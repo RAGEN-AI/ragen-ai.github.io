@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
+    <rect x="20" y="20" width="88" height="88" rx="20" stroke="#666" stroke-width="4" fill="none"/>
+    <text x="64" y="74" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" fill="#666">P</text>
+    <style>
+        rect, text { stroke: #666; fill: #666; }
+        @media (prefers-color-scheme: dark) {
+            rect, text { stroke: #AAA; fill: #AAA; }
+        }
+    </style>
+</svg>
