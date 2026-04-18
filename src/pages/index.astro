@@ -4,7 +4,8 @@ import Hero from '../components/Hero.astro';
 import Algorithm from '../components/Algorithm.astro';
 // import ChartsSection from '../components/ChartsSection.astro';
 import FindingsSection from '../components/FindingsSection.astro';
-import TrajectoryViewer from '../components/TrajectoryViewer.astro';
+// import TrajectoryViewer from '../components/TrajectoryViewer.astro';  // Hidden but preserved
+
 import AuthorsCitation from '../components/AuthorsCitation.astro';
 
 // Import component-specific styles
@@ -12,73 +13,67 @@ import '../styles/section.css';
 import '../styles/hero.css';
 import '../styles/authors.css';
 import '../styles/resources.css';
-import '../styles/trajectoryViewer.css';
+// import '../styles/trajectoryViewer.css';  // Hidden but preserved
 
-const pageTitle = "RAGEN - RL Agent";
+
+const pageTitle = "RAGEN-V2: Understanding Reasoning Collapse in LLM Agent Reinforcement Learning";
 ---
 <Layout title={pageTitle}>
+  <!-- 1. Teaser Section -->
   <Hero />
+  
+  <!-- 2. Algorithm Section -->
   <Algorithm />
-  <!-- <ChartsSection /> -->
+  
+  <!-- 4. Key Findings Section -->
   <FindingsSection />
-  <TrajectoryViewer />
+  
+  <!-- Trajectory Viewer Section (Original Data Viewer) - Hidden but preserved -->
+  <!-- <TrajectoryViewer /> -->
+  
+  <!-- 5. Citation Section -->
   <AuthorsCitation />
 </Layout>
 
 <script>
-  import { initTrajectoryViewer } from '../scripts/trajectoryViewer';
+  // import { initTrajectoryViewer } from '../scripts/trajectoryViewer';  // Hidden but preserved
+
   import { initCitationCopy } from '../scripts/citation';
 
   document.addEventListener('DOMContentLoaded', () => {
     // Initialize citation copy functionality
     initCitationCopy();
     
-    // Initialize trajectory viewer
-    initTrajectoryViewer();
-
+    // Initialize trajectory viewer - Hidden but preserved
+    // initTrajectoryViewer();
+    
     // Text animation for hero section
     const animateTitle = () => {
       const titleElement = document.getElementById('animated-title');
-      const subtitleElement = document.getElementById('animated-subtitle');
       
-      if (titleElement && subtitleElement) {
-        // Split title text into individual characters for animation
-        const titleText = titleElement.innerText;
-        titleElement.innerHTML = '';
+      if (titleElement) {
+        // Handle the new two-line title structure
+        const titleLines = titleElement.querySelectorAll('.title-line');
         
-        for (let i = 0; i < titleText.length; i++) {
-          const charSpan = document.createElement('span');
-          charSpan.className = 'reveal-char';
-          charSpan.style.animationDelay = `${i * 0.1}s`;
+        titleLines.forEach((line, lineIndex) => {
+          const lineText = (line as HTMLElement).innerText;
+          (line as HTMLElement).innerHTML = '';
           
-          // Special handling for spaces to ensure they display correctly
-          if (titleText[i] === ' ') {
-            charSpan.innerHTML = '&nbsp;';
-          } else {
-            charSpan.innerText = titleText[i];
+          for (let i = 0; i < lineText.length; i++) {
+            const charSpan = document.createElement('span');
+            charSpan.className = 'reveal-char';
+            charSpan.style.animationDelay = `${(lineIndex * lineText.length + i) * 0.05}s`;
+            
+            // Special handling for spaces to ensure they display correctly
+            if (lineText[i] === ' ') {
+              charSpan.innerHTML = '&nbsp;';
+            } else {
+              charSpan.innerText = lineText[i];
+            }
+            
+                         (line as HTMLElement).appendChild(charSpan);
           }
-          
-          titleElement.appendChild(charSpan);
-        }
-        
-        // Split subtitle text into individual characters for animation
-        const subtitleText = subtitleElement.innerText;
-        subtitleElement.innerHTML = '';
-        
-        for (let i = 0; i < subtitleText.length; i++) {
-          const charSpan = document.createElement('span');
-          charSpan.className = 'reveal-char-subtitle';
-          charSpan.style.animationDelay = `${i * 0.05 + 0.5}s`; // Start after title animation
-          
-          // Special handling for spaces to ensure they display correctly
-          if (subtitleText[i] === ' ') {
-            charSpan.innerHTML = '&nbsp;';
-          } else {
-            charSpan.innerText = subtitleText[i];
-          }
-          
-          subtitleElement.appendChild(charSpan);
-        }
+        });
       }
     };
     

@@ -131,25 +131,7 @@ animation: revealSubtitle 1s forwards;
     line-height: 1;
   }
 
-/* Hero Section styles */
-.hero-section {
-  max-width: 1000px;
-  margin: 4rem auto;
-  padding: 1rem;
-  text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-}
-
-.title-wrapper { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 0.5rem; }
-.title-icon { height: 60px; width: auto; flex-shrink: 0; }
-.main-title { font-size: 3.75rem; font-weight: 800; color: #2a2f6c; min-height: 1.2em; flex-shrink: 0; }
-.subtitle { font-size: 2.75rem; font-weight: 700; color: #333; margin-bottom: 1rem; }
-.description { font-size: 1.5rem; color: #555; margin-bottom: 2rem; line-height: 1.6; }
-.cta-button { display: inline-flex; align-items: center; gap: 0.6em; background-color: #2d333a; padding: 0.9rem 1.6rem; border-radius: 30px; text-decoration: none; border: none; box-shadow: none; cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease; }
-.button-icon { height: 1.4em; width: auto; fill: white; }
-.button-text { background: white; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; font-size: 1.1rem; font-weight: 600; display: inline-block; }
-.cta-button:hover { background-color: #444; transform: translateY(-2px); box-shadow: none; }
+/* 删除重复的Hero样式，避免冲突 */
 .diagram-placeholder { 
   margin-top: 3rem; 
   margin-bottom: 2rem;
@@ -376,7 +358,7 @@ animation: revealSubtitle 1s forwards;
 
 /* Resources section styles */
 .resources-section {
-  margin-top: 3rem;
+  margin-top: 1.2rem;
 }
 
 .resources-title {
@@ -390,7 +372,6 @@ animation: revealSubtitle 1s forwards;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   gap: 1rem;
   margin: 0 auto;
   max-width: 800px;

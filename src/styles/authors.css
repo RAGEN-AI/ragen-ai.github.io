@@ -36,6 +36,18 @@
   margin-bottom: 0.5rem;
 }
 
+.author-line {
+  margin-bottom: 0.6rem;
+}
+
+.equal-contribution {
+  font-style: italic;
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
 .affiliation-marker {
   font-size: 0.8em;
   vertical-align: super;

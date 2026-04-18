@@ -1,185 +1,684 @@
 ---
-// FindingsSection.astro - Displays the findings section with collapsible cards
+// FindingsSection.astro - Experiments driven by 6 research questions (accordion style)
+
+const basePath = import.meta.env.BASE_URL;
 ---
-<section id="findings" class="content-section">
+<section id="results" class="content-section">
   <div class="section-container">
-    <h2 class="section-title">Findings</h2>
-    
-    <div class="findings-components">
-      <div class="finding-card" id="finding-card-1">
-        <div class="finding-header">
-          <h3 class="finding-title">Finding 1: Single-turn RL may not be directly adapted to Multi-turn agent RL</h3>
-          <div class="expand-icon">-</div>
+    <h2 class="section-title">Experiments</h2>
+    <p class="section-subtitle">Click each question to expand the evidence.</p>
+
+    <!-- RQ1 -->
+    <div class="rq-block" id="rq1">
+      <button class="rq-header" aria-expanded="false" data-target="rq1-body">
+        <span class="rq-badge">RQ1</span>
+        <h3>Is entropy actually a good proxy for reasoning quality?</h3>
+        <span class="rq-summary">No &mdash; MI predicts performance 2&times; better than entropy, and entropy points in the wrong direction.</span>
+        <span class="rq-chevron" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+        </span>
+      </button>
+      <div class="rq-body" id="rq1-body">
+
+        <h4 class="rq-subheading">MI declines before performance &mdash; entropy stays high</h4>
+        <img src={`${basePath}fig7_training_dynamics.png`} alt="Training dynamics: MI declines before task performance while entropy remains elevated" class="rq-fig" />
+        <p class="rq-caption">MI proxy declines before task performance degrades, while conditional entropy remains elevated &mdash; demonstrating that entropy alone is insufficient to detect template collapse.</p>
+
+        <h4 class="rq-subheading">Spearman correlation: MI vs Entropy as diagnostics</h4>
+        <img src={`${basePath}fig10_spearman_correlation.png`} alt="Spearman correlation: MI-family metrics correlate positively with task success; entropy metrics correlate negatively" class="rq-fig" />
+        <p class="rq-caption">MI-family metrics (blue) achieve positive correlations with task success (+0.39), while entropy metrics show near-zero or negative correlations (&minus;0.11 to &minus;0.14) &mdash; confirming entropy is directionally misleading.</p>
+
+        <h4 class="rq-subheading">Correlation table: RV vs candidate proxies</h4>
+        <div class="table-wrapper">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Variable</th>
+                <th>Spearman &uarr;</th>
+                <th>Pearson &uarr;</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td><strong>Reward</strong></td>
+                <td><strong>0.630</strong></td>
+                <td><strong>0.650</strong></td>
+                <td><span class="verdict good">Strong positive</span></td>
+              </tr>
+              <tr>
+                <td>Retrieval Acc (our diagnostic)</td>
+                <td>0.130</td>
+                <td>0.150</td>
+                <td><span class="verdict neutral">Weak positive</span></td>
+              </tr>
+              <tr>
+                <td>Response Length</td>
+                <td>0.120</td>
+                <td>0.080</td>
+                <td><span class="verdict neutral">Weak positive</span></td>
+              </tr>
+              <tr>
+                <td>MI (traj, est)</td>
+                <td>-0.100</td>
+                <td>-0.170</td>
+                <td><span class="verdict warn">Negative</span></td>
+              </tr>
+              <tr class="entropy-row">
+                <td><strong>Conditional Entropy</strong></td>
+                <td><strong>-0.140</strong></td>
+                <td><strong>-0.180</strong></td>
+                <td><span class="verdict bad">Negative &mdash; misleading</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="finding-content active" id="finding-content-1">
-          <p> Vanilla adaptations from single-turn methods like PPO and GRPO achieve early gains in agent settings but often collapse. A critic in PPO may delay instability, but would not prevent reasoning degradation, highlighting the need for specialized stabilization in agent settings. </p>
-        </div>
+
+        <h4 class="rq-subheading">Format validity cannot detect collapse either</h4>
+        <img src={`${basePath}fig14_format_validity.png`} alt="Format validity vs MI and entropy: validity is decoupled from collapse metrics" class="rq-fig" />
+        <p class="rq-caption">Runs can remain highly valid while exhibiting low MI. Validity-based metrics alone are not sufficient to detect collapse &mdash; content-sensitive measures are needed.</p>
+
       </div>
-      
-      <div class="finding-card" id="finding-card-2">
-        <div class="finding-header">
-          <h3 class="finding-title">Finding 2: Model collapse in agent RL is reflected as "Echo Trap" over training</h3>
-          <div class="expand-icon">-</div>
+    </div>
+
+    <!-- RQ2 -->
+    <div class="rq-block" id="rq2">
+      <button class="rq-header" aria-expanded="false" data-target="rq2-body">
+        <span class="rq-badge">RQ2</span>
+        <h3>Is the SNR mechanism empirically supported?</h3>
+        <span class="rq-summary">Yes &mdash; task gradient norm grows with reward variance; regularization gradient stays flat.</span>
+        <span class="rq-chevron" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+        </span>
+      </button>
+      <div class="rq-body" id="rq2-body">
+
+        <h4 class="rq-subheading">Gradient decomposition by reward-variance buckets</h4>
+        <img src={`${basePath}ppo_grpo_bucket.png`} alt="Gradient decomposition by reward-variance buckets" class="rq-fig" />
+        <div class="evidence-grid">
+          <div class="evidence-item">
+            <div class="evidence-num">&oplus;</div>
+            <div><strong>RV buckets separate cleanly</strong> &mdash; 6 equal buckets by V&#770;ar(R|X) yield well-separated distributions.</div>
+          </div>
+          <div class="evidence-item">
+            <div class="evidence-num">&oplus;</div>
+            <div><strong>Task gradient &uarr; with RV</strong> &mdash; consistent with &Vert;g<sub>task</sub>&Vert; &le; c&middot;&radic;Var(R|X).</div>
+          </div>
+          <div class="evidence-item">
+            <div class="evidence-num">&oplus;</div>
+            <div><strong>Regularization gradient is flat</strong> across buckets &mdash; input-agnostic as predicted.</div>
+          </div>
         </div>
-        <div class="finding-content active" id="finding-content-2">
-          <p>We find that early-stage agent respond with diverse symbolic reasoning, but collapse into deterministic, repetitive templates after training. Models converge to fixed phrasing, indicating that RL may reinforce superficial patterns instead of general reasoning and forms an "Echo Trap" that hinders long-term generalization.</p>
-        </div>
+
+        <h4 class="rq-subheading">Extended gradient decomposition at step 101</h4>
+        <img src={`${basePath}fig12_gradient_decomposition.png`} alt="Gradient decomposition at step 101 for PPO and GRPO" class="rq-fig" />
+        <p class="rq-caption">Complementary gradient analysis at training step 101 under both PPO (top) and GRPO (bottom). The same three trends hold: RV increases Q1&rarr;Q6, task gradient scales with RV, and regularization gradient stays flat.</p>
+
+        <h4 class="rq-subheading">Reward variance decreases over training</h4>
+        <img src={`${basePath}fig15_reward_heatmap.png`} alt="Prompt-level reward and RV evolution across early, mid, and late training" class="rq-fig" />
+        <p class="rq-caption">From early to late training, the hard-prompt subset contracts while mixed prompts expand, and prompt-level RV shifts downward &mdash; rollout rewards become progressively more uniform, directly driving template collapse.</p>
+
+        <h4 class="rq-subheading">Adaptive filtering responds to SNR dynamics</h4>
+        <img src={`${basePath}fig11_adaptive_filtering.png`} alt="Effective kept ratio and zero-variance prompts over training" class="rq-fig" />
+        <p class="rq-caption">The kept ratio decreases as training progresses and more prompts yield near-zero reward variance. RV-aware filtering is adaptive: it applies stronger selection pressure precisely when task-discriminative signal is weakest.</p>
+
       </div>
-      
-      <div class="finding-card" id="finding-card-3">
-        <div class="finding-header">
-          <h3 class="finding-title">Finding 3: Collapse follows similar dynamics and can be anticipated by indicators</h3>
-          <div class="expand-icon">-</div>
-        </div>
-        <div class="finding-content active" id="finding-content-3">
-          <p>Reward standard deviation and entropy often fluctuate before performance degrades, while gradient norm spikes typically mark the point of irreversible collapse. These metrics provide early indicators and motivate the need for stabilization strategies.</p>
-        </div>
-      </div>
-      
-      <div class="finding-card" id="finding-card-4">
-        <div class="finding-header">
-          <h3 class="finding-title">Finding 4: Filtering low-variance trajectories improves stability and efficiency</h3>
-          <div class="expand-icon">-</div>
-        </div>
-        <div class="finding-content active" id="finding-content-4">
-          <p>Training on high-variance prompts delays or eliminates collapse in multi-turn RL. StarPO-S improves performance and reduces update steps by discarding low-information rollouts, especially under PPO. This aligns with active learning principles, where uncertain examples offer the most informative learning signals.</p>
-        </div>
-      </div>
-      
-      <div class="finding-card" id="finding-card-5">
-        <div class="finding-header">
-          <h3 class="finding-title">Finding 5: Task diversity,  action budget, and rollout frequency affect data quality</h3>
-          <div class="expand-icon">-</div>
-        </div>
-        <div class="finding-content active" id="finding-content-5">
-          <p>Diverse task instances enable better policy contrast and generalization across environments.
-            Moderate action budgets provide enough planning space and avoid the noise introduced by overly long sequences. Up-to-date rollouts ensure optimization targets remain aligned with current policy behavior. </p>
-        </div>
-      </div>
-      
-      <div class="finding-card" id="finding-card-6">
-        <div class="finding-header">
-          <h3 class="finding-title">Finding 6: Reasoning fails to emerge without meticulous reward design</h3>
-          <div class="expand-icon">-</div>
-        </div>
-        <div class="finding-content active" id="finding-content-6">
-          While symbolic reasoning can emerge in simple, single-turn tasks under weak supervision, it fails to persist in multi-turn environments without the reward design explicitly encouraging interpretable intermediate reasoning steps. We observe that even with structured prompts, reasoning gradually decays during training if the reward signal focuses only on final outcomes. This suggests that without meticulous reward shaping, agents may tend to collapse into shortcut behaviors that bypass reasoning altogether.
+    </div>
+
+    <!-- RQ3 -->
+    <div class="rq-block" id="rq3">
+      <button class="rq-header" aria-expanded="false" data-target="rq3-body">
+        <span class="rq-badge">RQ3</span>
+        <h3>Does RAGEN-V2 generalize?</h3>
+        <span class="rq-summary">Yes &mdash; consistent gains across 4 RL algorithms, 4 model scales, 2 model families, 2 modalities, and 8 environments.</span>
+        <span class="rq-chevron" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+        </span>
+      </button>
+      <div class="rq-body" id="rq3-body">
+
+        <h4 class="rq-subheading">Filtering across diverse environments</h4>
+        <img src={`${basePath}fig8_filtering_4envs.png`} alt="Top-p vs Top-k vs No Filtering across Sokoban, SearchQA, WebShop, DeepCoder" class="rq-fig" />
+        <p class="rq-caption">Top-p Filtering (orange) consistently outperforms both Top-k Filtering (blue) and No Filtering (gray) across Sokoban, SearchQA, WebShop, and DeepCoder &mdash; adaptive proportional selection is more effective than fixed-count filtering.</p>
+
+        <h4 class="rq-subheading">Comprehensive results matrix</h4>
+        <div class="big-table-wrapper">
+          <table class="results-table big-table">
+            <thead>
+              <tr>
+                <th class="left-col">Experiment Variant</th>
+                <th>Sokoban</th>
+                <th>FrozenLake</th>
+                <th>MetaMathQA</th>
+                <th>Countdown</th>
+                <th class="avg-col">Average &Delta;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="group-header-row">
+                <td colspan="6">Baseline Algorithm</td>
+              </tr>
+              <tr>
+                <td class="left-col">PPO &middot; Qwen2.5-3B</td>
+                <td>12.9 <span class="delta pos">(+16.0)</span></td>
+                <td>67.0 <span class="delta pos">(+10.9)</span></td>
+                <td>92.6 <span class="delta pos">(+0.6)</span></td>
+                <td>97.9 <span class="delta neu">(+0.0)</span></td>
+                <td class="avg-col"><strong class="big-delta">+6.9</strong></td>
+              </tr>
+
+              <tr class="group-header-row">
+                <td colspan="6">RL Algorithm (Qwen2.5-3B)</td>
+              </tr>
+              <tr>
+                <td class="left-col">DAPO</td>
+                <td>16.2 <span class="delta pos">(+5.1)</span></td>
+                <td>66.8 <span class="delta pos">(+2.1)</span></td>
+                <td>90.8 <span class="delta pos">(+2.8)</span></td>
+                <td>95.7 <span class="delta pos">(+1.6)</span></td>
+                <td class="avg-col"><strong class="big-delta">+2.9</strong></td>
+              </tr>
+              <tr>
+                <td class="left-col">GRPO</td>
+                <td>12.1 <span class="delta pos">(+9.0)</span></td>
+                <td>70.9 <span class="delta pos">(+2.3)</span></td>
+                <td>91.2 <span class="delta pos">(+1.2)</span></td>
+                <td>95.7 <span class="delta pos">(+2.2)</span></td>
+                <td class="avg-col"><strong class="big-delta">+3.7</strong></td>
+              </tr>
+              <tr>
+                <td class="left-col">Dr. GRPO</td>
+                <td>12.1 <span class="delta neg">(-0.4)</span></td>
+                <td>23.2 <span class="delta pos">(+0.6)</span></td>
+                <td>91.2 <span class="delta pos">(+1.4)</span></td>
+                <td>96.5 <span class="delta pos">(+1.4)</span></td>
+                <td class="avg-col"><strong class="big-delta">+0.8</strong></td>
+              </tr>
+
+              <tr class="group-header-row">
+                <td colspan="6">Model Scale (PPO)</td>
+              </tr>
+              <tr>
+                <td class="left-col">Qwen2.5-0.5B</td>
+                <td>3.3 <span class="delta pos">(+22.9)</span></td>
+                <td>19.5 <span class="delta neu">(+0.0)</span></td>
+                <td>10.0 <span class="delta neg">(-0.2)</span></td>
+                <td>23.0 <span class="delta neg">(-0.7)</span></td>
+                <td class="avg-col"><strong class="big-delta">+5.5</strong></td>
+              </tr>
+              <tr>
+                <td class="left-col">Qwen2.5-1.5B</td>
+                <td>17.0 <span class="delta pos">(+6.2)</span></td>
+                <td>36.5 <span class="delta pos">(+1.6)</span></td>
+                <td>80.3 <span class="delta pos">(+7.0)</span></td>
+                <td>56.6 <span class="delta pos">(+1.6)</span></td>
+                <td class="avg-col"><strong class="big-delta">+4.1</strong></td>
+              </tr>
+              <tr>
+                <td class="left-col">Qwen2.5-7B</td>
+                <td>42.4 <span class="delta pos">(+4.9)</span></td>
+                <td>85.0 <span class="delta neg">(-0.6)</span></td>
+                <td>84.0 <span class="delta pos">(+11.7)</span></td>
+                <td>97.7 <span class="delta pos">(+0.3)</span></td>
+                <td class="avg-col"><strong class="big-delta">+4.1</strong></td>
+              </tr>
+
+              <tr class="group-header-row">
+                <td colspan="6">Model Type (PPO)</td>
+              </tr>
+              <tr>
+                <td class="left-col">Qwen2.5-3B-Instruct</td>
+                <td>22.5 <span class="delta pos">(+14.2)</span></td>
+                <td>83.6 <span class="delta pos">(+2.3)</span></td>
+                <td>91.2 <span class="delta pos">(+0.4)</span></td>
+                <td>96.3 <span class="delta neg">(-0.6)</span></td>
+                <td class="avg-col"><strong class="big-delta">+4.1</strong></td>
+              </tr>
+              <tr>
+                <td class="left-col">Llama3.2-3B</td>
+                <td>24.4 <span class="delta pos">(+18.8)</span></td>
+                <td>84.6 <span class="delta neg">(-0.2)</span></td>
+                <td>86.1 <span class="delta pos">(+3.7)</span></td>
+                <td>99.2 <span class="delta neg">(-1.2)</span></td>
+                <td class="avg-col"><strong class="big-delta">+5.3</strong></td>
+              </tr>
+
+              <tr class="group-header-row">
+                <td colspan="6">Modality &mdash; Qwen2.5-VL-3B (PPO)</td>
+              </tr>
+              <tr>
+                <td class="left-col">Text input</td>
+                <td>53.0 <span class="delta pos">(+6.0)</span></td>
+                <td>16.0 <span class="delta pos">(+53.5)</span></td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td class="avg-col"><strong class="big-delta">+29.8</strong></td>
+              </tr>
+              <tr>
+                <td class="left-col">Image input</td>
+                <td>65.0 <span class="delta pos">(+12.0)</span></td>
+                <td>19.5 <span class="delta pos">(+59.5)</span></td>
+                <td>&mdash;</td>
+                <td>&mdash;</td>
+                <td class="avg-col"><strong class="big-delta">+35.8</strong></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+
+    <!-- RQ4 -->
+    <div class="rq-block" id="rq4">
+      <button class="rq-header" aria-expanded="false" data-target="rq4-body">
+        <span class="rq-badge">RQ4</span>
+        <h3>How does environment randomness affect template collapse?</h3>
+        <span class="rq-summary">Higher stochasticity weakens reward variance as a signal proxy &mdash; RV filtering helps most at moderate noise.</span>
+        <span class="rq-chevron" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+        </span>
+      </button>
+      <div class="rq-body" id="rq4-body">
+        <img src={`${basePath}fig6_filter_vs_no_filter.png`} alt="FrozenLake: success rate vs stochasticity for Top-p filtering vs no filtering" class="rq-fig" />
+        <div class="randomness-findings">
+          <div class="rand-item">
+            <div class="rand-icon down-arrow">&#8595;</div>
+            <div><strong>More randomness &rarr; lower success.</strong> Median success rates decrease as stochasticity increases from 0% to 100% for both filtered and unfiltered runs.</div>
+          </div>
+          <div class="rand-item">
+            <div class="rand-icon filter-icon">&#9660;</div>
+            <div><strong>RV filtering helps at 0&ndash;50% stochasticity.</strong> Top-p filtering maintains a clear advantage in this range, consistent with the SNR view.</div>
+          </div>
+          <div class="rand-item">
+            <div class="rand-icon warning-icon">&#9888;</div>
+            <div><strong>Gap closes at 80&ndash;100%.</strong> High transition noise weakens reward variance as an informative signal proxy, reducing the filter&rsquo;s effectiveness.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RQ5 (NEW) -->
+    <div class="rq-block" id="rq5">
+      <button class="rq-header" aria-expanded="false" data-target="rq5-body">
+        <span class="rq-badge">RQ5</span>
+        <h3>How sensitive is filtering to the keep rate?</h3>
+        <span class="rq-summary">Moderate filtering (top-p 0.8&ndash;0.98) works best &mdash; too aggressive or no filtering both hurt.</span>
+        <span class="rq-chevron" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+        </span>
+      </button>
+      <div class="rq-body" id="rq5-body">
+        <img src={`${basePath}fig9_rv_heatmap.png`} alt="RV-filter performance heatmap across top-p thresholds and training steps" class="rq-fig" />
+        <p class="rq-caption">Each cell reports validation success rate at the corresponding checkpoint. Moderate filtering (top-p &isin; [0.8, 0.98]) consistently achieves the highest performance. Overly aggressive filtering (top-p &le; 0.6) or no filtering (top-p = 1.0) yields lower returns.</p>
+        <div class="evidence-grid">
+          <div class="evidence-item">
+            <div class="evidence-num">&oplus;</div>
+            <div><strong>Sweet spot at top-p 0.8&ndash;0.98</strong> &mdash; retains enough informative rollouts while discarding low-signal prompts.</div>
+          </div>
+          <div class="evidence-item">
+            <div class="evidence-num">&ominus;</div>
+            <div><strong>Too aggressive (top-p &le; 0.6)</strong> &mdash; narrows exploration coverage, reducing effective training signal.</div>
+          </div>
+          <div class="evidence-item">
+            <div class="evidence-num">&ominus;</div>
+            <div><strong>No filtering (top-p = 1.0)</strong> &mdash; low-RV prompts inject noise, leading to template collapse.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RQ6 (NEW) -->
+    <div class="rq-block" id="rq6">
+      <button class="rq-header" aria-expanded="false" data-target="rq6-body">
+        <span class="rq-badge">RQ6</span>
+        <h3>Does RL training compress reasoning?</h3>
+        <span class="rq-summary">Yes &mdash; reasoning length consistently declines across all environments, model sizes, and with or without filtering.</span>
+        <span class="rq-chevron" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+        </span>
+      </button>
+      <div class="rq-body" id="rq6-body">
+        <img src={`${basePath}fig13_reasoning_length.png`} alt="Reasoning length over training steps across eight environments" class="rq-fig" />
+        <p class="rq-caption">Output token count over training steps across eight environments. All environments exhibit consistent decline (&minus;5% to &minus;66%), across model sizes (3B and 7B) and both with and without RV filtering.</p>
+        <div class="evidence-grid">
+          <div class="evidence-item">
+            <div class="evidence-num">&oplus;</div>
+            <div><strong>Universal phenomenon</strong> &mdash; reasoning length reduction is consistent across all environments, not an artifact of any specific intervention.</div>
+          </div>
+          <div class="evidence-item">
+            <div class="evidence-num">&oplus;</div>
+            <div><strong>Scale-invariant</strong> &mdash; the trend holds across both 3B and 7B models.</div>
+          </div>
+          <div class="evidence-item">
+            <div class="evidence-num">&oplus;</div>
+            <div><strong>Filter-independent</strong> &mdash; occurs with and without RV filtering, suggesting it is a general property of agent RL optimization.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<style>
-  .findings-components {
-    margin-bottom: 3rem;
-  }
+<script is:inline>
+  // Accordion toggle logic - runs inline to ensure DOM is available
+  (function() {
+    function initAccordion() {
+      var headers = document.querySelectorAll('.rq-header[data-target]');
+      headers.forEach(function(header) {
+        header.setAttribute('type', 'button');
+        header.addEventListener('click', function(e) {
+          e.preventDefault();
+          var targetId = header.getAttribute('data-target');
+          if (!targetId) return;
+          var body = document.getElementById(targetId);
+          if (!body) return;
 
-  .finding-card {
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    margin-bottom: 1.5rem;
-    transition: all 0.3s ease;
-  }
+          var isOpen = header.getAttribute('aria-expanded') === 'true';
 
-  .finding-card:hover {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-    transform: translateY(-5px);
-  }
-
-  .finding-header {
-    padding: 1.2rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    color: white;
-  }
-
-  /* Different background colors for each finding card */
-  .finding-card:nth-child(1) .finding-header { background-color: #2a2f6c; }
-  .finding-card:nth-child(2) .finding-header { background-color: #4a3f9f; }
-  .finding-card:nth-child(3) .finding-header { background-color: #5e56b2; }
-  .finding-card:nth-child(4) .finding-header { background-color: #7165d8; }
-  .finding-card:nth-child(5) .finding-header { background-color: #9f7cd2; }
-  .finding-card:nth-child(6) .finding-header { background-color: #2a2f6c; }
-
-  .finding-title {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    flex: 1;
-  }
-
-  .expand-icon {
-    font-size: 1.5rem;
-    font-weight: bold;
-    transition: transform 0.3s ease;
-    margin-left: 1rem;
-  }
-
-  .finding-content {
-    padding: 1.5rem;
-    display: none;
-    line-height: 1.7;
-  }
-
-  .finding-content p {
-    margin: 0;
-    font-size: 1.1rem;
-  }
-
-  .finding-content.active {
-    display: block;
-    animation: fadeIn 0.5s ease;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Add highlighting for key terms */
-  .finding-content strong {
-    color: #4a3f9f;
-    background-color: rgba(74, 63, 159, 0.1);
-    padding: 0.1rem 0.3rem;
-    border-radius: 3px;
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Set up event listeners for all finding cards
-    for (let i = 1; i <= 6; i++) {
-      const findingCard = document.getElementById(`finding-card-${i}`);
-      const findingContent = document.getElementById(`finding-content-${i}`);
-      
-      if (findingCard && findingContent) {
-        const expandIcon = findingCard.querySelector('.expand-icon') as HTMLElement | null;
-        
-        // Initialize all cards as expanded
-        findingContent.classList.add('active');
-        if (expandIcon) {
-          expandIcon.textContent = '-';
-        }
-        
-        findingCard.addEventListener('click', (e: Event) => {
-          const target = e.target as HTMLElement;
-          if (target.closest && target.closest('.finding-content')) return;
-          
-          findingContent.classList.toggle('active');
-          if (expandIcon) {
-            if (findingContent.classList.contains('active')) {
-              expandIcon.textContent = '-';
-            } else {
-              expandIcon.textContent = '+';
+          // Close all others
+          headers.forEach(function(h) {
+            var tid = h.getAttribute('data-target');
+            if (tid && tid !== targetId) {
+              h.setAttribute('aria-expanded', 'false');
+              var b = document.getElementById(tid);
+              if (b) b.style.maxHeight = '0px';
             }
+          });
+
+          // Toggle current
+          if (isOpen) {
+            header.setAttribute('aria-expanded', 'false');
+            body.style.maxHeight = '0px';
+          } else {
+            header.setAttribute('aria-expanded', 'true');
+            body.style.maxHeight = body.scrollHeight + 'px';
+            // Re-measure after images load
+            var imgs = body.querySelectorAll('img');
+            imgs.forEach(function(img) {
+              if (!img.complete) {
+                img.addEventListener('load', function() {
+                  if (header.getAttribute('aria-expanded') === 'true') {
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                  }
+                }, { once: true });
+              }
+            });
           }
         });
-      }
+      });
     }
-  });
-</script> 
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAccordion);
+    } else {
+      initAccordion();
+    }
+  })();
+</script>
+
+<style>
+  .section-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    margin-top: -0.5rem;
+  }
+
+  .rq-fig {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .rq-caption {
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.55;
+    margin: 0 0 1.5rem 0;
+    padding: 0 0.5rem;
+    border-left: 3px solid #e0e0e0;
+  }
+
+  .rq-subheading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2a2f6c;
+    margin: 1.5rem 0 0.8rem 0;
+  }
+
+  .rq-subheading:first-child {
+    margin-top: 0;
+  }
+
+  .rq-block {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    scroll-margin-top: 80px;
+    overflow: hidden;
+  }
+
+  /* Accordion header as button */
+  .rq-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    flex-wrap: wrap;
+    transition: background-color 0.15s ease;
+  }
+
+  .rq-header:hover {
+    background-color: #fafbff;
+  }
+
+  .rq-badge {
+    background: #2a2f6c;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .rq-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #1a1f3c;
+    font-weight: 700;
+    line-height: 1.35;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .rq-summary {
+    display: block;
+    width: 100%;
+    padding-left: calc(12px + 1rem + 32px); /* badge width + gap + approx */
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 0.3rem;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .rq-chevron {
+    flex-shrink: 0;
+    color: #999;
+    transition: transform 0.3s ease;
+    margin-top: 4px;
+  }
+
+  .rq-header[aria-expanded="true"] .rq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .rq-header[aria-expanded="true"] .rq-summary {
+    display: none;
+  }
+
+  /* Accordion body */
+  .rq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 2rem;
+  }
+
+  .rq-header[aria-expanded="true"] + .rq-body {
+    padding: 0 2rem 2rem;
+  }
+
+  /* Tables */
+  .table-wrapper, .big-table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin: 1.2rem 0;
+  }
+
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93rem;
+  }
+
+  .results-table th {
+    background: linear-gradient(135deg, #2a2f6c, #3a4b8e);
+    color: white;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .results-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: center;
+    background: white;
+  }
+
+  .results-table tr:last-child td { border-bottom: none; }
+  .results-table tr:hover td { background: #f8f9ff; }
+
+  .left-col { text-align: left !important; font-weight: 500; color: #2a2f6c; }
+  .avg-col  { font-weight: 700; background: #f4f6ff !important; }
+
+  .highlight-row td { background: #e8f5e9 !important; }
+  .entropy-row  td { background: #fff3e0 !important; }
+
+  .group-header-row td {
+    background: #f4f6ff !important;
+    font-weight: 700;
+    color: #2a2f6c;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 1rem;
+    text-align: left !important;
+  }
+
+  .big-table td { font-size: 0.88rem; padding: 0.55rem 0.8rem; }
+  .big-delta { font-size: 1.05rem; color: #1a7a4a; }
+
+  .delta { font-size: 0.82rem; font-weight: 600; }
+  .delta.pos { color: #1a7a4a; }
+  .delta.neg { color: #c0392b; }
+  .delta.neu { color: #888; }
+
+  /* Verdict badges */
+  .verdict {
+    font-size: 0.78rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .verdict.good    { background: #e8f5e9; color: #1a7a4a; }
+  .verdict.neutral { background: #f5f5f5; color: #666; }
+  .verdict.warn    { background: #fff3e0; color: #e67e22; }
+  .verdict.bad     { background: #fde8e8; color: #c0392b; }
+
+  /* Evidence grid */
+  .evidence-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin: 1.1rem 0;
+  }
+
+  .evidence-item {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.9rem 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    line-height: 1.5;
+    font-size: 0.93rem;
+  }
+
+  .evidence-num {
+    color: #1a7a4a;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-weight: 700;
+  }
+
+  /* Randomness findings */
+  .randomness-findings {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin: 1.1rem 0;
+  }
+
+  .rand-item {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.9rem 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    line-height: 1.5;
+    font-size: 0.93rem;
+    align-items: flex-start;
+  }
+
+  .rand-icon {
+    font-size: 1.15rem;
+    min-width: 40px;
+    text-align: center;
+    font-weight: 700;
+    color: #2a2f6c;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .rq-header { padding: 1.2rem 1.5rem; }
+    .rq-body { padding: 0 1.5rem; }
+    .rq-header[aria-expanded="true"] + .rq-body { padding: 0 1.5rem 1.5rem; }
+    .rq-header h3 { font-size: 1.05rem; }
+    .rq-summary { padding-left: 0; }
+  }
+</style>

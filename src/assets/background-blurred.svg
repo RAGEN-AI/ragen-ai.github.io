@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" fill="none" viewBox="0 0 1440 1024"> {/* Added viewBox */}
   <defs>
     <linearGradient id="b" x1="373" x2="1995.44" y1="1100" y2="118.03" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D83333"/>
-      <stop offset="1" stop-color="#F041FF"/>
+      <stop stop-color="#52C234"/>
+      <stop offset="1" stop-color="#A8E063"/>
     </linearGradient>
     <linearGradient id="a" x1="107.37" x2="1130.66" y1="1993.35" y2="1026.31" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#3245FF"/>
-      <stop offset="1" stop-color="#BC52EE"/>
+      <stop stop-color="#F9D423"/>
+      <stop offset="1" stop-color="#F6A623"/>
     </linearGradient>
 
     {/* --- Add the Blur Filter Definition --- */}

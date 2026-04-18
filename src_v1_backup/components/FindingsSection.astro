@@ -1,0 +1,185 @@
+---
+// FindingsSection.astro - Displays the findings section with collapsible cards
+---
+<section id="findings" class="content-section">
+  <div class="section-container">
+    <h2 class="section-title">Findings</h2>
+    
+    <div class="findings-components">
+      <div class="finding-card" id="finding-card-1">
+        <div class="finding-header">
+          <h3 class="finding-title">Finding 1: Single-turn RL may not be directly adapted to Multi-turn agent RL</h3>
+          <div class="expand-icon">-</div>
+        </div>
+        <div class="finding-content active" id="finding-content-1">
+          <p> Vanilla adaptations from single-turn methods like PPO and GRPO achieve early gains in agent settings but often collapse. A critic in PPO may delay instability, but would not prevent reasoning degradation, highlighting the need for specialized stabilization in agent settings. </p>
+        </div>
+      </div>
+      
+      <div class="finding-card" id="finding-card-2">
+        <div class="finding-header">
+          <h3 class="finding-title">Finding 2: Model collapse in agent RL is reflected as "Echo Trap" over training</h3>
+          <div class="expand-icon">-</div>
+        </div>
+        <div class="finding-content active" id="finding-content-2">
+          <p>We find that early-stage agent respond with diverse symbolic reasoning, but collapse into deterministic, repetitive templates after training. Models converge to fixed phrasing, indicating that RL may reinforce superficial patterns instead of general reasoning and forms an "Echo Trap" that hinders long-term generalization.</p>
+        </div>
+      </div>
+      
+      <div class="finding-card" id="finding-card-3">
+        <div class="finding-header">
+          <h3 class="finding-title">Finding 3: Collapse follows similar dynamics and can be anticipated by indicators</h3>
+          <div class="expand-icon">-</div>
+        </div>
+        <div class="finding-content active" id="finding-content-3">
+          <p>Reward standard deviation and entropy often fluctuate before performance degrades, while gradient norm spikes typically mark the point of irreversible collapse. These metrics provide early indicators and motivate the need for stabilization strategies.</p>
+        </div>
+      </div>
+      
+      <div class="finding-card" id="finding-card-4">
+        <div class="finding-header">
+          <h3 class="finding-title">Finding 4: Filtering low-variance trajectories improves stability and efficiency</h3>
+          <div class="expand-icon">-</div>
+        </div>
+        <div class="finding-content active" id="finding-content-4">
+          <p>Training on high-variance prompts delays or eliminates collapse in multi-turn RL. StarPO-S improves performance and reduces update steps by discarding low-information rollouts, especially under PPO. This aligns with active learning principles, where uncertain examples offer the most informative learning signals.</p>
+        </div>
+      </div>
+      
+      <div class="finding-card" id="finding-card-5">
+        <div class="finding-header">
+          <h3 class="finding-title">Finding 5: Task diversity,  action budget, and rollout frequency affect data quality</h3>
+          <div class="expand-icon">-</div>
+        </div>
+        <div class="finding-content active" id="finding-content-5">
+          <p>Diverse task instances enable better policy contrast and generalization across environments.
+            Moderate action budgets provide enough planning space and avoid the noise introduced by overly long sequences. Up-to-date rollouts ensure optimization targets remain aligned with current policy behavior. </p>
+        </div>
+      </div>
+      
+      <div class="finding-card" id="finding-card-6">
+        <div class="finding-header">
+          <h3 class="finding-title">Finding 6: Reasoning fails to emerge without meticulous reward design</h3>
+          <div class="expand-icon">-</div>
+        </div>
+        <div class="finding-content active" id="finding-content-6">
+          While symbolic reasoning can emerge in simple, single-turn tasks under weak supervision, it fails to persist in multi-turn environments without the reward design explicitly encouraging interpretable intermediate reasoning steps. We observe that even with structured prompts, reasoning gradually decays during training if the reward signal focuses only on final outcomes. This suggests that without meticulous reward shaping, agents may tend to collapse into shortcut behaviors that bypass reasoning altogether.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .findings-components {
+    margin-bottom: 3rem;
+  }
+
+  .finding-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .finding-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+  }
+
+  .finding-header {
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+  }
+
+  /* Different background colors for each finding card */
+  .finding-card:nth-child(1) .finding-header { background-color: #2a2f6c; }
+  .finding-card:nth-child(2) .finding-header { background-color: #4a3f9f; }
+  .finding-card:nth-child(3) .finding-header { background-color: #5e56b2; }
+  .finding-card:nth-child(4) .finding-header { background-color: #7165d8; }
+  .finding-card:nth-child(5) .finding-header { background-color: #9f7cd2; }
+  .finding-card:nth-child(6) .finding-header { background-color: #2a2f6c; }
+
+  .finding-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .expand-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    margin-left: 1rem;
+  }
+
+  .finding-content {
+    padding: 1.5rem;
+    display: none;
+    line-height: 1.7;
+  }
+
+  .finding-content p {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .finding-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Add highlighting for key terms */
+  .finding-content strong {
+    color: #4a3f9f;
+    background-color: rgba(74, 63, 159, 0.1);
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set up event listeners for all finding cards
+    for (let i = 1; i <= 6; i++) {
+      const findingCard = document.getElementById(`finding-card-${i}`);
+      const findingContent = document.getElementById(`finding-content-${i}`);
+      
+      if (findingCard && findingContent) {
+        const expandIcon = findingCard.querySelector('.expand-icon') as HTMLElement | null;
+        
+        // Initialize all cards as expanded
+        findingContent.classList.add('active');
+        if (expandIcon) {
+          expandIcon.textContent = '-';
+        }
+        
+        findingCard.addEventListener('click', (e: Event) => {
+          const target = e.target as HTMLElement;
+          if (target.closest && target.closest('.finding-content')) return;
+          
+          findingContent.classList.toggle('active');
+          if (expandIcon) {
+            if (findingContent.classList.contains('active')) {
+              expandIcon.textContent = '-';
+            } else {
+              expandIcon.textContent = '+';
+            }
+          }
+        });
+      }
+    }
+  });
+</script> 

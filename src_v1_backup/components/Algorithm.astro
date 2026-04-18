@@ -1,0 +1,886 @@
+---
+// Algorithm.astro - Displays information about the StarPO algorithm framework
+import { Fragment } from 'astro/jsx-runtime'
+
+// Predefined math formula variables
+const mathFormulas = {
+  state: "\\(s_t\\)",
+  action: "\\(a_t\\)",
+  nextState: "\\(s_{t+1}\\)",
+  transitionFunction: "\\(P(s_{t+1} | s_t, a_t)\\)",
+  policy: "\\(\\pi(a_t | s_t)\\)",
+  expectedRewards: "\\(\\mathbb{E}_\\pi[\\sum_t \\gamma^t r_t]\\)",
+  ppoFormula: "\\[J_{\\text{PPO}}(\\theta) = \\frac{1}{G} \\sum_{i=1}^G \\frac{1}{|\\tau_i|} \\sum_{t=1}^{|\\tau_i|} \\min \\left( \\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\text{old}}(a_t|s_t)} A_{i,t}, \\text{clip}\\left(\\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\text{old}}(a_t|s_t)}, 1-\\epsilon, 1+\\epsilon\\right) A_{i,t} \\right)\\]",
+  grpoFormula: "\\[\\hat{A}_{i,t} = \\frac{R(\\tau_i) - \\text{mean}(\\{R(\\tau_1), \\ldots, R(\\tau_G)\\})}{\\text{std}(\\{R(\\tau_1), \\ldots, R(\\tau_G)\\})}\\] \\[J_{\\text{GRPO}}(\\theta) = \\frac{1}{G} \\sum_{i=1}^G \\frac{1}{|\\tau_i|} \\sum_{t=1}^{|\\tau_i|} \\min \\left( \\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\text{old}}(a_t|s_t)} \\hat{A}_{i,t}, \\text{clip}\\left(\\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\text{old}}(a_t|s_t)}, 1-\\epsilon, 1+\\epsilon\\right) \\hat{A}_{i,t} \\right)\\]"
+}
+
+// @ts-ignore
+---
+<section id="starpo" class="content-section alt-background"> 
+  <div class="section-container">
+    <h2 class="section-title">StarPO (<b>S</b>tate-<b>T</b>hinking-<b>A</b>ction-<b>R</b>eward <b>P</b>olicy <b>O</b>ptimization)</h2>
+    
+    <!-- MathJax CDN -->
+    <script is:inline>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)']],
+          displayMath: [['\\[', '\\]']]
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+    </script>
+    <script is:inline src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script is:inline id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Move algorithm flowchart above the image -->
+    <div class="algorithm-visualization">
+      <div class="visual-container">
+        <div class="flow-step" id="step-initial">
+          <div class="step-icon">📋</div>
+          <div class="step-content">
+            <h4>Initial State</h4>
+          </div>
+        </div>
+        <div class="flow-arrow-wrapper">
+          <svg width="50" height="20" viewBox="0 0 50 20" class="flow-arrow">
+            <defs>
+              <marker id="arrow-marker" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#2a2f6c" />
+              </marker>
+            </defs>
+            <path d="M 0 10 L 40 10" stroke="#2a2f6c" stroke-width="2" marker-end="url(#arrow-marker)" />
+          </svg>
+        </div>
+        <div class="flow-step" id="step-reasoning">
+          <div class="step-icon">🧠</div>
+          <div class="step-content">
+            <h4>Reasoning</h4>
+          </div>
+        </div>
+        <div class="flow-arrow-wrapper">
+          <svg width="50" height="20" viewBox="0 0 50 20" class="flow-arrow">
+            <path d="M 0 10 L 40 10" stroke="#2a2f6c" stroke-width="2" marker-end="url(#arrow-marker)" />
+          </svg>
+        </div>
+        <div class="flow-step" id="step-action">
+          <div class="step-icon">⚡</div>
+          <div class="step-content">
+            <h4>Action</h4>
+          </div>
+        </div>
+        <div class="flow-arrow-wrapper">
+          <svg width="50" height="20" viewBox="0 0 50 20" class="flow-arrow">
+            <path d="M 0 10 L 40 10" stroke="#2a2f6c" stroke-width="2" marker-end="url(#arrow-marker)" />
+          </svg>
+        </div>
+        <div class="flow-step" id="step-reward">
+          <div class="step-icon">🏆</div>
+          <div class="step-content">
+            <h4>Reward</h4>
+          </div>
+        </div>
+        
+        <!-- Completely redesigned repeat arrow to match the image exactly -->
+        <div class="repeat-arrow-container">
+          <svg class="repeat-arrow" width="100%" height="50" viewBox="0 0 500 50">
+            <!-- Left vertical line with arrow pointing up to Initial State -->
+            <line x1="-50" y1="5" x2="-50" y2="30" stroke="#2a2f6c" stroke-width="2"/>
+            <!-- Horizontal line -->
+            <line x1="-50" y1="30" x2="560" y2="30" stroke="#2a2f6c" stroke-width="2"/>
+            <!-- Right vertical line coming down from Reward -->
+            <line x1="560" y1="5" x2="560" y2="30" stroke="#2a2f6c" stroke-width="2"/>
+            <!-- Arrow head pointing up to Initial State -->
+            <polygon points="-55,15 -50,5 -45,15" fill="#2a2f6c"/>
+            <!-- Text label for repeat -->
+            <text x="250" y="20" text-anchor="middle" fill="#2a2f6c" font-size="15" font-weight="700">Repeat</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    
+    <div class="diagram-placeholder">
+      <img src="/starpo.png" alt="StarPO Framework" style=""/>
+      <p style="text-align: center; color: #888;">The StarPO (State-Thinking-Action-Reward Policy Optimization) framework with two interleaved stages: <strong>rollout stage</strong> and <strong>update stage</strong>.</p>
+    </div>
+    
+    <div class="spacer" style="height: 2rem;"></div>
+
+    <div class="algorithm-components">
+      <!-- <h3 class="components-title">The framework consists of two key components:</h3> -->
+      
+      <div class="component-card mdp-card" id="mdp-card">
+        <div class="component-header">
+          <h3 class="component-title">MDP Formulation</h3>
+          <div class="expand-icon">-</div>
+        </div>
+        <div class="component-content active" id="mdp-content">
+          <p>We formulate agent-environment interactions as Markov Decision Processes (MDPs) where states and actions are token sequences, allowing LLMs to reason over environment dynamics.</p>
+          
+          <div class="interactive-mdp-viz">
+            <div class="mdp-state" id="state-0">
+              <span class="state-label">State <span set:html={mathFormulas.state} /></span>
+              <div class="state-tokens">token sequence</div>
+            </div>
+            <div class="mdp-arrow">
+              <svg width="50" height="20" viewBox="0 0 50 20">
+                <defs>
+                  <marker id="arrowhead1" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#2a2f6c" />
+                  </marker>
+                </defs>
+                <path d="M 0 10 L 40 10" stroke="#2a2f6c" stroke-width="2" marker-end="url(#arrowhead1)" />
+              </svg>
+              <span class="action-label">Action <span set:html={mathFormulas.action} /></span>
+            </div>
+            <div class="mdp-state" id="state-1">
+              <span class="state-label">State <span set:html={mathFormulas.nextState} /></span>
+              <div class="state-tokens">new token sequence</div>
+            </div>
+          </div>
+          
+          <p>At time <span set:html="\\(t\\)" />, state <span set:html={mathFormulas.state} /> transitions to the next state through action <span set:html={mathFormulas.action} /> following a transition function <span set:html={mathFormulas.transitionFunction} />. The policy <span set:html={mathFormulas.policy} /> generates actions given the trajectory history. The objective is to maximize expected cumulative rewards <span set:html={mathFormulas.expectedRewards} /> across multiple interaction turns.</p>
+        </div>
+      </div>
+      
+      <div class="component-card starpo-card" id="starpo-card">
+        <div class="component-header">
+          <h3 class="component-title">StarPO: Reinforcing Reasoning via Trajectory-Level Optimization</h3>
+          <div class="expand-icon">-</div>
+        </div>
+        <div class="component-content active" id="starpo-content">
+          <p>StarPO is a general RL framework for optimizing entire multi-turn interaction trajectories for LLM agents. The algorithm alternates between two phases:</p>
+          
+          <div class="starpo-phases">
+            <div class="phase-card" id="rollout-phase">
+              <h4>Rollout Stage: Reasoning-Interaction Trajectories</h4>
+              <div class="phase-content">
+                <p>Given an initial Sokoban puzzle state, the LLM generates multiple solving trajectories. At each step, the model receives the puzzle state and generates a reasoning-guided action to push boxes to goal positions:</p>
+                <div class="code-snippet">
+                  <code>&lt;think&gt;I need to push the box ($) to the goal (.) which is directly to the right.&lt;/think&gt;&lt;ans&gt; Right &lt;/ans&gt;</code>
+                </div>
+                <p>The environment receives the action and returns the next state with the box pushed to the goal.</p>
+                
+                <div class="interactive-rollout">
+                  <div class="rollout-step">
+                    <div class="agent-box">
+                      <div class="agent-icon">🤖</div>
+                      <div class="agent-bubble thinking" id="agent-thinking">
+                        I need to push the box ($) to the goal (.) which is directly to the right. To do this, I need to move right and push the box.
+                      </div>
+                      <div class="agent-bubble action" id="agent-action">
+                        Right
+                      </div>
+                    </div>
+                    <div class="env-box">
+                      <div class="env-icon">🌐</div>
+                      <div class="env-bubble feedback" id="env-feedback">
+                        #####<br>#_@*#<br>#####<br><br>Box pushed to goal position. State updated.
+                      </div>
+                    </div>
+                  </div>
+                  <button class="replay-button" id="replay-rollout">▶️ Replay Interaction</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="phase-card" id="update-phase">
+              <h4>Update Stage: Multi-turn Trajectory Optimization</h4>
+              <div class="phase-content">
+                <p>After generating trajectories, we train LLMs to optimize expected rewards. Instead of step-by-step optimization, StarPO optimizes entire trajectories using importance sampling. This approach enables long-horizon reasoning while maintaining computational efficiency.</p>
+                
+                <div class="optimization-strategies">
+                  <h4 class="strategies-title">StarPO supports multiple optimization strategies:</h4>
+                  <div class="strategy-tabs">
+                    <div class="strategy-tab active" data-strategy="ppo" id="ppo-tab">PPO</div>
+                    <div class="strategy-tab" data-strategy="grpo" id="grpo-tab">GRPO</div>
+                  </div>
+                  <div class="strategy-content">
+                    <div class="strategy-details active" id="ppo-content">
+                      <p><strong>PPO (Proximal Policy Optimization):</strong></p>
+                      <div class="formula">
+                        <span set:html={mathFormulas.ppoFormula} />
+                      </div>
+                    </div>
+                    <div class="strategy-details" id="grpo-content">
+                      <p><strong>GRPO (Group Relative Policy Optimization):</strong> </p>
+                      <div class="formula">
+                        <span set:html={mathFormulas.grpoFormula} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <p class="conclusion-text">Rollout and update stages interleave in StarPO, enabling both online and offline learning.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .algorithm-main-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .main-algorithm-img {
+    max-width: 100%;
+    width: 1000px;
+    height: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-caption {
+    max-width: 800px;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  .algorithm-components {
+    margin-bottom: 3rem;
+  }
+
+  .components-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2a2f6c;
+    font-size: 1.5rem;
+  }
+
+  .component-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+  }
+
+  .component-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+  }
+
+  .component-header {
+    background-color: #2a2f6c;
+    color: white;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .component-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .expand-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+
+  .component-content {
+    padding: 1.5rem;
+    display: none;
+  }
+
+  .component-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .mdp-card .component-header {
+    background-color: #2a2f6c;
+  }
+
+  .starpo-card .component-header {
+    background-color: #4a3f9f;
+  }
+
+  .interactive-mdp-viz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    gap: 0.5rem;
+  }
+
+  .mdp-state {
+    background-color: #f0f2f5;
+    border: 2px solid #2a2f6c;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 150px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .mdp-state:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .state-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #2a2f6c;
+  }
+
+  .state-tokens {
+    font-family: monospace;
+    padding: 0.5rem;
+    background-color: #e6e8eb;
+    border-radius: 4px;
+  }
+
+  .mdp-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0.5rem;
+  }
+
+  .action-label {
+    font-weight: bold;
+    color: #2a2f6c;
+    margin-top: 0.25rem;
+  }
+
+  .starpo-phases {
+    margin-top: 2rem;
+  }
+
+  .phase-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #4a3f9f;
+  }
+
+  .phase-card h4 {
+    color: #2a2f6c;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .phase-content {
+    padding-left: 1rem;
+  }
+
+  .code-snippet {
+    background-color: #1e1e3f;
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .code-snippet code {
+    color: #e7e7e7;
+    font-family: monospace;
+  }
+
+  .interactive-rollout {
+    margin: 2rem 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: #fff;
+  }
+
+  .rollout-step {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .agent-box, .env-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .agent-icon, .env-icon {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f0f2f5;
+    flex-shrink: 0;
+  }
+
+  .agent-bubble, .env-bubble {
+    background-color: #f0f2f5;
+    border-radius: 12px;
+    padding: 1rem;
+    position: relative;
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .agent-bubble:before, .env-bubble:before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #f0f2f5;
+  }
+
+  .agent-bubble.thinking {
+    background-color: #e6f3ff;
+    border-left: 3px solid #2a2f6c;
+  }
+
+  .agent-bubble.thinking:before {
+    border-right-color: #e6f3ff;
+  }
+
+  .agent-bubble.action {
+    background-color: #e9f7ef;
+    border-left: 3px solid #27ae60;
+    margin-top: 0.5rem;
+  }
+
+  .agent-bubble.action:before {
+    border-right-color: #e9f7ef;
+  }
+
+  .env-bubble.feedback {
+    background-color: #fef5e7;
+    border-left: 3px solid #f39c12;
+  }
+
+  .env-bubble.feedback:before {
+    border-right-color: #fef5e7;
+  }
+
+  .replay-button {
+    background-color: #2a2f6c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  .replay-button:hover {
+    background-color: #4a3f9f;
+  }
+
+  .optimization-strategies {
+    margin: 1.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .strategies-title {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    background-color: #f0f2f5;
+    border-bottom: 1px solid #ddd;
+    color: #2a2f6c;
+    font-size: 1.1rem;
+  }
+
+  .strategy-tabs {
+    display: flex;
+    background-color: #f0f2f5;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .strategy-tab {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .strategy-tab:hover {
+    background-color: #e6e8eb;
+  }
+
+  .strategy-tab.active {
+    background-color: #2a2f6c;
+    color: white;
+    font-weight: bold;
+  }
+
+  .strategy-content {
+    padding: 1.5rem;
+    background-color: #fff;
+  }
+
+  .strategy-details {
+    display: none;
+  }
+
+  .strategy-details.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .formula {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    margin: 1rem 0;
+    min-height: 50px;
+  }
+
+  .conclusion-text {
+    font-weight: 600;
+    margin-top: 1.5rem;
+    color: #2a2f6c;
+  }
+
+  .algorithm-visualization {
+    margin: 1rem 0 3rem 0;
+    position: relative;
+    padding-bottom: 1rem;
+  }
+  
+  .algorithm-visualization h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2a2f6c;
+  }
+  
+  .visual-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    position: relative;
+    margin-bottom: 3rem;
+  }
+  
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.2rem;
+    width: 120px;
+    height: 120px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  .flow-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-content {
+    text-align: center;
+    width: 100%;
+  }
+
+  .step-content h4 {
+    margin: 0;
+    color: #2a2f6c;
+    font-size: 1.1rem;
+  }
+
+  .flow-arrow-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flow-arrow {
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .flow-step.active {
+    border: 2px solid #2a2f6c;
+    background-color: #f0f8ff;
+  }
+
+  /* New repeat arrow styling */
+  .repeat-arrow-container {
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    bottom: -40px;
+    left: 0;
+    overflow: visible;
+  }
+
+  .repeat-arrow {
+    width: 100%;
+    height: 50px;
+    overflow: visible;
+  }
+
+  .math-var {
+    font-family: inherit;
+  }
+  
+  .state-label, .action-label {
+    font-weight: bold;
+    color: #2a2f6c;
+  }
+  
+  .math-formula {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    display: block;
+    text-align: center;
+    letter-spacing: 0.02em;
+    padding: 0.8rem;
+  }
+  
+  .math-formula sub,
+  .math-var sub {
+    font-size: 0.75em;
+    position: relative;
+    bottom: -0.25em;
+    line-height: 0;
+  }
+  
+  .math-formula sup,
+  .math-var sup {
+    font-size: 0.75em;
+    position: relative;
+    top: -0.5em;
+    line-height: 0;
+  }
+
+  @media (max-width: 768px) {
+    .interactive-mdp-viz {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .mdp-arrow {
+      transform: rotate(90deg);
+      margin: 1rem 0;
+    }
+
+    .visual-container {
+      flex-direction: column;
+      padding: 2rem 1rem;
+    }
+
+    .flow-arrow-wrapper {
+      transform: rotate(90deg);
+      margin: 0.5rem 0;
+    }
+
+    .repeat-arrow-container {
+      display: none; /* Hide on mobile */
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .main-algorithm-img {
+      width: 90%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Component expansion functionality
+    const mdpCard = document.getElementById('mdp-card');
+    const mdpContent = document.getElementById('mdp-content');
+    const starpoCard = document.getElementById('starpo-card');
+    const starpoContent = document.getElementById('starpo-content');
+
+    if (mdpCard && mdpContent) {
+      const mdpExpandIcon = mdpCard.querySelector('.expand-icon') as HTMLElement | null;
+      
+      mdpCard.addEventListener('click', (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target.closest && target.closest('.component-content')) return;
+        
+        mdpContent.classList.toggle('active');
+        if (mdpExpandIcon) {
+          if (mdpContent.classList.contains('active')) {
+            mdpExpandIcon.textContent = '-';
+          } else {
+            mdpExpandIcon.textContent = '+';
+          }
+        }
+      });
+    }
+
+    if (starpoCard && starpoContent) {
+      const starpoExpandIcon = starpoCard.querySelector('.expand-icon') as HTMLElement | null;
+      
+      starpoCard.addEventListener('click', (e: Event) => {
+        const target = e.target as HTMLElement;
+        if (target.closest && target.closest('.component-content')) return;
+        
+        starpoContent.classList.toggle('active');
+        if (starpoExpandIcon) {
+          if (starpoContent.classList.contains('active')) {
+            starpoExpandIcon.textContent = '-';
+          } else {
+            starpoExpandIcon.textContent = '+';
+          }
+        }
+      });
+    }
+
+    // Modify initialization display: keep both cards collapsed
+    if (mdpContent && mdpCard) {
+      mdpContent.classList.add('active');
+      const mdpExpandIcon = mdpCard.querySelector('.expand-icon') as HTMLElement | null;
+      if (mdpExpandIcon) {
+        mdpExpandIcon.textContent = '-';
+      }
+    }
+    
+    if (starpoContent && starpoCard) {
+      starpoContent.classList.add('active');
+      const starpoExpandIcon = starpoCard.querySelector('.expand-icon') as HTMLElement | null;
+      if (starpoExpandIcon) {
+        starpoExpandIcon.textContent = '-';
+      }
+    }
+
+    // Strategy tab switching
+    const ppoTab = document.getElementById('ppo-tab');
+    const grpoTab = document.getElementById('grpo-tab');
+    const ppoContent = document.getElementById('ppo-content');
+    const grpoContent = document.getElementById('grpo-content');
+
+    if (ppoTab && grpoTab && ppoContent && grpoContent) {
+      ppoTab.addEventListener('click', () => {
+        ppoTab.classList.add('active');
+        grpoTab.classList.remove('active');
+        ppoContent.classList.add('active');
+        grpoContent.classList.remove('active');
+      });
+
+      grpoTab.addEventListener('click', () => {
+        grpoTab.classList.add('active');
+        ppoTab.classList.remove('active');
+        grpoContent.classList.add('active');
+        ppoContent.classList.remove('active');
+      });
+    }
+
+    // Rollout animation
+    const replayRollout = document.getElementById('replay-rollout');
+    const agentThinking = document.getElementById('agent-thinking') as HTMLElement | null;
+    const agentAction = document.getElementById('agent-action') as HTMLElement | null;
+    const envFeedback = document.getElementById('env-feedback') as HTMLElement | null;
+
+    function animateRollout() {
+      // Reset
+      if (agentThinking) agentThinking.style.opacity = '0';
+      if (agentAction) agentAction.style.opacity = '0';
+      if (envFeedback) envFeedback.style.opacity = '0';
+      
+      // Animate thinking
+      setTimeout(() => {
+        if (agentThinking) {
+          agentThinking.style.opacity = '1';
+          agentThinking.style.transform = 'translateY(0)';
+        }
+      }, 500);
+      
+      // Animate action
+      setTimeout(() => {
+        if (agentAction) {
+          agentAction.style.opacity = '1';
+          agentAction.style.transform = 'translateY(0)';
+        }
+      }, 2000);
+      
+      // Animate feedback
+      setTimeout(() => {
+        if (envFeedback) {
+          envFeedback.style.opacity = '1';
+          envFeedback.style.transform = 'translateY(0)';
+        }
+      }, 3500);
+    }
+
+    if (replayRollout) {
+      replayRollout.addEventListener('click', animateRollout);
+      
+      // Run animation on load
+      setTimeout(animateRollout, 1000);
+    }
+
+    // Interactive algorithm flow
+    const flowSteps = document.querySelectorAll('.flow-step');
+    let currentStepIndex = 0;
+
+    function highlightNextStep() {
+      // Reset all steps
+      flowSteps.forEach(step => step.classList.remove('active'));
+      
+      // Highlight current step
+      if (flowSteps[currentStepIndex]) {
+        flowSteps[currentStepIndex].classList.add('active');
+      }
+      
+      // Move to next step
+      currentStepIndex = (currentStepIndex + 1) % flowSteps.length;
+    }
+
+    // Highlight steps every 2 seconds
+    if (flowSteps.length > 0) {
+      highlightNextStep(); // Highlight first step immediately
+      setInterval(highlightNextStep, 2000);
+    }
+  });
+</script> 

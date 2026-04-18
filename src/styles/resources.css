@@ -14,7 +14,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   gap: 1rem;
   margin: 0 auto;
   max-width: 800px;
@@ -43,15 +42,7 @@
 }
 
 .resource-icon {
-  width: 18px;
-  height: 18px;
-  stroke: currentColor;
-  stroke-width: 2;
-  fill: none;
-}
-
-.resource-icon.x-icon {
-  stroke: none;
-  fill: currentColor;
-  stroke-width: 0;
+  font-size: 18px;
+  color: currentColor;
+  flex-shrink: 0;
 } 

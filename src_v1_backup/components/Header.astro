@@ -1,0 +1,335 @@
+---
+// src/components/Header.astro
+---
+
+<header>
+  <div class="container">
+      <a href="#hero" class="info-badge">
+          <img src="/icon.png" alt="Icon" class="badge-icon" />
+          <span class="badge-text"><strong>RAGEN</strong></span>
+      </a>
+
+      <div class="nav-wrapper">
+          <nav class="main-nav">
+              <ul>
+                  <!-- <li><a href="#starpo">StarPO Algorithm</a></li> -->
+                  <!-- <li><a href="#charts">Dynamic Charts</a></li> -->
+                  <!-- <li><a href="#findings">Findings</a></li> -->
+                  <!-- <li><a href="#data">Examples</a></li> -->
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle">
+                          More Research
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dropdown-icon">
+                              <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                      </a>
+                      <div class="dropdown-menu">
+                        <a href="https://vagen-ai.github.io/" target="_blank" class="dropdown-item">VAGEN</a>
+                        <a href="https://mind-cube.github.io/" target="_blank" class="dropdown-item">MindCube</a>
+                        <a href="https://embodied-agent-interface.github.io/" target="_blank" class="dropdown-item">Embodied Agent Interface</a>
+                      </div>
+
+                  </li>
+                  <li><a href="https://www.mll.lab.northwestern.edu/" target="_blank">MLL Lab</a></li>
+                  <li><a href="https://github.com/RAGEN-AI/RAGEN" target="_blank" rel="noopener noreferrer" class="github-repo">
+                    <div class="repo-icon">
+                        <svg aria-hidden="true" height="24" viewBox="0 0 16 16" width="24" fill="currentColor">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                        </svg>
+                    </div>
+                  </a>
+                  </li>
+              </ul>
+          </nav>
+      </div>
+  </div>
+</header>
+
+<style>
+  header {
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    height: var(--header-height, 60px);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .container {
+    max-width: var(--page-max-width, 1100px);
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between; /* Logo left, nav-wrapper right */
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Wrapper for right-aligned items */
+  .nav-wrapper {
+      display: flex;
+      align-items: center;
+      width: auto; /* Allow natural width */
+  }
+
+  /* Main navigation styles */
+  .main-nav {
+      width: 100%; /* Take full width of wrapper */
+  }
+  
+  .main-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center; /* Ensure vertical alignment */
+      flex-wrap: nowrap; /* Prevent wrapping on mobile */
+      justify-content: flex-end; /* Push items to the right */
+      width: 100%; /* Take full width */
+  }
+
+  .main-nav li {
+      display: inline-block;
+      white-space: nowrap; /* Prevent text wrapping */
+  }
+
+  .main-nav a {
+      text-decoration: none;
+      color: #555;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+  }
+
+  .main-nav a:hover,
+  .main-nav a:focus {
+      color: #2a2f6c;
+  }
+
+  /* Dropdown styles */
+  .dropdown {
+      position: relative;
+  }
+
+  .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+  }
+
+  .dropdown-icon {
+      transition: transform 0.2s ease;
+  }
+
+  .dropdown:hover .dropdown-icon {
+      transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-width: 160px;
+      padding: 8px 0;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+      transform: translateX(-50%) translateY(-10px);
+      z-index: 1000;
+  }
+
+  .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-item {
+      display: block;
+      padding: 10px 20px;
+      color: #555;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+  }
+
+  .dropdown-item:hover {
+      background-color: #f5f5f5;
+      color: #2a2f6c;
+  }
+
+  /* GitHub repo display styles */
+  .github-repo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      padding: 4px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+  }
+
+  .github-repo:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .repo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+  }
+
+  /* Logo styles */
+  .info-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    gap: 8px;
+    text-decoration: none;
+    color: #212529;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    min-width: 0; /* Allow shrinking */
+    overflow: hidden; /* Prevent overflow */
+  }
+
+  .info-badge:hover {
+    background-color: #e9ecef;
+    border-color: #e9ecef;
+    cursor: pointer;
+  }
+
+  .badge-icon {
+    height: 24px;
+    width: auto;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+  }
+
+  .badge-text {
+    line-height: 1;
+    white-space: nowrap; /* Keep text on one line */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis if needed */
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 0.5rem;
+    }
+    
+    .main-nav ul {
+      gap: 0; /* Remove fixed gap on mobile */
+      justify-content: space-between; /* Distribute items evenly */
+    }
+    
+    .main-nav a {
+      font-size: 0.85rem;
+      padding: 0.25rem 0.35rem;
+    }
+    
+    .info-badge {
+      padding: 6px 10px;
+      font-size: 0.9rem;
+      max-width: 110px; /* Limit width on mobile */
+    }
+    
+    .badge-icon {
+      height: 20px;
+    }
+    
+    .github-repo {
+      padding: 2px;
+    }
+    
+    .repo-icon svg {
+      height: 20px;
+      width: 20px;
+    }
+
+    .dropdown-toggle {
+      font-size: 0.85rem;
+    }
+
+    .dropdown-icon {
+      width: 10px;
+      height: 10px;
+    }
+
+    .dropdown-menu {
+      min-width: 140px;
+      font-size: 0.85rem;
+    }
+
+    .dropdown-item {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Very small screens */
+  @media (max-width: 480px) {
+    .info-badge {
+      padding: 4px 6px;
+      max-width: 40px; /* Make very compact */
+      justify-content: center;
+    }
+    
+    .badge-text {
+      display: none; /* Hide text on very small screens */
+    }
+    
+    .badge-icon {
+      height: 24px; /* Make icon slightly larger for better visibility */
+    }
+    
+    .main-nav a {
+      font-size: 0.8rem;
+      padding: 0.25rem;
+    }
+
+    .dropdown-toggle {
+      font-size: 0.75rem;
+      padding: 0.25rem;
+    }
+
+    .dropdown-icon {
+      width: 8px;
+      height: 8px;
+    }
+
+    .dropdown-menu {
+      min-width: 120px;
+      left: auto;
+      right: 0;
+      transform: none;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+  }
+</style>

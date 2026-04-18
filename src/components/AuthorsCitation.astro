@@ -1,13 +1,12 @@
 ---
-// AuthorsCitation.astro - Displays citation information
+// AuthorsCitation.astro - Citation section
 ---
-<section id="authors-citation" class="content-section">
+<section id="citation" class="content-section alt-background">
   <div class="section-container">
     <h2 class="section-title">Citation</h2>
 
-    {/* Citation Block */}
     <div class="citation-section">
-      <p>If you find RAGEN useful in your research, we would appreciate it if you consider citing our work:</p>
+      <p>If you find this work useful, please cite:</p>
       <div class="citation-block">
         <div class="code-container">
           <button id="copy-button" aria-label="Copy citation" class="copy-button-corner">
@@ -19,14 +18,11 @@
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
           </button>
-          <pre><code>{`@misc{ragen,
-      title={RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning}, 
-      author={Zihan Wang and Kangrui Wang and Qineng Wang and Pingyue Zhang and Linjie Li and Zhengyuan Yang and Xing Jin and Kefan Yu and Minh Nhat Nguyen and Licheng Liu and Eli Gottlieb and Yiping Lu and Kyunghyun Cho and Jiajun Wu and Li Fei-Fei and Lijuan Wang and Yejin Choi and Manling Li},
-      year={2025},
-      eprint={2504.20073},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2504.20073}, 
+          <pre><code>{`@article{ragenv2026collapse,
+  title={Understanding Reasoning Collapse in Multi-turn Agent Reinforcement Learning},
+  author={Zihan Wang and Chi Gui and Xing Jin and Qineng Wang and Licheng Liu and Kangrui Wang and Shiqi Chen and Linjie Li and Zhengyuan Yang and Pingyue Zhang and Yiping Lu and Jiajun Wu and Li Fei-Fei and Lijuan Wang and Yejin Choi and Manling Li},
+  journal={ICML 2026},
+  year={2026}
 }`}</code></pre>
         </div>
       </div>
@@ -36,33 +32,21 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Citation copy functionality
     const copyButton = document.getElementById('copy-button');
     const codeElement = document.querySelector('.citation-block pre code');
-    
+
     if (copyButton && codeElement) {
       copyButton.addEventListener('click', async () => {
         const citationText = codeElement.textContent || '';
-        
         try {
           await navigator.clipboard.writeText(citationText);
-          
-          // Visual feedback
           copyButton.classList.add('copied');
-          
-          // Reset after 2 seconds
-          setTimeout(() => {
-            copyButton.classList.remove('copied');
-          }, 2000);
+          setTimeout(() => copyButton.classList.remove('copied'), 2000);
         } catch (err) {
-          console.error('Failed to copy: ', err);
           copyButton.classList.add('copy-error');
-          
-          setTimeout(() => {
-            copyButton.classList.remove('copy-error');
-          }, 2000);
+          setTimeout(() => copyButton.classList.remove('copy-error'), 2000);
         }
       });
     }
   });
-</script> 
+</script>
