@@ -17,7 +17,7 @@
 5. 在 `RV-Filter-Website` 中加入 `SITE_URL` / `SITE_BASE` 构建支持，并将页面资源路径改为兼容子路径部署。
 6. 修正 `RV-Filter-Website` 首页顶部两个占位按钮，避免部署后出现死链接。
 7. 生成 `SITE_BASE=/v2/` 的静态产物，并同步到 `ragen-ai.github.io/public/v2/`。
-8. 在主站首页 hero 顶部新增 `News: We released RAGEN v2` 入口，点击跳转 `/v2/`。
+8. 在主站首页 hero 顶部新增 `News: We released RAGEN-2` 入口，点击跳转 `/v2/`。
 9. 更新两个 repo 的 README，记录 v2 子路径构建与同步方式。
 10. 完成主站构建验证：`npm run build` 成功，且产物中同时存在 `dist/index.html` 的 news 入口和 `dist/v2/index.html` 子站页面。
 11. 确认主站当前本地未安装 `node_modules`，本地预览前需要先执行 `npm install`。

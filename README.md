@@ -34,6 +34,6 @@ npm run build
 
 The main homepage includes a top hero news banner:
 
-- `News: We released RAGEN v2`
+- `News: We released RAGEN-2`
 
 That banner links to `/v2/`.
