@@ -1,0 +1,765 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/section.css';
+import '../../styles/hero.css';
+import '../../styles/authors.css';
+import '../../styles/resources.css';
+
+const basePath = import.meta.env.BASE_URL;
+const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
+---
+
+<Layout title={pageTitle}>
+
+  <!-- ============================================================ -->
+  <!-- HERO -->
+  <!-- ============================================================ -->
+  <section id="hero" class="content-section hero-section">
+    <div class="title-wrapper">
+      <div class="title-with-logo">
+        <img src={`${basePath}icon.png`} alt="BAGEN Logo" class="title-logo">
+        <h1 class="main-title" id="animated-title">BAGEN</h1>
+      </div>
+      <p class="title-subtitle">Are LLM Agents Budget-Aware?</p>
+      <p class="venue-badge">NeurIPS 2026</p>
+    </div>
+
+    <p class="main-subtitle">
+      Foundation-model agents are deployed with growing resource constraints like token, money, and time budgets,
+      yet it remains unclear whether they know how much budget they will spend.
+      We formalize <strong>budget awareness</strong> as <em>progressive interval estimation</em>:
+      mid-execution, can the agent provide a calibrated interval on remaining budget and
+      detect when a task is no longer finishable?
+    </p>
+
+    <div class="authors-section compact">
+      <div class="authors-list">
+        <p class="author-line">
+          <a href="#">Yuxiang Lin</a><sup>*1,2</sup>,
+          <a href="https://zihanwang314.github.io/">Zihan &ldquo;Zenus&rdquo; Wang</a><sup>*1,2</sup>,
+          <a href="#">Mengyang Liu</a><sup>*3</sup>,
+          <a href="#">Yuxuan Shan</a><sup>*2</sup>,
+          <a href="#">Longju Bai</a><sup>*4</sup>
+        </p>
+        <p class="author-line">
+          <a href="#">Junyao Zhang</a><sup>2</sup>,
+          <a href="#">Xing Jin</a><sup>3</sup>,
+          <a href="#">Boshan Chen</a><sup>2</sup>,
+          <a href="#">Jinyan Su</a><sup>5</sup>,
+          <a href="#">Xingyao Wang</a><sup>6</sup>,
+          <a href="#">Jiaxin Pei</a><sup>7,8</sup>,
+          <a href="https://limanling.github.io/">Manling Li</a><sup>1</sup>
+        </p>
+        <p class="equal-contribution"><sup>*</sup> Core Contributors</p>
+        <p class="affiliations">
+          <sup>1</sup>Northwestern &nbsp;
+          <sup>2</sup>O2 AI &nbsp;
+          <sup>3</sup>Independent &nbsp;
+          <sup>4</sup>University of Michigan &nbsp;
+          <sup>5</sup>Cornell &nbsp;
+          <sup>6</sup>All Hands AI &nbsp;
+          <sup>7</sup>Stanford &nbsp;
+          <sup>8</sup>UT Austin
+        </p>
+      </div>
+    </div>
+
+    <div class="resources-section">
+      <div class="resources-buttons">
+        <a href="#" class="resource-button" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="resource-icon gh-icon" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+          </svg>
+          <span>Code (coming soon)</span>
+        </a>
+        <a href="#" class="resource-button" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="resource-icon" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="currentColor"></path>
+            <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2"></polyline>
+          </svg>
+          <span>Paper (coming soon)</span>
+        </a>
+        <a href="#citation" class="resource-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="resource-icon" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"></path>
+            <rect x="9" y="3" width="6" height="4" rx="1"></rect>
+          </svg>
+          <span>Citation</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- TL;DR highlight boxes -->
+    <div class="tldr-grid">
+      <div class="tldr-card">
+        <div class="tldr-icon">&#127919;</div>
+        <div class="tldr-text"><strong>Budget awareness decouples</strong> from task performance — better agents do not reliably estimate their own costs (r&nbsp;&approx;&nbsp;0.35).</div>
+      </div>
+      <div class="tldr-card">
+        <div class="tldr-icon">&#128200;</div>
+        <div class="tldr-text"><strong>Universal optimistic bias</strong> — all models underestimate remaining budget; weaker models are <em>more</em> optimistic, not less.</div>
+      </div>
+      <div class="tldr-card">
+        <div class="tldr-icon">&#9889;</div>
+        <div class="tldr-text"><strong>Actionable signal</strong> — early stopping on <code>impossible</code> predictions saves 28&ndash;64% of wasted tokens at only 1.6&ndash;4.2 pp success cost.</div>
+      </div>
+      <div class="tldr-card">
+        <div class="tldr-icon">&#127981;</div>
+        <div class="tldr-text"><strong>Trainable</strong> — SFT alone raises feasibility from 25.5% to ~90%. Interval coverage caps near 47% after SFT+RL, exposing a hard reasoning gap.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- METHOD -->
+  <!-- ============================================================ -->
+  <section id="method" class="content-section alt-background">
+    <div class="section-container">
+      <h2 class="section-title">Method</h2>
+
+      <!-- Budget modalities -->
+      <div class="method-block">
+        <div class="method-block-header">
+          <span class="method-tag">Setup</span>
+          <h3>Two Budget Modalities</h3>
+        </div>
+        <div class="method-block-body">
+          <div class="modality-grid">
+            <div class="modality-card internal">
+              <div class="modality-label">Internal Budget</div>
+              <p>The compute the model generates — primarily <strong>token consumption</strong> across reasoning steps. Tested on Sokoban, Search-R1, and SWE-bench.</p>
+              <div class="modality-formula">
+                C<sub>k</sub><sup>in</sup> = &sum;<sub>t=1</sub><sup>k</sup> c<sub>t</sub><sup>in</sup>
+              </div>
+            </div>
+            <div class="modality-card external">
+              <div class="modality-label">External Budget</div>
+              <p>The cost the agent commits in the environment — <strong>money, time, warehouse capacity</strong>. Multi-dimensional, coupled constraints. Tested on our Warehouse environment.</p>
+              <div class="modality-formula">
+                <b>C</b><sub>k</sub><sup>ex</sup> = &sum;<sub>t=1</sub><sup>k</sup> <b>c</b><sub>t</sub><sup>ex</sup> &isin; &#8477;<sup>D</sup>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Protocol -->
+      <div class="method-block">
+        <div class="method-block-header">
+          <span class="method-tag">Protocol</span>
+          <h3>Progressive Interval Estimation + Rollout-Replay</h3>
+        </div>
+        <div class="method-block-body">
+          <p class="method-desc">At every turn <em>k</em>, the estimator returns either a budget interval or an <code>impossible</code> declaration:</p>
+          <div class="equation-box">
+            ŷ<sub>k</sub> =
+            <span class="eq-case">
+              <span class="eq-branch">[R&#770;<sub>k</sub><sup>lo</sup>, R&#770;<sub>k</sub><sup>hi</sup>]</span>
+              <span class="eq-cond">if task still feasible</span>
+              <span class="eq-branch impossible-branch"><code>impossible</code></span>
+              <span class="eq-cond">if completion no longer achievable</span>
+            </span>
+          </div>
+          <div class="protocol-steps">
+            <div class="protocol-step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <strong>Rollout generation</strong> — run the agent without any budget cap, log the full trajectory with per-turn costs and final outcome.
+              </div>
+            </div>
+            <div class="protocol-step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <strong>Prefix replay &amp; estimation</strong> — for each non-terminal turn, replay the logged prefix and ask the agent for ŷ<sub>k</sub>, scored against true remaining cost R<sub>k</sub>.
+              </div>
+            </div>
+          </div>
+          <p class="method-note">This separates estimation ability from task completion, since estimation itself would consume tokens if done inline.</p>
+        </div>
+      </div>
+
+      <!-- Sub-capabilities -->
+      <div class="method-block">
+        <div class="method-block-header">
+          <span class="method-tag">Metrics</span>
+          <h3>Three Sub-Capability Metrics</h3>
+        </div>
+        <div class="method-block-body">
+          <div class="metric-cards">
+            <div class="subcap-card">
+              <div class="subcap-num">①</div>
+              <div class="subcap-label">Feasibility Prediction</div>
+              <p>Can the agent tell whether the task will succeed? Scored as <strong>Macro-F₁</strong> over feasible / impossible classes, at first turn and all turns.</p>
+            </div>
+            <div class="subcap-card">
+              <div class="subcap-num">②</div>
+              <div class="subcap-label">Early Failure Detection</div>
+              <p>For tasks that ultimately fail, does the agent raise the alarm early? Scored as <strong>Fail-F₁</strong> on the impossible class only.</p>
+            </div>
+            <div class="subcap-card">
+              <div class="subcap-num">③</div>
+              <div class="subcap-label">Interval Calibration</div>
+              <p>On successful trajectories, how accurate and tight is the predicted interval? Scored as <strong>coverage × tightness</strong>, plus midpoint relative error.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Environments & Models -->
+      <div class="method-block">
+        <div class="method-block-header">
+          <span class="method-tag">Setup</span>
+          <h3>4 Environments &times; 5 Frontier Models</h3>
+        </div>
+        <div class="method-block-body">
+          <div class="env-grid">
+            <div class="env-card">
+              <div class="env-name">Sokoban</div>
+              <div class="env-type internal-tag">Internal</div>
+              <p>8&times;8 grid planning task, 2,500-token cap.</p>
+            </div>
+            <div class="env-card">
+              <div class="env-name">Search-R1</div>
+              <div class="env-type internal-tag">Internal</div>
+              <p>Multi-hop information retrieval, 3,500-token cap.</p>
+            </div>
+            <div class="env-card">
+              <div class="env-name">SWE-bench</div>
+              <div class="env-type internal-tag">Internal</div>
+              <p>GitHub issue resolution, 160-turn cap.</p>
+            </div>
+            <div class="env-card">
+              <div class="env-name">Warehouse</div>
+              <div class="env-type external-tag">External</div>
+              <p>Supply-chain from real enterprise data. 3 coupled budgets: cost (USD), time (weeks), occupancy (item-weeks).</p>
+            </div>
+          </div>
+          <div class="model-chips">
+            <span class="model-chip">GPT-5.2 Instant</span>
+            <span class="model-chip">Claude Opus 4.7</span>
+            <span class="model-chip">Claude Sonnet 4.6</span>
+            <span class="model-chip">Gemini 3.1 Pro</span>
+            <span class="model-chip">Qwen3-235B</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FINDINGS (accordion) -->
+  <!-- ============================================================ -->
+  <section id="results" class="content-section">
+    <div class="section-container">
+      <h2 class="section-title">Key Findings</h2>
+      <p class="section-subtitle">Click each finding to expand the evidence.</p>
+
+      <!-- Finding 1 -->
+      <div class="rq-block" id="f1">
+        <button class="rq-header" aria-expanded="false" data-target="f1-body">
+          <span class="rq-badge">Finding 1</span>
+          <h3>Budget Awareness Decouples from Task Performance</h3>
+          <span class="rq-summary">Task success rate correlates only weakly with estimation quality (r&nbsp;&approx;&nbsp;0.35). The best actor is not the best estimator.</span>
+          <span class="rq-chevron" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+          </span>
+        </button>
+        <div class="rq-body" id="f1-body">
+          <img src={`${basePath}bagen/fig_decoupling.png`} alt="Task performance vs estimation quality" class="rq-fig" />
+          <p class="rq-caption">Left &amp; middle: task success rate correlates only weakly with budget estimation quality for both internal and external budgets. Right: on failed Sokoban trajectories, estimation accuracy improves as more progress is observed — but the largest gains appear only very late.</p>
+
+          <div class="evidence-grid">
+            <div class="evidence-item">
+              <div class="evidence-num">&#8853;</div>
+              <div>On <strong>Search-R1</strong>, Opus achieves the highest task success rate (75.8%) but Sonnet produces better interval estimates (36.5% hit rate vs. 23.1% for Opus).</div>
+            </div>
+            <div class="evidence-item">
+              <div class="evidence-num">&#8853;</div>
+              <div>On <strong>SWE-bench</strong>, rankings split three ways: Opus leads task success, Gemini leads feasibility F₁, GPT-5.2 leads interval hit rate.</div>
+            </div>
+            <div class="evidence-item">
+              <div class="evidence-num">&#8853;</div>
+              <div><strong>What separates good estimators is calibration, not feasibility.</strong> Interval hit rate correlates strongly with midpoint bias (r&nbsp;&approx;&nbsp;&minus;0.67) but only weakly with feasibility F₁ (r&nbsp;&approx;&nbsp;0.35).</div>
+            </div>
+          </div>
+
+          <!-- Main results table -->
+          <h4 class="rq-subheading">Full Results Table</h4>
+          <div class="table-wrapper">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th class="left-col">Model</th>
+                  <th>Success</th>
+                  <th>F1@1</th>
+                  <th>F1@All</th>
+                  <th>Fail-F1</th>
+                  <th>Hit Rate</th>
+                  <th>Reward</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group-header-row"><td colspan="7">SWE-bench</td></tr>
+                <tr><td class="left-col">Claude Opus 4.7</td><td><strong>71.9%</strong></td><td>41.1%</td><td>51.1%</td><td>48.8%</td><td>30.3%</td><td><strong>0.160</strong></td></tr>
+                <tr><td class="left-col">Claude Sonnet 4.6</td><td>68.8%</td><td>32.2%</td><td>37.7%</td><td>23.4%</td><td>22.3%</td><td>0.130</td></tr>
+                <tr><td class="left-col">Gemini 3.1 Pro</td><td>68.8%</td><td>39.2%</td><td><strong>58.2%</strong></td><td><strong>52.0%</strong></td><td>23.2%</td><td>0.112</td></tr>
+                <tr><td class="left-col">GPT-5.2 Instant</td><td>57.8%</td><td>43.5%</td><td>40.2%</td><td>21.2%</td><td><strong>44.3%</strong></td><td>0.115</td></tr>
+                <tr><td class="left-col">Qwen3-235B</td><td>33.3%</td><td><strong>47.6%</strong></td><td>35.1%</td><td>32.8%</td><td>6.5%</td><td>0.021</td></tr>
+
+                <tr class="group-header-row"><td colspan="7">Search-R1</td></tr>
+                <tr><td class="left-col">Claude Opus 4.7</td><td><strong>75.8%</strong></td><td>39.4%</td><td><strong>40.5%</strong></td><td>5.6%</td><td>23.1%</td><td>0.114</td></tr>
+                <tr><td class="left-col">Claude Sonnet 4.6</td><td>71.1%</td><td>37.9%</td><td>33.3%</td><td>0.0%</td><td><strong>36.5%</strong></td><td><strong>0.154</strong></td></tr>
+                <tr><td class="left-col">GPT-5.2 Instant</td><td>68.0%</td><td><strong>40.2%</strong></td><td>38.3%</td><td>0.0%</td><td>21.4%</td><td>0.031</td></tr>
+                <tr><td class="left-col">Gemini 3.1 Pro</td><td>53.9%</td><td>24.5%</td><td>24.8%</td><td>0.0%</td><td>20.7%</td><td>0.079</td></tr>
+                <tr><td class="left-col">Qwen3-235B</td><td>35.2%</td><td>33.2%</td><td>23.9%</td><td><strong>30.9%</strong></td><td>0.0%</td><td>0.000</td></tr>
+
+                <tr class="group-header-row"><td colspan="7">Sokoban</td></tr>
+                <tr><td class="left-col">Claude Opus 4.7</td><td><strong>56.2%</strong></td><td>46.3%</td><td>45.6%</td><td>16.0%</td><td><strong>46.4%</strong></td><td>0.112</td></tr>
+                <tr><td class="left-col">Claude Sonnet 4.6</td><td>51.6%</td><td><strong>46.4%</strong></td><td>53.6%</td><td>33.9%</td><td>45.1%</td><td>0.148</td></tr>
+                <tr><td class="left-col">Gemini 3.1 Pro</td><td>39.1%</td><td>40.0%</td><td><strong>61.9%</strong></td><td><strong>79.9%</strong></td><td>8.8%</td><td><strong>0.313</strong></td></tr>
+                <tr><td class="left-col">GPT-5.2 Instant</td><td>35.2%</td><td>27.7%</td><td>40.6%</td><td>32.8%</td><td>36.0%</td><td>0.167</td></tr>
+                <tr><td class="left-col">Qwen3-235B</td><td>7.0%</td><td>6.3%</td><td>12.6%</td><td>20.4%</td><td>10.8%</td><td>0.029</td></tr>
+
+                <tr class="group-header-row"><td colspan="7">Warehouse (external budget)</td></tr>
+                <tr><td class="left-col">GPT-5.2 Instant</td><td>—</td><td>35.0%</td><td>63.4%</td><td>56.9%</td><td>24.7%</td><td>0.577</td></tr>
+                <tr><td class="left-col">Claude Opus 4.7</td><td>—</td><td>33.3%</td><td>63.2%</td><td>55.7%</td><td>35.9%</td><td>0.690</td></tr>
+                <tr><td class="left-col">Claude Sonnet 4.6</td><td>—</td><td>33.3%</td><td>64.9%</td><td>59.0%</td><td>17.3%</td><td>0.572</td></tr>
+                <tr><td class="left-col">Gemini 3.1 Pro</td><td>—</td><td><strong>42.0%</strong></td><td><strong>67.0%</strong></td><td><strong>62.8%</strong></td><td><strong>50.2%</strong></td><td><strong>0.698</strong></td></tr>
+                <tr><td class="left-col">Qwen3-235B</td><td>—</td><td>41.0%</td><td>60.8%</td><td>56.0%</td><td>17.3%</td><td>0.483</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finding 2 -->
+      <div class="rq-block" id="f2">
+        <button class="rq-header" aria-expanded="false" data-target="f2-body">
+          <span class="rq-badge">Finding 2</span>
+          <h3>Optimistic Bias Is Universal Across All Models and Tasks</h3>
+          <span class="rq-summary">All 20 model-environment pairs underestimate remaining budget. Weaker models are <em>more</em> optimistic, not less.</span>
+          <span class="rq-chevron" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+          </span>
+        </button>
+        <div class="rq-body" id="f2-body">
+          <h4 class="rq-subheading">Cumulative optimism across models</h4>
+          <img src={`${basePath}bagen/fig_optimism.png`} alt="Optimistic bias across models" class="rq-fig" />
+          <p class="rq-caption">Models generally estimate budget too optimistically throughout the rollout. Conservative bias increases with rollout progress, but remains secondary to optimism overall.</p>
+
+          <h4 class="rq-subheading">First-turn vs. all-turn feasibility F₁</h4>
+          <img src={`${basePath}bagen/fig_first_vs_all.png`} alt="First-turn vs all-turn F1" class="rq-fig" />
+          <p class="rq-caption">Points scatter on both sides of the equality line — first-turn predictions do not reliably summarize what the same agent would say after seeing partial progress. On Sokoban, Gemini improves by +21.9 F₁ points; on Search-R1, Qwen3-235B drops 9.3 points.</p>
+
+          <div class="evidence-grid">
+            <div class="evidence-item">
+              <div class="evidence-num">&#8853;</div>
+              <div><strong>Optimistic misses dominate at every progress bin</strong> for all 20 model-environment pairs — the bias is not an artifact of early turns.</div>
+            </div>
+            <div class="evidence-item">
+              <div class="evidence-num">&#8853;</div>
+              <div><strong>Bias tracks model confidence, not task difficulty.</strong> Within an environment, weaker models are more optimistic — consistent with overconfidence under limited self-awareness.</div>
+            </div>
+            <div class="evidence-item">
+              <div class="evidence-num">&#8853;</div>
+              <div><strong>First-turn estimates are unstable.</strong> Neither a consistent over- nor underestimate of all-turn judgment — which direction depends on the specific model and task.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finding 3 -->
+      <div class="rq-block" id="f3">
+        <button class="rq-header" aria-expanded="false" data-target="f3-body">
+          <span class="rq-badge">Finding 3</span>
+          <h3>Failure Is Recognized Too Late to Act On</h3>
+          <span class="rq-summary">Models predict "feasible" above 70% even after 60% of budget is consumed. The alarm fires only in the final 20%.</span>
+          <span class="rq-chevron" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+          </span>
+        </button>
+        <div class="rq-body" id="f3-body">
+          <img src={`${basePath}bagen/fig_failure_timing.png`} alt="Failure recognition timing" class="rq-fig" />
+          <p class="rq-caption">Failure is recognized late: across environments, models often label failed trajectories as <code>impossible</code> only after much of the token budget has already been spent.</p>
+
+          <div class="evidence-grid">
+            <div class="evidence-item">
+              <div class="evidence-num">&#9888;</div>
+              <div>On failed trajectories, <strong>feasibility predictions stay above 70% even after 60% of budget is consumed</strong> — the prediction drops sharply only in the final 20%.</div>
+            </div>
+            <div class="evidence-item">
+              <div class="evidence-num">&#9888;</div>
+              <div>This <strong>late recognition wastes substantial compute</strong> on trajectories that are already doomed — an opportunity for early-stop policies to intervene.</div>
+            </div>
+          </div>
+
+          <h4 class="rq-subheading">Early Stopping Policy Results</h4>
+          <p class="rq-caption" style="margin-bottom: 0.8rem;">A simple policy: terminate whenever the model predicts <code>impossible</code>. False aborts stop a would-have-succeeded trajectory; false continues miss a chance to save compute.</p>
+          <div class="table-wrapper">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th class="left-col">Model</th>
+                  <th>False-Abort Rate</th>
+                  <th>Tokens Saved</th>
+                  <th>Stopped Failed Rollouts</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="left-col">GPT-5.2 Instant</td><td>6.6%</td><td><strong>64.1%</strong></td><td>124 / 215</td></tr>
+                <tr><td class="left-col">Claude Opus 4.7</td><td><strong>2.2%</strong></td><td>28.2%</td><td>62 / 169</td></tr>
+                <tr><td class="left-col">Claude Sonnet 4.6</td><td>3.3%</td><td>49.6%</td><td>101 / 183</td></tr>
+                <tr><td class="left-col">Gemini 3.1 Pro</td><td>2.8%</td><td>55.7%</td><td>123 / 221</td></tr>
+                <tr><td class="left-col">Qwen3-235B</td><td>4.9%</td><td>38.8%</td><td>140 / 306</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finding 4 -->
+      <div class="rq-block" id="f4">
+        <button class="rq-header" aria-expanded="false" data-target="f4-body">
+          <span class="rq-badge">Finding 4</span>
+          <h3>Binary Feasibility Is Calibration; Interval Estimation Is Reasoning</h3>
+          <span class="rq-summary">SFT alone raises feasibility from 25.5% to ~90%. Interval coverage only reaches 47% after SFT+RL — a hard reasoning bottleneck.</span>
+          <span class="rq-chevron" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
+          </span>
+        </button>
+        <div class="rq-body" id="f4-body">
+          <h4 class="rq-subheading">SFT + RL training on Sokoban</h4>
+          <img src={`${basePath}bagen/fig_sft_rl.png`} alt="SFT and RL training tradeoffs" class="rq-fig" />
+          <p class="rq-caption">Left: coverage vs. midpoint error for SFT checkpoints and their SFT+RL continuations. Right: reward before and after RL from the same SFT starts. RL improves estimation only when starting from a suitable SFT initialization — RL without SFT collapses.</p>
+
+          <h4 class="rq-subheading">SFT interval-width ablation</h4>
+          <img src={`${basePath}bagen/fig_sft_ablation.png`} alt="SFT ablation: interval width choices" class="rq-fig" />
+          <p class="rq-caption">SFT choices control the estimator's behavior. Wider interval targets improve coverage but increase midpoint error. Longer SFT makes the model more conservative by reducing feasible predictions and improving recall on impossible cases.</p>
+
+          <div class="evidence-grid">
+            <div class="evidence-item">
+              <div class="evidence-num">&#8853;</div>
+              <div><strong>Feasibility is a calibration problem.</strong> Base Qwen-7B: 25.5% accuracy. SFT alone raises it to ~90%. The capability was already there — the model just needed the right format.</div>
+            </div>
+            <div class="evidence-item">
+              <div class="evidence-num">&#8853;</div>
+              <div><strong>Interval estimation is a reasoning problem.</strong> Base: 10.5% coverage. SFT: 26–53% depending on target width. SFT+RL: 47% with 28% median midpoint error. Nearly half of intervals still miss the true remaining budget.</div>
+            </div>
+            <div class="evidence-item">
+              <div class="evidence-num">&#8854;</div>
+              <div><strong>RL without SFT collapses entirely.</strong> The model either labels everything <code>impossible</code> or emits invalid formats — RL cannot recover capability from sparse reward on its own.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CITATION -->
+  <!-- ============================================================ -->
+  <section id="citation" class="content-section alt-background">
+    <div class="section-container">
+      <h2 class="section-title">Citation</h2>
+      <div class="citation-section">
+        <p>If you find this work useful, please cite:</p>
+        <div class="citation-block">
+          <div class="code-container">
+            <button id="copy-button" aria-label="Copy citation" class="copy-button-corner">
+              <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              </svg>
+              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+            <pre><code>{`@misc{lin2026bagen,
+  title={BAGEN: Are LLM Agents Budget-Aware?},
+  author={Yuxiang Lin and Zihan Wang and Mengyang Liu and Yuxuan Shan and Longju Bai and Junyao Zhang and Xing Jin and Boshan Chen and Jinyan Su and Xingyao Wang and Jiaxin Pei and Manling Li},
+  year={2026},
+  note={NeurIPS 2026},
+}`}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<!-- ============================================================ -->
+<!-- PAGE-SPECIFIC SCRIPTS -->
+<!-- ============================================================ -->
+<script>
+  // Accordion
+  (function () {
+    function init() {
+      document.querySelectorAll<HTMLButtonElement>('.rq-header[data-target]').forEach(header => {
+        header.setAttribute('type', 'button');
+        header.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = header.getAttribute('data-target')!;
+          const body = document.getElementById(targetId);
+          if (!body) return;
+          const isOpen = header.getAttribute('aria-expanded') === 'true';
+          document.querySelectorAll<HTMLButtonElement>('.rq-header[data-target]').forEach(h => {
+            const tid = h.getAttribute('data-target')!;
+            if (tid !== targetId) {
+              h.setAttribute('aria-expanded', 'false');
+              const b = document.getElementById(tid);
+              if (b) b.style.maxHeight = '0px';
+            }
+          });
+          if (isOpen) {
+            header.setAttribute('aria-expanded', 'false');
+            body.style.maxHeight = '0px';
+          } else {
+            header.setAttribute('aria-expanded', 'true');
+            body.style.maxHeight = body.scrollHeight + 'px';
+            body.querySelectorAll('img').forEach(img => {
+              if (!img.complete) img.addEventListener('load', () => {
+                if (header.getAttribute('aria-expanded') === 'true')
+                  body.style.maxHeight = body.scrollHeight + 'px';
+              }, { once: true });
+            });
+          }
+        });
+      });
+    }
+    document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+  })();
+
+  // Copy citation
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('copy-button');
+    const code = document.querySelector('.citation-block pre code');
+    if (btn && code) {
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(code.textContent || '');
+          btn.classList.add('copied');
+          setTimeout(() => btn.classList.remove('copied'), 2000);
+        } catch {
+          btn.classList.add('copy-error');
+          setTimeout(() => btn.classList.remove('copy-error'), 2000);
+        }
+      });
+    }
+  });
+
+  // Title reveal animation
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById('animated-title');
+    if (el) {
+      const text = el.textContent || '';
+      el.innerHTML = '';
+      text.split('').forEach((ch, i) => {
+        const span = document.createElement('span');
+        span.className = 'reveal-char';
+        span.style.animationDelay = `${i * 0.08}s`;
+        span.textContent = ch === ' ' ? ' ' : ch;
+        el.appendChild(span);
+      });
+    }
+  });
+</script>
+
+<!-- ============================================================ -->
+<!-- PAGE-SPECIFIC STYLES -->
+<!-- ============================================================ -->
+<style>
+  /* ---- Hero ---- */
+  .venue-badge {
+    display: inline-block;
+    margin-top: 6px;
+    color: #c0392b;
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    letter-spacing: 0.05em;
+  }
+
+  .main-subtitle {
+    max-width: 860px;
+    margin: 18px auto 1rem;
+    color: #444;
+    font-size: 19px;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  .authors-section.compact { margin-top: 1.4rem; text-align: center; }
+  .equal-contribution { font-size: 0.9rem; color: #666; margin-top: 0.5rem; }
+  .resources-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1.2rem; }
+
+  .gh-icon { fill: currentColor; }
+
+  /* TL;DR grid */
+  .tldr-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 900px;
+    margin: 2rem auto 0;
+    text-align: left;
+  }
+  @media (max-width: 640px) { .tldr-grid { grid-template-columns: 1fr; } }
+
+  .tldr-card {
+    display: flex;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border: 1px solid #eee;
+    font-size: 0.93rem;
+    line-height: 1.55;
+    align-items: flex-start;
+  }
+  .tldr-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+  /* ---- Method ---- */
+  .method-block {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .method-block-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2rem 0.8rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .method-block-header h3 { margin: 0; font-size: 1.15rem; color: #1a1f3c; }
+  .method-block-body { padding: 1.5rem 2rem; }
+
+  .method-tag {
+    background: linear-gradient(135deg, #2a2f6c, #4b4f8f);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  /* Modality cards */
+  .modality-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 640px) { .modality-grid { grid-template-columns: 1fr; } }
+
+  .modality-card {
+    padding: 1.2rem 1.4rem;
+    border-radius: 10px;
+    border: 2px solid;
+    font-size: 0.93rem;
+    line-height: 1.6;
+  }
+  .modality-card.internal { border-color: #4a56c9; background: #f5f6ff; }
+  .modality-card.external { border-color: #27ae60; background: #f0faf4; }
+  .modality-label { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+  .modality-card.internal .modality-label { color: #4a56c9; }
+  .modality-card.external .modality-label { color: #27ae60; }
+  .modality-formula { font-family: 'Georgia', serif; font-size: 1rem; margin-top: 0.8rem; color: #333; }
+
+  /* Equation box */
+  .equation-box {
+    background: #f8f9ff;
+    border: 1px solid #dde2f5;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    font-family: 'Georgia', serif;
+    font-size: 1.05rem;
+    color: #2a2f6c;
+    margin: 0.8rem 0 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .eq-case { display: flex; flex-direction: column; gap: 0.4rem; }
+  .eq-branch { font-weight: 600; }
+  .impossible-branch code { background: #fde8e8; color: #c0392b; padding: 1px 6px; border-radius: 4px; font-family: monospace; }
+  .eq-cond { font-size: 0.85rem; color: #666; font-style: italic; }
+
+  /* Protocol steps */
+  .protocol-steps { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
+  .protocol-step { display: flex; gap: 1rem; align-items: flex-start; padding: 0.9rem 1rem; background: #f8f9fa; border-radius: 10px; border: 1px solid #e9ecef; font-size: 0.93rem; line-height: 1.5; }
+  .step-num { background: #2a2f6c; color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
+  .method-note { font-size: 0.88rem; color: #888; font-style: italic; margin-top: 0.5rem; }
+  .method-desc { color: #444; margin-bottom: 0.5rem; }
+
+  /* Sub-capability cards */
+  .metric-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 768px) { .metric-cards { grid-template-columns: 1fr; } }
+
+  .subcap-card { padding: 1.2rem; background: #f8f9fa; border-radius: 10px; border: 1px solid #e9ecef; font-size: 0.92rem; line-height: 1.55; }
+  .subcap-num { font-size: 1.5rem; color: #2a2f6c; font-weight: 700; margin-bottom: 0.3rem; }
+  .subcap-label { font-weight: 700; color: #1a1f3c; margin-bottom: 0.5rem; font-size: 0.95rem; }
+
+  /* Environment grid */
+  .env-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1.2rem; }
+  @media (max-width: 900px) { .env-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .env-grid { grid-template-columns: 1fr; } }
+
+  .env-card { padding: 1rem; background: #f8f9fa; border-radius: 10px; border: 1px solid #e9ecef; font-size: 0.88rem; line-height: 1.55; }
+  .env-name { font-weight: 700; font-size: 0.95rem; color: #2a2f6c; margin-bottom: 0.3rem; }
+  .env-type { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 1px 8px; border-radius: 20px; margin-bottom: 0.4rem; }
+  .internal-tag { background: #eef0ff; color: #4a56c9; }
+  .external-tag { background: #e8f8ee; color: #27ae60; }
+
+  /* Model chips */
+  .model-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .model-chip { background: white; border: 1px solid #d0d5e8; border-radius: 20px; padding: 4px 14px; font-size: 0.88rem; color: #2a2f6c; font-weight: 500; }
+
+  /* ---- Findings / Accordion ---- */
+  .section-subtitle { text-align: center; color: #888; font-size: 0.95rem; margin-bottom: 2rem; margin-top: -0.5rem; }
+
+  .rq-block { background: white; border-radius: 14px; margin-bottom: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.07); overflow: hidden; }
+  .rq-header { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem 2rem; width: 100%; background: none; border: none; cursor: pointer; text-align: left; font-family: inherit; color: inherit; flex-wrap: wrap; transition: background-color 0.15s ease; }
+  .rq-header:hover { background-color: #fafbff; }
+  .rq-badge { background: linear-gradient(135deg, #2a2f6c, #4b4f8f); color: white; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.05em; flex-shrink: 0; margin-top: 2px; }
+  .rq-header h3 { margin: 0; font-size: 1.15rem; color: #1a1f3c; font-weight: 700; line-height: 1.35; flex: 1; min-width: 200px; }
+  .rq-summary { display: block; width: 100%; padding-left: calc(12px + 1rem + 50px); font-size: 0.88rem; color: #666; line-height: 1.5; margin-top: 0.3rem; font-style: italic; }
+  .rq-chevron { flex-shrink: 0; color: #999; transition: transform 0.3s ease; margin-top: 4px; }
+  .rq-header[aria-expanded="true"] .rq-chevron { transform: rotate(180deg); }
+  .rq-header[aria-expanded="true"] .rq-summary { display: none; }
+
+  .rq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding: 0 2rem; }
+  .rq-header[aria-expanded="true"] + .rq-body { padding: 0 2rem 2rem; }
+
+  .rq-fig { width: 100%; height: auto; border-radius: 8px; display: block; margin-bottom: 0.6rem; }
+  .rq-caption { font-size: 0.88rem; color: #666; line-height: 1.55; margin: 0 0 1.5rem 0; padding: 0 0.5rem; border-left: 3px solid #e0e0e0; }
+  .rq-subheading { font-size: 1rem; font-weight: 700; color: #2a2f6c; margin: 1.5rem 0 0.8rem 0; }
+  .rq-subheading:first-child { margin-top: 0; }
+
+  .evidence-grid { display: flex; flex-direction: column; gap: 0.7rem; margin: 1.1rem 0; }
+  .evidence-item { display: flex; gap: 0.8rem; padding: 0.9rem 1rem; background: #f8f9fa; border-radius: 10px; border: 1px solid #e9ecef; line-height: 1.5; font-size: 0.93rem; }
+  .evidence-num { color: #1a7a4a; font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; font-weight: 700; }
+
+  /* Tables */
+  .table-wrapper { overflow-x: auto; border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin: 1.2rem 0; }
+  .results-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .results-table th { background: linear-gradient(135deg, #2a2f6c, #3a4b8e); color: white; padding: 0.7rem 0.8rem; text-align: center; font-weight: 600; white-space: nowrap; }
+  .results-table td { padding: 0.55rem 0.8rem; border-bottom: 1px solid #f0f0f0; text-align: center; background: white; }
+  .results-table tr:last-child td { border-bottom: none; }
+  .results-table tr:hover td { background: #f8f9ff; }
+  .left-col { text-align: left !important; font-weight: 500; color: #2a2f6c; }
+  .group-header-row td { background: #f4f6ff !important; font-weight: 700; color: #2a2f6c; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.45rem 0.8rem; text-align: left !important; }
+
+  @media (max-width: 768px) {
+    .rq-header { padding: 1.2rem 1.5rem; }
+    .rq-body { padding: 0 1.5rem; }
+    .rq-header[aria-expanded="true"] + .rq-body { padding: 0 1.5rem 1.5rem; }
+    .rq-summary { padding-left: 0; }
+    .method-block-header, .method-block-body { padding-left: 1.2rem; padding-right: 1.2rem; }
+  }
+</style>
