@@ -21,13 +21,14 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
         <h1 class="main-title" id="animated-title">BAGEN</h1>
       </div>
       <p class="title-subtitle">Are LLM Agents Budget-Aware?</p>
-      <p class="venue-badge">Preprint</p>
     </div>
 
     <p class="main-subtitle">
-      Foundation-model agents are deployed with growing resource constraints like token, money, and time budgets,
-      yet it remains unclear whether they know how much budget they will spend.
-      We formalize <strong>budget awareness</strong> as <em>progressive interval estimation</em>:
+      Agents are deployed with <strong>resource constraints</strong>: token, money, and time budgets.
+      We ask: do they know how much budget they will spend?
+    </p>
+    <p class="main-subtitle" style="margin-top: 0.5rem;">
+      We formalize budget awareness as <strong>progressive interval estimation</strong>:
       mid-execution, can the agent provide a calibrated interval on remaining budget and
       detect when a task is no longer finishable?
     </p>
@@ -36,7 +37,7 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
       <div class="authors-list">
         <p class="author-line">
           <a href="#">Yuxiang Lin</a><sup>*1,2</sup>,
-          <a href="https://zihanwang314.github.io/">Zihan &ldquo;Zenus&rdquo; Wang</a><sup>*1,2</sup>,
+          <a href="https://zihanwang314.github.io/">Zihan &ldquo;Zenus&rdquo; Wang</a><sup>*&dagger;1,2</sup>,
           <a href="#">Mengyang Liu</a><sup>*3</sup>,
           <a href="#">Yuxuan Shan</a><sup>*2</sup>,
           <a href="#">Longju Bai</a><sup>*4</sup>
@@ -50,12 +51,12 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
           <a href="#">Jiaxin Pei</a><sup>7,8</sup>,
           <a href="https://limanling.github.io/">Manling Li</a><sup>1</sup>
         </p>
-        <p class="equal-contribution"><sup>*</sup> Core Contributors</p>
+        <p class="equal-contribution"><sup>*</sup> Core Contributors &nbsp;&nbsp; <sup>&dagger;</sup> Project Lead</p>
         <p class="affiliations">
           <sup>1</sup>Northwestern &nbsp;
           <sup>2</sup>O2 Lab &nbsp;
           <sup>3</sup>Independent &nbsp;
-          <sup>4</sup>University of Michigan &nbsp;
+          <sup>4</sup>UMich &nbsp;
           <sup>5</sup>Cornell &nbsp;
           <sup>6</sup>All Hands AI &nbsp;
           <sup>7</sup>Stanford &nbsp;
@@ -93,19 +94,19 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
     <div class="tldr-grid">
       <div class="tldr-card">
         <div class="tldr-icon">&#127919;</div>
-        <div class="tldr-text"><strong>Budget awareness decouples</strong> from task performance — better agents do not reliably estimate their own costs (r&nbsp;&approx;&nbsp;0.35).</div>
+        <div class="tldr-text"><strong>Budget awareness &#8800; task performance</strong> (r&nbsp;&approx;&nbsp;0.35): the best task performer is not the best estimator.</div>
       </div>
       <div class="tldr-card">
         <div class="tldr-icon">&#128200;</div>
-        <div class="tldr-text"><strong>Universal optimistic bias</strong> — all models underestimate remaining budget; weaker models are <em>more</em> optimistic, not less.</div>
+        <div class="tldr-text">Models are universally <strong>too optimistic</strong>: all 20/20 model-task pairs underestimate remaining budget, with weaker models showing worse bias.</div>
       </div>
       <div class="tldr-card">
         <div class="tldr-icon">&#9889;</div>
-        <div class="tldr-text"><strong>Actionable signal</strong> — early stopping on <code>impossible</code> predictions saves 28&ndash;64% of wasted tokens at only 1.6&ndash;4.2 pp success cost.</div>
+        <div class="tldr-text"><strong>Early stopping</strong> when a task seems unfinishable saves 28&ndash;64% of wasted tokens at only 1.6&ndash;4.2% success cost.</div>
       </div>
       <div class="tldr-card">
         <div class="tldr-icon">&#127981;</div>
-        <div class="tldr-text"><strong>Trainable</strong> — SFT alone raises feasibility from 25.5% to ~90%. Interval coverage caps near 47% after SFT+RL, exposing a hard reasoning gap.</div>
+        <div class="tldr-text"><strong>Trainable</strong>: SFT alone raises binary feasibility from 25.5% to ~90%, and interval coverage caps near 47% after SFT+RL.</div>
       </div>
     </div>
   </section>
@@ -127,14 +128,14 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
           <div class="modality-grid">
             <div class="modality-card internal">
               <div class="modality-label">Internal Budget</div>
-              <p>The compute the model generates — primarily <strong>token consumption</strong> across reasoning steps. Tested on Sokoban, Search-R1, and SWE-bench.</p>
+              <p>The compute the model generates, primarily <strong>token consumption</strong> across reasoning steps. Tested on Sokoban, Search-R1, and SWE-bench.</p>
               <div class="modality-formula">
                 C<sub>k</sub><sup>in</sup> = &sum;<sub>t=1</sub><sup>k</sup> c<sub>t</sub><sup>in</sup>
               </div>
             </div>
             <div class="modality-card external">
               <div class="modality-label">External Budget</div>
-              <p>The cost the agent commits in the environment — <strong>money, time, warehouse capacity</strong>. Multi-dimensional, coupled constraints. Tested on our Warehouse environment.</p>
+              <p>The cost the agent commits in the environment: <strong>money, time, and warehouse capacity</strong>. Multi-dimensional, coupled constraints. Tested on our Warehouse environment.</p>
               <div class="modality-formula">
                 <b>C</b><sub>k</sub><sup>ex</sup> = &sum;<sub>t=1</sub><sup>k</sup> <b>c</b><sub>t</sub><sup>ex</sup> &isin; &#8477;<sup>D</sup>
               </div>
@@ -164,13 +165,13 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
             <div class="protocol-step">
               <div class="step-num">1</div>
               <div class="step-body">
-                <strong>Rollout generation</strong> — run the agent without any budget cap, log the full trajectory with per-turn costs and final outcome.
+                <strong>Rollout generation</strong>: run the agent without any budget cap, log the full trajectory with per-turn costs and final outcome.
               </div>
             </div>
             <div class="protocol-step">
               <div class="step-num">2</div>
               <div class="step-body">
-                <strong>Prefix replay &amp; estimation</strong> — for each non-terminal turn, replay the logged prefix and ask the agent for ŷ<sub>k</sub>, scored against true remaining cost R<sub>k</sub>.
+                <strong>Prefix replay &amp; estimation</strong>: for each non-terminal turn, replay the logged prefix and ask the agent for ŷ<sub>k</sub>, scored against true remaining cost R<sub>k</sub>.
               </div>
             </div>
           </div>
@@ -267,7 +268,7 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
         </button>
         <div class="rq-body" id="f1-body">
           <img src={`${basePath}bagen/fig_decoupling.png`} alt="Task performance vs estimation quality" class="rq-fig" />
-          <p class="rq-caption">Left &amp; middle: task success rate correlates only weakly with budget estimation quality for both internal and external budgets. Right: on failed Sokoban trajectories, estimation accuracy improves as more progress is observed — but the largest gains appear only very late.</p>
+          <p class="rq-caption">Left &amp; middle: task success rate correlates only weakly with budget estimation quality for both internal and external budgets. Right: on failed Sokoban trajectories, estimation accuracy improves as more progress is observed, but the largest gains appear only very late.</p>
 
           <div class="evidence-grid">
             <div class="evidence-item">
@@ -350,20 +351,20 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
 
           <h4 class="rq-subheading">First-turn vs. all-turn feasibility F₁</h4>
           <img src={`${basePath}bagen/fig_first_vs_all.png`} alt="First-turn vs all-turn F1" class="rq-fig" />
-          <p class="rq-caption">Points scatter on both sides of the equality line — first-turn predictions do not reliably summarize what the same agent would say after seeing partial progress. On Sokoban, Gemini improves by +21.9 F₁ points; on Search-R1, Qwen3-235B drops 9.3 points.</p>
+          <p class="rq-caption">Points scatter on both sides of the equality line: first-turn predictions do not reliably summarize what the same agent would say after seeing partial progress. On Sokoban, Gemini improves by +21.9 F₁ points; on Search-R1, Qwen3-235B drops 9.3 points.</p>
 
           <div class="evidence-grid">
             <div class="evidence-item">
               <div class="evidence-num">&#8853;</div>
-              <div><strong>Optimistic misses dominate at every progress bin</strong> for all 20 model-environment pairs — the bias is not an artifact of early turns.</div>
+              <div><strong>Optimistic misses dominate at every progress bin</strong> for all 20 model-environment pairs; the bias is not an artifact of early turns.</div>
             </div>
             <div class="evidence-item">
               <div class="evidence-num">&#8853;</div>
-              <div><strong>Bias tracks model confidence, not task difficulty.</strong> Within an environment, weaker models are more optimistic — consistent with overconfidence under limited self-awareness.</div>
+              <div><strong>Bias tracks model confidence, not task difficulty.</strong> Within an environment, weaker models are more optimistic, consistent with overconfidence under limited self-awareness.</div>
             </div>
             <div class="evidence-item">
               <div class="evidence-num">&#8853;</div>
-              <div><strong>First-turn estimates are unstable.</strong> Neither a consistent over- nor underestimate of all-turn judgment — which direction depends on the specific model and task.</div>
+              <div><strong>First-turn estimates are unstable.</strong> Neither a consistent over- nor underestimate of all-turn judgment; which direction it falls depends on the specific model and task.</div>
             </div>
           </div>
         </div>
@@ -386,11 +387,11 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
           <div class="evidence-grid">
             <div class="evidence-item">
               <div class="evidence-num">&#9888;</div>
-              <div>On failed trajectories, <strong>feasibility predictions stay above 70% even after 60% of budget is consumed</strong> — the prediction drops sharply only in the final 20%.</div>
+              <div>On failed trajectories, <strong>feasibility predictions stay above 70% even after 60% of budget is consumed</strong>, dropping sharply only in the final 20%.</div>
             </div>
             <div class="evidence-item">
               <div class="evidence-num">&#9888;</div>
-              <div>This <strong>late recognition wastes substantial compute</strong> on trajectories that are already doomed — an opportunity for early-stop policies to intervene.</div>
+              <div>This <strong>late recognition wastes substantial compute</strong> on trajectories that are already doomed, leaving an opportunity for early-stop policies to intervene.</div>
             </div>
           </div>
 
@@ -423,7 +424,7 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
         <button class="rq-header" aria-expanded="false" data-target="f4-body">
           <span class="rq-badge">Finding 4</span>
           <h3>Binary Feasibility Is Calibration; Interval Estimation Is Reasoning</h3>
-          <span class="rq-summary">SFT alone raises feasibility from 25.5% to ~90%. Interval coverage only reaches 47% after SFT+RL — a hard reasoning bottleneck.</span>
+          <span class="rq-summary">SFT alone raises feasibility from 25.5% to ~90%. Interval coverage only reaches 47% after SFT+RL, exposing a hard reasoning bottleneck.</span>
           <span class="rq-chevron" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
           </span>
@@ -431,7 +432,7 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
         <div class="rq-body" id="f4-body">
           <h4 class="rq-subheading">SFT + RL training on Sokoban</h4>
           <img src={`${basePath}bagen/fig_sft_rl.png`} alt="SFT and RL training tradeoffs" class="rq-fig" />
-          <p class="rq-caption">Left: coverage vs. midpoint error for SFT checkpoints and their SFT+RL continuations. Right: reward before and after RL from the same SFT starts. RL improves estimation only when starting from a suitable SFT initialization — RL without SFT collapses.</p>
+          <p class="rq-caption">Left: coverage vs. midpoint error for SFT checkpoints and their SFT+RL continuations. Right: reward before and after RL from the same SFT starts. RL improves estimation only when starting from a suitable SFT initialization; RL alone collapses.</p>
 
           <h4 class="rq-subheading">SFT interval-width ablation</h4>
           <img src={`${basePath}bagen/fig_sft_ablation.png`} alt="SFT ablation: interval width choices" class="rq-fig" />
@@ -440,7 +441,7 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
           <div class="evidence-grid">
             <div class="evidence-item">
               <div class="evidence-num">&#8853;</div>
-              <div><strong>Feasibility is a calibration problem.</strong> Base Qwen-7B: 25.5% accuracy. SFT alone raises it to ~90%. The capability was already there — the model just needed the right format.</div>
+              <div><strong>Feasibility is a calibration problem.</strong> Base Qwen-7B: 25.5% accuracy. SFT alone raises it to ~90%. The capability was already there; the model just needed the right format.</div>
             </div>
             <div class="evidence-item">
               <div class="evidence-num">&#8853;</div>
@@ -448,7 +449,7 @@ const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
             </div>
             <div class="evidence-item">
               <div class="evidence-num">&#8854;</div>
-              <div><strong>RL without SFT collapses entirely.</strong> The model either labels everything <code>impossible</code> or emits invalid formats — RL cannot recover capability from sparse reward on its own.</div>
+              <div><strong>RL without SFT collapses entirely.</strong> The model either labels everything <code>impossible</code> or emits invalid formats; RL cannot recover capability from sparse reward on its own.</div>
             </div>
           </div>
         </div>
