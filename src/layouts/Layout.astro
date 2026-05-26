@@ -14,7 +14,7 @@ const basePath = import.meta.env.BASE_URL;
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content="Astro description" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/png" href={`${basePath}icon.png`} />
         <link rel="apple-touch-icon" href={`${basePath}icon.png`} />
         <meta name="generator" content={Astro.generator} />
@@ -53,9 +53,10 @@ const basePath = import.meta.env.BASE_URL;
 		color: #252525;
 		scroll-behavior: smooth;
 	}
-	body {
+	html, body {
 		min-height: 100vh;
 		overflow-x: hidden;
+		max-width: 100%;
 	}
 	main {
 		padding-top: var(--header-height);
