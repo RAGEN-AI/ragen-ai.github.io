@@ -16,9 +16,87 @@ import '../styles/resources.css';
 // import '../styles/trajectoryViewer.css';  // Hidden but preserved
 
 
-const pageTitle = "RAGEN-2: Reasoning Collapse in Agentic RL";
+const pageTitle = "RAGEN-2: Reasoning Collapse in Agentic RL | Multi-Turn Reinforcement Learning for LLM Agents";
+const pageDescription = "RAGEN-2 (ICML 2026 Oral) finds template collapse, reasoning collapse in agentic reinforcement learning invisible to entropy, fixed by SNR-aware filtering.";
+const siteUrl = "https://ragen-ai.github.io/";
+const ogImage = "https://ragen-ai.github.io/teaser-ragen-2.png";
+const authors = [
+  "Zihan Wang", "Chi Gui", "Xing Jin", "Qineng Wang", "Licheng Liu", "Kangrui Wang",
+  "Shiqi Chen", "Linjie Li", "Zhengyuan Yang", "Pingyue Zhang", "Yiping Lu",
+  "Jiajun Wu", "Li Fei-Fei", "Lijuan Wang", "Yejin Choi", "Manling Li"
+];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://ragen-ai.github.io/#website",
+      "url": siteUrl,
+      "name": "RAGEN-AI",
+      "alternateName": ["RAGEN", "RAGEN-2"],
+      "description": "Project pages of the RAGEN-AI research series on reinforcement learning for LLM agents: RAGEN, RAGEN-2, and BAGEN."
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://ragen-ai.github.io/#ragen2-paper",
+      "headline": "RAGEN-2: Reasoning Collapse in Agentic RL",
+      "name": "RAGEN-2: Reasoning Collapse in Agentic RL",
+      "url": siteUrl,
+      "sameAs": "https://arxiv.org/abs/2604.06268",
+      "datePublished": "2026-04-07",
+      "abstract": "RL training of multi-turn LLM agents is inherently unstable, and reasoning quality directly determines task performance. In RAGEN-2, we find that even with stable entropy, models can rely on fixed templates that look diverse but are input-agnostic. We call this template collapse, a failure mode invisible to entropy and all existing metrics. We decompose reasoning quality into within-input diversity (entropy) and cross-input distinguishability (mutual information), explain template collapse with a signal-to-noise ratio mechanism, and propose SNR-Aware Filtering.",
+      "keywords": ["agentic reinforcement learning", "reasoning collapse", "template collapse", "multi-turn reinforcement learning", "LLM agents", "mutual information", "SNR-aware filtering", "entropy collapse"],
+      "author": authors.map((name) =>
+        name === "Manling Li"
+          ? { "@type": "Person", "@id": "https://limanling.github.io/#person", "name": "Manling Li", "url": "https://limanling.github.io/" }
+          : { "@type": "Person", "name": name }
+      ),
+      "citation": [
+        {
+          "@type": "ScholarlyArticle",
+          "name": "RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning",
+          "url": "https://arxiv.org/abs/2504.20073"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://ragen-ai.github.io/#code",
+      "name": "RAGEN",
+      "codeRepository": "https://github.com/RAGEN-AI/RAGEN",
+      "programmingLanguage": "Python",
+      "description": "Modular system for training and evaluating LLM agents with multi-turn reinforcement learning."
+    }
+  ]
+};
 ---
-<Layout title={pageTitle}>
+<Layout title={pageTitle} description={pageDescription}>
+  <Fragment slot="head">
+    <link rel="canonical" href={siteUrl} />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="keywords" content="RAGEN-2, reasoning collapse, template collapse, agentic reinforcement learning, multi-turn reinforcement learning, LLM agents, agent RL, mutual information, SNR-aware filtering" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:site_name" content="RAGEN-AI" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1826" />
+    <meta property="og:image:height" content="752" />
+    <meta property="og:image:alt" content="RAGEN-2 teaser: reasoning collapse in agentic reinforcement learning" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="citation_title" content="RAGEN-2: Reasoning Collapse in Agentic RL" />
+    {authors.map((name) => <meta name="citation_author" content={name} />)}
+    <meta name="citation_publication_date" content="2026/04/07" />
+    <meta name="citation_arxiv_id" content="2604.06268" />
+    <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2604.06268" />
+    <meta name="citation_abstract_html_url" content="https://arxiv.org/abs/2604.06268" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
   <!-- 1. Teaser Section -->
   <Hero />
   

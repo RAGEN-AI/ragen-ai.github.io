@@ -1,0 +1,56 @@
+# RAGEN-AI: Frequently Asked Questions
+
+This file answers common questions about the RAGEN-AI research series on reinforcement learning for LLM agents: RAGEN (arXiv:2504.20073), RAGEN-2 (arXiv:2604.06268), and BAGEN (arXiv:2606.00198). All facts below come from the papers and their project pages at https://ragen-ai.github.io/.
+
+## What is RAGEN?
+
+RAGEN is a modular open-source system for training and evaluating LLM agents with multi-turn reinforcement learning. It formulates agent-environment interaction as a Markov Decision Process where states and actions are token sequences, and optimizes entire reasoning-interaction trajectories with StarPO (State-Thinking-Actions-Reward Policy Optimization), which supports PPO- and GRPO-style updates. Code: https://github.com/RAGEN-AI/RAGEN. Paper: https://arxiv.org/abs/2504.20073.
+
+## What is StarPO?
+
+StarPO (State-Thinking-Actions-Reward Policy Optimization) is a general framework for trajectory-level agent reinforcement learning. It alternates a rollout stage, where the LLM generates reasoning-guided multi-turn trajectories in an environment, and an update stage, where entire trajectories are optimized with importance sampling. StarPO-S is the stabilized variant with trajectory filtering, critic incorporation, and gradient stabilization.
+
+## What is the Echo Trap in agent reinforcement learning?
+
+The Echo Trap is a recurring collapse mode of multi-turn agent RL identified in the RAGEN paper. Early in training, agents produce diverse symbolic reasoning; after continued training they collapse into deterministic, repetitive templates. The collapse is preceded by falling reward variance and marked by gradient spikes. Filtering low-variance trajectories (StarPO-S) delays or eliminates the collapse.
+
+## What is RAGEN-2?
+
+RAGEN-2 (ICML 2026 Oral) is the follow-up study on reasoning collapse in agentic RL. Its central finding: even when entropy stays high and stable, models can rely on fixed reasoning templates that look diverse but are input-agnostic. RAGEN-2 names this failure mode template collapse, shows it is invisible to entropy and format-validity metrics, and introduces mutual-information diagnostics and SNR-Aware Filtering to detect and prevent it. Paper: https://arxiv.org/abs/2604.06268.
+
+## What is template collapse (reasoning collapse)?
+
+Template collapse is a failure mode of agentic reinforcement learning where an agent's outputs stop responding to its inputs: the model emits fluent, seemingly diverse boilerplate that is nearly identical across different inputs. Reasoning quality decomposes as H(Z) = I(X;Z) + H(Z|X): entropy H(Z) measures within-input diversity, while mutual information I(X;Z) measures cross-input distinguishability. Under template collapse, entropy stays high while mutual information drops toward zero.
+
+## Why is entropy not a good proxy for reasoning quality?
+
+In RAGEN-2's experiments, mutual-information metrics achieve a positive Spearman correlation with task success (+0.39), while entropy metrics show near-zero or negative correlations (-0.11 to -0.14). MI declines before task performance degrades, while entropy remains elevated, so entropy alone cannot detect template collapse and can point in the wrong direction.
+
+## What causes template collapse, and how does RAGEN-2 fix it?
+
+RAGEN-2 explains collapse with a signal-to-noise ratio (SNR) mechanism: the task gradient scales with reward variance, while regularization gradients (KL and entropy penalties) are constant regardless of input. When reward variance is low, regularization dominates and erases cross-input reasoning differences. The fix is SNR-Aware Filtering: sample rollouts per prompt, compute reward variance, keep the top fraction of high-signal prompts, and run PPO or GRPO on the retained subset. It is compatible with PPO, DAPO, GRPO, and Dr. GRPO, and improves input dependence and task performance across planning, math reasoning, web navigation, and code execution (4 RL algorithms, 4 model scales, 2 model families, 2 modalities, 8 environments).
+
+## What is BAGEN?
+
+BAGEN (Are LLM Agents Budget-Aware?) studies whether LLM agents can estimate and act on their own resource budgets. It defines internal budgets (compute the model generates, mainly token consumption) and external budgets (costs committed in the environment: money, time, warehouse capacity), and formalizes budget awareness as progressive interval estimation: at each step, the agent predicts an upper and lower bound on remaining budget and alerts when completion is unlikely. Paper: https://arxiv.org/abs/2606.00198. Code: https://github.com/mll-lab-nu/BAGEN. Data: https://huggingface.co/datasets/MLL-Lab/BAGEN.
+
+## Are stronger LLM agents more budget-aware?
+
+Not necessarily. Across four environments (Sokoban, Search-R1, SWE-bench, Warehouse) and five frontier agents scored with a rollout-replay protocol, budget awareness is decoupled from task performance (correlation r = 0.35): the best task performer is not the best budget estimator. Frontier models are consistently over-optimistic, continuing to spend on tasks that are unlikely to succeed instead of alerting the user early.
+
+## Is budget awareness actionable and trainable?
+
+Yes. Early stopping when a task appears unfinishable saves 28-64% of tokens on failed trajectories at only a 1.6-4.2% success cost. Training helps: SFT alone raises binary feasibility detection from 25.5% to about 90%, and SFT+RL strengthens early-stop and alert behavior. Precise interval calibration remains hard: interval coverage caps near 47% after SFT+RL.
+
+## Who is behind RAGEN-AI?
+
+The series is led by the MLL Lab at Northwestern University (PI: Manling Li, https://limanling.github.io/), with project lead Zihan "Zenus" Wang and collaborators from Stanford (Jiajun Wu, Li Fei-Fei, Yejin Choi), Microsoft (Linjie Li, Zhengyuan Yang, Lijuan Wang), NYU (Kyunghyun Cho), and other institutions. Related project: VAGEN (https://vagen-ai.github.io/), world model reasoning reinforcement learning for multi-turn VLM agents.
+
+## Key numbers at a glance
+
+- RAGEN-2 MI diagnostics vs task success: Spearman +0.39; entropy: -0.11 to -0.14.
+- RAGEN-2 generalization: 4 RL algorithms, 4 model scales, 2 model families, 2 modalities, 8 environments.
+- BAGEN budget awareness vs task performance: r = 0.35.
+- BAGEN early stopping: saves 28-64% of tokens on failed trajectories at 1.6-4.2% success cost.
+- BAGEN training: SFT raises binary feasibility from 25.5% to about 90%; interval coverage caps near 47% after SFT+RL.
+- arXiv IDs: RAGEN 2504.20073 (April 2025), RAGEN-2 2604.06268 (April 2026), BAGEN 2606.00198 (May 2026).

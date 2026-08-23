@@ -1,0 +1,67 @@
+# RAGEN-AI
+
+> RAGEN-AI is a research series on reinforcement learning for LLM agents from the MLL Lab at Northwestern University (PI: Manling Li, https://limanling.github.io/) with collaborators at Stanford, Microsoft, UW, NYU, and others. It includes RAGEN (arXiv:2504.20073, multi-turn reinforcement learning for LLM agents), RAGEN-2 (arXiv:2604.06268, reasoning collapse in agentic RL, ICML 2026 Oral), and BAGEN (arXiv:2606.00198, budget-aware LLM agents).
+
+## What is agent reinforcement learning (agent RL)?
+
+Agent reinforcement learning trains large language models as interactive agents that make decisions over multiple turns in an environment, rather than answering a single prompt. States and actions are token sequences, and the model is optimized over entire multi-turn trajectories of reasoning, actions, and environment feedback. RAGEN introduces StarPO (State-Thinking-Actions-Reward Policy Optimization), a general framework for trajectory-level agent RL.
+
+## What is the Echo Trap?
+
+The Echo Trap is a collapse mode of multi-turn agent RL identified in RAGEN: early in training, agents respond with diverse symbolic reasoning, but over training they collapse into deterministic, repetitive templates, marked by reward variance cliffs and gradient spikes. StarPO-S mitigates it with trajectory filtering, critic incorporation, and gradient stabilization.
+
+## What is reasoning collapse (template collapse)?
+
+RAGEN-2 shows that even when entropy stays high and stable, an agent's reasoning can become input-agnostic: the model reuses fixed templates that look diverse but do not respond to different inputs. This failure mode is called template collapse, and it is invisible to entropy and format-validity metrics. RAGEN-2 diagnoses it by decomposing reasoning quality into within-input diversity (entropy) and cross-input distinguishability (mutual information, MI), and fixes it with SNR-Aware Filtering, which keeps high reward-variance prompts so task gradients are not drowned out by regularization gradients.
+
+## What is a budget-aware agent?
+
+BAGEN defines a budget-aware agent as one that treats budget (tokens, money, time) as an active control signal rather than a passive cost metric. Budget awareness is formalized as progressive interval estimation: at each step, the agent predicts an upper and lower bound on remaining budget and alerts when task completion is unlikely.
+
+## Key facts
+
+- RAGEN (arXiv:2504.20073): StarPO trajectory-level RL framework; the Echo Trap collapse mode; StarPO-S stabilization; open-source system at https://github.com/RAGEN-AI/RAGEN.
+- RAGEN-2 (arXiv:2604.06268, ICML 2026 Oral): template collapse is invisible to entropy; MI-family diagnostics correlate with task success (+0.39) while entropy correlates near zero or negatively (-0.11 to -0.14); SNR-Aware Filtering improves input dependence and task performance across planning, math reasoning, web navigation, and code execution, spanning 4 RL algorithms, 4 model scales, 2 model families, 2 modalities, and 8 environments.
+- BAGEN (arXiv:2606.00198): budget awareness is decoupled from task performance (r = 0.35); frontier agents are consistently over-optimistic about remaining budget; early stopping on unfinishable tasks saves 28-64% of tokens at 1.6-4.2% success cost; SFT raises binary feasibility detection from 25.5% to about 90%, while interval coverage caps near 47% after SFT+RL.
+
+## Links
+
+- RAGEN-2 project page: https://ragen-ai.github.io/
+- RAGEN (v1) project page: https://ragen-ai.github.io/v1/
+- BAGEN project page: https://ragen-ai.github.io/bagen/
+- RAGEN code: https://github.com/RAGEN-AI/RAGEN
+- BAGEN code: https://github.com/mll-lab-nu/BAGEN
+- BAGEN dataset: https://huggingface.co/datasets/MLL-Lab/BAGEN
+- arXiv: https://arxiv.org/abs/2504.20073 (RAGEN), https://arxiv.org/abs/2604.06268 (RAGEN-2), https://arxiv.org/abs/2606.00198 (BAGEN)
+- Related projects: VAGEN (https://vagen-ai.github.io/), MLL Lab (https://mll-lab-nu.github.io), Manling Li (https://limanling.github.io/)
+
+## BibTeX
+
+```bibtex
+@misc{wang2025ragen,
+  title={RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning},
+  author={Zihan Wang and Kangrui Wang and Qineng Wang and Pingyue Zhang and Linjie Li and Zhengyuan Yang and Xing Jin and Kefan Yu and Minh Nhat Nguyen and Licheng Liu and Eli Gottlieb and Yiping Lu and Kyunghyun Cho and Jiajun Wu and Li Fei-Fei and Lijuan Wang and Yejin Choi and Manling Li},
+  year={2025},
+  eprint={2504.20073},
+  archivePrefix={arXiv},
+  url={https://arxiv.org/abs/2504.20073}
+}
+
+@misc{wang2026ragen2,
+  title={RAGEN-2: Reasoning Collapse in Agentic RL},
+  author={Zihan Wang and Chi Gui and Xing Jin and Qineng Wang and Licheng Liu and Kangrui Wang and Shiqi Chen and Linjie Li and Zhengyuan Yang and Pingyue Zhang and Yiping Lu and Jiajun Wu and Li Fei-Fei and Lijuan Wang and Yejin Choi and Manling Li},
+  year={2026},
+  eprint={2604.06268},
+  archivePrefix={arXiv},
+  url={https://arxiv.org/abs/2604.06268}
+}
+
+@misc{lin2026bagen,
+  title={BAGEN: Are LLM Agents Budget-Aware?},
+  author={Yuxiang Lin and Zihan Wang and Mengyang Liu and Yuxuan Shan and Longju Bai and Junyao Zhang and Xing Jin and Boshan Chen and Jinyan Su and Xingyao Wang and Jiaxin Pei and Manling Li},
+  year={2026},
+  eprint={2606.00198},
+  archivePrefix={arXiv},
+  url={https://arxiv.org/abs/2606.00198}
+}
+```

@@ -6,10 +6,82 @@ import '../../styles/authors.css';
 import '../../styles/resources.css';
 
 const basePath = import.meta.env.BASE_URL;
-const pageTitle = "BAGEN: Are LLM Agents Budget-Aware?";
+const pageTitle = "BAGEN: Are LLM Agents Budget-Aware? | Budget-Aware LLM Agents Benchmark";
+const pageDescription = "BAGEN tests whether LLM agents are budget-aware: frontier agents are over-optimistic, and early stopping saves 28-64% of tokens at 1.6-4.2% success cost.";
+const pageUrl = "https://ragen-ai.github.io/bagen/";
+const ogImage = "https://ragen-ai.github.io/bagen/fig_decoupling.png";
+const authors = [
+  "Yuxiang Lin", "Zihan Wang", "Mengyang Liu", "Yuxuan Shan", "Longju Bai",
+  "Junyao Zhang", "Xing Jin", "Boshan Chen", "Jinyan Su", "Xingyao Wang",
+  "Jiaxin Pei", "Manling Li"
+];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://ragen-ai.github.io/bagen/#paper",
+      "headline": "BAGEN: Are LLM Agents Budget-Aware?",
+      "name": "BAGEN: Are LLM Agents Budget-Aware?",
+      "url": pageUrl,
+      "sameAs": "https://arxiv.org/abs/2606.00198",
+      "datePublished": "2026-05-29",
+      "abstract": "While agents are increasingly spending more resources, today agent cost is mostly measured only after execution. A Budget-Aware Agent (BAGEN) should treat budget as an active control signal, rather than a passive cost metric. We define budget estimation as internal budgets (from agent computation) and external budgets (from agent actions), and formalize budget-awareness as progressive interval estimation: at each step of a plan, an agent should predict an upper and lower bound on remaining budget, and alert when completion is unlikely.",
+      "keywords": ["budget-aware LLM agents", "budget awareness", "LLM agents", "agent cost estimation", "progressive interval estimation", "early stopping", "token budget", "agent benchmark"],
+      "author": authors.map((name) =>
+        name === "Manling Li"
+          ? { "@type": "Person", "@id": "https://limanling.github.io/#person", "name": "Manling Li", "url": "https://limanling.github.io/" }
+          : { "@type": "Person", "name": name }
+      )
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://ragen-ai.github.io/bagen/#dataset",
+      "name": "BAGEN",
+      "description": "Benchmark data for evaluating budget awareness of LLM agents across four environments (Sokoban, Search-R1, SWE-bench, Warehouse) with a rollout-replay scoring protocol.",
+      "url": pageUrl,
+      "sameAs": ["https://huggingface.co/datasets/MLL-Lab/BAGEN", "https://arxiv.org/abs/2606.00198"],
+      "creator": { "@type": "Organization", "name": "MLL Lab, Northwestern University", "url": "https://mll-lab-nu.github.io" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://ragen-ai.github.io/bagen/#code",
+      "name": "BAGEN",
+      "codeRepository": "https://github.com/mll-lab-nu/BAGEN",
+      "programmingLanguage": "Python",
+      "description": "Code for evaluating and training budget-aware LLM agents."
+    }
+  ]
+};
 ---
 
-<Layout title={pageTitle}>
+<Layout title={pageTitle} description={pageDescription}>
+  <Fragment slot="head">
+    <link rel="canonical" href={pageUrl} />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="keywords" content="BAGEN, budget-aware LLM agents, budget awareness, agent cost, progressive interval estimation, early stopping, LLM agent benchmark" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:site_name" content="RAGEN-AI" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="7296" />
+    <meta property="og:image:height" content="2240" />
+    <meta property="og:image:alt" content="BAGEN: budget awareness is decoupled from task performance in LLM agents" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="citation_title" content="BAGEN: Are LLM Agents Budget-Aware?" />
+    {authors.map((name) => <meta name="citation_author" content={name} />)}
+    <meta name="citation_publication_date" content="2026/05/29" />
+    <meta name="citation_arxiv_id" content="2606.00198" />
+    <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2606.00198" />
+    <meta name="citation_abstract_html_url" content="https://arxiv.org/abs/2606.00198" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
 
   <!-- ============================================================ -->
   <!-- HERO -->
