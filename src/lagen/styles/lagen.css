@@ -168,9 +168,9 @@ td strong.winner { font-weight: 750; }
 .citation-heading h2 { margin: 0; }
 .citation-heading button { font-size: 16px; }
 pre { background: var(--paper); border-radius: 10px; padding: 24px; overflow-x: auto; font-size: 16px; line-height: 1.65; }
-.site-footer { border-top: 1px solid var(--rule); padding: 25px max(1.5rem, calc((100% - 1100px)/2)); display: flex; justify-content: space-between; gap: 25px; color: var(--muted); font-size: 16px; }
-.site-footer nav { display: flex; flex-wrap: wrap; gap: 16px; }
-.site-footer a { text-decoration: none; }
+.site-footer { border-top: 1px solid var(--rule); padding: 28px 18px; text-align: center; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.site-footer p { margin: 0; }
+.site-footer a { color: var(--purple); font-weight: 600; text-decoration: none; }
 @media (max-width: 900px) {
   .hero { padding-top: 64px; }
   .hero h1 { font-size: 4.3rem; }
@@ -225,7 +225,6 @@ pre { background: var(--paper); border-radius: 10px; padding: 24px; overflow-x: 
   .citation-heading { align-items: center; }
   .citation-heading button { padding: .5rem .65rem; }
   pre { padding: 18px; }
-  .site-footer { flex-direction: column; padding: 24px 18px; gap: 12px; }
 }
 @media (max-width: 350px) {
   .hero h1 { font-size: 2.85rem; }
@@ -298,7 +297,6 @@ pre { background: var(--paper); border-radius: 10px; padding: 24px; overflow-x: 
   #findings > h2 { margin-bottom: 28px; }
   .findings-group + .findings-group { margin-top: 44px; }
   .evidence > h3 { font-size: 22px; }
-  .site-footer { padding-inline: 18px; }
 }
 @media (max-width: 350px) {
   .site-header { padding-inline: 12px; column-gap: 8px; }

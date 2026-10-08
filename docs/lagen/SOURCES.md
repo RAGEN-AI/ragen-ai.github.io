@@ -1,6 +1,7 @@
 # Content and demonstration sources
 
-Website source: [mindorigin150/lagen at 5e95bfd](https://github.com/mindorigin150/lagen/tree/5e95bfd).
+Original website source: `mindorigin150/lagen@5e95bfd`, retained in a private
+archive. Public source is available in [the migration PR](https://github.com/RAGEN-AI/ragen-ai.github.io/pull/1).
 Paper and `../outputs/` paths below identify the original authoring workspace.
 They are provenance records, not dependencies of this website build. Website
 source and public asset paths identify their new locations in this repository.

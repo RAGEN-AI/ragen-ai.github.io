@@ -150,6 +150,9 @@ The header icon and social preview use separate assets.
   light demo background. Figure grids use the available article width for their
   responsive layouts. Inter is bundled locally under the SIL Open Font License.
 
+The footer centers the copyright and maintenance notices on two lines. Both
+notices link to MLL Lab. Footer text stays at 16px on desktop and phones.
+
 Only the central video plays, muted and looping, while visible. Task selection
 never advances automatically. The Play/Pause button sits centered below the
 active video's action indicators and above the task thumbnails.
