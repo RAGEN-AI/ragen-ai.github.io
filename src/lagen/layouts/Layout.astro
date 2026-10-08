@@ -1,0 +1,87 @@
+---
+import "../styles/lagen.css";
+import Contents from "../components/Contents.astro";
+import palette from "../data/paper-palette.json";
+import interFont from "../assets/inter.woff2?url";
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const base = '/lagen/';
+const canonical = new URL(base, Astro.site);
+const socialImage = new URL(`${base}assets/latency-aware-agents-social-card.png`, Astro.site);
+const colors =
+  Object.entries(palette)
+    .filter(([key]) => key !== "heatmap")
+    .map(([key, value]) => `--${key}:${value}`)
+    .join(";");
+---
+
+<!doctype html>
+<html lang="en" style={colors}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={palette.purple} />
+    <link rel="preload" href={interFont} as="font" type="font/woff2" crossorigin />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${base}assets/favicon.svg`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={title} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <header class="site-header">
+      <a class="wordmark" href={base}>
+        <img src={`${base}assets/favicon.svg`} alt="" width="30" height="30" />
+        LAGEN
+      </a>
+      <nav class="resource-nav" aria-label="Resources">
+        <a href={`${base}assets/paper.pdf`} target="_blank" rel="noopener">Paper</a>
+        <a href="#citation">Citation</a>
+        <details id="research" class="research">
+          <summary>More Research <span aria-hidden="true">⌄</span></summary>
+          <ul class="research-menu">
+            <li><a href="https://ragen-ai.github.io/bagen/">BAGEN</a></li>
+            <li><a href="https://enact-embodied-cognition.github.io/">ENACT</a></li>
+            <li><a href="https://ragen-ai.github.io/">RAGEN</a></li>
+            <li><a href="https://embodied-agent-interface.github.io/">Embodied Agent Interface</a></li>
+            <li><a href="https://vagen-ai.github.io/">VAGEN</a></li>
+            <li><a href="https://viewagent.github.io/">ViewAgent: Planning with the Views</a></li>
+          </ul>
+        </details>
+        <a href="https://www.mll.lab.northwestern.edu/">MLL Lab</a>
+      </nav>
+      <button id="contents-toggle" type="button" aria-expanded="false" aria-controls="contents">Contents <span aria-hidden="true">⌄</span></button>
+    </header>
+    <Contents />
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>LAGEN · Latency-aware agents</span>
+      <nav aria-label="Related research">
+        <a href="https://www.mll.lab.northwestern.edu/">MLL Lab</a>
+        <a href="https://ragen-ai.github.io/">RAGEN</a>
+        <a href="https://vagen-ai.github.io/">VAGEN</a>
+        <a href="https://enact-embodied-cognition.github.io/">ENACT</a>
+      </nav>
+    </footer>
+  </body>
+</html>

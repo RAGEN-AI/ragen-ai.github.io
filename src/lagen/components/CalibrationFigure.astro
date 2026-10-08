@@ -1,0 +1,80 @@
+---
+import points from '../data/calibration.json';
+import palette from '../data/paper-palette.json';
+import FigureReadout from './FigureReadout.astro';
+const methods = [['fixed', 'Fixed'], ['normal', 'Normal'], ['iid', 'IID'], ['temporal', 'Temporal']];
+const models = [['qwenoft', 'OpenVLA'], ['qwengr00t', 'GR00T']];
+const taskNames: Record<string, string> = { flappy: 'Flappy Bird', inverted_pendulum: 'Inverted Pendulum', mikasa_intercept_grab_fast: 'InterceptGrabFast' };
+const taskColors: Record<string, string> = { flappy: palette.gray, inverted_pendulum: palette.coral, mikasa_intercept_grab_fast: palette.peach };
+const gpuNames: Record<string, string> = { rtx3090: 'RTX 3090', rtx4090: 'RTX 4090', rtx5090: 'RTX 5090', l40s: 'L40S', a100: 'A100' };
+const markers: Record<string, string> = {
+  rtx3090: 'M-4.5,0a4.5,4.5 0 1,0 9,0a4.5,4.5 0 1,0 -9,0',
+  rtx4090: 'M-4.5,-4.5h9v9h-9Z',
+  rtx5090: 'M0,-5L5,4H-5Z',
+  l40s: 'M-1.7,-5h3.4v3.3H5v3.4H1.7V5h-3.4V1.7H-5v-3.4h3.3Z',
+  a100: 'M-3.5,-5L0,-1.7L3.5,-5L5,-3.5L1.7,0L5,3.5L3.5,5L0,1.7L-3.5,5L-5,3.5L-1.7,0L-5,-3.5Z',
+};
+const plot = { left: 58, top: 12, width: 198, height: 198 };
+const x = (value: number) => plot.left + value / 110 * plot.width;
+const y = (value: number) => plot.top + plot.height - value / 110 * plot.height;
+const ticks = [0, 25, 50, 75, 100];
+const panels = models.map(([model, modelName]) => ({ model, modelName, methods: methods.map(([method, methodName]) => {
+  const selected = points.filter(point => point.model === model && point.method === method);
+  // Coincident observations retain their coordinates and share one complete readout.
+  const locations = [...new Set(selected.map(point => `${point.real},${point.sim}`))];
+  const groups = locations.map(location => selected.filter(point => `${point.real},${point.sim}` === location));
+  return { method, methodName, groups };
+}) }));
+---
+<figure id="calibration-figure" class="paper-figure" data-interactive-figure aria-label="Held-out simulated versus real mean returns">
+  <div class="if-legend">{Object.entries(taskNames).map(([task, name]) => <span><svg viewBox="0 0 22 16" aria-hidden="true"><circle cx="11" cy="8" r="5" fill={taskColors[task]} stroke="#46414f" /></svg>{name}</span>)}</div>
+  <div class="if-legend">{Object.entries(gpuNames).map(([gpu, name]) => <span><svg viewBox="-8 -8 16 16" aria-hidden="true"><path d={markers[gpu]} fill="#46414f" /></svg>{name}</span>)}</div>
+  {panels.map(panel => <div class="calibration-row">
+    <h5 class="calibration-model">{panel.modelName}</h5>
+    <div class="if-panels">
+      {panel.methods.map(method => <div class="if-panel">
+        <h5>{method.methodName}</h5>
+        <svg class="if-chart" viewBox="0 0 268 274" data-inspect-chart tabindex="0" role="group" aria-label={panel.modelName + ' · ' + method.methodName + ' simulated versus real returns'} aria-describedby="calibration-figure-help">
+          {ticks.map(tick => <g>
+            <path class="if-grid" d={`M${x(tick)},${plot.top}v${plot.height}M${plot.left},${y(tick)}h${plot.width}`} />
+            <path class="if-axis" d={`M${x(tick)},${plot.top + plot.height}v5M${plot.left - 5},${y(tick)}h5`} />
+            <text x={x(tick)} y={plot.top + plot.height + 23} text-anchor="middle">{tick}</text>
+            <text x={plot.left - 8} y={y(tick)} text-anchor="end" dominant-baseline="middle">{tick}</text>
+          </g>)}
+          <path class="if-axis" d={`M${plot.left},${plot.top}v${plot.height}h${plot.width}`} />
+          <path class="if-reference" d={`M${x(0)},${y(0)}L${x(110)},${y(110)}`} />
+          <text class="if-axis-label" x="157" y="263" text-anchor="middle">Real mean return (%)</text>
+          <text class="if-axis-label if-y-label" transform="translate(14 111) rotate(-90)" text-anchor="middle">Simulated mean return (%)</text>
+          {method.groups.map((group, i) => <g data-inspect-target data-x={x(group[0].real)} data-y={y(group[0].sim)} data-readout={`calibration-readout-${panel.model}-${method.method}-${i}`}>
+            <g class="if-highlight">
+              <line class="if-guide" x1={x(group[0].real)} x2={x(group[0].real)} y1={plot.top} y2={plot.top + plot.height} />
+              <circle cx={x(group[0].real)} cy={y(group[0].sim)} r="8" fill="white" stroke={taskColors[group[0].task]} stroke-width="1.5" />
+            </g>
+            {group.map(point => <path d={markers[point.gpu]} transform={`translate(${x(point.real)} ${y(point.sim)})`} fill={taskColors[point.task]} stroke="#46414f" stroke-width=".8" />)}
+          </g>)}
+          <rect data-inspect-hit x={plot.left} y={plot.top} width={plot.width} height={plot.height} fill="transparent" />
+        </svg>
+      </div>)}
+    </div>
+  </div>)}
+  {panels.map(panel => panel.methods.map(method => method.groups.map((group, i) => {
+    const point = group[0];
+    const gap = point.sim - point.real;
+    return <template id={`calibration-readout-${panel.model}-${method.method}-${i}`}>
+      <p class="readout-title">{taskNames[point.task]} · {panel.modelName}</p>
+      <p class="readout-subtitle">{method.methodName} · {group.map(p => gpuNames[p.gpu]).join(', ')}</p>
+      <dl>
+        <dt>Simulated return</dt><dd>{point.sim.toFixed(2)}%</dd>
+        <dt>Real return</dt><dd>{point.real.toFixed(2)}%</dd>
+        <dt>Sim − real</dt><dd>{gap > 0 ? '+' : ''}{gap.toFixed(2)} pp</dd>
+      </dl>
+    </template>;
+  })))}
+  <FigureReadout id="calibration-figure" />
+  <figcaption>Both axes show return relative to the same zero-latency baseline (100%). The diagonal marks equal simulated and measured returns. Sim − real shows their difference in percentage points.</figcaption>
+</figure>
+<style>
+  .calibration-row { margin-top: 28px; }
+  .calibration-model { font-size: 18px; font-weight: 650; margin: 0; }
+  .calibration-row .if-panels { margin-top: 10px; }
+</style>

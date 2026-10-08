@@ -1,0 +1,962 @@
+[
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "fixed",
+    "real": 43.69799999999999,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "normal",
+    "real": 43.69799999999999,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "iid",
+    "real": 43.69799999999999,
+    "sim": 41.443999999999996
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "temporal",
+    "real": 43.69799999999999,
+    "sim": 45.56
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "fixed",
+    "real": 47.714,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "normal",
+    "real": 47.714,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "iid",
+    "real": 47.714,
+    "sim": 45.992
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "temporal",
+    "real": 47.714,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "fixed",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "normal",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "iid",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "temporal",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "fixed",
+    "real": 26.96650194703225,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "normal",
+    "real": 26.96650194703225,
+    "sim": 86.53337280532422
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "iid",
+    "real": 26.96650194703225,
+    "sim": 48.23719627445276
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "temporal",
+    "real": 26.96650194703225,
+    "sim": 36.8273631954096
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "fixed",
+    "real": 24.477688573562606,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "normal",
+    "real": 24.477688573562606,
+    "sim": 12.581217326362848
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "iid",
+    "real": 24.477688573562606,
+    "sim": 5.665608663181485
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "temporal",
+    "real": 24.477688573562606,
+    "sim": 35.59932785661027
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "fixed",
+    "real": 30.588,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "normal",
+    "real": 30.588,
+    "sim": 45.025999999999996
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "iid",
+    "real": 30.588,
+    "sim": 20.452
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "temporal",
+    "real": 30.588,
+    "sim": 32.03
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "fixed",
+    "real": 62.33000000000001,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "normal",
+    "real": 62.33000000000001,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "iid",
+    "real": 62.33000000000001,
+    "sim": 50.036
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "temporal",
+    "real": 62.33000000000001,
+    "sim": 75.988
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "fixed",
+    "real": 45.79600000000001,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "normal",
+    "real": 45.79600000000001,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "iid",
+    "real": 45.79600000000001,
+    "sim": 41.63
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "temporal",
+    "real": 45.79600000000001,
+    "sim": 39.842000000000006
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "fixed",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "normal",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "iid",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "temporal",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "fixed",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "normal",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "iid",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "temporal",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "fixed",
+    "real": 88.72133536766346,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "normal",
+    "real": 88.72133536766346,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "iid",
+    "real": 88.72133536766346,
+    "sim": 89.00507822285452
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "temporal",
+    "real": 88.72133536766346,
+    "sim": 88.27089927812261
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "fixed",
+    "real": 68.8363149671892,
+    "sim": 71.47873340992365
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "normal",
+    "real": 68.8363149671892,
+    "sim": 69.23970148240491
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "iid",
+    "real": 68.8363149671892,
+    "sim": 75.03073340743795
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "temporal",
+    "real": 68.8363149671892,
+    "sim": 71.29363100274834
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "fixed",
+    "real": 71.67692406131668,
+    "sim": 73.15739149283158
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "normal",
+    "real": 71.67692406131668,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "iid",
+    "real": 71.67692406131668,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "temporal",
+    "real": 71.67692406131668,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "fixed",
+    "real": 31.567358366338016,
+    "sim": 16.99854665206361
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "normal",
+    "real": 31.567358366338016,
+    "sim": 31.865288003860424
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "iid",
+    "real": 31.567358366338016,
+    "sim": 43.129282897675466
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "l40s",
+    "method": "temporal",
+    "real": 31.567358366338016,
+    "sim": 25.86330357260184
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "fixed",
+    "real": 79.14024462541558,
+    "sim": 73.15739149283158
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "normal",
+    "real": 79.14024462541558,
+    "sim": 63.658159368342474
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "iid",
+    "real": 79.14024462541558,
+    "sim": 82.00508326301124
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "l40s",
+    "method": "temporal",
+    "real": 79.14024462541558,
+    "sim": 71.42317504787667
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "fixed",
+    "real": 75.66493775239122,
+    "sim": 71.47873340992365
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "normal",
+    "real": 75.66493775239122,
+    "sim": 69.23970148240491
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "iid",
+    "real": 75.66493775239122,
+    "sim": 75.03073340743795
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "temporal",
+    "real": 75.66493775239122,
+    "sim": 71.29363100274834
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "fixed",
+    "real": 79.6177246339393,
+    "sim": 73.15739149283158
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "normal",
+    "real": 79.6177246339393,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "iid",
+    "real": 79.6177246339393,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "temporal",
+    "real": 79.6177246339393,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "fixed",
+    "real": 71.37356633842194,
+    "sim": 71.47873340992365
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "normal",
+    "real": 71.37356633842194,
+    "sim": 69.8982969509619
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "iid",
+    "real": 71.37356633842194,
+    "sim": 68.93003273930216
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "temporal",
+    "real": 71.37356633842194,
+    "sim": 70.35513137263473
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "fixed",
+    "real": 77.10831060586763,
+    "sim": 73.15739149283158
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "normal",
+    "real": 77.10831060586763,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "iid",
+    "real": 77.10831060586763,
+    "sim": 77.53674776821079
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "temporal",
+    "real": 77.10831060586763,
+    "sim": 81.36441154870325
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "fixed",
+    "real": 80.14242149524551,
+    "sim": 71.47873340992365
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "normal",
+    "real": 80.14242149524551,
+    "sim": 69.23970148240491
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "iid",
+    "real": 80.14242149524551,
+    "sim": 73.58816447280839
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "temporal",
+    "real": 80.14242149524551,
+    "sim": 74.88724899730015
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "fixed",
+    "real": 76.94077823008932,
+    "sim": 73.15739149283158
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "normal",
+    "real": 76.94077823008932,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "iid",
+    "real": 76.94077823008932,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "mikasa_intercept_grab_fast",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "temporal",
+    "real": 76.94077823008932,
+    "sim": 75.99490744158176
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "fixed",
+    "real": 44.068000000000005,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "normal",
+    "real": 44.068000000000005,
+    "sim": 46.718
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "iid",
+    "real": 44.068000000000005,
+    "sim": 41.443999999999996
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwenoft",
+    "gpu": "rtx5090",
+    "method": "temporal",
+    "real": 44.068000000000005,
+    "sim": 46.047999999999995
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "fixed",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "normal",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "iid",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "inverted_pendulum",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "temporal",
+    "real": 100.0,
+    "sim": 100.0
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "fixed",
+    "real": 88.08672516804029,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "normal",
+    "real": 88.08672516804029,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "iid",
+    "real": 88.08672516804029,
+    "sim": 95.03967513069956
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx5090",
+    "method": "temporal",
+    "real": 88.08672516804029,
+    "sim": 90.62219940254374
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "fixed",
+    "real": 90.78587206522448,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "normal",
+    "real": 90.78587206522448,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "iid",
+    "real": 90.78587206522448,
+    "sim": 87.7025026757499
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx3090",
+    "method": "temporal",
+    "real": 90.78587206522448,
+    "sim": 82.85564639173323
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "fixed",
+    "real": 91.74617251680824,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "normal",
+    "real": 91.74617251680824,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "iid",
+    "real": 91.74617251680824,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "a100",
+    "method": "temporal",
+    "real": 91.74617251680824,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "fixed",
+    "real": 92.50233383122199,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "normal",
+    "real": 92.50233383122199,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "iid",
+    "real": 92.50233383122199,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx3090",
+    "method": "temporal",
+    "real": 92.50233383122199,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "fixed",
+    "real": 88.99095939699419,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "normal",
+    "real": 88.99095939699419,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "iid",
+    "real": 88.99095939699419,
+    "sim": 84.20786555234612
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "rtx4090",
+    "method": "temporal",
+    "real": 88.99095939699419,
+    "sim": 81.8099423860854
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "fixed",
+    "real": 89.74244528955457,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "normal",
+    "real": 89.74244528955457,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "iid",
+    "real": 89.74244528955457,
+    "sim": 89.09480108396627
+  },
+  {
+    "task": "flappy",
+    "model": "qwenoft",
+    "gpu": "a100",
+    "method": "temporal",
+    "real": 89.74244528955457,
+    "sim": 89.81577209482865
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "fixed",
+    "real": 93.40786034354484,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "normal",
+    "real": 93.40786034354484,
+    "sim": 95.79630321135677
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "iid",
+    "real": 93.40786034354484,
+    "sim": 94.97292755788405
+  },
+  {
+    "task": "flappy",
+    "model": "qwengr00t",
+    "gpu": "rtx4090",
+    "method": "temporal",
+    "real": 93.40786034354484,
+    "sim": 95.79630321135677
+  }
+]

@@ -1,0 +1,11 @@
+---
+import '../styles/interactive-figures.css';
+interface Props { id: string; }
+const { id } = Astro.props;
+---
+<p id={id + '-help'} class="if-sr-only">Hover or tap to inspect values. Focus a chart and use the arrow keys to move between readings. Press Escape to close.</p>
+<div id={id + '-tooltip'} class="if-tooltip" role="tooltip" hidden></div>
+<div class="if-sr-only" data-inspect-announcement aria-live="polite" aria-atomic="true"></div>
+<script>
+  import '../scripts/figure-inspection';
+</script>

@@ -1,0 +1,135 @@
+---
+import LinkedReadout from './LinkedReadout.astro';
+import panels from '../data/history.json';
+import palette from '../data/paper-palette.json';
+const methods = [
+  { name: 'Single frame', color: palette.gray, key: 'single' },
+  { name: 'Ghost trail', color: palette.coral, key: 'ghost' },
+  { name: 'KV memory', color: palette.peach, key: 'kv' },
+  { name: '4-frame prompt', color: palette.blue, key: 'prompt' },
+  { name: '4-frame grid (2×2)', color: palette.rose, key: 'grid' },
+  { name: 'WanOFT', color: palette.purple, key: 'wan' },
+];
+const asset = (name: string) => '/lagen/' + 'assets/history/' + name;
+const frame = (i: number) => asset('frame_0' + i + '.png');
+const y = (value: number) => 286 - (value - 50) / 100 * 240;
+const ghostTrailNAReason = 'Ghost trail is not suitable for first-person shooters such as Deadly Corridor, so this condition was not evaluated.';
+---
+<figure id="history-figure" data-linked-figure aria-label="Visual-history mechanisms linked to results on three tasks">
+  <div class="history-layout">
+    <div class="history-mechanisms" data-choice-group>
+      {methods.map((method, index) => <button class="history-mechanism" type="button" data-choice={'history:' + index} data-method={index} aria-pressed="false" aria-describedby="history-figure-help" style={{ '--method-color': method.color }}>
+        <span class="mechanism-title">{method.name}</span>
+        <svg class="mechanism-diagram" viewBox="0 0 320 124" aria-hidden="true">
+          <defs><marker id={'history-arrow-' + index} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L8 4L0 8Z" fill={method.color} /></marker></defs>
+          {(method.key === 'single' || method.key === 'kv') && <image href={frame(5)} x="10" y="8" width="108" height="108" />}
+          {method.key === 'ghost' && <svg x="10" y="8" width="108" height="108" viewBox="0 60 288 288"><image href={asset('ghost-trail.png')} width="288" height="512" /></svg>}
+          {(method.key === 'prompt' || method.key === 'wan') && (method.key === 'wan' ? [1,2,3,4,5] : [2,3,4,5]).map((i, n, frames) => <image href={frame(i)} x={24 - (frames.length - 1 - n) * 4} y={18 - (frames.length - 1 - n) * 4} width="106" height="106" opacity={.3 + .7 * n / (frames.length - 1)} />)}
+          {method.key === 'grid' && <>
+            <rect x="8" y="6" width="112" height="112" rx="6" fill="white" stroke={method.color} />
+            {[2,3,4,5].map((i, n) => <image href={frame(i)} x={10 + n % 2 * 54} y={8 + Math.floor(n / 2) * 54} width="52" height="52" />)}
+          </>}
+          <path d="M132 65H153" fill="none" stroke={method.color} stroke-width="1.4" marker-end={'url(#history-arrow-' + index + ')'} />
+          <rect x="158" y={method.key === 'kv' ? 32 : 34} width="108" height={method.key === 'kv' ? 49 : 62} rx="5" fill="white" stroke="#a09aa9" stroke-width="1.3" />
+          {method.key === 'wan'
+            ? <text x="212" y="59" text-anchor="middle"><tspan x="212">World</tspan><tspan x="212" dy="21">Model</tspan></text>
+            : <text x="212" y={method.key === 'kv' ? 64 : 72} text-anchor="middle">VLA</text>}
+          <path d="M267 65H285" fill="none" stroke="#403748" stroke-width="1.3" />
+          <path d="M281 59L294 65L281 71Z" fill="#403748" />
+          <text class="mechanism-action" x="298" y="71">a<tspan class="mechanism-subscript" baseline-shift="sub">t</tspan></text>
+          {method.key === 'kv' && <>
+            <rect x="142" y="94" width="146" height="28" rx="14" fill={method.color} fill-opacity=".15" stroke={method.color} stroke-opacity=".6" />
+            <text x="164" y="115" text-anchor="middle">K/V</text>
+            {[0,1,2].map(column => [98,110].map(row => <rect x={192 + column * 28} y={row} width="21" height="9" rx="2" fill={method.color} fill-opacity=".45" />))}
+            <path d="M190 94V82" fill="none" stroke={method.color} stroke-width="1.3" marker-end={'url(#history-arrow-' + index + ')'} />
+            <path d="M232 82V94" fill="none" stroke={method.color} stroke-width="1.3" marker-end={'url(#history-arrow-' + index + ')'} />
+          </>}
+        </svg>
+      </button>)}
+    </div>
+    <div class="history-results">
+      <div class="history-legend" data-choice-group>
+        {methods.map((method, index) => <button type="button" data-choice={'history:' + index} aria-pressed="false"><span style={{ background: method.color }}></span>{method.name}</button>)}
+      </div>
+      <p class="history-axis-label">Return (% of single-frame baseline)</p>
+      <div class="history-panels">
+        {panels.map((panel, task) => <section class="history-panel">
+          <h5>{panel.task}</h5>
+          <p class="history-delay">{panel.delay} frames of delay</p>
+          <svg viewBox="0 0 340 310" aria-label={panel.task + ' mean returns and 95% confidence intervals'} data-choice-group data-roving>
+            {[50,75,100,125,150].map(value => <g>
+              <line x1="48" x2="334" y1={y(value)} y2={y(value)} class={value === 100 ? 'linked-reference' : 'linked-grid'} stroke-dasharray={value === 100 ? '4 4' : undefined} />
+              <text x="40" y={y(value) + 6} text-anchor="end">{value}</text>
+            </g>)}
+            <path d="M48 46V286H334M44 281L52 275M44 289L52 283" class="linked-axis" />
+            {panel.cells.map((cell, index) => {
+              const x = 58 + index * 46;
+              return <g data-choice={'history:' + index} data-method={index} data-readout={`history-${task}-${index}`} role="button" tabindex={index === 0 ? 0 : -1} aria-pressed="false" aria-label={cell ? methods[index].name + ': ' + cell.mean.toFixed(2) + '% of baseline' : ghostTrailNAReason} aria-describedby="history-figure-help">
+                <rect x={x - 5} y="34" width="46" height="258" fill="transparent" />
+                {cell ? <g class="history-marks">
+                  <rect x={x} y={y(cell.mean)} width="36" height={286 - y(cell.mean)} fill={methods[index].color} />
+                  <path d={`M${x + 18} ${y(cell.high)}V${y(cell.low)}M${x + 12} ${y(cell.high)}H${x + 24}M${x + 12} ${y(cell.low)}H${x + 24}`} stroke="#403748" fill="none" />
+                  <circle cx={x + 18} cy={y(cell.mean)} r="2.5" fill={methods[index].color} />
+                </g> : <text class="history-missing" x={x + 18} y="276" text-anchor="middle">N/A</text>}
+              </g>;
+            })}
+          </svg>
+        </section>)}
+      </div>
+    </div>
+  </div>
+  {panels.map((panel, task) => panel.cells.map((cell, index) => <template id={`history-${task}-${index}`}>
+    <p class="readout-title">{panel.task} · {methods[index].name}</p>
+    {cell ? <dl><dt>Return</dt><dd>{cell.mean.toFixed(2)}%</dd><dt>95% interval</dt><dd>{cell.low.toFixed(2)}–{cell.high.toFixed(2)}%</dd><dt>Episodes</dt><dd>{cell.episodes}</dd><dt>Delay</dt><dd>{panel.delay} raw frames</dd></dl> : <p>{ghostTrailNAReason}</p>}
+  </template>))}
+  <LinkedReadout id="history-figure" />
+  <figcaption>100% marks the single-frame baseline at the same delay. Delays are three frames on Flappy Bird and six on Demon Attack and Deadly Corridor. Error bars show episode-level 95% intervals from one training run. OpenVLA uses 100 evaluation episodes per condition, and WanOFT uses 20. Ghost trail was not evaluated on Deadly Corridor.</figcaption>
+</figure>
+<script>
+  const figure = document.querySelector<HTMLElement>('#history-figure')!;
+  figure.addEventListener('figure-selection', () => {
+    const selection = figure.dataset.selection;
+    for (const target of figure.querySelectorAll<HTMLElement | SVGElement>('[data-choice]')) {
+      const active = target.dataset.choice === selection;
+      target.classList.toggle('is-active', active);
+      if (target.closest('.history-panel')) target.classList.toggle('is-muted', selection !== undefined && !active);
+    }
+  });
+</script>
+<style>
+  .history-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .history-mechanisms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .history-mechanism { display: block; min-width: 0; padding: 0; overflow: hidden; border: 1px solid color-mix(in srgb, var(--method-color) 50%, white); border-radius: 15px; background: color-mix(in srgb, var(--method-color) 5%, white); text-align: center; }
+  .mechanism-title { display: block; padding: 3px 6px; border-radius: 13px; background: var(--method-color); color: white; font-size: 20px; font-weight: 700; line-height: 1.3; }
+  .history-mechanism:is([data-method="0"], [data-method="2"], [data-method="5"]) .mechanism-title { font-weight: 400; letter-spacing: .04em; }
+  .mechanism-diagram { display: block; width: 100%; }
+  .mechanism-diagram text { font-size: 20px; }
+  .mechanism-diagram .mechanism-action { font-family: Georgia, serif; font-style: italic; }
+  .mechanism-diagram .mechanism-subscript { font-size: 13px; }
+  .history-mechanism.is-active { border-color: var(--method-color); box-shadow: 0 3px 10px #29263126; }
+  .history-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 24px; }
+  .history-legend button { display: flex; gap: 7px; align-items: center; border: 0; background: transparent; padding: 5px 0; text-align: left; white-space: nowrap; line-height: 1.4; border-radius: 4px; }
+  .history-legend button span { flex: 0 0 15px; height: 12px; }
+  .history-legend button.is-active { background: #f0eef3; }
+  .history-axis-label { font-size: 16px; margin: 20px 0 16px; text-align: center; }
+  .history-panels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  .history-panel { min-width: 0; }
+  .history-panel h5 { font-size: 18px; text-align: center; margin: 0; }
+  .history-delay { font-size: 16px; text-align: center; margin: 5px 0 0; }
+  .history-panel svg { display: block; width: 100%; overflow: visible; }
+  .history-panel svg text { font-size: 18px; }
+  .history-marks { pointer-events: none; }
+  .is-muted .history-marks { opacity: .25; }
+  .is-active .history-marks { filter: drop-shadow(0 2px 2px #29263133); }
+  @container (max-width: 980px) {
+    .history-panels { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .history-panel { width: 100%; max-width: 400px; justify-self: center; }
+  }
+  @container (max-width: 810px) {
+    .history-mechanisms { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @container (max-width: 550px) {
+    .history-mechanisms { grid-template-columns: minmax(0, 1fr); max-width: 340px; width: 100%; justify-self: center; }
+    .history-panel svg text { font-size: 20px; }
+  }
+</style>

@@ -1,0 +1,146 @@
+---
+import panels from '../data/latency-robustness.json';
+import palette from '../data/paper-palette.json';
+import FigureReadout from './FigureReadout.astro';
+const stops = palette.heatmap.map(hex => [1, 3, 5].map(start => parseInt(hex.slice(start, start + 2), 16)));
+function cellColors(ratio: number) {
+  // The paper's shared linear color scale is -5% to 100%; labels retain the full ratio.
+  const position = Math.max(0, Math.min(1, (ratio + .05) / 1.05)) * (stops.length - 1);
+  const index = Math.min(Math.floor(position), stops.length - 2);
+  const fraction = position - index;
+  const rgb = stops[index].map((channel, i) => Math.round(channel + fraction * (stops[index + 1][i] - channel)));
+  const luminance = (.2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2]) / 255;
+  return { '--cell-fill': `rgb(${rgb.join(',')})`, '--cell-text': luminance < .53 ? '#ffffff' : '#292631' };
+}
+---
+<figure id="robustness-figure" class="paper-figure" data-interactive-figure aria-label="Cross-latency transfer relative to matched-delay policies">
+  <div class="heatmap-scale" aria-label="Color scale: relative to matched-delay policy">
+    <p>Relative to matched-delay policy</p>
+    <div class="heatmap-gradient" style={{ background: `linear-gradient(to right, ${palette.heatmap.join(',')})` }}></div>
+    <div class="heatmap-scale-ticks">{[0, 25, 50, 75, 100].map(value => <span style={{ left: `${(value + 5) / 105 * 100}%` }}>{value}%</span>)}</div>
+  </div>
+  <div class="heatmap-panels">
+    {panels.map((panel, panelIndex) => {
+      const longToShort = panel.ratios.flatMap((row, evaluation) => row.filter((_, training) => training > evaluation));
+      const shortToLong = panel.ratios.flatMap((row, evaluation) => row.filter((_, training) => training < evaluation));
+      const directions = [
+        { id: 'long', label: 'High → low latency', values: longToShort },
+        { id: 'short', label: 'Low → high latency', values: shortToLong },
+      ];
+      return <div class="heatmap-panel">
+      <div class="heatmap-axes">
+        <div class="heatmap-heading">
+          <h5>{panel.task}</h5>
+          <div class="direction-summary">
+            {directions.map(direction => {
+              const mean = 100 * direction.values.reduce((sum, value) => sum + value, 0) / direction.values.length;
+              return <button type="button" data-transfer-direction={direction.id} aria-label={`${direction.label}: mean ${mean.toFixed(1)}% over ${direction.values.length} off-diagonal cells. Highlight this transfer direction.`}><span>{direction.label}</span><span class="direction-value">{mean.toFixed(1)}%</span></button>;
+            })}
+          </div>
+        </div>
+        <span class="heatmap-y-label">Eval latency (raw frames)</span>
+        <div class="heatmap-scroll">
+          <table class="latency-heatmap" data-inspect-chart tabindex="0" aria-label={panel.task + ': train and evaluation latency in raw frames; cells relative to the matched-delay policy'} aria-describedby="robustness-figure-help">
+            <colgroup><col class="heatmap-tick-column" />{panel.latencies.map(() => <col />)}</colgroup>
+            <tbody>{[...panel.latencies.keys()].reverse().map(row => <tr>
+              <th scope="row" id={`robustness-eval-${panelIndex}-${row}`}>{panel.latencies[row]}</th>
+              {panel.ratios[row].map((ratio, column) => <td data-inspect-target data-inspect-hit data-transfer-direction={column > row ? 'long' : column < row ? 'short' : undefined} data-readout={`robustness-readout-${panelIndex}-${row}-${column}`} headers={`robustness-eval-${panelIndex}-${row} robustness-train-${panelIndex}-${column}`} style={cellColors(ratio)}>
+                <span class="heatmap-value">{(100 * ratio).toFixed(1)}%</span>
+              </td>)}
+            </tr>)}</tbody>
+            <tfoot><tr><td></td>{panel.latencies.map((latency, column) => <th scope="col" id={`robustness-train-${panelIndex}-${column}`}>{latency}</th>)}</tr></tfoot>
+          </table>
+          {directions.map(direction => <div class="heatmap-region" data-transfer-direction={direction.id} aria-hidden="true" style={{ '--heatmap-size': panel.latencies.length }}>
+            {panel.ratios.map((row, evaluation) => row.map((ratio, training) =>
+              (direction.id === 'long' ? training > evaluation : training < evaluation) &&
+              <span class="heatmap-region-cell" style={{ ...cellColors(ratio), gridRow: panel.latencies.length - evaluation, gridColumn: training + 1 }}>{(100 * ratio).toFixed(1)}%</span>
+            ))}
+          </div>)}
+        </div>
+        <span class="heatmap-x-label">Train latency (raw frames)</span>
+      </div>
+      {panel.ratios.map((row, rowIndex) => row.map((ratio, column) => <template id={`robustness-readout-${panelIndex}-${rowIndex}-${column}`}>
+        <p class="readout-title">{panel.task}</p>
+        <dl>
+          <dt>Train delay</dt><dd>{panel.latencies[column]} {panel.latencies[column] === 1 ? 'frame' : 'frames'}</dd>
+          <dt>Eval delay</dt><dd>{panel.latencies[rowIndex]} {panel.latencies[rowIndex] === 1 ? 'frame' : 'frames'}</dd>
+          <dt>Relative performance</dt><dd>{(100 * ratio).toFixed(1)}%</dd>
+        </dl>
+      </template>))}
+    </div>;
+    })}
+  </div>
+  <FigureReadout id="robustness-figure" />
+  <figcaption>Arrows show training → evaluation latency. <strong>High → low latency</strong> is the mean of the ten cell percentages in the lower-right triangle. <strong>Low → high latency</strong> is the corresponding mean for the upper-left triangle.</figcaption>
+</figure>
+<script>
+  for (const panel of document.querySelectorAll<HTMLElement>('.heatmap-panel')) {
+    const hide = () => { delete panel.dataset.transferDirection; };
+    const chart = panel.querySelector<HTMLTableElement>('.latency-heatmap')!;
+    chart.addEventListener('pointermove', hide);
+    chart.addEventListener('pointerdown', hide);
+    chart.addEventListener('focus', hide);
+    for (const button of panel.querySelectorAll<HTMLButtonElement>('.direction-summary button')) {
+      const show = () => { panel.dataset.transferDirection = button.dataset.transferDirection!; };
+      button.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') show(); });
+      button.addEventListener('pointerleave', event => { if (event.pointerType !== 'touch') hide(); });
+      button.addEventListener('focus', show);
+      button.addEventListener('blur', hide);
+      button.addEventListener('click', show);
+    }
+  }
+</script>
+<style>
+  .heatmap-scale { width: min(360px, 100%); margin: 0 auto 24px; font-size: 16px; }
+  .heatmap-scale p { margin: 0 0 10px; text-align: center; }
+  .heatmap-gradient { height: 14px; margin: 0 24px; }
+  .heatmap-scale-ticks { position: relative; height: 28px; margin: 4px 24px 0; color: var(--muted); }
+  .heatmap-scale-ticks span { position: absolute; transform: translateX(-50%); }
+  .heatmap-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 32px; }
+  .heatmap-panel { min-width: 0; --heatmap-tick-width: 32px; }
+  .heatmap-panel h5 { margin: 0 0 14px; text-align: center; font-size: 18px; font-weight: 550; line-height: 1.5; }
+  .direction-summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; }
+  .direction-summary button { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 3px 8px; padding: 5px 0; border: 0; border-radius: 6px; background: transparent; font-size: 16px; font-weight: 400; line-height: 1.5; transition: background-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease; -webkit-tap-highlight-color: transparent; }
+  .direction-summary button[data-transfer-direction="long"] { font-weight: 700; }
+  .direction-summary .direction-value { white-space: nowrap; font-size: 18px; font-variant-numeric: tabular-nums; }
+  .heatmap-panel[data-transfer-direction="long"] button[data-transfer-direction="long"],
+  .heatmap-panel[data-transfer-direction="short"] button[data-transfer-direction="short"] { background-color: color-mix(in srgb, var(--blue) 10%, transparent); color: var(--blue); transform: translateY(-1px); box-shadow: 0 3px 8px rgb(53 80 112 / .12); }
+  .heatmap-panel[data-transfer-direction="long"] td:not([data-transfer-direction="long"]) .heatmap-value,
+  .heatmap-panel[data-transfer-direction="short"] td:not([data-transfer-direction="short"]) .heatmap-value,
+  .heatmap-panel:not([data-transfer-direction]) .latency-heatmap:has(td.is-inspected) td:not(.is-inspected) .heatmap-value { opacity: .3; }
+  .heatmap-panel[data-transfer-direction="long"] td[data-transfer-direction="long"] .heatmap-value,
+  .heatmap-panel[data-transfer-direction="short"] td[data-transfer-direction="short"] .heatmap-value { opacity: 0; }
+  .heatmap-panel[data-transfer-direction="long"] .heatmap-region[data-transfer-direction="long"],
+  .heatmap-panel[data-transfer-direction="short"] .heatmap-region[data-transfer-direction="short"] { display: grid; }
+  .heatmap-panel[data-transfer-direction] .heatmap-value { transition: none; }
+  .heatmap-panel:not([data-transfer-direction]) .latency-heatmap td.is-inspected .heatmap-value { transform: translateY(-4px); box-shadow: 0 6px 12px rgb(25 45 65 / .3); z-index: 2; }
+  .heatmap-axes { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; font-size: 16px; }
+  .heatmap-heading { grid-column: 2; padding-left: var(--heatmap-tick-width); padding-bottom: 6px; }
+  .heatmap-y-label { grid-column: 1; grid-row: 2; writing-mode: vertical-rl; transform: rotate(180deg); justify-self: center; align-self: center; white-space: nowrap; }
+  .heatmap-x-label { grid-column: 2; margin-left: var(--heatmap-tick-width); text-align: center; }
+  /* The extra scroll padding contains the shared shadow without moving the grid. */
+  .heatmap-scroll { grid-column: 2; grid-row: 2; display: grid; grid-template-columns: minmax(312px, 1fr); overflow-x: auto; padding: 18px 18px 18px 0; margin: -12px -18px -12px 0; }
+  .latency-heatmap { grid-area: 1 / 1; table-layout: fixed; width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 16px; line-height: 1; }
+  .heatmap-region { display: none; grid-area: 1 / 1; align-self: start; position: relative; z-index: 1; margin-left: var(--heatmap-tick-width); width: calc(100% - var(--heatmap-tick-width)); aspect-ratio: 1; grid-template: repeat(var(--heatmap-size), 1fr) / repeat(var(--heatmap-size), 1fr); pointer-events: none; transform: translateY(-4px); filter: drop-shadow(0 2px 5px rgb(25 45 65 / .32)); font-family: Arial, sans-serif; font-size: 16px; line-height: 1; }
+  .heatmap-region-cell { display: flex; align-items: center; justify-content: center; background-color: var(--cell-fill); color: var(--cell-text); font-variant-numeric: tabular-nums; }
+  .latency-heatmap:focus { outline: none; }
+  .latency-heatmap:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+  .heatmap-tick-column { width: var(--heatmap-tick-width); }
+  .latency-heatmap th, .latency-heatmap td { padding: 0; border: 0; text-align: center; }
+  .latency-heatmap td { touch-action: auto; }
+  .latency-heatmap tbody td { color: var(--cell-text); }
+  .latency-heatmap th { font-weight: 400; color: var(--muted); }
+  .latency-heatmap tbody th { position: sticky; left: 0; z-index: 3; background: white; padding-right: 8px; text-align: right; }
+  .latency-heatmap tfoot td { position: sticky; left: 0; z-index: 3; background: white; }
+  .latency-heatmap tfoot th { height: 30px; vertical-align: bottom; }
+  .heatmap-value { position: relative; display: flex; align-items: center; justify-content: center; aspect-ratio: 1; min-height: 56px; background-color: var(--cell-fill); color: var(--cell-text); font-variant-numeric: tabular-nums; transition: transform .2s ease, box-shadow .2s ease; }
+  .latency-heatmap tr:has(.is-inspected) th,
+  .latency-heatmap:has(td:nth-child(2).is-inspected) tfoot th:nth-child(2),
+  .latency-heatmap:has(td:nth-child(3).is-inspected) tfoot th:nth-child(3),
+  .latency-heatmap:has(td:nth-child(4).is-inspected) tfoot th:nth-child(4),
+  .latency-heatmap:has(td:nth-child(5).is-inspected) tfoot th:nth-child(5),
+  .latency-heatmap:has(td:nth-child(6).is-inspected) tfoot th:nth-child(6) { color: var(--ink); font-weight: 700; }
+  @container (max-width: 652px) {
+    .heatmap-panels { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  }
+</style>

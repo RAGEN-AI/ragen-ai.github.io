@@ -1,0 +1,139 @@
+---
+const approaches = [
+  {
+    key: 'execution',
+    title: 'Reduce latency',
+    description: 'Two inference-duration bars share one start: the shorter blue bar finishes earlier than the gray bar, with a left-pointing arrow showing the saved time. Action execution shows two equal eight-action chunks on two rows of a shared time axis. The lower chunk starts four steps later. During its two-step inference delay, the upper chunk continues executing the rose prefix. The lower hatched cells retain that prefix. A downward arrow marks the switch to the new actions when inference finishes; the unused upper tail is hollow.',
+    caption: 'Accelerate inference. Predict new actions while executing the current ones.',
+  },
+  {
+    key: 'training',
+    title: 'Train with latency (ours)',
+    description: 'The same aligned inference-duration bars and two asynchronous action chunks are preserved. Their filled regions and the saved-time and handoff arrows use 40 percent opacity. Node borders, module connections and labels remain fully opaque. The upper chunk supplies committed actions while the lower chunk is computed, then execution switches to the lower row. The purple deployment profile supplies delays during simulated training, not an input to Policy.',
+    caption: 'Reproduce deployment latency in simulation. Train agents to act under these delays.',
+  },
+];
+---
+<figure id="latency-approaches" class="paper-figure approaches" aria-label="An execution system, with deployment latency training added to the same system">
+  <div class="approach-columns">
+    {approaches.map(approach => <section class={approach.key} aria-labelledby={approach.key + '-title'}>
+      <h3 id={approach.key + '-title'}>{approach.title}</h3>
+      <div class="loop-diagram" role="img" aria-label={approach.description}>
+        <svg class="loop-arrows" viewBox="0 0 100 440" preserveAspectRatio="none" aria-hidden="true">
+          <g class="common-arrows">
+            <path class="environment-policy" d="M21 280V180m-1.5 7 1.5-7 1.5 7" />
+            <path class="policy-action" d="M42 94H70V218m-1.5-7 1.5 7 1.5-7" />
+            <path d="M50 312H42m1.5-6-1.5 6 1.5 6" />
+          </g>
+        </svg>
+
+        <div class="policy-node node">
+          <span class="node-title">Policy</span>
+          <svg class="inference-comparison" viewBox="0 0 160 76" preserveAspectRatio="none" aria-hidden="true">
+            <path class="inference-start" d="M12 5V63" />
+            <rect class="original-inference mechanism-fill" x="18" y="8" width="132" height="14" rx="3" />
+            <rect class="accelerated-inference mechanism-fill" x="18" y="46" width="66" height="14" rx="3" />
+            <path class="finish-guides" d="M150 24V42M84 34V44" />
+            <path class="saved-time" d="M150 34H84m7-5-7 5 7 5" />
+            <path class="duration-direction" d="M12 71H150m-5-4 5 4-5 4" />
+          </svg>
+          <span class="inference-label">Faster inference</span>
+        </div>
+        <div class="environment-node node"><span class="node-title">Environment</span></div>
+        <div class="action-node node">
+          <span class="node-title">Action execution</span>
+          <!-- H=8, s=4, d=2: the lower prefix is retained input, not executed twice. -->
+          <svg class="chunk-timeline" viewBox="0 0 240 116" preserveAspectRatio="none" aria-hidden="true">
+            <defs><pattern id={'retained-prefix-' + approach.key} width="6" height="6" patternUnits="userSpaceOnUse">
+              <path class="prefix-hatch" d="M-1 1L1-1M0 6L6 0M5 7L7 5" />
+            </pattern></defs>
+            <g class="previous-chunk">
+              {Array.from({ length: 8 }, (_, i) => <rect
+                class:list={['action-cell', 'mechanism-fill', i < 4 ? 'past-action' : i < 6 ? 'committed-prefix' : 'unused-tail']}
+                x={12 + i * 18} y="12" width="18" height="24"
+              />)}
+            </g>
+            <g class="new-chunk">
+              {Array.from({ length: 8 }, (_, i) => <rect
+                class:list={['action-cell', 'mechanism-fill', i < 2 ? 'retained-prefix' : 'new-action']}
+                x={84 + i * 18} y="66" width="18" height="24"
+                fill={i < 2 ? 'url(#retained-prefix-' + approach.key + ')' : undefined}
+              />)}
+            </g>
+            <path class="prefix-alignment" d="M84 38V64" />
+            <path class="handoff" d="M120 38V62m-5-6 5 6 5-6" />
+            <path class="time-direction" d="M12 110H228m-6-4 6 4-6 4" />
+          </svg>
+        </div>
+
+        {approach.key === 'training' && <div class="latency-profile">
+          <span>Deployment<br />latency profile</span>
+          <svg class="profile-bars" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 39H120" />
+            <rect x="3" y="23" width="9" height="16" /><rect x="21" y="14" width="9" height="25" /><rect x="39" y="22" width="9" height="17" /><rect x="57" y="3" width="9" height="36" /><rect x="75" y="6" width="9" height="33" /><rect x="93" y="20" width="9" height="19" /><rect x="111" y="25" width="9" height="14" />
+          </svg>
+          <svg class="profile-connector" aria-hidden="true">
+            <line class="profile-line" x1="8" y1="0" x2="8" y2="100%" />
+            <svg y="100%" width="16" height="8" overflow="visible"><path d="M3 -7 8 0 13 -7" /></svg>
+          </svg>
+        </div>}
+        <span class="world-note">The world keeps moving.</span>
+      </div>
+      <p class="approach-caption">{approach.caption}</p>
+    </section>)}
+  </div>
+</figure>
+
+<style>
+  .approaches { margin: 32px 0 36px; }
+  .approach-columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .approach-columns section { min-width: 0; container-type: inline-size; --mechanism-opacity: 1; }
+  .approach-columns .training { --mechanism-opacity: .4; padding-top: 28px; border-top: 1px solid var(--rule); }
+  h3 { font-size: 22px; line-height: 1.3; }
+  .training h3 { color: var(--purple); }
+  .loop-diagram { --profile-top: 20px; position: relative; max-width: 480px; margin: 26px auto 0; height: 440px; font-size: 16px; line-height: 1.4; }
+  .node { position: absolute; background: white; text-align: center; }
+  .node::before { content: ''; position: absolute; inset: 0; border: 2px solid var(--blue); border-radius: 6px; pointer-events: none; }
+  .node-title { display: block; font-size: 18px; font-weight: 650; line-height: 1.25; }
+  .policy-node { top: 8px; left: 0; width: 42%; height: 172px; padding: 12px; display: flex; flex-direction: column; justify-content: flex-start; gap: 8px; }
+  .inference-comparison { display: block; width: 100%; height: 64px; flex-shrink: 0; }
+  .original-inference { fill: var(--gray); }
+  .accelerated-inference { fill: var(--blue); }
+  .inference-comparison path { fill: none; stroke: var(--gray); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .inference-comparison .saved-time { stroke: var(--blue); }
+  .finish-guides { stroke-dasharray: 2 3; }
+  .environment-node { display: grid; place-items: center; top: 280px; left: 0; width: 42%; height: 64px; }
+  .environment-node::before { border-color: var(--gray); }
+  .action-node { top: 218px; right: 0; width: 50%; height: 178px; padding: 10px; }
+  .chunk-timeline { display: block; width: 100%; height: 96px; margin-top: 12px; }
+  .chunk-timeline path { fill: none; stroke: var(--gray); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .chunk-timeline .handoff { stroke: var(--blue); stroke-width: 1.5; }
+  .prefix-alignment { stroke-dasharray: 2 3; }
+  .chunk-timeline .prefix-hatch { stroke: var(--rose); stroke-width: 1.5; }
+  .action-cell { stroke: var(--gray); stroke-width: .7; vector-effect: non-scaling-stroke; }
+  .past-action { fill: color-mix(in srgb, var(--gray) 12%, white); }
+  .committed-prefix { fill: var(--rose); }
+  .unused-tail { fill: none; }
+  .new-action { fill: var(--blue); }
+  .mechanism-fill { fill-opacity: var(--mechanism-opacity); }
+  .saved-time, .handoff { stroke-opacity: var(--mechanism-opacity); }
+  .loop-arrows { position: absolute; inset: 0; width: 100%; height: 440px; }
+  .loop-arrows path { fill: none; stroke: var(--gray); stroke-width: 1.8; vector-effect: non-scaling-stroke; }
+  .profile-line { stroke-dasharray: 4 4; }
+  .latency-profile { position: absolute; top: var(--profile-top); left: min(calc(85% - 70px), calc(100% - 140px)); width: 140px; text-align: center; color: var(--purple); }
+  .latency-profile > span { display: block; font-size: 18px; font-weight: 600; line-height: 1.25; }
+  .profile-bars { display: block; width: 126px; height: 45px; margin: 12px auto 0; fill: var(--purple); }
+  .profile-bars path { stroke: var(--purple); }
+  .profile-connector { position: absolute; top: 115px; left: calc(50% - 8px); width: 16px; height: calc(103px - var(--profile-top)); overflow: visible; }
+  .profile-connector path, .profile-connector line { fill: none; stroke: var(--purple); stroke-width: 1.8; }
+  .world-note { position: absolute; top: 414px; left: 0; color: var(--muted); }
+  .approach-caption { font-size: 18px; line-height: 1.55; margin: 18px 0 0; }
+  @container (max-width: 475px) {
+    .loop-diagram { --profile-top: -20px; margin-top: 66px; }
+  }
+  @media (min-width: 900px) {
+    .approach-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
+    .execution { padding-right: 31px; }
+    .approach-columns .training { border-top: 0; border-left: 1px solid var(--rule); padding: 0 0 0 30px; }
+  }
+</style>
