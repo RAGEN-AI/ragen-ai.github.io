@@ -176,6 +176,87 @@
     "clipFrames": 150
   },
   {
+    "id": "mikasa",
+    "title": "Intercept Grab (Fast)",
+    "envFps": 20,
+    "defaultLatency": 2,
+    "poster": "demos/mikasa/poster.webp",
+    "controls": [],
+    "requests": [],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/mikasa/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/mikasa/delay-1.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/mikasa/delay-2.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      },
+      {
+        "latencyRawFrames": 3,
+        "video": "demos/mikasa/delay-3.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/mikasa/delay-4.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      },
+      {
+        "latencyRawFrames": 6,
+        "video": "demos/mikasa/delay-6.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/mikasa/delay-8.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/mikasa-intercept-grab-fast/small-policy/ppo-v1",
+      "checkpoint": "checkpoint.pt",
+      "seed": 4242424243,
+      "clipStartFrame": 0,
+      "clipEndFrame": 60
+    },
+    "actionKind": "mikasa",
+    "actionLabel": "Move \u00b7 Rotate \u00b7 Grip",
+    "actionFile": "actions/mikasa.json",
+    "clipFrames": 60
+  },
+  {
     "id": "demon_attack",
     "title": "Demon Attack",
     "envFps": 60,
@@ -730,6 +811,79 @@
     "clipFrames": 720
   },
   {
+    "id": "ant",
+    "title": "Ant",
+    "envFps": 20,
+    "defaultLatency": 4,
+    "poster": "demos/ant/poster.webp",
+    "controls": [],
+    "requests": [],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/ant/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/ant/delay-1.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/ant/delay-2.mp4",
+        "failureFrames": [
+          null,
+          69
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/ant/delay-4.mp4",
+        "failureFrames": [
+          null,
+          215
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/ant/delay-8.mp4",
+        "failureFrames": [
+          null,
+          219
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/ant/delay-16.mp4",
+        "failureFrames": [
+          null,
+          220
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/ant/small-policy/sample-factory-v1",
+      "checkpoint": "checkpoint.pth",
+      "seed": 43,
+      "clipStartFrame": 40,
+      "clipEndFrame": 280
+    },
+    "actionKind": "ant",
+    "actionLabel": "Joint torque \u00b7 \u2212 / +",
+    "actionFile": "actions/ant.json",
+    "clipFrames": 240
+  },
+  {
     "id": "deadly_corridor",
     "title": "Deadly Corridor",
     "envFps": 35.0,
@@ -1030,6 +1184,79 @@
     "actionLabel": "",
     "actionFile": null,
     "clipFrames": 188
+  },
+  {
+    "id": "hopper",
+    "title": "Hopper",
+    "envFps": 125.0,
+    "defaultLatency": 4,
+    "poster": "demos/hopper/poster.webp",
+    "controls": [],
+    "requests": [],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/hopper/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/hopper/delay-1.mp4",
+        "failureFrames": [
+          null,
+          136
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/hopper/delay-2.mp4",
+        "failureFrames": [
+          null,
+          110
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/hopper/delay-4.mp4",
+        "failureFrames": [
+          null,
+          89
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/hopper/delay-8.mp4",
+        "failureFrames": [
+          null,
+          87
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/hopper/delay-16.mp4",
+        "failureFrames": [
+          null,
+          95
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/hopper/small-policy/sample-factory-v1",
+      "checkpoint": "checkpoint.pth",
+      "seed": 42,
+      "clipStartFrame": 0,
+      "clipEndFrame": 1000
+    },
+    "actionKind": "hopper",
+    "actionLabel": "Joint torque \u00b7 \u2212 / +",
+    "actionFile": "actions/hopper.json",
+    "clipFrames": 1000
   },
   {
     "id": "air-raid",
@@ -1879,889 +2106,6 @@
     "clipFrames": 600
   },
   {
-    "id": "asterix",
-    "title": "Asterix",
-    "envFps": 60.0,
-    "defaultLatency": 12,
-    "poster": "demos/asterix/poster.webp",
-    "controls": [
-      {
-        "id": "up",
-        "label": "\u2191"
-      },
-      {
-        "id": "left",
-        "label": "\u2190"
-      },
-      {
-        "id": "down",
-        "label": "\u2193"
-      },
-      {
-        "id": "right",
-        "label": "\u2192"
-      }
-    ],
-    "requests": [
-      {
-        "tick": 0,
-        "keys": [
-          "down",
-          "right"
-        ]
-      },
-      {
-        "tick": 28,
-        "keys": [
-          "down",
-          "left"
-        ]
-      },
-      {
-        "tick": 36,
-        "keys": [
-          "up",
-          "left"
-        ]
-      },
-      {
-        "tick": 56,
-        "keys": [
-          "up"
-        ]
-      },
-      {
-        "tick": 60,
-        "keys": [
-          "up",
-          "right"
-        ]
-      },
-      {
-        "tick": 64,
-        "keys": [
-          "down",
-          "right"
-        ]
-      },
-      {
-        "tick": 68,
-        "keys": [
-          "down"
-        ]
-      },
-      {
-        "tick": 80,
-        "keys": [
-          "down",
-          "right"
-        ]
-      },
-      {
-        "tick": 88,
-        "keys": [
-          "up",
-          "right"
-        ]
-      },
-      {
-        "tick": 112,
-        "keys": [
-          "left"
-        ]
-      },
-      {
-        "tick": 116,
-        "keys": [
-          "up"
-        ]
-      },
-      {
-        "tick": 384,
-        "keys": [
-          "down",
-          "right"
-        ]
-      },
-      {
-        "tick": 404,
-        "keys": [
-          "down",
-          "left"
-        ]
-      },
-      {
-        "tick": 432,
-        "keys": [
-          "up",
-          "left"
-        ]
-      },
-      {
-        "tick": 440,
-        "keys": [
-          "up",
-          "right"
-        ]
-      },
-      {
-        "tick": 452,
-        "keys": [
-          "up",
-          "left"
-        ]
-      },
-      {
-        "tick": 456,
-        "keys": [
-          "up",
-          "right"
-        ]
-      },
-      {
-        "tick": 460,
-        "keys": [
-          "down",
-          "right"
-        ]
-      },
-      {
-        "tick": 464,
-        "keys": [
-          "up",
-          "right"
-        ]
-      },
-      {
-        "tick": 484,
-        "keys": [
-          "left"
-        ]
-      },
-      {
-        "tick": 488,
-        "keys": [
-          "up"
-        ]
-      }
-    ],
-    "variants": [
-      {
-        "latencyRawFrames": 0,
-        "video": "demos/asterix/delay-0.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 4,
-        "video": "demos/asterix/delay-4.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 8,
-        "video": "demos/asterix/delay-8.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 12,
-        "video": "demos/asterix/delay-12.mp4",
-        "failureFrames": [
-          null,
-          365
-        ]
-      },
-      {
-        "latencyRawFrames": 16,
-        "video": "demos/asterix/delay-16.mp4",
-        "failureFrames": [
-          null,
-          365
-        ]
-      },
-      {
-        "latencyRawFrames": 24,
-        "video": "demos/asterix/delay-24.mp4",
-        "failureFrames": [
-          null,
-          365
-        ]
-      }
-    ],
-    "source": {
-      "kind": "zero-latency-teacher-actions",
-      "repository": "MLL-Lab/LAGEN-models",
-      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
-      "bundle": "zero-latency/asterix/small-policy/sample-factory-v1",
-      "checkpoint": "best_000029312_15007744_reward_5879.000.pth",
-      "seed": 42,
-      "clipStartFrame": 0,
-      "clipEndFrame": 720
-    },
-    "actionKind": "keys",
-    "actionLabel": "",
-    "actionFile": null,
-    "clipFrames": 720
-  },
-  {
-    "id": "atlantis",
-    "title": "Atlantis",
-    "envFps": 60,
-    "defaultLatency": 16,
-    "poster": "demos/atlantis/poster.webp",
-    "controls": [
-      {
-        "id": "left-fire",
-        "label": "\u2196"
-      },
-      {
-        "id": "fire",
-        "label": "FIRE"
-      },
-      {
-        "id": "right-fire",
-        "label": "\u2197"
-      }
-    ],
-    "requests": [
-      {
-        "tick": -24,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 0,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 6,
-        "keys": []
-      },
-      {
-        "tick": 18,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 34,
-        "keys": []
-      },
-      {
-        "tick": 42,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 46,
-        "keys": []
-      },
-      {
-        "tick": 50,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 70,
-        "keys": []
-      },
-      {
-        "tick": 74,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 78,
-        "keys": []
-      },
-      {
-        "tick": 98,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 102,
-        "keys": []
-      },
-      {
-        "tick": 106,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 110,
-        "keys": []
-      },
-      {
-        "tick": 118,
-        "keys": [
-          "fire"
-        ]
-      },
-      {
-        "tick": 122,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 134,
-        "keys": []
-      },
-      {
-        "tick": 150,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 154,
-        "keys": []
-      },
-      {
-        "tick": 162,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 166,
-        "keys": []
-      },
-      {
-        "tick": 170,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 178,
-        "keys": []
-      },
-      {
-        "tick": 186,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 194,
-        "keys": []
-      },
-      {
-        "tick": 202,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 206,
-        "keys": []
-      },
-      {
-        "tick": 210,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 222,
-        "keys": []
-      },
-      {
-        "tick": 226,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 234,
-        "keys": []
-      },
-      {
-        "tick": 250,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 254,
-        "keys": []
-      },
-      {
-        "tick": 258,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 262,
-        "keys": []
-      },
-      {
-        "tick": 266,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 270,
-        "keys": []
-      },
-      {
-        "tick": 274,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 286,
-        "keys": []
-      },
-      {
-        "tick": 290,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 298,
-        "keys": []
-      },
-      {
-        "tick": 314,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 318,
-        "keys": []
-      },
-      {
-        "tick": 322,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 334,
-        "keys": []
-      },
-      {
-        "tick": 338,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 358,
-        "keys": []
-      },
-      {
-        "tick": 382,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 398,
-        "keys": []
-      },
-      {
-        "tick": 410,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 418,
-        "keys": []
-      },
-      {
-        "tick": 434,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 450,
-        "keys": []
-      },
-      {
-        "tick": 474,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 486,
-        "keys": []
-      },
-      {
-        "tick": 498,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 526,
-        "keys": [
-          "left-fire"
-        ]
-      },
-      {
-        "tick": 530,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 534,
-        "keys": []
-      },
-      {
-        "tick": 538,
-        "keys": [
-          "left-fire"
-        ]
-      },
-      {
-        "tick": 542,
-        "keys": []
-      },
-      {
-        "tick": 550,
-        "keys": [
-          "fire"
-        ]
-      },
-      {
-        "tick": 554,
-        "keys": []
-      },
-      {
-        "tick": 570,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 574,
-        "keys": [
-          "fire"
-        ]
-      },
-      {
-        "tick": 582,
-        "keys": []
-      },
-      {
-        "tick": 598,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 602,
-        "keys": []
-      },
-      {
-        "tick": 606,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 610,
-        "keys": [
-          "left-fire"
-        ]
-      },
-      {
-        "tick": 614,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 618,
-        "keys": []
-      },
-      {
-        "tick": 666,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 674,
-        "keys": []
-      },
-      {
-        "tick": 682,
-        "keys": [
-          "left-fire"
-        ]
-      },
-      {
-        "tick": 686,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 690,
-        "keys": []
-      },
-      {
-        "tick": 698,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 702,
-        "keys": []
-      },
-      {
-        "tick": 710,
-        "keys": [
-          "right-fire"
-        ]
-      },
-      {
-        "tick": 718,
-        "keys": []
-      }
-    ],
-    "variants": [
-      {
-        "latencyRawFrames": 0,
-        "video": "demos/atlantis/delay-0.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 4,
-        "video": "demos/atlantis/delay-4.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 8,
-        "video": "demos/atlantis/delay-8.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 12,
-        "video": "demos/atlantis/delay-12.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 16,
-        "video": "demos/atlantis/delay-16.mp4",
-        "failureFrames": [
-          null,
-          597
-        ]
-      },
-      {
-        "latencyRawFrames": 24,
-        "video": "demos/atlantis/delay-24.mp4",
-        "failureFrames": [
-          null,
-          709
-        ]
-      }
-    ],
-    "source": {
-      "kind": "zero-latency-teacher-actions",
-      "repository": "MLL-Lab/LAGEN-models",
-      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
-      "bundle": "zero-latency/atlantis/small-policy/sample-factory-v1",
-      "checkpoint": "best_000013824_7077888_reward_547238.000.pth",
-      "seed": 42,
-      "clipStartFrame": 570,
-      "clipEndFrame": 1290
-    },
-    "actionKind": "keys",
-    "actionLabel": "",
-    "actionFile": null,
-    "clipFrames": 720
-  },
-  {
-    "id": "ant",
-    "title": "Ant",
-    "envFps": 20,
-    "defaultLatency": 4,
-    "poster": "demos/ant/poster.webp",
-    "controls": [],
-    "requests": [],
-    "variants": [
-      {
-        "latencyRawFrames": 0,
-        "video": "demos/ant/delay-0.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 1,
-        "video": "demos/ant/delay-1.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 2,
-        "video": "demos/ant/delay-2.mp4",
-        "failureFrames": [
-          null,
-          69
-        ]
-      },
-      {
-        "latencyRawFrames": 4,
-        "video": "demos/ant/delay-4.mp4",
-        "failureFrames": [
-          null,
-          215
-        ]
-      },
-      {
-        "latencyRawFrames": 8,
-        "video": "demos/ant/delay-8.mp4",
-        "failureFrames": [
-          null,
-          219
-        ]
-      },
-      {
-        "latencyRawFrames": 16,
-        "video": "demos/ant/delay-16.mp4",
-        "failureFrames": [
-          null,
-          220
-        ]
-      }
-    ],
-    "source": {
-      "kind": "zero-latency-teacher-actions",
-      "repository": "MLL-Lab/LAGEN-models",
-      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
-      "bundle": "zero-latency/ant/small-policy/sample-factory-v1",
-      "checkpoint": "checkpoint.pth",
-      "seed": 43,
-      "clipStartFrame": 40,
-      "clipEndFrame": 280
-    },
-    "actionKind": "ant",
-    "actionLabel": "Joint torque \u00b7 \u2212 / +",
-    "actionFile": "actions/ant.json",
-    "clipFrames": 240
-  },
-  {
-    "id": "hopper",
-    "title": "Hopper",
-    "envFps": 125.0,
-    "defaultLatency": 4,
-    "poster": "demos/hopper/poster.webp",
-    "controls": [],
-    "requests": [],
-    "variants": [
-      {
-        "latencyRawFrames": 0,
-        "video": "demos/hopper/delay-0.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 1,
-        "video": "demos/hopper/delay-1.mp4",
-        "failureFrames": [
-          null,
-          136
-        ]
-      },
-      {
-        "latencyRawFrames": 2,
-        "video": "demos/hopper/delay-2.mp4",
-        "failureFrames": [
-          null,
-          110
-        ]
-      },
-      {
-        "latencyRawFrames": 4,
-        "video": "demos/hopper/delay-4.mp4",
-        "failureFrames": [
-          null,
-          89
-        ]
-      },
-      {
-        "latencyRawFrames": 8,
-        "video": "demos/hopper/delay-8.mp4",
-        "failureFrames": [
-          null,
-          87
-        ]
-      },
-      {
-        "latencyRawFrames": 16,
-        "video": "demos/hopper/delay-16.mp4",
-        "failureFrames": [
-          null,
-          95
-        ]
-      }
-    ],
-    "source": {
-      "kind": "zero-latency-teacher-actions",
-      "repository": "MLL-Lab/LAGEN-models",
-      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
-      "bundle": "zero-latency/hopper/small-policy/sample-factory-v1",
-      "checkpoint": "checkpoint.pth",
-      "seed": 42,
-      "clipStartFrame": 0,
-      "clipEndFrame": 1000
-    },
-    "actionKind": "hopper",
-    "actionLabel": "Joint torque \u00b7 \u2212 / +",
-    "actionFile": "actions/hopper.json",
-    "clipFrames": 1000
-  },
-  {
     "id": "inverted-pendulum",
     "title": "Inverted Pendulum",
     "envFps": 25.0,
@@ -3409,6 +2753,238 @@
     "clipFrames": 300
   },
   {
+    "id": "asterix",
+    "title": "Asterix",
+    "envFps": 60.0,
+    "defaultLatency": 12,
+    "poster": "demos/asterix/poster.webp",
+    "controls": [
+      {
+        "id": "up",
+        "label": "\u2191"
+      },
+      {
+        "id": "left",
+        "label": "\u2190"
+      },
+      {
+        "id": "down",
+        "label": "\u2193"
+      },
+      {
+        "id": "right",
+        "label": "\u2192"
+      }
+    ],
+    "requests": [
+      {
+        "tick": 0,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 28,
+        "keys": [
+          "down",
+          "left"
+        ]
+      },
+      {
+        "tick": 36,
+        "keys": [
+          "up",
+          "left"
+        ]
+      },
+      {
+        "tick": 56,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "tick": 60,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 64,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 68,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "tick": 80,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 88,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 112,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 116,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "tick": 384,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 404,
+        "keys": [
+          "down",
+          "left"
+        ]
+      },
+      {
+        "tick": 432,
+        "keys": [
+          "up",
+          "left"
+        ]
+      },
+      {
+        "tick": 440,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 452,
+        "keys": [
+          "up",
+          "left"
+        ]
+      },
+      {
+        "tick": 456,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 460,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 464,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 484,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 488,
+        "keys": [
+          "up"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/asterix/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/asterix/delay-4.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/asterix/delay-8.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 12,
+        "video": "demos/asterix/delay-12.mp4",
+        "failureFrames": [
+          null,
+          365
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/asterix/delay-16.mp4",
+        "failureFrames": [
+          null,
+          365
+        ]
+      },
+      {
+        "latencyRawFrames": 24,
+        "video": "demos/asterix/delay-24.mp4",
+        "failureFrames": [
+          null,
+          365
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/asterix/small-policy/sample-factory-v1",
+      "checkpoint": "best_000029312_15007744_reward_5879.000.pth",
+      "seed": 42,
+      "clipStartFrame": 0,
+      "clipEndFrame": 720
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 720
+  },
+  {
     "id": "walker2d",
     "title": "Walker2D",
     "envFps": 125.0,
@@ -3482,6 +3058,511 @@
     "clipFrames": 982
   },
   {
+    "id": "atlantis",
+    "title": "Atlantis",
+    "envFps": 60,
+    "defaultLatency": 16,
+    "poster": "demos/atlantis/poster.webp",
+    "controls": [
+      {
+        "id": "left-fire",
+        "label": "\u2196"
+      },
+      {
+        "id": "fire",
+        "label": "FIRE"
+      },
+      {
+        "id": "right-fire",
+        "label": "\u2197"
+      }
+    ],
+    "requests": [
+      {
+        "tick": -24,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 0,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 6,
+        "keys": []
+      },
+      {
+        "tick": 18,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 34,
+        "keys": []
+      },
+      {
+        "tick": 42,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 46,
+        "keys": []
+      },
+      {
+        "tick": 50,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 70,
+        "keys": []
+      },
+      {
+        "tick": 74,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 78,
+        "keys": []
+      },
+      {
+        "tick": 98,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 102,
+        "keys": []
+      },
+      {
+        "tick": 106,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 110,
+        "keys": []
+      },
+      {
+        "tick": 118,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 122,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 134,
+        "keys": []
+      },
+      {
+        "tick": 150,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 154,
+        "keys": []
+      },
+      {
+        "tick": 162,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 166,
+        "keys": []
+      },
+      {
+        "tick": 170,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 178,
+        "keys": []
+      },
+      {
+        "tick": 186,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 194,
+        "keys": []
+      },
+      {
+        "tick": 202,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 206,
+        "keys": []
+      },
+      {
+        "tick": 210,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 222,
+        "keys": []
+      },
+      {
+        "tick": 226,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 234,
+        "keys": []
+      },
+      {
+        "tick": 250,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 254,
+        "keys": []
+      },
+      {
+        "tick": 258,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 262,
+        "keys": []
+      },
+      {
+        "tick": 266,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 270,
+        "keys": []
+      },
+      {
+        "tick": 274,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 286,
+        "keys": []
+      },
+      {
+        "tick": 290,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 298,
+        "keys": []
+      },
+      {
+        "tick": 314,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 318,
+        "keys": []
+      },
+      {
+        "tick": 322,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 334,
+        "keys": []
+      },
+      {
+        "tick": 338,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 358,
+        "keys": []
+      },
+      {
+        "tick": 382,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 398,
+        "keys": []
+      },
+      {
+        "tick": 410,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 418,
+        "keys": []
+      },
+      {
+        "tick": 434,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 450,
+        "keys": []
+      },
+      {
+        "tick": 474,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 486,
+        "keys": []
+      },
+      {
+        "tick": 498,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 526,
+        "keys": [
+          "left-fire"
+        ]
+      },
+      {
+        "tick": 530,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 534,
+        "keys": []
+      },
+      {
+        "tick": 538,
+        "keys": [
+          "left-fire"
+        ]
+      },
+      {
+        "tick": 542,
+        "keys": []
+      },
+      {
+        "tick": 550,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 554,
+        "keys": []
+      },
+      {
+        "tick": 570,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 574,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 582,
+        "keys": []
+      },
+      {
+        "tick": 598,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 602,
+        "keys": []
+      },
+      {
+        "tick": 606,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 610,
+        "keys": [
+          "left-fire"
+        ]
+      },
+      {
+        "tick": 614,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 618,
+        "keys": []
+      },
+      {
+        "tick": 666,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 674,
+        "keys": []
+      },
+      {
+        "tick": 682,
+        "keys": [
+          "left-fire"
+        ]
+      },
+      {
+        "tick": 686,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 690,
+        "keys": []
+      },
+      {
+        "tick": 698,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 702,
+        "keys": []
+      },
+      {
+        "tick": 710,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 718,
+        "keys": []
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/atlantis/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/atlantis/delay-4.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/atlantis/delay-8.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 12,
+        "video": "demos/atlantis/delay-12.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/atlantis/delay-16.mp4",
+        "failureFrames": [
+          null,
+          597
+        ]
+      },
+      {
+        "latencyRawFrames": 24,
+        "video": "demos/atlantis/delay-24.mp4",
+        "failureFrames": [
+          null,
+          709
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/atlantis/small-policy/sample-factory-v1",
+      "checkpoint": "best_000013824_7077888_reward_547238.000.pth",
+      "seed": 42,
+      "clipStartFrame": 570,
+      "clipEndFrame": 1290
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 720
+  },
+  {
     "id": "balance",
     "title": "Balance",
     "envFps": 50.0,
@@ -3553,86 +3634,5 @@
     "actionLabel": "Target updates",
     "actionFile": "actions/balance.json",
     "clipFrames": 600
-  },
-  {
-    "id": "mikasa",
-    "title": "Intercept Grab (Fast)",
-    "envFps": 20,
-    "defaultLatency": 2,
-    "poster": "demos/mikasa/poster.webp",
-    "controls": [],
-    "requests": [],
-    "variants": [
-      {
-        "latencyRawFrames": 0,
-        "video": "demos/mikasa/delay-0.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 1,
-        "video": "demos/mikasa/delay-1.mp4",
-        "failureFrames": [
-          null,
-          null
-        ]
-      },
-      {
-        "latencyRawFrames": 2,
-        "video": "demos/mikasa/delay-2.mp4",
-        "failureFrames": [
-          null,
-          59
-        ]
-      },
-      {
-        "latencyRawFrames": 3,
-        "video": "demos/mikasa/delay-3.mp4",
-        "failureFrames": [
-          null,
-          59
-        ]
-      },
-      {
-        "latencyRawFrames": 4,
-        "video": "demos/mikasa/delay-4.mp4",
-        "failureFrames": [
-          null,
-          59
-        ]
-      },
-      {
-        "latencyRawFrames": 6,
-        "video": "demos/mikasa/delay-6.mp4",
-        "failureFrames": [
-          null,
-          59
-        ]
-      },
-      {
-        "latencyRawFrames": 8,
-        "video": "demos/mikasa/delay-8.mp4",
-        "failureFrames": [
-          null,
-          59
-        ]
-      }
-    ],
-    "source": {
-      "kind": "zero-latency-teacher-actions",
-      "repository": "MLL-Lab/LAGEN-models",
-      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
-      "bundle": "zero-latency/mikasa-intercept-grab-fast/small-policy/ppo-v1",
-      "checkpoint": "checkpoint.pt",
-      "seed": 4242424243,
-      "clipStartFrame": 0,
-      "clipEndFrame": 60
-    },
-    "actionKind": "mikasa",
-    "actionLabel": "Move \u00b7 Rotate \u00b7 Grip",
-    "actionFile": "actions/mikasa.json",
-    "clipFrames": 60
   }
 ]
