@@ -1,0 +1,84 @@
+---
+import results from '../data/results.json';
+import palette from '../data/paper-palette.json';
+import FigureReadout from './FigureReadout.astro';
+const colors = [palette.gray, palette.blue, palette.rose];
+const models = ['OpenVLA', 'π₀.₅', 'GR00T'];
+const tasks = [...new Set(results.map(row => row.task))];
+const ymax = Math.ceil(Math.max(100, ...results.map(row => 100 * row.after / row.zero)) / 25) * 25 + 15;
+const ticks = Array.from({ length: Math.ceil(ymax / 25) }, (_, i) => i * 25);
+const layouts = [
+  { key: 'wide', tasks, width: 1100, height: 430, plotHeight: 240, wide: true },
+  ...Array.from({ length: 6 }, (_, i) => ({ key: 'pair-' + i, tasks: tasks.slice(i * 2, i * 2 + 2), width: 280, height: 370, plotHeight: 205, wide: false })),
+];
+---
+<figure id="recovery-figure" class="paper-figure" data-interactive-figure aria-label="Before and after profile training, Appendix L Figure 20">
+  <div class="if-legend">{models.map((model, i) => <span><svg viewBox="0 0 22 16" aria-hidden="true"><rect width="22" height="16" fill={colors[i]} /></svg>{model}</span>)}</div>
+  <div class="if-legend recovery-conditions">
+    <span><svg viewBox="0 0 22 16" aria-hidden="true"><rect width="22" height="16" fill={palette.gray} opacity=".3" /><path d="M-4 16L12 0M6 16L22 0M16 16L32 0" stroke={palette.gray} stroke-dasharray="1.5 1.5" /></svg>Before training</span>
+    <span><svg viewBox="0 0 22 16" aria-hidden="true"><rect width="22" height="16" fill={palette.gray} /></svg>After training</span>
+    <span><svg class="line-swatch" viewBox="0 0 32 16" aria-hidden="true"><path d="M0 8H32" stroke={palette.gray} stroke-dasharray="5 4" stroke-width="1.5" /></svg>Zero latency (100%)</span>
+  </div>
+  <div class="recovery-plots">
+    {layouts.map(layout => {
+      const left = 74;
+      const top = layout.wide ? 42 : 15;
+      const plotWidth = layout.width - left - 12;
+      const positions = layout.tasks.map((task, i) => i + (layout.wide && i >= 6 ? .35 : 0));
+      const xmin = -.65;
+      const xmax = positions.at(-1)! + .6;
+      const x = (value: number) => left + (value - xmin) / (xmax - xmin) * plotWidth;
+      const y = (value: number) => top + layout.plotHeight - value / ymax * layout.plotHeight;
+      const barWidth = .28 / (xmax - xmin) * plotWidth;
+      return <div class:list={['recovery-panel', { 'recovery-wide': layout.wide, 'recovery-small': !layout.wide }]}>
+        <svg class="if-chart" viewBox={`0 0 ${layout.width} ${layout.height}`} data-inspect-chart tabindex="0" role="group" aria-label={layout.wide ? 'Before and after training on all twelve tasks' : layout.tasks.join(' and ') + ' before and after training'} aria-describedby="recovery-figure-help">
+          <defs>{colors.map((color, i) => <pattern id={`recovery-hatch-${layout.key}-${i}`} width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill={color} opacity=".3" /><path d="M-2 2L2 -2M0 7L7 0M5 9L9 5" stroke={color} stroke-width="1" stroke-dasharray="1 1" /></pattern>)}</defs>
+          {layout.wide && <><text class="if-group-label" x={x(2.5)} y="24" text-anchor="middle">Game</text><text class="if-group-label" x={x(8.85)} y="24" text-anchor="middle">Embodied</text></>}
+          {ticks.map(tick => <g>
+            <path class="if-grid" d={`M${left},${y(tick)}h${plotWidth}`} />
+            <path class="if-axis" d={`M${left - 5},${y(tick)}h5`} />
+            <text x={left - 8} y={y(tick)} dominant-baseline="middle" text-anchor="end">{tick}%</text>
+          </g>)}
+          <path class="if-axis" d={`M${left},${top}v${layout.plotHeight}h${plotWidth}`} />
+          <text class="if-axis-label" transform={`translate(${layout.wide ? 18 : 9} ${top + layout.plotHeight / 2}) rotate(-90)`} text-anchor="middle">Relative performance (%)</text>
+          {layout.tasks.map((task, taskIndex) => <>
+            {results.filter(row => row.task === task).map((row, modelIndex) => {
+              const center = x(positions[taskIndex] + (modelIndex - 1) * .29);
+              const before = 100 * row.before / row.zero;
+              const after = 100 * row.after / row.zero;
+              return <g data-inspect-target data-x={center} data-y={y(after)} data-readout={'recovery-readout-' + results.indexOf(row)}>
+                <rect x={center - barWidth / 2} y={y(before)} width={barWidth} height={y(0) - y(before)} fill={`url(#recovery-hatch-${layout.key}-${modelIndex})`} />
+                <rect x={center - barWidth / 2} y={y(after)} width={barWidth} height={y(before) - y(after)} fill={colors[modelIndex]} />
+                <rect class="if-highlight" x={center - barWidth / 2 - 2} y={y(after) - 2} width={barWidth + 4} height={y(0) - y(after) + 4} fill="none" stroke={colors[modelIndex]} stroke-width="1.8" />
+              </g>;
+            })}
+            <text transform={`translate(${x(positions[taskIndex])} ${top + layout.plotHeight + 24}) rotate(-45)`} text-anchor="end">{task}</text>
+          </>)}
+          <path class="if-reference" d={`M${left},${y(100)}h${plotWidth}`} />
+          <rect data-inspect-hit x={left} y={top} width={plotWidth} height={layout.plotHeight} fill="transparent" />
+        </svg>
+      </div>;
+    })}
+  </div>
+  {results.map((row, i) => <template id={'recovery-readout-' + i}>
+    <p class="readout-title">{row.task} · {row.model}</p>
+    <dl>
+      <dt>Before training</dt><dd>{(100 * row.before / row.zero).toFixed(2)}%</dd>
+      <dt>After training</dt><dd>{(100 * row.after / row.zero).toFixed(2)}%</dd>
+    </dl>
+  </template>)}
+  <FigureReadout id="recovery-figure" />
+  <figcaption>RTX 3090 latency profiles · 12 tasks · 3 VLA architectures. The hatched region shows performance before latency training. The full bar shows performance after training. Both use the original policy’s zero-latency return as 100%.</figcaption>
+</figure>
+<style>
+  .recovery-conditions { margin-bottom: 22px; }
+  .recovery-small { display: none; }
+  @container (max-width: 1071px) {
+    .recovery-wide { display: none; }
+    .recovery-small { display: block; width: 100%; max-width: 380px; justify-self: center; }
+    .recovery-plots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  }
+  @container (max-width: 552px) {
+    .recovery-plots { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  }
+</style>

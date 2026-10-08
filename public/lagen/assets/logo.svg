@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="955" height="818" viewBox="0 0 955 818" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">LAGEN hourglass and circuits</title>
+  <!-- Three independent groups. See README.md for centered hourglass scaling. -->
+  <g id="circuits" fill="none" stroke="#5F5F5F" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="1">
+    <path d="M180 178 258 108H331"/>
+    <path d="M210 206 284 132H401L410 123"/>
+    <path d="M75 357H99V309L164 244H218L289 173H400L420 153"/>
+    <path d="M132 324 175 278H232L305 205H363"/>
+    <path d="M141 360 185 316H289L340 371"/>
+    <path d="M317 280 364 332"/>
+    <path d="M121 408H147L197 358H255L322 424H343V523"/>
+    <path d="M237 425 291 486H309L329 506V550"/>
+    <path d="M93 476H127V518H191L213 539"/>
+    <path d="M149 467H209L266 524"/>
+    <path d="M504 76V132L465 171V189"/>
+    <path d="M631 104H683L729 150V262L766 299H782"/>
+    <path d="M643 206 650 213V307L597 360"/>
+    <path d="M574 149H662L697 184V315L775 393V505L749 531"/>
+    <path d="M673 249V338L743 424V495H669L644 520"/>
+    <path d="M795 223 854 282V331L894 371V398"/>
+    <path d="M717 296 790 370H808"/>
+    <path d="M816 419H800V480"/>
+    <path d="M859 482H834L785 531"/>
+    <path d="M639 399 590 439"/>
+    <path d="M666 435H660L618 483V550"/>
+    <path d="M370 680 331 719"/>
+    <path d="M427 665V699L400 726"/>
+    <path d="M478 679V741"/>
+    <path d="M537 667V694L563 720H618M625 685V712"/>
+    <circle cx="168" cy="190" r="16"/>
+    <circle cx="347" cy="102" r="16"/>
+    <circle cx="421" cy="112" r="16"/>
+    <circle cx="59" cy="357" r="16"/>
+    <circle cx="306" cy="269" r="16"/>
+    <circle cx="351" cy="383" r="16"/>
+    <circle cx="105" cy="408" r="16"/>
+    <circle cx="225" cy="413" r="16"/>
+    <circle cx="77" cy="476" r="16"/>
+    <circle cx="224" cy="550" r="16"/>
+    <circle cx="504" cy="60" r="16"/>
+    <circle cx="615" cy="104" r="16"/>
+    <circle cx="632" cy="195" r="16"/>
+    <circle cx="558" cy="149" r="16"/>
+    <circle cx="784" cy="212" r="16"/>
+    <circle cx="798" cy="299" r="16"/>
+    <circle cx="824" cy="370" r="16"/>
+    <circle cx="894" cy="414" r="16"/>
+    <circle cx="832" cy="419" r="16"/>
+    <circle cx="875" cy="482" r="16"/>
+    <circle cx="586" cy="371" r="16"/>
+    <circle cx="650" cy="388" r="16"/>
+    <circle cx="682" cy="435" r="16"/>
+    <circle cx="319" cy="731" r="16"/>
+    <circle cx="478" cy="757" r="16"/>
+    <circle cx="633" cy="729" r="16"/>
+  </g>
+  <!-- Uniform scaling; the upward translation keeps the bottom clear of the wordmark. -->
+  <g id="hourglass" transform="translate(476 363.1) scale(1.1) translate(-476 -379)" color="#000000" fill="currentColor" opacity="1">
+    <g id="hourglass-frame" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round">
+      <path id="glass-sides" d="M391 251V287C391 308 407 321 433 346C451 363 455 375 438 392L397 432C387 442 382 451 382 465V506M561 251V287C561 308 545 321 519 346C501 363 497 375 514 392L555 432C565 442 570 451 570 465V506"/>
+      <path id="top-rail" d="M378 226H574V251H378Z"/>
+      <path id="bottom-rail" d="M372 506H580V532H372Z"/>
+    </g>
+    <path id="upper-sand" d="M415 297H537L488 348Q482 354 482 362V369Q482 376 476 376Q470 376 470 369V362Q470 354 464 348Z"/>
+    <path id="sand-grains" d="M482 389a6 6 0 1 1-12 0 6 6 0 1 1 12 0ZM482 408a6 6 0 1 1-12 0 6 6 0 1 1 12 0ZM482 427a6 6 0 1 1-12 0 6 6 0 1 1 12 0Z"/>
+    <path id="lower-sand" d="M402 495 476 441 550 495Z"/>
+  </g>
+  <g id="wordmark" fill="#000000" fill-rule="evenodd" opacity="1">
+    <path id="letter-l" d="M111 548H156V655H227V686H111Z"/>
+    <path id="letter-a" d="M298 548H344L410 686H364L353 663H289L278 686H231ZM303 631H339L321 591Z"/>
+    <path id="letter-g" d="M543 569 516 595C506 584 494 578 479 578C454 578 439 593 439 616C439 640 455 655 479 655C490 655 500 652 508 646V632H478V604H550V654C532 675 508 686 478 686C429 686 397 658 397 617C397 576 429 548 478 548C504 548 526 555 543 569Z"/>
+    <path id="letter-e" d="M563 548H681V580H606V602H671V632H606V655H681V686H563Z"/>
+    <path id="letter-n" d="M694 548H736L804 631V548H845V686H795L735 611V686H694Z"/>
+  </g>
+</svg>

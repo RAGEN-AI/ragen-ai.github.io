@@ -1,0 +1,3638 @@
+[
+  {
+    "id": "flappy",
+    "title": "Flappy Bird",
+    "envFps": 30.0,
+    "defaultLatency": 3,
+    "poster": "demo-showcase-real/flappy/flappy-real-02.webp",
+    "controls": [
+      {
+        "id": "flap",
+        "label": "\u2191"
+      }
+    ],
+    "requests": [
+      {
+        "tick": 0,
+        "keys": []
+      },
+      {
+        "tick": 7,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 9,
+        "keys": []
+      },
+      {
+        "tick": 21,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 22,
+        "keys": []
+      },
+      {
+        "tick": 42,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 43,
+        "keys": []
+      },
+      {
+        "tick": 47,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 48,
+        "keys": []
+      },
+      {
+        "tick": 67,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 68,
+        "keys": []
+      },
+      {
+        "tick": 92,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 93,
+        "keys": []
+      },
+      {
+        "tick": 110,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 112,
+        "keys": []
+      },
+      {
+        "tick": 125,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 127,
+        "keys": []
+      },
+      {
+        "tick": 146,
+        "keys": [
+          "flap"
+        ]
+      },
+      {
+        "tick": 147,
+        "keys": []
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demo-showcase-real/flappy/flappy-real-02-l0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demo-showcase-real/flappy/flappy-real-02-l1.mp4",
+        "failureFrames": [
+          null,
+          45.0
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demo-showcase-real/flappy/flappy-real-02-l2.mp4",
+        "failureFrames": [
+          null,
+          45.0
+        ]
+      },
+      {
+        "latencyRawFrames": 3,
+        "video": "demo-showcase-real/flappy/flappy-real-02-l3.mp4",
+        "failureFrames": [
+          null,
+          45.0
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demo-showcase-real/flappy/flappy-real-02-l4.mp4",
+        "failureFrames": [
+          null,
+          27.0
+        ]
+      },
+      {
+        "latencyRawFrames": 5,
+        "video": "demo-showcase-real/flappy/flappy-real-02-l5.mp4",
+        "failureFrames": [
+          null,
+          27.0
+        ]
+      },
+      {
+        "latencyRawFrames": 6,
+        "video": "demo-showcase-real/flappy/flappy-real-02-l6.mp4",
+        "failureFrames": [
+          null,
+          27.0
+        ]
+      }
+    ],
+    "source": {
+      "kind": "retained-recorded-actions",
+      "revision": "8c1bb81",
+      "case": 2
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 150
+  },
+  {
+    "id": "demon_attack",
+    "title": "Demon Attack",
+    "envFps": 60,
+    "defaultLatency": 12,
+    "poster": "demos/demon-attack/poster.webp",
+    "controls": [
+      {
+        "id": "left",
+        "label": "\u2190"
+      },
+      {
+        "id": "fire",
+        "label": "FIRE"
+      },
+      {
+        "id": "right",
+        "label": "\u2192"
+      }
+    ],
+    "requests": [
+      {
+        "tick": -16,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 0,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 8,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 12,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 20,
+        "keys": []
+      },
+      {
+        "tick": 28,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 36,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 40,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 44,
+        "keys": []
+      },
+      {
+        "tick": 80,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 84,
+        "keys": []
+      },
+      {
+        "tick": 92,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 104,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 108,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 116,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 120,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 144,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 148,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 160,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 176,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 192,
+        "keys": []
+      },
+      {
+        "tick": 200,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 216,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 228,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 236,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 240,
+        "keys": []
+      },
+      {
+        "tick": 248,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 252,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 256,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 260,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 268,
+        "keys": []
+      },
+      {
+        "tick": 276,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 280,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 288,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 296,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 316,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 324,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 328,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 336,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 360,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 368,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 376,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 388,
+        "keys": []
+      },
+      {
+        "tick": 392,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 396,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 400,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 404,
+        "keys": []
+      },
+      {
+        "tick": 436,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 444,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 448,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 452,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 456,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 460,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 468,
+        "keys": []
+      },
+      {
+        "tick": 472,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 488,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 508,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 532,
+        "keys": []
+      },
+      {
+        "tick": 536,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 552,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 568,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 572,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 584,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 588,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 596,
+        "keys": []
+      },
+      {
+        "tick": 604,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 620,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 624,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 628,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 632,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 636,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 640,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 644,
+        "keys": []
+      },
+      {
+        "tick": 660,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 664,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 668,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 672,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 676,
+        "keys": []
+      },
+      {
+        "tick": 680,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 688,
+        "keys": []
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/demon-attack/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/demon-attack/delay-4.mp4",
+        "failureFrames": [
+          null,
+          679
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/demon-attack/delay-8.mp4",
+        "failureFrames": [
+          null,
+          693
+        ]
+      },
+      {
+        "latencyRawFrames": 12,
+        "video": "demos/demon-attack/delay-12.mp4",
+        "failureFrames": [
+          null,
+          299
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/demon-attack/delay-16.mp4",
+        "failureFrames": [
+          null,
+          141
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/demon-attack/small-policy/sample-factory-v1",
+      "checkpoint": "best_000048704_24936448_reward_27118.050.pth",
+      "seed": 42,
+      "clipStartFrame": 60,
+      "clipEndFrame": 780
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 720
+  },
+  {
+    "id": "deadly_corridor",
+    "title": "Deadly Corridor",
+    "envFps": 35.0,
+    "defaultLatency": 8,
+    "poster": "demo-showcase-real/deadly_corridor/deadly_corridor-real-01.webp",
+    "controls": [
+      {
+        "id": "turn-left",
+        "label": "\u21b6"
+      },
+      {
+        "id": "up",
+        "label": "\u2191"
+      },
+      {
+        "id": "turn-right",
+        "label": "\u21b7"
+      },
+      {
+        "id": "left",
+        "label": "\u2190"
+      },
+      {
+        "id": "down",
+        "label": "\u2193"
+      },
+      {
+        "id": "right",
+        "label": "\u2192"
+      },
+      {
+        "id": "fire",
+        "label": "FIRE"
+      }
+    ],
+    "requests": [
+      {
+        "tick": 0,
+        "keys": [
+          "turn-left",
+          "down"
+        ]
+      },
+      {
+        "tick": 12,
+        "keys": [
+          "up",
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 16,
+        "keys": [
+          "up",
+          "fire"
+        ]
+      },
+      {
+        "tick": 24,
+        "keys": [
+          "turn-left",
+          "up",
+          "fire"
+        ]
+      },
+      {
+        "tick": 28,
+        "keys": [
+          "up",
+          "fire"
+        ]
+      },
+      {
+        "tick": 36,
+        "keys": [
+          "up",
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 56,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 60,
+        "keys": [
+          "turn-right",
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 64,
+        "keys": [
+          "up",
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 68,
+        "keys": [
+          "turn-right",
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 76,
+        "keys": [
+          "turn-right",
+          "up",
+          "fire"
+        ]
+      },
+      {
+        "tick": 80,
+        "keys": [
+          "up",
+          "fire"
+        ]
+      },
+      {
+        "tick": 96,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "tick": 100,
+        "keys": [
+          "turn-left",
+          "up"
+        ]
+      },
+      {
+        "tick": 104,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "tick": 108,
+        "keys": [
+          "up",
+          "left"
+        ]
+      },
+      {
+        "tick": 120,
+        "keys": [
+          "turn-right",
+          "up",
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 124,
+        "keys": [
+          "up",
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 128,
+        "keys": [
+          "turn-left",
+          "up",
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 132,
+        "keys": [
+          "turn-left",
+          "up",
+          "fire"
+        ]
+      },
+      {
+        "tick": 136,
+        "keys": [
+          "turn-left",
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 140,
+        "keys": [
+          "up",
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 144,
+        "keys": [
+          "turn-left",
+          "up"
+        ]
+      },
+      {
+        "tick": 148,
+        "keys": [
+          "turn-left",
+          "up",
+          "fire"
+        ]
+      },
+      {
+        "tick": 152,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 156,
+        "keys": [
+          "turn-left",
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 160,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 180,
+        "keys": [
+          "up",
+          "right",
+          "fire"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demo-showcase-real/deadly_corridor/deadly_corridor-real-01-l0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demo-showcase-real/deadly_corridor/deadly_corridor-real-01-l4.mp4",
+        "failureFrames": [
+          null,
+          104.0
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demo-showcase-real/deadly_corridor/deadly_corridor-real-01-l8.mp4",
+        "failureFrames": [
+          null,
+          102.0
+        ]
+      },
+      {
+        "latencyRawFrames": 12,
+        "video": "demo-showcase-real/deadly_corridor/deadly_corridor-real-01-l12.mp4",
+        "failureFrames": [
+          null,
+          102.0
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demo-showcase-real/deadly_corridor/deadly_corridor-real-01-l16.mp4",
+        "failureFrames": [
+          null,
+          102.0
+        ]
+      }
+    ],
+    "source": {
+      "kind": "retained-recorded-actions",
+      "revision": "8c1bb81",
+      "case": 1
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 188
+  },
+  {
+    "id": "air-raid",
+    "title": "AirRaid",
+    "envFps": 50,
+    "defaultLatency": 8,
+    "poster": "demos/air-raid/poster.webp",
+    "controls": [
+      {
+        "id": "left",
+        "label": "\u2190"
+      },
+      {
+        "id": "fire",
+        "label": "FIRE"
+      },
+      {
+        "id": "right",
+        "label": "\u2192"
+      }
+    ],
+    "requests": [
+      {
+        "tick": -24,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 0,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 4,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 12,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 16,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 20,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 24,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 28,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 36,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 40,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 44,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 48,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 52,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 56,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 64,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 68,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 72,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 76,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 88,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 96,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 100,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 104,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 112,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 116,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 120,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 124,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 132,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 136,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 140,
+        "keys": []
+      },
+      {
+        "tick": 148,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 152,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 156,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 160,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 164,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 168,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 176,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 180,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 184,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 192,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 196,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 200,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 204,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 208,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 212,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 216,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 220,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 224,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 228,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 232,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 240,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 248,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 252,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 256,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 260,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 268,
+        "keys": []
+      },
+      {
+        "tick": 272,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 280,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 284,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 288,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 292,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 296,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 304,
+        "keys": []
+      },
+      {
+        "tick": 312,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 320,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 324,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 328,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 332,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 336,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 344,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 348,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 352,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 360,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 368,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 372,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 376,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 380,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 396,
+        "keys": []
+      },
+      {
+        "tick": 400,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 408,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 412,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 416,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 420,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 428,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 432,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 436,
+        "keys": []
+      },
+      {
+        "tick": 440,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 444,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 448,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 456,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 460,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 464,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 468,
+        "keys": []
+      },
+      {
+        "tick": 472,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 476,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 480,
+        "keys": []
+      },
+      {
+        "tick": 484,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 492,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 496,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 500,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 504,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 508,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 512,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 516,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 520,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 524,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 528,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 532,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 536,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 540,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 544,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 548,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 552,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 560,
+        "keys": []
+      },
+      {
+        "tick": 564,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 572,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 576,
+        "keys": [
+          "left",
+          "fire"
+        ]
+      },
+      {
+        "tick": 580,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 588,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      },
+      {
+        "tick": 592,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 596,
+        "keys": [
+          "right",
+          "fire"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/air-raid/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/air-raid/delay-4.mp4",
+        "failureFrames": [
+          null,
+          123
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/air-raid/delay-8.mp4",
+        "failureFrames": [
+          null,
+          125
+        ]
+      },
+      {
+        "latencyRawFrames": 12,
+        "video": "demos/air-raid/delay-12.mp4",
+        "failureFrames": [
+          null,
+          286
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/air-raid/delay-16.mp4",
+        "failureFrames": [
+          null,
+          334
+        ]
+      },
+      {
+        "latencyRawFrames": 24,
+        "video": "demos/air-raid/delay-24.mp4",
+        "failureFrames": [
+          null,
+          128
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/air-raid/small-policy/sample-factory-v1",
+      "checkpoint": "checkpoint.pth",
+      "seed": 43,
+      "clipStartFrame": 0,
+      "clipEndFrame": 600
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 600
+  },
+  {
+    "id": "asterix",
+    "title": "Asterix",
+    "envFps": 60.0,
+    "defaultLatency": 12,
+    "poster": "demos/asterix/poster.webp",
+    "controls": [
+      {
+        "id": "up",
+        "label": "\u2191"
+      },
+      {
+        "id": "left",
+        "label": "\u2190"
+      },
+      {
+        "id": "down",
+        "label": "\u2193"
+      },
+      {
+        "id": "right",
+        "label": "\u2192"
+      }
+    ],
+    "requests": [
+      {
+        "tick": 0,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 28,
+        "keys": [
+          "down",
+          "left"
+        ]
+      },
+      {
+        "tick": 36,
+        "keys": [
+          "up",
+          "left"
+        ]
+      },
+      {
+        "tick": 56,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "tick": 60,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 64,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 68,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "tick": 80,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 88,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 112,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 116,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "tick": 384,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 404,
+        "keys": [
+          "down",
+          "left"
+        ]
+      },
+      {
+        "tick": 432,
+        "keys": [
+          "up",
+          "left"
+        ]
+      },
+      {
+        "tick": 440,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 452,
+        "keys": [
+          "up",
+          "left"
+        ]
+      },
+      {
+        "tick": 456,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 460,
+        "keys": [
+          "down",
+          "right"
+        ]
+      },
+      {
+        "tick": 464,
+        "keys": [
+          "up",
+          "right"
+        ]
+      },
+      {
+        "tick": 484,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 488,
+        "keys": [
+          "up"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/asterix/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/asterix/delay-4.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/asterix/delay-8.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 12,
+        "video": "demos/asterix/delay-12.mp4",
+        "failureFrames": [
+          null,
+          365
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/asterix/delay-16.mp4",
+        "failureFrames": [
+          null,
+          365
+        ]
+      },
+      {
+        "latencyRawFrames": 24,
+        "video": "demos/asterix/delay-24.mp4",
+        "failureFrames": [
+          null,
+          365
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/asterix/small-policy/sample-factory-v1",
+      "checkpoint": "best_000029312_15007744_reward_5879.000.pth",
+      "seed": 42,
+      "clipStartFrame": 0,
+      "clipEndFrame": 720
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 720
+  },
+  {
+    "id": "atlantis",
+    "title": "Atlantis",
+    "envFps": 60,
+    "defaultLatency": 16,
+    "poster": "demos/atlantis/poster.webp",
+    "controls": [
+      {
+        "id": "left-fire",
+        "label": "\u2196"
+      },
+      {
+        "id": "fire",
+        "label": "FIRE"
+      },
+      {
+        "id": "right-fire",
+        "label": "\u2197"
+      }
+    ],
+    "requests": [
+      {
+        "tick": -24,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 0,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 6,
+        "keys": []
+      },
+      {
+        "tick": 18,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 34,
+        "keys": []
+      },
+      {
+        "tick": 42,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 46,
+        "keys": []
+      },
+      {
+        "tick": 50,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 70,
+        "keys": []
+      },
+      {
+        "tick": 74,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 78,
+        "keys": []
+      },
+      {
+        "tick": 98,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 102,
+        "keys": []
+      },
+      {
+        "tick": 106,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 110,
+        "keys": []
+      },
+      {
+        "tick": 118,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 122,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 134,
+        "keys": []
+      },
+      {
+        "tick": 150,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 154,
+        "keys": []
+      },
+      {
+        "tick": 162,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 166,
+        "keys": []
+      },
+      {
+        "tick": 170,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 178,
+        "keys": []
+      },
+      {
+        "tick": 186,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 194,
+        "keys": []
+      },
+      {
+        "tick": 202,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 206,
+        "keys": []
+      },
+      {
+        "tick": 210,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 222,
+        "keys": []
+      },
+      {
+        "tick": 226,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 234,
+        "keys": []
+      },
+      {
+        "tick": 250,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 254,
+        "keys": []
+      },
+      {
+        "tick": 258,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 262,
+        "keys": []
+      },
+      {
+        "tick": 266,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 270,
+        "keys": []
+      },
+      {
+        "tick": 274,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 286,
+        "keys": []
+      },
+      {
+        "tick": 290,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 298,
+        "keys": []
+      },
+      {
+        "tick": 314,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 318,
+        "keys": []
+      },
+      {
+        "tick": 322,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 334,
+        "keys": []
+      },
+      {
+        "tick": 338,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 358,
+        "keys": []
+      },
+      {
+        "tick": 382,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 398,
+        "keys": []
+      },
+      {
+        "tick": 410,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 418,
+        "keys": []
+      },
+      {
+        "tick": 434,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 450,
+        "keys": []
+      },
+      {
+        "tick": 474,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 486,
+        "keys": []
+      },
+      {
+        "tick": 498,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 526,
+        "keys": [
+          "left-fire"
+        ]
+      },
+      {
+        "tick": 530,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 534,
+        "keys": []
+      },
+      {
+        "tick": 538,
+        "keys": [
+          "left-fire"
+        ]
+      },
+      {
+        "tick": 542,
+        "keys": []
+      },
+      {
+        "tick": 550,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 554,
+        "keys": []
+      },
+      {
+        "tick": 570,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 574,
+        "keys": [
+          "fire"
+        ]
+      },
+      {
+        "tick": 582,
+        "keys": []
+      },
+      {
+        "tick": 598,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 602,
+        "keys": []
+      },
+      {
+        "tick": 606,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 610,
+        "keys": [
+          "left-fire"
+        ]
+      },
+      {
+        "tick": 614,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 618,
+        "keys": []
+      },
+      {
+        "tick": 666,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 674,
+        "keys": []
+      },
+      {
+        "tick": 682,
+        "keys": [
+          "left-fire"
+        ]
+      },
+      {
+        "tick": 686,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 690,
+        "keys": []
+      },
+      {
+        "tick": 698,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 702,
+        "keys": []
+      },
+      {
+        "tick": 710,
+        "keys": [
+          "right-fire"
+        ]
+      },
+      {
+        "tick": 718,
+        "keys": []
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/atlantis/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/atlantis/delay-4.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/atlantis/delay-8.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 12,
+        "video": "demos/atlantis/delay-12.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/atlantis/delay-16.mp4",
+        "failureFrames": [
+          null,
+          597
+        ]
+      },
+      {
+        "latencyRawFrames": 24,
+        "video": "demos/atlantis/delay-24.mp4",
+        "failureFrames": [
+          null,
+          709
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/atlantis/small-policy/sample-factory-v1",
+      "checkpoint": "best_000013824_7077888_reward_547238.000.pth",
+      "seed": 42,
+      "clipStartFrame": 570,
+      "clipEndFrame": 1290
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 720
+  },
+  {
+    "id": "ant",
+    "title": "Ant",
+    "envFps": 20,
+    "defaultLatency": 4,
+    "poster": "demos/ant/poster.webp",
+    "controls": [],
+    "requests": [],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/ant/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/ant/delay-1.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/ant/delay-2.mp4",
+        "failureFrames": [
+          null,
+          69
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/ant/delay-4.mp4",
+        "failureFrames": [
+          null,
+          215
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/ant/delay-8.mp4",
+        "failureFrames": [
+          null,
+          219
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/ant/delay-16.mp4",
+        "failureFrames": [
+          null,
+          220
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/ant/small-policy/sample-factory-v1",
+      "checkpoint": "checkpoint.pth",
+      "seed": 43,
+      "clipStartFrame": 40,
+      "clipEndFrame": 280
+    },
+    "actionKind": "ant",
+    "actionLabel": "Joint torque \u00b7 \u2212 / +",
+    "actionFile": "actions/ant.json",
+    "clipFrames": 240
+  },
+  {
+    "id": "hopper",
+    "title": "Hopper",
+    "envFps": 125.0,
+    "defaultLatency": 4,
+    "poster": "demos/hopper/poster.webp",
+    "controls": [],
+    "requests": [],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/hopper/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/hopper/delay-1.mp4",
+        "failureFrames": [
+          null,
+          136
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/hopper/delay-2.mp4",
+        "failureFrames": [
+          null,
+          110
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/hopper/delay-4.mp4",
+        "failureFrames": [
+          null,
+          89
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/hopper/delay-8.mp4",
+        "failureFrames": [
+          null,
+          87
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/hopper/delay-16.mp4",
+        "failureFrames": [
+          null,
+          95
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/hopper/small-policy/sample-factory-v1",
+      "checkpoint": "checkpoint.pth",
+      "seed": 42,
+      "clipStartFrame": 0,
+      "clipEndFrame": 1000
+    },
+    "actionKind": "hopper",
+    "actionLabel": "Joint torque \u00b7 \u2212 / +",
+    "actionFile": "actions/hopper.json",
+    "clipFrames": 1000
+  },
+  {
+    "id": "inverted-pendulum",
+    "title": "Inverted Pendulum",
+    "envFps": 25.0,
+    "defaultLatency": 2,
+    "poster": "demos/inverted-pendulum/poster.webp",
+    "controls": [
+      {
+        "id": "left",
+        "label": "\u2190"
+      },
+      {
+        "id": "right",
+        "label": "\u2192"
+      }
+    ],
+    "requests": [
+      {
+        "tick": 0,
+        "keys": []
+      },
+      {
+        "tick": 6,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 7,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 9,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 10,
+        "keys": []
+      },
+      {
+        "tick": 15,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 16,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 17,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 19,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 20,
+        "keys": []
+      },
+      {
+        "tick": 22,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 23,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 24,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 26,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 27,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 29,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 30,
+        "keys": []
+      },
+      {
+        "tick": 32,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 33,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 34,
+        "keys": []
+      },
+      {
+        "tick": 38,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 39,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 40,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 42,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 43,
+        "keys": []
+      },
+      {
+        "tick": 46,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 47,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 48,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 50,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 51,
+        "keys": []
+      },
+      {
+        "tick": 67,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 68,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 69,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 71,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 72,
+        "keys": []
+      },
+      {
+        "tick": 97,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 98,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 99,
+        "keys": []
+      },
+      {
+        "tick": 105,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 106,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 107,
+        "keys": []
+      },
+      {
+        "tick": 113,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 114,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 115,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 117,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 118,
+        "keys": []
+      },
+      {
+        "tick": 119,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 120,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 121,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 123,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 124,
+        "keys": []
+      },
+      {
+        "tick": 130,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 131,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 132,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 134,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 135,
+        "keys": []
+      },
+      {
+        "tick": 147,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 148,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 149,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 151,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 152,
+        "keys": []
+      },
+      {
+        "tick": 170,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 171,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 172,
+        "keys": []
+      },
+      {
+        "tick": 178,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 179,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 180,
+        "keys": []
+      },
+      {
+        "tick": 186,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 187,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 188,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 190,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 191,
+        "keys": []
+      },
+      {
+        "tick": 192,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 193,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 194,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 196,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 197,
+        "keys": []
+      },
+      {
+        "tick": 204,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 205,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 206,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 208,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 209,
+        "keys": []
+      },
+      {
+        "tick": 229,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 230,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 231,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 233,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 234,
+        "keys": []
+      },
+      {
+        "tick": 250,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 251,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 252,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 254,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 255,
+        "keys": []
+      },
+      {
+        "tick": 267,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 268,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 269,
+        "keys": []
+      },
+      {
+        "tick": 274,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 275,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 276,
+        "keys": []
+      },
+      {
+        "tick": 295,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "tick": 296,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "tick": 297,
+        "keys": []
+      },
+      {
+        "tick": 299,
+        "keys": [
+          "left"
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/inverted-pendulum/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/inverted-pendulum/delay-1.mp4",
+        "failureFrames": [
+          null,
+          41
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/inverted-pendulum/delay-2.mp4",
+        "failureFrames": [
+          null,
+          38
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/inverted-pendulum/delay-4.mp4",
+        "failureFrames": [
+          null,
+          33
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/inverted-pendulum/delay-8.mp4",
+        "failureFrames": [
+          null,
+          33
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/inverted-pendulum/delay-16.mp4",
+        "failureFrames": [
+          null,
+          31
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/inverted-pendulum/small-policy/sample-factory-v1",
+      "checkpoint": "checkpoint.pth",
+      "seed": 42,
+      "clipStartFrame": 0,
+      "clipEndFrame": 300
+    },
+    "actionKind": "keys",
+    "actionLabel": "",
+    "actionFile": null,
+    "clipFrames": 300
+  },
+  {
+    "id": "walker2d",
+    "title": "Walker2D",
+    "envFps": 125.0,
+    "defaultLatency": 4,
+    "poster": "demos/walker2d/poster.webp",
+    "controls": [],
+    "requests": [],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/walker2d/delay-0.mp4",
+        "failureFrames": [
+          981,
+          981
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/walker2d/delay-1.mp4",
+        "failureFrames": [
+          981,
+          215
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/walker2d/delay-2.mp4",
+        "failureFrames": [
+          981,
+          213
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/walker2d/delay-4.mp4",
+        "failureFrames": [
+          981,
+          186
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/walker2d/delay-8.mp4",
+        "failureFrames": [
+          981,
+          87
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/walker2d/delay-16.mp4",
+        "failureFrames": [
+          981,
+          107
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/walker2d/small-policy/sample-factory-v1",
+      "checkpoint": "checkpoint.pth",
+      "seed": 42,
+      "clipStartFrame": 0,
+      "clipEndFrame": 982
+    },
+    "actionKind": "walker2d",
+    "actionLabel": "Joint torque \u00b7 \u2212 / +",
+    "actionFile": "actions/walker2d.json",
+    "clipFrames": 982
+  },
+  {
+    "id": "balance",
+    "title": "Balance",
+    "envFps": 50.0,
+    "defaultLatency": 1,
+    "poster": "demos/balance/poster.webp",
+    "controls": [],
+    "requests": [],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/balance/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/balance/delay-1.mp4",
+        "failureFrames": [
+          null,
+          81
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/balance/delay-2.mp4",
+        "failureFrames": [
+          null,
+          105
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/balance/delay-4.mp4",
+        "failureFrames": [
+          null,
+          87
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/balance/delay-8.mp4",
+        "failureFrames": [
+          null,
+          70
+        ]
+      },
+      {
+        "latencyRawFrames": 16,
+        "video": "demos/balance/delay-16.mp4",
+        "failureFrames": [
+          null,
+          61
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/humanoidbench-balance-simple/small-policy/fasttd3-h1-v1",
+      "checkpoint": "checkpoint.pth",
+      "seed": 42,
+      "clipStartFrame": 0,
+      "clipEndFrame": 600
+    },
+    "actionKind": "balance",
+    "actionLabel": "Target updates",
+    "actionFile": "actions/balance.json",
+    "clipFrames": 600
+  },
+  {
+    "id": "mikasa",
+    "title": "Intercept Grab (Fast)",
+    "envFps": 20,
+    "defaultLatency": 2,
+    "poster": "demos/mikasa/poster.webp",
+    "controls": [],
+    "requests": [],
+    "variants": [
+      {
+        "latencyRawFrames": 0,
+        "video": "demos/mikasa/delay-0.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 1,
+        "video": "demos/mikasa/delay-1.mp4",
+        "failureFrames": [
+          null,
+          null
+        ]
+      },
+      {
+        "latencyRawFrames": 2,
+        "video": "demos/mikasa/delay-2.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      },
+      {
+        "latencyRawFrames": 3,
+        "video": "demos/mikasa/delay-3.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      },
+      {
+        "latencyRawFrames": 4,
+        "video": "demos/mikasa/delay-4.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      },
+      {
+        "latencyRawFrames": 6,
+        "video": "demos/mikasa/delay-6.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      },
+      {
+        "latencyRawFrames": 8,
+        "video": "demos/mikasa/delay-8.mp4",
+        "failureFrames": [
+          null,
+          59
+        ]
+      }
+    ],
+    "source": {
+      "kind": "zero-latency-teacher-actions",
+      "repository": "MLL-Lab/LAGEN-models",
+      "revision": "525b3bc5c79c1f08711368ff89a7b5916ba5f175",
+      "bundle": "zero-latency/mikasa-intercept-grab-fast/small-policy/ppo-v1",
+      "checkpoint": "checkpoint.pt",
+      "seed": 4242424243,
+      "clipStartFrame": 0,
+      "clipEndFrame": 60
+    },
+    "actionKind": "mikasa",
+    "actionLabel": "Move \u00b7 Rotate \u00b7 Grip",
+    "actionFile": "actions/mikasa.json",
+    "clipFrames": 60
+  }
+]

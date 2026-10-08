@@ -1,0 +1,106 @@
+[
+  {
+    "task": "Flappy Bird",
+    "withLatency": true,
+    "cells": [
+      {
+        "mean": 433.8,
+        "ci": 15.7
+      },
+      {
+        "mean": 434.0,
+        "ci": 22.2
+      },
+      {
+        "mean": 341.3,
+        "ci": 69.2
+      },
+      {
+        "mean": 290.3,
+        "ci": 81.2
+      },
+      {
+        "mean": 267.6,
+        "ci": 69.0
+      }
+    ]
+  },
+  {
+    "task": "Flappy Bird",
+    "withLatency": false,
+    "cells": [
+      {
+        "mean": 18.8,
+        "ci": 7.3
+      },
+      {
+        "mean": 14.3,
+        "ci": 7.3
+      },
+      {
+        "mean": 9.4,
+        "ci": 3.1
+      },
+      {
+        "mean": 6.5,
+        "ci": 1.6
+      },
+      {
+        "mean": 4.5,
+        "ci": 0.4
+      }
+    ]
+  },
+  {
+    "task": "Demon Attack",
+    "withLatency": true,
+    "cells": [
+      {
+        "mean": 7409.0,
+        "ci": 302.6
+      },
+      {
+        "mean": 6558.0,
+        "ci": 509.7
+      },
+      {
+        "mean": 5551.2,
+        "ci": 474.2
+      },
+      {
+        "mean": 4038.0,
+        "ci": 896.4
+      },
+      {
+        "mean": 3630.0,
+        "ci": 717.4
+      }
+    ]
+  },
+  {
+    "task": "Demon Attack",
+    "withLatency": false,
+    "cells": [
+      {
+        "mean": 3814.8,
+        "ci": 947.9
+      },
+      {
+        "mean": 4392.5,
+        "ci": 851.8
+      },
+      {
+        "mean": 4478.8,
+        "ci": 516.9
+      },
+      {
+        "mean": 4091.2,
+        "ci": 877.5
+      },
+      {
+        "mean": 1995.2,
+        "ci": 705.5
+      }
+    ]
+  }
+]

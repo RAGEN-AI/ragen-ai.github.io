@@ -1,0 +1,13 @@
+---
+const src = '/lagen/' + 'assets/figures/framework.png';
+---
+<figure id="pipeline-figure" class="paper-figure">
+  <div class="pipeline-image" tabindex="0" role="region" aria-label="Original paper pipeline figure">
+    <img src={src} width="3988" height="1771" loading="lazy" alt="LAGEN pipeline from the paper: profile deployment timing using Fixed, Normal, IID or Temporal generators; train a latency teacher through fresh reinforcement-learning interactions; distill teacher demonstrations into a VLA with optional DAgger; deploy the VLA with delayed-action execution." />
+  </div>
+  <figcaption>The agent interacts with the simulator under delays sampled from the latency profile. ActionReady marks when a predicted action becomes available. The curves show schematic latency profiles.</figcaption>
+</figure>
+<style>
+  .pipeline-image { overflow-x: auto; }
+  .pipeline-image img { display: block; width: 100%; min-width: 1100px; max-width: none; height: auto; }
+</style>

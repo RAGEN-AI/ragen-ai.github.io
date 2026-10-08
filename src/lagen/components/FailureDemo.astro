@@ -1,0 +1,54 @@
+---
+import demos from '../data/demos.json';
+const asset = (name: string) => '/lagen/' + 'assets/' + name;
+const first = demos[0];
+const initialMilliseconds = Math.round(first.defaultLatency * 1000 / first.envFps);
+const previous = demos[demos.length - 1];
+const next = demos[1];
+---
+<section class="demo-section" id="failure-demo" aria-labelledby="demo-title">
+  <div class="section-width demo-heading">
+    <h2 id="demo-title">Timing changes the outcome</h2>
+    <p>Both runs start from the same state and replay the same actions. Use the slider to delay the actions on the right.</p>
+  </div>
+  <div class="demo-carousel" data-demo>
+    <div class="demo-toolbar section-width">
+      <h3 id="demo-task">{first.title}</h3>
+      <div class="delay-control">
+        <label for="demo-delay">Action delay <output id="demo-delay-value">{initialMilliseconds} ms · {first.defaultLatency} frames</output></label>
+        <input id="demo-delay" type="range" min="0" max={first.variants.length - 1} value={first.variants.findIndex(v => v.latencyRawFrames === first.defaultLatency)} step="1" />
+      </div>
+    </div>
+    <div class="demo-lane-labels"><span>No delay</span><span id="demo-right-label">{initialMilliseconds} ms delay</span></div>
+    <div class="demo-stage">
+      <div class="demo-track">
+        {[previous, first, next].map((demo, i) => (
+          <div class="demo-slide" data-position={['left','center','right'][i]} data-slot={i}>
+            <div class="demo-screen">
+              <video id={i === 1 ? 'demo-video' : undefined} poster={asset(demo.poster)} muted loop playsinline preload="none" aria-label={demo.title + ': recorded action comparison'}></video>
+              <button class="demo-play" aria-label="Play demonstration" hidden>▶ Play</button>
+              <button class="demo-side-select" aria-label={'Show ' + demo.title} tabindex={i === 1 ? -1 : 0}></button>
+            </div>
+            <div class="demo-actions">
+              <div class="demo-action-docks" aria-hidden="true"></div>
+              <div class="action-caption"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button class="demo-arrow previous" id="demo-prev" aria-label="Previous task">‹</button>
+      <button class="demo-arrow next" id="demo-next" aria-label="Next task">›</button>
+    </div>
+    <button id="demo-pause" class="playback-key" aria-label="Pause demonstration"><svg class="playback-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 2h5v16H3zM12 2h5v16h-5z" /></svg><span class="playback-label">Pause</span></button>
+    <div class="demo-bottom section-width">
+      <div class="demo-thumbnails" aria-label="Choose a task">
+        {demos.map((demo, i) => (
+          <button class:list={['demo-thumbnail', {selected: i === 0}]} data-task-index={i} aria-pressed={i === 0} aria-label={'Show ' + demo.title}>
+            <img src={asset(demo.poster)} alt="" width="180" height="110" loading="lazy" />
+            <span>{demo.title}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

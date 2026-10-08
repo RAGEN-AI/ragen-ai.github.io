@@ -1,0 +1,254 @@
+[
+  {
+    "task": "Demon Attack",
+    "model": "OpenVLA",
+    "zero": 2362.15,
+    "before": 584.35,
+    "after": 1452.8
+  },
+  {
+    "task": "Demon Attack",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 2350.95,
+    "before": 112.3,
+    "after": 907.3
+  },
+  {
+    "task": "Demon Attack",
+    "model": "GR00T",
+    "zero": 2370.9,
+    "before": 231.9,
+    "after": 1203.1
+  },
+  {
+    "task": "Asterix",
+    "model": "OpenVLA",
+    "zero": 5803.5,
+    "before": 374.5,
+    "after": 3653.5
+  },
+  {
+    "task": "Asterix",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 5758.5,
+    "before": 143.5,
+    "after": 1015.0
+  },
+  {
+    "task": "Asterix",
+    "model": "GR00T",
+    "zero": 5714.0,
+    "before": 182.0,
+    "after": 1440.0
+  },
+  {
+    "task": "Atlantis",
+    "model": "OpenVLA",
+    "zero": 39560.0,
+    "before": 18588.0,
+    "after": 39229.0
+  },
+  {
+    "task": "Atlantis",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 39615.0,
+    "before": 4369.0,
+    "after": 26447.0
+  },
+  {
+    "task": "Atlantis",
+    "model": "GR00T",
+    "zero": 39662.0,
+    "before": 8167.0,
+    "after": 28488.0
+  },
+  {
+    "task": "AirRaid",
+    "model": "OpenVLA",
+    "zero": 2000.0,
+    "before": 878.75,
+    "after": 2353.75
+  },
+  {
+    "task": "AirRaid",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 1943.75,
+    "before": 1386.25,
+    "after": 3227.5
+  },
+  {
+    "task": "AirRaid",
+    "model": "GR00T",
+    "zero": 2101.25,
+    "before": 733.75,
+    "after": 1586.25
+  },
+  {
+    "task": "Deadly Corridor",
+    "model": "OpenVLA",
+    "zero": 2098.67,
+    "before": 742.35,
+    "after": 2091.23
+  },
+  {
+    "task": "Deadly Corridor",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 2104.09,
+    "before": 140.94,
+    "after": 1450.83
+  },
+  {
+    "task": "Deadly Corridor",
+    "model": "GR00T",
+    "zero": 2100.46,
+    "before": 341.76,
+    "after": 2090.82
+  },
+  {
+    "task": "Flappy Bird",
+    "model": "OpenVLA",
+    "zero": 439.13,
+    "before": 19.19,
+    "after": 373.78
+  },
+  {
+    "task": "Flappy Bird",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 408.72,
+    "before": 5.58,
+    "after": 344.48
+  },
+  {
+    "task": "Flappy Bird",
+    "model": "GR00T",
+    "zero": 428.48,
+    "before": 6.62,
+    "after": 414.52
+  },
+  {
+    "task": "Ant",
+    "model": "OpenVLA",
+    "zero": 5565.29,
+    "before": 194.33,
+    "after": 1853.33
+  },
+  {
+    "task": "Ant",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 5782.5,
+    "before": 131.6,
+    "after": 1774.71
+  },
+  {
+    "task": "Ant",
+    "model": "GR00T",
+    "zero": 6222.6,
+    "before": 165.37,
+    "after": 1955.97
+  },
+  {
+    "task": "Hopper",
+    "model": "OpenVLA",
+    "zero": 1419.93,
+    "before": 67.88,
+    "after": 424.58
+  },
+  {
+    "task": "Hopper",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 3482.49,
+    "before": 8.4,
+    "after": 235.17
+  },
+  {
+    "task": "Hopper",
+    "model": "GR00T",
+    "zero": 872.83,
+    "before": 8.55,
+    "after": 242.55
+  },
+  {
+    "task": "Inverted Pendulum",
+    "model": "OpenVLA",
+    "zero": 1000.0,
+    "before": 19.8,
+    "after": 586.85
+  },
+  {
+    "task": "Inverted Pendulum",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 1000.0,
+    "before": 20.15,
+    "after": 830.4
+  },
+  {
+    "task": "Inverted Pendulum",
+    "model": "GR00T",
+    "zero": 1000.0,
+    "before": 15.55,
+    "after": 1000.0
+  },
+  {
+    "task": "Walker2D",
+    "model": "OpenVLA",
+    "zero": 983.92,
+    "before": 103.65,
+    "after": 857.44
+  },
+  {
+    "task": "Walker2D",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 3631.42,
+    "before": 80.95,
+    "after": 371.09
+  },
+  {
+    "task": "Walker2D",
+    "model": "GR00T",
+    "zero": 3527.99,
+    "before": 63.24,
+    "after": 852.87
+  },
+  {
+    "task": "Balance",
+    "model": "OpenVLA",
+    "zero": 275.56408963144986,
+    "before": 50.74563342659616,
+    "after": 114.62512823978415
+  },
+  {
+    "task": "Balance",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 328.60200050352006,
+    "before": 46.84542287791159,
+    "after": 72.31229944773577
+  },
+  {
+    "task": "Balance",
+    "model": "GR00T",
+    "zero": 267.52374034714785,
+    "before": 45.340414426486596,
+    "after": 90.42079649633935
+  },
+  {
+    "task": "Intercept Grab Fast",
+    "model": "OpenVLA",
+    "zero": 36.108,
+    "before": 18.596,
+    "after": 25.752
+  },
+  {
+    "task": "Intercept Grab Fast",
+    "model": "\u03c0\u2080.\u2085",
+    "zero": 36.785,
+    "before": 8.082,
+    "after": 17.558
+  },
+  {
+    "task": "Intercept Grab Fast",
+    "model": "GR00T",
+    "zero": 33.514,
+    "before": 14.314,
+    "after": 25.235
+  }
+]

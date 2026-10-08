@@ -1,0 +1,127 @@
+---
+import panels from '../data/degradation.json';
+import palette from '../data/paper-palette.json';
+
+const colors = [palette.gray, palette.blue, palette.rose];
+const shapes = ['M-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0', 'M-4,-4h8v8h-8Z', 'M0,-5L5,4H-5Z'];
+const main = { left: 58, top: 30, width: 198, height: 198 };
+const inset = { left: 172, top: 54, width: 82, height: 62 };
+---
+<figure class="paper-figure degradation-figure" aria-label="Performance under fixed action delay">
+  <div class="degradation-legend" aria-label="Chart legend">
+    {['OpenVLA', 'π₀.₅', 'GR00T'].map((label, i) => <span><svg viewBox="-7 -7 14 14" aria-hidden="true"><path d={shapes[i]} fill={colors[i]} /></svg>{label}</span>)}
+    <span><svg viewBox="0 0 30 14" class="line-key" aria-hidden="true"><path d="M0 7H30" stroke="currentColor" stroke-width="2" /><circle cx="15" cy="7" r="4" fill="currentColor" /></svg>Single action</span>
+    <span><svg viewBox="0 0 30 14" class="line-key" aria-hidden="true"><path d="M0 7H30" stroke="currentColor" stroke-width="2" stroke-dasharray="5 3" /><circle cx="15" cy="7" r="4" fill="white" stroke="currentColor" stroke-width="2" /></svg>Action chunk (horizon 8)</span>
+  </div>
+  <div class="degradation-panels">
+    {panels.map((panel, panelIndex) => {
+      const mikasa = panel.inset === null;
+      const views = [
+        { ...main, latencies: panel.latencies, xMin: panel.latencies[0] - .25, xMax: panel.latencies.at(-1)! + .25, yMin: 0, yMax: panel.yMax, xTicks: panel.latencies, yTicks: panel.yTicks },
+        ...(panel.inset ? [{ ...inset, ...panel.inset, xMin: panel.inset.latencies[0] - .2, xMax: panel.inset.latencies.at(-1)! + .2 }] : []),
+      ];
+      const mainX = (value: number) => main.left + (value - views[0].xMin) / (views[0].xMax - views[0].xMin) * main.width;
+      const mainY = (value: number) => main.top + main.height - value / panel.yMax * main.height;
+      return <div class="degradation-panel" data-panel={panelIndex}>
+        <h3 id={'degradation-title-' + panelIndex}>{panel.title}</h3>
+        <svg class="degradation-chart" viewBox="0 0 268 288" tabindex="0" role="group" aria-labelledby={'degradation-title-' + panelIndex} aria-describedby="degradation-help">
+          <text class="axis-label" x="157" y="277" text-anchor="middle">Eval latency (frames)</text>
+          {(panelIndex === 0 || mikasa) && <text class="axis-label" transform="translate(14 129) rotate(-90)" text-anchor="middle">{mikasa ? 'Success rate (%)' : 'Mean return'}</text>}
+          {views.map((view, viewIndex) => {
+            const x = (value: number) => view.left + (value - view.xMin) / (view.xMax - view.xMin) * view.width;
+            const y = (value: number) => view.top + view.height - (value - view.yMin) / (view.yMax - view.yMin) * view.height;
+            const clipId = `degradation-clip-${panelIndex}-${viewIndex}`;
+            return <g class="plot-view" data-view={viewIndex} data-x-min={view.xMin} data-x-max={view.xMax} data-left={view.left} data-width={view.width}>
+              {viewIndex === 1 && <>
+                <rect class="zoom-box" x={mainX(view.xMin)} y={mainY(view.yMax)} width={mainX(view.xMax) - mainX(view.xMin)} height={mainY(view.yMin) - mainY(view.yMax)} />
+                <rect x={view.left - 38} y={view.top - 28} width={view.width + 42} height={view.height + 58} fill="white" fill-opacity=".96" />
+                <text class="zoom-title" x={view.left + view.width} y={view.top - 12} text-anchor="end">Zoom: latency &gt; 0</text>
+              </>}
+              <rect x={view.left} y={view.top} width={view.width} height={view.height} fill="white" />
+              {view.yTicks.map(tick => <g>
+                <path class="plot-grid" d={`M${view.left},${y(tick)}h${view.width}`} />
+                <path class="plot-axis" d={`M${view.left - 5},${y(tick)}h5`} />
+                <text class="tick-label" x={view.left - 8} y={y(tick)} text-anchor="end" dominant-baseline="middle">{tick}</text>
+              </g>)}
+              {view.xTicks.map(tick => <g>
+                <path class="plot-grid" d={`M${x(tick)},${view.top}v${view.height}`} />
+                <path class="plot-axis" d={`M${x(tick)},${view.top + view.height}v5`} />
+                <text class="tick-label" x={x(tick)} y={view.top + view.height + 23} text-anchor="middle">{tick}</text>
+              </g>)}
+              <path class="plot-axis" d={`M${view.left},${view.top}v${view.height}h${view.width}`} />
+              <defs>
+                <clipPath id={clipId}><rect x={view.left - 5} y={view.top - 5} width={view.width + 10} height={view.height + 10} /></clipPath>
+                {viewIndex === 1 && <marker id={`degradation-arrow-${panelIndex}`} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L7 4L1 7" fill="none" stroke="#77727e" /></marker>}
+              </defs>
+              <g clip-path={`url(#${clipId})`}>
+                <line class="column-guide" y1={view.top} y2={view.top + view.height} hidden />
+                {panel.series.map((series, seriesIndex) => {
+                  const modelIndex = mikasa ? Math.floor(seriesIndex / 2) : seriesIndex;
+                  const points = view.latencies.map(latency => ({ latency, x: x(latency), y: y(series.values[panel.latencies.indexOf(latency)]) }));
+                  return <g stroke={colors[modelIndex]} fill={series.horizon === 8 ? 'white' : colors[modelIndex]}>
+                    <path d={points.map((point, i) => `${i === 0 ? 'M' : 'L'}${point.x},${point.y}`).join(' ')} fill="none" stroke-width={viewIndex === 1 ? 1.5 : 2} stroke-dasharray={series.horizon === 8 ? '7 4' : undefined} />
+                    {points.map(point => <g transform={`translate(${point.x} ${point.y})`}>
+                      <circle class="point-highlight" data-latency={point.latency} r={viewIndex === 1 ? 6 : 7} fill="white" fill-opacity=".75" stroke-width="1.5" hidden />
+                      <path d={shapes[modelIndex]} transform={viewIndex === 1 ? 'scale(.7)' : undefined} stroke-width="1.3" />
+                    </g>)}
+                  </g>;
+                })}
+              </g>
+              {viewIndex === 1 && <path class="zoom-box" d={`M${mainX((view.xMin + view.xMax) / 2)},${mainY(view.yMax)}L${view.left + view.width * .25},${view.top + view.height + 2}`} marker-end={`url(#degradation-arrow-${panelIndex})`} />}
+              <rect class="plot-hit-area" x={view.left} y={view.top} width={view.width} height={view.height} fill="transparent" />
+            </g>;
+          })}
+        </svg>
+      </div>;
+    })}
+  </div>
+  <p id="degradation-help" class="chart-sr-only">Focus a chart and use the left and right arrow keys to inspect latency columns. Press Escape to dismiss values. On touch screens, tap a column.</p>
+  <div class="degradation-tooltip" id="degradation-tooltip" role="tooltip" hidden>
+    <p class="tooltip-heading"></p>
+    <p class="tooltip-metric"></p>
+    <div class="tooltip-values"></div>
+  </div>
+  <div class="chart-sr-only" data-chart-announcement aria-live="polite" aria-atomic="true"></div>
+  <figcaption>Each point uses a fixed action delay. The game plots show mean return. InterceptGrabFast shows success rate over 200 episodes.</figcaption>
+</figure>
+<script>
+  import '../scripts/degradation';
+</script>
+<style>
+  .degradation-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; margin: 0 0 22px; font-size: 16px; line-height: 1.5; }
+  .degradation-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .degradation-legend svg { width: 16px; height: 16px; }
+  .degradation-legend .line-key { width: 30px; }
+  .degradation-panels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .degradation-panel { min-width: 0; }
+  .degradation-panel h3 { font-size: 16px; font-weight: 500; letter-spacing: -.025em; text-align: center; line-height: 1.5; white-space: nowrap; }
+  .degradation-chart { display: block; width: 100%; overflow: visible; border-radius: 2px; font-family: Arial, sans-serif; }
+  .degradation-chart:focus { outline: none; }
+  .degradation-chart:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+  .axis-label, .tick-label, .zoom-title { font-size: 17px; fill: var(--muted); }
+  .axis-label { fill: var(--ink); }
+  .plot-grid { stroke: #d7d3dd; stroke-opacity: .25; stroke-width: .7; }
+  .plot-axis { fill: none; stroke: #77727e; stroke-width: .9; }
+  .zoom-box { fill: none; stroke: #77727e; stroke-width: 1; stroke-dasharray: 4 3; }
+  .column-guide { stroke: #6d597a; stroke-width: 1; stroke-dasharray: 3 3; opacity: .7; }
+  .plot-hit-area { cursor: crosshair; touch-action: pan-y; }
+  .degradation-tooltip { position: fixed; z-index: 30; pointer-events: none; padding: 12px 16px; border: 1px solid var(--rule); border-radius: 8px; background: white; box-shadow: 0 4px 18px #2926311a; font-size: 16px; line-height: 1.5; max-width: calc(100vw - 24px); }
+  .tooltip-heading { font-weight: 650; margin: 0; }
+  .tooltip-metric { color: var(--muted); margin: 2px 0 8px; }
+  .tooltip-values { display: grid; grid-template-columns: 16px auto auto; gap: 4px 8px; align-items: center; font-variant-numeric: tabular-nums; }
+  .tooltip-values :global(.value-row) { display: contents; }
+  .tooltip-values :global(svg) { width: 16px; height: 16px; }
+  .tooltip-values :global(.value-heading) { grid-column: 1 / -1; font-weight: 600; margin-top: 6px; }
+  .tooltip-values :global(.value-heading:first-child) { margin-top: 0; }
+  .tooltip-values :global(.numeric-value) { padding-left: 14px; text-align: left; color: var(--ink); }
+  .chart-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  @container (max-width: 1071px) {
+    .degradation-panels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+    .degradation-panel { width: 100%; max-width: 400px; justify-self: center; }
+  }
+  @container (max-width: 552px) {
+    .degradation-panels { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .degradation-legend { justify-content: flex-start; margin-bottom: 28px; }
+    .degradation-panel h3 { font-size: 18px; }
+  }
+</style>

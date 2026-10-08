@@ -1,0 +1,171 @@
+---
+import Layout from '../../lagen/layouts/Layout.astro';
+import FailureDemo from '../../lagen/components/FailureDemo.astro';
+import ProfilesFigure from '../../lagen/components/ProfilesFigure.astro';
+import PipelineFigure from '../../lagen/components/PipelineFigure.astro';
+import HistoryFigure from '../../lagen/components/HistoryFigure.astro';
+import DegradationFigure from '../../lagen/components/DegradationFigure.astro';
+import RecoveryFigure from '../../lagen/components/RecoveryFigure.astro';
+import LatencyApproachesFigure from '../../lagen/components/LatencyApproachesFigure.astro';
+import CrossTaskFigure from '../../lagen/components/CrossTaskFigure.astro';
+import CalibrationFigure from '../../lagen/components/CalibrationFigure.astro';
+import RobustnessFigure from '../../lagen/components/RobustnessFigure.astro';
+import meanTraining from '../../lagen/data/mean-training.json';
+import prompt from '../../lagen/data/prompt.json';
+import results from '../../lagen/data/results.json';
+const asset = (name: string) => '/lagen/' + 'assets/' + name;
+const title = 'Are Vision-Language Agents Latency Aware?';
+const authors = [
+  ['Talha Chafekar', '1,2,*,†', 'https://github.com/talha1503'],
+  ['Zihan "Zenus" Wang', '1,*', 'https://zihanwang314.github.io/'],
+  ['Zeju Li', '1,*,†', 'https://zeju-li.com/'],
+  ['Xinyuan Li', '1,*,†', 'https://mindorigin150.github.io/'],
+  ['Qineng Wang', '1', 'https://qinengwang-aiden.github.io/'],
+  ['Jiajun Wu', '3', 'https://jiajunwu.com/'],
+  ['Yuke Zhu', '4', 'https://yukezhu.me/'],
+  ['Yi Dong', '5', 'https://yidong72.github.io/'],
+  ['Zhiding Yu', '5', 'https://chrisding.github.io/'],
+  ['Ruohan Zhang', '1,3', 'https://ruohanzhang.com/'],
+  ['Manling Li', '1', 'https://limanling.github.io/'],
+];
+const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language Agents Latency Aware?},\n  author={Talha Chafekar and Zihan Wang and Zeju Li and Xinyuan Li and Qineng Wang and Jiajun Wu and Yuke Zhu and Yi Dong and Zhiding Yu and Ruohan Zhang and Manling Li},\n  year={2026}\n}';
+---
+<Layout title={title} description="The world keeps moving while an agent thinks. We measure deployment latency and train agents to act under it.">
+  <section class="hero" aria-labelledby="paper-title">
+    <div class="section-width">
+      <div class="hero-brand">
+        <img src={asset('logo.svg')} alt="LAGEN hourglass logo" width="105" height="90" />
+        <h1 id="paper-title">LAGEN</h1>
+      </div>
+      <p class="paper-title">{title}</p>
+      <p class="hero-lead">Training agents for a world that keeps moving</p>
+      <div class="authors" aria-label="Paper authors">
+        {authors.map(([name, note, url]) => <span><a href={url} target="_blank" rel="noopener">{name}</a><sup>{note}</sup></span>)}
+      </div>
+      <p class="author-notes"><sup>*</sup> Equal contribution; author order is interchangeable.<br /><sup>†</sup> Work done during internship at Northwestern.</p>
+      <p class="affiliations">
+        <span><sup>1</sup> Northwestern University</span><span><sup>2</sup> University of Massachusetts Amherst</span>
+        <span><sup>3</sup> Stanford University</span><span><sup>4</sup> The University of Texas at Austin</span><span><sup>5</sup> NVIDIA</span>
+      </p>
+      <div class="resource-links">
+        <a class="button primary" href={asset('paper.pdf')} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8Z"/><path d="M14 3v5h5M8 12h8M8 16h8"/></svg>Paper</a>
+        <a class="button" href="https://github.com/ZihanWang314/latency-sensitive-bench" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .75a11.25 11.25 0 0 0-3.558 21.923c.563.104.768-.244.768-.542 0-.267-.01-.975-.015-1.914-3.13.68-3.791-1.508-3.791-1.508-.512-1.3-1.25-1.646-1.25-1.646-1.022-.699.078-.685.078-.685 1.13.079 1.725 1.16 1.725 1.16 1.005 1.723 2.637 1.225 3.279.937.102-.729.393-1.225.715-1.507-2.5-.284-5.126-1.25-5.126-5.56 0-1.229.439-2.233 1.16-3.02-.117-.284-.503-1.43.11-2.978 0 0 .945-.303 3.094 1.154A10.782 10.782 0 0 1 12 6.185c.956.004 1.918.129 2.816.379 2.147-1.457 3.09-1.154 3.09-1.154.615 1.548.229 2.694.113 2.978.722.787 1.158 1.791 1.158 3.02 0 4.32-2.63 5.272-5.137 5.55.404.35.764 1.042.764 2.1 0 1.517-.014 2.741-.014 3.113 0 .3.203.651.774.54A11.252 11.252 0 0 0 12 .75Z"/></svg>Code</a>
+        <a class="button" href="https://huggingface.co/MLL-Lab/LAGEN-models" target="_blank" rel="noopener"><img src={asset('huggingface.svg')} alt="" width="21" height="21" />Models</a>
+        <a class="button" href="https://huggingface.co/datasets/MLL-Lab/LAGEN-datasets" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>Data</a>
+        <a class="button" href="https://huggingface.co/datasets/MLL-Lab/LAGEN-profiles" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>Profiles</a>
+        <a class="button" href="#citation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 4H6a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-3"/><rect x="9" y="2" width="6" height="4" rx="1"/></svg>Citation</a>
+      </div>
+    </div>
+  </section>
+  <section id="demo" aria-labelledby="demo-title">
+    <FailureDemo />
+
+    <section id="problem" class="paper-section section-width">
+      <h2>Pausing the world hides the cost of latency</h2>
+      <p class="section-lead">While an agent computes, the world changes. Its action then reaches a different state from the one it observed. On Flappy Bird and Demon Attack, a two-frame delay leaves agents with just <strong>1.2–7.1% of their zero-latency return.</strong></p>
+      <DegradationFigure />
+    </section>
+
+  </section>
+
+  <section id="results" class="paper-section section-width">
+    <h2>Reducing latency is not enough. Train with it</h2>
+    <LatencyApproachesFigure />
+    <p class="section-lead">Training with deployment latency improves real-time performance across <strong>all 36 combinations of tasks and architectures</strong>.</p>
+    <RecoveryFigure />
+    <details>
+      <summary>All 36 results</summary>
+      <p>The table reports mean episode returns. Zero/Zero uses a policy trained and evaluated without latency. Zero/Real evaluates the same policy in real time. Target/Real evaluates a policy trained with the deployment latency profile in real time.</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="All 36 task and architecture results">
+        <table><thead><tr><th>Task</th><th>Architecture</th><th>Zero/Zero</th><th>Zero/Real</th><th>Target/Real</th></tr></thead>
+          <tbody>{results.map(row => <tr><th scope="row">{row.task}</th><td>{row.model}</td><td>{row.zero.toFixed(1)}</td><td>{row.before.toFixed(1)}</td><td>{row.after.toFixed(1)}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <section id="method" class="paper-section section-width" aria-label="Method">
+    <section id="profiling" class="research-group">
+      <h2>Reproducing deployment latency in simulation</h2>
+      <section id="calibration" class="evidence">
+        <h3>Simulation predicts deployment performance</h3>
+        <p>We reproduce deployment latency in simulation to predict how agents perform. Temporal replay reduces normalized return error from <strong>8.93 to 3.81 percentage points</strong> compared with a fixed mean delay. This comparison covers five GPU types, three tasks, and two models.</p>
+        <CalibrationFigure />
+        <details>
+          <summary>How we test the simulation</summary>
+          <p>We evaluate OpenVLA and GR00T on three tasks: Flappy Bird, Inverted Pendulum, and InterceptGrabFast. We use five GPU types: RTX 3090, RTX 4090, RTX 5090, L40S, and A100.</p>
+          <p>Each combination uses 25 runs to fit the latency model and 25 separate runs to evaluate it. Each run contains two episodes. The simulation models both action delays and inference capacity.</p>
+          <p>Overall normalized return error, in percentage points: Fixed 8.93, Normal 6.55, IID 4.58, and Temporal 3.81. See paper §3.4.</p>
+        </details>
+      </section>
+      <section id="latency-bursts" class="evidence">
+        <h3>Slow requests occur in bursts</h3>
+        <p>Two deployments can have the same average latency but different sequences of delays. Temporal profiles capture how often different delays occur and how slow requests cluster over time.</p>
+        <ProfilesFigure />
+      </section>
+    </section>
+    <section id="pipeline" class="research-group">
+      <h2>Training agents with deployment latency</h2>
+      <p class="section-lead">We replay deployment latency in simulation while the world keeps moving. A teacher learns to act under these delays through reinforcement learning. We then fine-tune the VLA using the teacher’s action labels.</p>
+      <PipelineFigure />
+    </section>
+  </section>
+
+  <section id="findings" class="paper-section section-width" aria-label="Experiments">
+    <h2>Key Findings</h2>
+    <div id="training-findings" class="findings-group">
+      <section id="training" class="evidence">
+        <h3>1. Profile-trained policies achieve higher returns</h3>
+        <p class="section-lead">Training with the full latency profile exposes agents to varying delays and consecutive slow requests. Policies trained with the full profile achieve higher returns than those trained at the mean on three of four tasks. Flappy Bird returns are similar.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Mean-delay and profile training comparison">
+          <table class="comparison-table">
+            <caption>OpenVLA · one action per request · mean episode return ± standard deviation</caption>
+            <thead><tr><th>Training</th>{meanTraining.map(row => <th>{row.task}</th>)}</tr></thead>
+            <tbody>
+              <tr><th scope="row">Fixed mean</th>{meanTraining.map(row => <td><strong class:list={{winner: row.mean > row.profile}}>{row.mean.toFixed(2)}</strong><span class="uncertainty">± {row.meanStd.toFixed(2)}</span></td>)}</tr>
+              <tr><th scope="row">Full profile</th>{meanTraining.map(row => <td><strong class:list={{winner: row.profile > row.mean}}>{row.profile.toFixed(2)}</strong><span class="uncertainty">± {row.profileStd.toFixed(2)}</span></td>)}</tr>
+              <tr class="gain-row"><th scope="row">Profile gain</th>{meanTraining.map(row => <td>{row.gain > 0 ? '+' : ''}{row.gain.toFixed(1)}%</td>)}</tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="transfer" class="evidence">
+          <h3>2. Transfer is stronger from high to low latency</h3>
+          <p>Transfer is stronger from longer delays to shorter delays than in the reverse direction. Flappy Bird performs best near its training delay. Scores use a policy trained at the evaluation delay as the reference.</p>
+          <RobustnessFigure />
+      </section>
+      <section id="cross-task" class="evidence">
+          <h3>3. Latency training transfers to other tasks</h3>
+          <p>We train on Demon Attack with mixed latencies and evaluate the policy on other games. It achieves higher returns under delay on Atlantis and AirRaid than a policy trained without latency. On Asterix, it outperforms this baseline at two frames and underperforms at four.</p>
+          <CrossTaskFigure />
+      </section>
+    </div>
+
+    <div id="information" class="findings-group">
+      <section id="latency-prompt" class="evidence">
+        <h3>4. Explicit latency information improves control</h3>
+        <p>The same observation can require different actions at different latencies. Stating the latency in the prompt lets the agent distinguish these cases. On Flappy Bird, mean return rises from below 20 to 268–434 across delays of 0–4 frames. On Demon Attack, mean return improves at delays of 0, 1, 2, and 4 frames; the means are similar at three frames.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Latency prompt ablation across two tasks">
+          <table class="prompt-table">
+            <caption>Mean return ± 95% confidence interval · 20 episodes per condition</caption>
+            <thead><tr><th>Task</th><th>Delay in prompt</th>{[0,1,2,3,4].map(n => <th>{n} {n === 1 ? 'frame' : 'frames'}</th>)}</tr></thead>
+            <tbody>{prompt.map(row => <tr class:list={{'with-prompt': row.withLatency}}><th scope="row">{row.task}</th><td>{row.withLatency ? 'Yes' : 'No'}</td>{row.cells.map(cell => <td><strong>{cell.mean.toFixed(1)}</strong><span class="uncertainty">± {cell.ci.toFixed(1)}</span></td>)}</tr>)}</tbody>
+          </table>
+        </div>
+        <p class="figure-note">The prompt states the delay shown in each column.</p>
+      </section>
+      <section id="visual-history" class="evidence">
+        <h3>5. Visual history improves control</h3>
+        <p>Visual history shows how the scene changes over time. Ghost trails improve Flappy Bird performance, KV memory gives the largest gain on Demon Attack, and a frame grid performs best on Deadly Corridor.</p>
+        <HistoryFigure />
+      </section>
+    </div>
+  </section>
+
+  <section id="citation" class="paper-section section-width citation-section">
+    <div class="citation-heading"><h2>Citation</h2><button type="button" id="copy-citation">Copy BibTeX</button></div>
+    <pre><code id="citation-text">{citation}</code></pre>
+  </section>
+</Layout>
+<script>import '../../lagen/scripts/interactions';</script>

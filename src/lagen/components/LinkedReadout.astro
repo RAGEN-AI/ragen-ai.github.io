@@ -1,0 +1,25 @@
+---
+import '../styles/interactive-figures.css';
+interface Props { id: string; }
+const { id } = Astro.props;
+---
+<p id={id + '-help'} class="if-sr-only">Hover or focus to highlight. Click or press Enter to keep a selection; repeat to clear it. Use arrow keys to move between choices. Escape clears the selection.</p>
+<div id={id + '-tooltip'} class="if-tooltip" role="tooltip" hidden></div>
+<div class="if-sr-only" data-linked-announcement aria-live="polite" aria-atomic="true"></div>
+<script>import '../scripts/linked-figures';</script>
+<style is:global>
+  [data-linked-figure] { margin: 28px 0 0; }
+  [data-linked-figure] button { font: inherit; font-size: 16px; }
+  [data-linked-figure] [data-choice] { cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
+  [data-linked-figure] [data-choice]:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+  [data-linked-figure] figcaption { margin-top: 18px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+  [data-linked-figure] svg { font-family: Arial, sans-serif; }
+  [data-linked-figure] svg text { font-size: 16px; fill: var(--ink); }
+  [data-linked-figure] .linked-grid { stroke: #d7d3dd; stroke-opacity: .5; stroke-width: 1; }
+  [data-linked-figure] .linked-axis { fill: none; stroke: #77727e; }
+  [data-linked-figure] .linked-reference { fill: none; stroke: #a09aa9; stroke-width: 1.4; }
+  [data-linked-figure] .linked-muted { opacity: .25; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-linked-figure] * { transition: none !important; }
+  }
+</style>

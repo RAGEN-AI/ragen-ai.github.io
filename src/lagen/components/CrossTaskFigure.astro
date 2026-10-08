@@ -1,0 +1,53 @@
+---
+import panels from '../data/cross-task.json';
+import palette from '../data/paper-palette.json';
+import FigureReadout from './FigureReadout.astro';
+const colors = [palette.gray, palette.purple];
+const labels = ['Zero-latency train', 'Mixed-latency train'];
+const plot = { left: 58, top: 16, width: 198, height: 198 };
+const x = (value: number) => plot.left + (value + .2) / 4.4 * plot.width;
+---
+<figure id="cross-task-figure" class="paper-figure" data-interactive-figure aria-label="Cross-task transfer of Demon Attack policies">
+  <div class="if-legend">
+    {labels.map((label, i) => <span><svg class="line-swatch" viewBox="0 0 32 16" aria-hidden="true"><path d="M0 8H32" stroke={colors[i]} stroke-width="2" /><circle cx="16" cy="8" r="4" fill={colors[i]} /></svg>{label}</span>)}
+  </div>
+  <div class="if-panels">
+    {panels.map((panel, panelIndex) => {
+      const ymax = Math.max(...panel.zero, ...panel.mixed) * 1.18;
+      const y = (value: number) => plot.top + plot.height - value / ymax * plot.height;
+      return <div class="if-panel">
+        <h5>{panel.task}</h5>
+        <svg class="if-chart" viewBox="0 0 268 275" data-inspect-chart tabindex="0" aria-label={panel.task + ' cross-task mean returns'} aria-describedby="cross-task-figure-help" role="group">
+          {panel.yTicks.map(tick => <g>
+            <path class="if-grid" d={`M${plot.left},${y(tick)}h${plot.width}`} />
+            <path class="if-axis" d={`M${plot.left - 5},${y(tick)}h5`} />
+            <text x={plot.left - 8} y={y(tick)} text-anchor="end" dominant-baseline="middle">{tick >= 1000 ? tick / 1000 + 'k' : tick}</text>
+          </g>)}
+          {panel.latencies.map(latency => <g>
+            <path class="if-axis" d={`M${x(latency)},${plot.top + plot.height}v5`} />
+            <text x={x(latency)} y={plot.top + plot.height + 24} text-anchor="middle">{latency}</text>
+          </g>)}
+          <path class="if-axis" d={`M${plot.left},${plot.top}v${plot.height}h${plot.width}`} />
+          <text class="if-axis-label if-y-label" transform="translate(14 115) rotate(-90)" text-anchor="middle">Mean return</text>
+          <text class="if-axis-label" x="157" y="263" text-anchor="middle">Eval latency (raw frames)</text>
+          {[panel.zero, panel.mixed].map((values, i) => <path d={values.map((value, j) => `${j === 0 ? 'M' : 'L'}${x(panel.latencies[j])},${y(value)}`).join(' ')} fill="none" stroke={colors[i]} stroke-width="2.2" />)}
+          {panel.latencies.map((latency, column) => <g data-inspect-target data-x={x(latency)} data-y={plot.top + plot.height / 2} data-readout={`cross-task-readout-${panelIndex}-${column}`}>
+            <line class="if-highlight if-guide" x1={x(latency)} x2={x(latency)} y1={plot.top} y2={plot.top + plot.height} />
+            {[panel.zero, panel.mixed].map((values, i) => <g>
+              <circle class="if-highlight" cx={x(latency)} cy={y(values[column])} r="7" fill="white" stroke={colors[i]} stroke-width="1.5" />
+              <circle cx={x(latency)} cy={y(values[column])} r="4" fill={colors[i]} />
+            </g>)}
+          </g>)}
+          <rect data-inspect-hit x={plot.left} y={plot.top} width={plot.width} height={plot.height} fill="transparent" />
+        </svg>
+      </div>;
+    })}
+  </div>
+  {panels.map((panel, panelIndex) => panel.latencies.map((latency, column) => <template id={`cross-task-readout-${panelIndex}-${column}`}>
+    <p class="readout-title">{panel.task} · {latency} frames</p>
+    <p class="readout-subtitle">Mean return · 20 episodes</p>
+    <dl>{[panel.zero, panel.mixed].map((values, i) => <><dt><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4" fill={colors[i]} /></svg>{labels[i]}</dt><dd>{values[column]}</dd></>)}</dl>
+  </template>))}
+  <FigureReadout id="cross-task-figure" />
+  <figcaption>Both policies train on Demon Attack. Each point shows mean return over 20 episodes. Returns use each task’s native scale.</figcaption>
+</figure>

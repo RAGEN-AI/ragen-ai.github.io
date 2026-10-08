@@ -6,6 +6,7 @@ Project pages of the RAGEN-AI research series on reinforcement learning for LLM 
 
 - `/` : [RAGEN-2: Reasoning Collapse in Agentic RL](https://ragen-ai.github.io/) (ICML 2026 Oral, [arXiv:2604.06268](https://arxiv.org/abs/2604.06268)) - template collapse, mutual information diagnostics, SNR-aware filtering
 - `/v1/` : [RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning](https://ragen-ai.github.io/v1/) ([arXiv:2504.20073](https://arxiv.org/abs/2504.20073)) - StarPO, the Echo Trap
+- `/lagen/` : [LAGEN: Are Vision-Language Agents Latency Aware?](https://ragen-ai.github.io/lagen/) - deployment latency and latency-aware training
 - `/bagen/` : [BAGEN: Are LLM Agents Budget-Aware?](https://ragen-ai.github.io/bagen/) ([arXiv:2606.00198](https://arxiv.org/abs/2606.00198)) - budget-aware LLM agents
 
 ## Local Development
@@ -43,3 +44,10 @@ The main homepage includes a top hero news banner:
 - `News: We released RAGEN-2`
 
 That banner links to `/v2/`.
+
+## LAGEN Maintenance
+
+LAGEN shares this repository’s Astro build and Pages deployment. See
+[the LAGEN maintenance guide](docs/lagen/README.md),
+[content sources](docs/lagen/SOURCES.md), and
+[migration status](docs/lagen/MIGRATION.md).
