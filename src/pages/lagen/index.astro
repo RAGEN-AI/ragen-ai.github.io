@@ -32,6 +32,13 @@ const authors = [
 const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language Agents Latency Aware?},\n  author={Talha Chafekar and Zihan Wang and Zeju Li and Xinyuan Li and Qineng Wang and Jiajun Wu and Yuke Zhu and Yi Dong and Zhiding Yu and Ruohan Zhang and Manling Li},\n  year={2026}\n}';
 ---
 <Layout title={title} description="The world keeps moving while an agent thinks. We measure deployment latency and train agents to act under it.">
+  <script is:inline>
+    // Hide the hero title until the intro script splits it; the timeout shows it if the script fails.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('lagen-intro');
+      setTimeout(() => document.documentElement.classList.add('lagen-intro-ready'), 2500);
+    }
+  </script>
   <section class="hero" aria-labelledby="paper-title">
     <div class="section-width">
       <div class="hero-brand">

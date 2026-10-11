@@ -1,3 +1,4 @@
+import './hero';
 import './demo';
 
 const copy = document.querySelector<HTMLButtonElement>('#copy-citation')!;
