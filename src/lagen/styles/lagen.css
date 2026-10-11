@@ -71,11 +71,6 @@ sup { font-size: .68em; }
 .hero-lead { font-size: 21px; color: var(--muted); margin: 22px 0 34px; }
 .hero-abstract { max-width: 900px; margin: 0 auto 30px; font-size: 19px; line-height: 1.7; color: var(--ink); }
 .hero-abstract strong { color: var(--purple); }
-.contributions { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 980px; margin: 40px auto 0; padding: 0; text-align: left; }
-.contributions a { display: flex; flex-direction: column; gap: 4px; height: 100%; padding: 18px 20px; border: 1px solid var(--rule); border-radius: 12px; background: #ffffffb8; color: var(--muted); font-size: 16px; line-height: 1.5; text-decoration: none; }
-.contributions a:hover { border-color: var(--purple); color: var(--muted); }
-.contributions strong { font-size: 28px; font-weight: 750; letter-spacing: -.02em; color: var(--purple); font-variant-numeric: tabular-nums; }
-.contribution-step { font-size: 14px; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; color: var(--ink); }
 .bridge { margin: 44px 0 0; padding: 18px 22px; border-left: 3px solid var(--purple); background: var(--paper); font-size: 18px; line-height: 1.65; }
 .authors { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 19px; row-gap: 9px; max-width: 1000px; margin: auto; font-size: 18px; }
 .authors span { white-space: nowrap; }
@@ -181,7 +176,6 @@ pre { background: var(--paper); border-radius: 10px; padding: 24px; overflow-x: 
   .hero { padding-top: 64px; }
   .hero h1 { font-size: 2.4rem; }
   .hero-brand img { height: 76px; }
-  .contributions { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
   .demo-carousel { --demo-slide-width: 78%; --demo-video-height: 440px; --demo-offset: 100%; }
   .demo-arrow.previous { left: 3%; }
   .demo-arrow.next { right: 3%; }
@@ -201,8 +195,6 @@ pre { background: var(--paper); border-radius: 10px; padding: 24px; overflow-x: 
   .hero-brand img { height: 64px; }
   .hero-lead { font-size: 18px; margin: 16px 0 28px; }
   .hero-abstract { font-size: 17px; text-align: left; }
-  .contributions { margin-top: 30px; }
-  .contributions strong { font-size: 24px; }
   .bridge { font-size: 17px; }
   .authors { font-size: 16px; column-gap: 14px; row-gap: 9px; }
   .author-notes { margin-top: 20px; }

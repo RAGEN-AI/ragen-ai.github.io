@@ -8,22 +8,22 @@ const steps = [
   {
     key: 'profile',
     title: 'Profile the deployment',
-    text: 'Record action latency for the target model, GPU, and task. Fit a latency profile that captures which delays occur and whether slow requests come in bursts.',
+    text: 'Measure delays on the target GPU, model, and task. Fit a profile, including bursts of slow requests.',
   },
   {
     key: 'teacher',
     title: 'Train a teacher under replayed delay',
-    text: 'In a latency-aware simulator, each predicted action takes effect only after a delay sampled from the profile. The world keeps moving. A small RL teacher learns from the rewards of these delayed actions.',
+    text: 'In simulation, each action lands after a delay drawn from the profile. An RL teacher learns to act under it.',
   },
   {
     key: 'distill',
     title: 'Distill into the VLA',
-    text: 'The frozen teacher labels observations with its actions. We fine-tune the VLA on these demonstrations, optionally adding teacher-labeled states the VLA visits (DAgger).',
+    text: 'The VLA is fine-tuned on the teacher’s actions, optionally with DAgger.',
   },
   {
     key: 'deploy',
     title: 'Act under the same timing',
-    text: 'The VLA receives the task, the latency as text, and optional visual history. Its actions execute with delays drawn from the target profile.',
+    text: 'The VLA sees the task, the delay as text, and optional recent frames.',
   },
 ];
 ---
@@ -74,7 +74,7 @@ const steps = [
       </li>
     ))}
   </ol>
-  <figcaption>The same latency profile drives teacher training, VLA fine-tuning, and evaluation, so the policy learns under the timing it will face.</figcaption>
+  <figcaption>One latency profile drives training and evaluation.</figcaption>
   <details class="pipeline-original">
     <summary>Full pipeline figure from the paper</summary>
     <a href={src} target="_blank" rel="noopener" class="pipeline-image" aria-label="Open the full-resolution pipeline figure in a new tab">

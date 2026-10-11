@@ -46,7 +46,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
       <p class="affiliations">
         <span><sup>1</sup> Northwestern</span><span><sup>2</sup> UMass Amherst</span><span><sup>3</sup> Stanford</span><span><sup>4</sup> UT Austin</span><span><sup>5</sup> NVIDIA</span>
       </p>
-      <p class="hero-abstract">Benchmarks for vision-language-action (VLA) agents pause the world while the model computes. Real deployments do not. Evaluated in real time on an RTX&nbsp;3090, VLA policies on 12 environments keep a median of only <strong>6.6%</strong> of their zero-latency return. LAGEN measures the latency of a deployment, replays it in simulation, and trains agents to act under it.</p>
+      <p class="hero-abstract">Benchmarks pause the world while the model thinks. Real deployments don’t. Run in real time, VLA agents keep only <strong>6.6%</strong> of their return (median, 36 policies). LAGEN trains agents to act under real deployment latency.</p>
       <div class="resource-links">
         <a class="button primary" href={asset('paper.pdf')} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8Z"/><path d="M14 3v5h5M8 12h8M8 16h8"/></svg>Paper</a>
         <a class="button" href="https://github.com/mll-lab-nu/latency-aware-agents" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .75a11.25 11.25 0 0 0-3.558 21.923c.563.104.768-.244.768-.542 0-.267-.01-.975-.015-1.914-3.13.68-3.791-1.508-3.791-1.508-.512-1.3-1.25-1.646-1.25-1.646-1.022-.699.078-.685.078-.685 1.13.079 1.725 1.16 1.725 1.16 1.005 1.723 2.637 1.225 3.279.937.102-.729.393-1.225.715-1.507-2.5-.284-5.126-1.25-5.126-5.56 0-1.229.439-2.233 1.16-3.02-.117-.284-.503-1.43.11-2.978 0 0 .945-.303 3.094 1.154A10.782 10.782 0 0 1 12 6.185c.956.004 1.918.129 2.816.379 2.147-1.457 3.09-1.154 3.09-1.154.615 1.548.229 2.694.113 2.978.722.787 1.158 1.791 1.158 3.02 0 4.32-2.63 5.272-5.137 5.55.404.35.764 1.042.764 2.1 0 1.517-.014 2.741-.014 3.113 0 .3.203.651.774.54A11.252 11.252 0 0 0 12 .75Z"/></svg>Code</a>
@@ -55,11 +55,6 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
         <a class="button" href="https://huggingface.co/datasets/MLL-Lab/LAGEN-profiles" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>Profiles</a>
         <a class="button" href="#citation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 4H6a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-3"/><rect x="9" y="2" width="6" height="4" rx="1"/></svg>Citation</a>
       </div>
-      <ol class="contributions" aria-label="Contributions">
-        <li><a href="#problem"><span class="contribution-step">1 · Measure</span><strong>6.6%</strong><span>median return kept when 36 VLA policies run in real time instead of in a paused world</span></a></li>
-        <li><a href="#profiling"><span class="contribution-step">2 · Reproduce</span><strong>8.93 → 3.81 pp</strong><span>error in predicting real-time return when temporal profiles replace a fixed mean delay</span></a></li>
-        <li><a href="#results"><span class="contribution-step">3 · Train</span><strong>36 / 36</strong><span>task–architecture pairs improve after training with the deployment profile</span></a></li>
-      </ol>
     </div>
   </section>
   <section id="demo" aria-labelledby="demo-title">
@@ -67,7 +62,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
 
     <section id="problem" class="paper-section section-width">
       <h2>Pausing the world hides the cost of latency</h2>
-      <p class="section-lead">The demo is one episode, but the failure is systematic. We take policies trained in a paused world and add action delay only at evaluation. On Flappy Bird and Demon Attack, a two-frame delay leaves them with just <strong>1.2–7.1% of their zero-latency return.</strong> Real GPU latency has the same effect: on an RTX&nbsp;3090, the 36 policies keep a median of 6.6%.</p>
+      <p class="section-lead">The failure is systematic. Add just two frames of delay, and policies keep only <strong>1.2–7.1% of their return.</strong></p>
       <DegradationFigure />
     </section>
 
@@ -75,9 +70,9 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
 
   <section id="results" class="paper-section section-width">
     <h2>Reducing latency is not enough. Train with it</h2>
-    <p class="section-lead">The usual response is to make the model faster. Faster inference shrinks the delay but never removes it, and the policy still acts as if the world waits. We take the other route: keep the delay and teach the policy to act under it.</p>
+    <p class="section-lead">Faster inference shrinks the delay but never removes it. We keep the delay and train the agent to act under it.</p>
     <LatencyApproachesFigure />
-    <p class="section-lead">Does it work? Training with deployment latency improves real-time performance across <strong>all 36 combinations of tasks and architectures</strong>.</p>
+    <p class="section-lead">Result: real-time return improves in <strong>all 36 task × model pairs</strong>.</p>
     <MobileCollapse summary="Show results for all 12 tasks"><RecoveryFigure /></MobileCollapse>
     <details>
       <summary>All 36 results</summary>
@@ -88,21 +83,21 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
         </table>
       </div>
     </details>
-    <p class="bridge">Training with latency requires two things: a faithful model of the deployment’s latency, and a way to train a VLA against it. <a href="#method">The method</a> covers both.</p>
+    <p class="bridge">How? First model the deployment’s latency, then train against it. <a href="#method">See the method</a>.</p>
   </section>
 
   <section id="method" class="paper-section section-width" aria-label="Method">
     <section id="profiling" class="research-group">
       <h2>Reproducing deployment latency in simulation</h2>
-      <p class="section-lead">To train with latency, we first need the delays the policy will actually face. Deployment latency is not one number: it varies from request to request and depends on the model, the GPU, and the task. We record action latency on the target hardware, fit a latency profile, and replay new delay sequences from it in simulation.</p>
+      <p class="section-lead">First, capture the delays the agent will actually face: record them on the target hardware, fit a latency profile, and replay it in simulation.</p>
       <section id="latency-bursts" class="evidence">
         <h3>Slow requests occur in bursts</h3>
-        <p>A profile must capture more than the average. Two deployments can have the same mean latency but different sequences of delays. We compare four profiles of increasing detail. Only the Temporal profile captures both how often each delay occurs and how slow requests cluster over time.</p>
+        <p>The same mean latency can hide very different delay sequences. Only the Temporal profile captures how slow requests cluster.</p>
         <MobileCollapse summary="Show the latency profiles"><ProfilesFigure /></MobileCollapse>
       </section>
       <section id="calibration" class="evidence">
         <h3>Simulation predicts deployment performance</h3>
-        <p>Does replaying a profile reproduce what happens on real hardware? We compare the return predicted in simulation with the return measured in real time. Temporal replay reduces the normalized return error from <strong>8.93 to 3.81 percentage points</strong> compared with a fixed mean delay. This comparison covers five GPU types, three tasks, and two models.</p>
+        <p>Does replay match real hardware? Temporal replay cuts the prediction error from <strong>8.93 to 3.81 points</strong>, versus a fixed mean delay.</p>
         <MobileCollapse summary="Show simulated vs. real returns"><CalibrationFigure /></MobileCollapse>
         <details>
           <summary>How we test the simulation</summary>
@@ -114,18 +109,18 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
     </section>
     <section id="pipeline" class="research-group">
       <h2>Training agents with deployment latency</h2>
-      <p class="section-lead">With a profile that predicts deployment, we can train against it. A small teacher first learns through reinforcement learning to act under replayed delays. We then fine-tune the VLA on the teacher’s actions.</p>
+      <p class="section-lead">Then train against the profile: an RL teacher learns under replayed delays, and the VLA learns from the teacher.</p>
       <PipelineFigure />
     </section>
   </section>
 
   <section id="findings" class="paper-section section-width" aria-label="Experiments">
     <h2>Key Findings</h2>
-    <p class="section-lead">Latency training works. The remaining questions are what to train on, how far the training transfers, and what information the agent needs.</p>
+    <p class="section-lead">Three follow-up questions: what to train on, how far it transfers, and what the agent needs to know.</p>
     <div id="training-findings" class="findings-group">
       <section id="training" class="evidence">
         <h3>1. Profile-trained policies achieve higher returns</h3>
-        <p>Is the mean delay enough to train on? A fixed mean is simpler than a full profile, but it never shows the agent a slow request, let alone several in a row. Policies trained with the full profile achieve higher returns than those trained at the mean on three of four tasks. Flappy Bird returns are similar.</p>
+        <p>Is the mean delay enough? No. The full profile wins on three of four tasks; Flappy Bird is a tie.</p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Mean-delay and profile training comparison">
           <table class="comparison-table">
             <caption>OpenVLA · one action per request · mean episode return</caption>
@@ -141,12 +136,12 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
 
       <section id="transfer" class="evidence">
           <h3>2. Transfer is stronger from high to low latency</h3>
-          <p>Latency changes with hardware and load, so a policy rarely faces exactly its training delay. How well does it handle other delays? Transfer is stronger from longer delays to shorter delays than in the reverse direction. Flappy Bird performs best near its training delay. Scores use a policy trained at the evaluation delay as the reference.</p>
+          <p>Does a policy work at other delays? Better from long to short delays than the reverse. Flappy Bird works only near its training delay.</p>
           <RobustnessFigure />
       </section>
       <section id="cross-task" class="evidence">
           <h3>3. Latency training transfers to other tasks</h3>
-          <p>Does latency training teach only the training task, or a more general habit of acting ahead? We train on Demon Attack with mixed latencies and evaluate the policy on other games. It achieves higher returns under delay on Atlantis and AirRaid than a policy trained without latency. On Asterix, it outperforms this baseline at two frames and underperforms at four.</p>
+          <p>Does it carry over to other games? Trained on Demon Attack, it beats the no-latency baseline on Atlantis and AirRaid. Asterix is mixed.</p>
           <CrossTaskFigure />
       </section>
     </div>
@@ -154,7 +149,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
     <div id="information" class="findings-group">
       <section id="latency-prompt" class="evidence">
         <h3>4. Explicit latency information improves control</h3>
-        <p>So far, each policy trains at one deployment’s latency. A policy trained across many delays faces a new problem: the same observation can require different actions at different latencies. Stating the latency in the prompt lets the agent distinguish these cases. On Flappy Bird, mean return rises from below 20 to 268–434 across delays of 0–4 frames. On Demon Attack, mean return improves at delays of 0, 1, 2, and 4 frames; the means are similar at three frames.</p>
+        <p>The same frame can need different actions at different delays. Telling the agent the delay lifts Flappy Bird from <strong>below 20 to 268–434</strong>.</p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Latency prompt ablation across three tasks">
           <table class="prompt-table">
             <caption>Games: mean return. Intercept Grab: success rate (%). 20 episodes per condition.</caption>
@@ -166,7 +161,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
       </section>
       <section id="visual-history" class="evidence">
         <h3>5. Visual history improves control</h3>
-        <p>The latency value tells the agent how long the delay is, but not what happened during it. Visual history shows how the scene changes over time. Ghost trails improve Flappy Bird performance, KV memory gives the largest gain on Demon Attack, and a frame grid performs best on Deadly Corridor.</p>
+        <p>Recent frames show how the scene moved during the delay. The best format depends on the task.</p>
         <HistoryFigure />
       </section>
     </div>
