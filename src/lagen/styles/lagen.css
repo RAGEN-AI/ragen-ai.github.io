@@ -67,7 +67,7 @@ sup { font-size: .68em; }
 }
 .hero-brand { display: flex; align-items: center; justify-content: center; gap: 22px; }
 .hero-brand img { height: 86px; width: auto; flex: none; }
-.hero h1 { font-size: 2.9rem; font-weight: 800; color: var(--ink); line-height: 1.15; letter-spacing: -.03em; text-align: left; max-width: 760px; }
+.hero h1 { font-size: clamp(1.9rem, 2.85vw, 2.6rem); font-weight: 800; color: var(--ink); line-height: 1.2; letter-spacing: -.03em; white-space: nowrap; }
 .hero-lead { font-size: 21px; color: var(--muted); margin: 22px 0 34px; }
 .hero-abstract { max-width: 900px; margin: 0 auto 30px; font-size: 19px; line-height: 1.7; color: var(--ink); }
 .hero-abstract strong { color: var(--purple); }
@@ -174,7 +174,8 @@ pre { background: var(--paper); border-radius: 10px; padding: 24px; overflow-x: 
 .site-footer a { color: var(--purple); font-weight: 600; text-decoration: none; }
 @media (max-width: 900px) {
   .hero { padding-top: 64px; }
-  .hero h1 { font-size: 2.4rem; }
+  .hero-brand { flex-direction: column; gap: 16px; }
+  .hero h1 { font-size: 2.2rem; white-space: normal; text-align: center; text-wrap: balance; }
   .hero-brand img { height: 76px; }
   .demo-carousel { --demo-slide-width: 78%; --demo-video-height: 440px; --demo-offset: 100%; }
   .demo-arrow.previous { left: 3%; }
@@ -313,3 +314,20 @@ pre { background: var(--paper); border-radius: 10px; padding: 24px; overflow-x: 
   .mobile-collapse > summary { display: list-item; }
   .mobile-collapse[open] > summary { margin-bottom: 4px; }
 }
+
+/* Hero intro: title letters rise in, the tagline slides in, then the rest of the hero fades up. */
+.intro-word { display: inline-block; white-space: nowrap; }
+.lagen-intro #paper-title, .lagen-intro .hero-lead { visibility: hidden; }
+.lagen-intro-ready #paper-title, .lagen-intro-ready .hero-lead { visibility: visible; }
+.intro-char { display: inline-block; opacity: 0; transform: translateY(.4em); animation: intro-rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+.intro-char-lead { display: inline-block; opacity: 0; transform: translateX(-8px); animation: intro-slide .7s ease-out forwards; }
+.lagen-intro .hero-brand img { opacity: 0; transform: scale(.85) rotate(-12deg); animation: intro-logo .8s cubic-bezier(.2,.7,.2,1) forwards; }
+.lagen-intro .hero .authors, .lagen-intro .hero .author-notes, .lagen-intro .hero .affiliations, .lagen-intro .hero .hero-abstract, .lagen-intro .hero .resource-links { opacity: 0; transform: translateY(14px); animation: intro-rise .7s ease-out forwards; }
+.lagen-intro .hero .authors { animation-delay: 1.2s; }
+.lagen-intro .hero .author-notes { animation-delay: 1.3s; }
+.lagen-intro .hero .affiliations { animation-delay: 1.35s; }
+.lagen-intro .hero .hero-abstract { animation-delay: 1.45s; }
+.lagen-intro .hero .resource-links { animation-delay: 1.6s; }
+@keyframes intro-rise { to { opacity: 1; transform: none; } }
+@keyframes intro-slide { to { opacity: 1; transform: none; } }
+@keyframes intro-logo { to { opacity: 1; transform: none; } }
