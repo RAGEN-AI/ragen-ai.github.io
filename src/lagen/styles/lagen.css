@@ -158,7 +158,6 @@ th:first-child { text-align: left; }
 thead th { border-top: 2px solid var(--purple); border-bottom: 1px solid var(--purple); }
 td strong { font-weight: 500; }
 td strong.winner { font-weight: 750; }
-.uncertainty { display: block; color: var(--muted); font-weight: 400; }
 .gain-row, .with-prompt { background: #f2eef5; }
 .gain-row td { font-weight: 700; }
 .prompt-table th:first-child { white-space: normal; min-width: 125px; }
