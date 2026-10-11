@@ -123,7 +123,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
         <p>Is the mean latency sufficient for training? No. Training with the full profile gives a higher return on three of four tasks. On Flappy Bird, the two returns are almost equal.</p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Mean-delay and profile training comparison">
           <table class="comparison-table">
-            <caption>OpenVLA · one action per request · mean episode return</caption>
+            <caption>OpenVLA with one action for each request. The values are mean episode returns.</caption>
             <thead><tr><th>Training</th>{meanTraining.map(row => <th>{row.task}</th>)}</tr></thead>
             <tbody>
               <tr><th scope="row">Fixed mean</th>{meanTraining.map(row => <td><strong class:list={{winner: row.mean > row.profile}}>{row.mean.toFixed(2)}</strong></td>)}</tr>
@@ -152,12 +152,12 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
         <p>At different latencies, the same frame can need different actions. When the prompt gives the latency value, the Flappy Bird return increases from <strong>less than 20 to 268–434</strong>.</p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Latency prompt ablation across three tasks">
           <table class="prompt-table">
-            <caption>Games: mean return. Intercept Grab: success rate (%). 20 episodes per condition.</caption>
+            <caption>Games: mean return. Intercept Grab: success rate (%). Each condition uses 20 episodes.</caption>
             <thead><tr><th>Task</th><th>Delay in prompt</th>{[0,1,2,3,4].map(n => <th>{n} {n === 1 ? 'frame' : 'frames'}</th>)}</tr></thead>
             <tbody>{prompt.map(row => <tr class:list={{'with-prompt': row.withLatency}}><th scope="row">{row.task}</th><td>{row.withLatency ? 'Yes' : 'No'}</td>{row.cells.map(cell => <td><strong>{cell.mean.toFixed(1)}{row.metric === 'success_rate_percent' ? '%' : ''}</strong></td>)}</tr>)}</tbody>
           </table>
         </div>
-        <p class="figure-note">The prompt states the delay shown in each column.</p>
+        <p class="figure-note">In each column, the prompt gives the delay of that column.</p>
       </section>
       <section id="visual-history" class="evidence">
         <h3>5. Visual history improves control</h3>
