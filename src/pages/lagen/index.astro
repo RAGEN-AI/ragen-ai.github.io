@@ -61,7 +61,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
     <FailureDemo />
 
     <section id="problem" class="paper-section section-width">
-      <h2>Benchmarks that stop the environment hide the cost of latency</h2>
+      <h2>Benchmarks that stop the environment hide the effect of latency</h2>
       <p class="section-lead">This failure is not specific to one episode. On Flappy Bird and Demon Attack, we add a delay of only two frames. The return then falls to <strong>1.2–7.1% of the return without delay.</strong></p>
       <DegradationFigure />
     </section>
@@ -69,7 +69,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
   </section>
 
   <section id="results" class="paper-section section-width">
-    <h2>Faster inference is not sufficient. Train with latency.</h2>
+    <h2>Faster inference does not remove latency. Train with latency.</h2>
     <p class="section-lead">Faster inference makes the latency smaller, but the latency does not become zero. Thus, we keep the latency and train the agent to act with it.</p>
     <LatencyApproachesFigure />
     <p class="section-lead">Result: training with latency increases the real-time return for <strong>all 36 combinations of task and model</strong>.</p>
@@ -88,15 +88,15 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
 
   <section id="method" class="paper-section section-width" aria-label="Method">
     <section id="profiling" class="research-group">
-      <h2>Reproducing deployment latency in simulation</h2>
+      <h2>Simulate the deployment latency</h2>
       <p class="section-lead">First, we find the latency that the agent will have during deployment. We measure the latency on the target hardware and fit a latency profile to the measurements. Then, we use the profile to make new latency sequences in simulation.</p>
       <section id="latency-bursts" class="evidence">
-        <h3>Slow requests occur in bursts</h3>
+        <h3>Slow requests occur in groups</h3>
         <p>Two deployments can have the same mean latency but different sequences of latency. Only the Temporal profile shows that slow requests occur together in time.</p>
         <MobileCollapse summary="Show the latency profiles"><ProfilesFigure /></MobileCollapse>
       </section>
       <section id="calibration" class="evidence">
-        <h3>Simulation predicts deployment performance</h3>
+        <h3>The simulation predicts the return on real hardware</h3>
         <p>Does the simulation predict the return on real hardware? With the Temporal profile, the prediction error decreases from <strong>8.93 to 3.81 percentage points</strong>. The baseline is a fixed latency that is equal to the mean.</p>
         <MobileCollapse summary="Show simulated and real returns"><CalibrationFigure /></MobileCollapse>
         <details>
@@ -108,18 +108,18 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
       </section>
     </section>
     <section id="pipeline" class="research-group">
-      <h2>Training agents with deployment latency</h2>
+      <h2>Train agents with the deployment latency</h2>
       <p class="section-lead">Then, we train the agent with the profile. First, an RL teacher learns to act with the simulated latency. Then, the VLA learns from the actions of the teacher.</p>
       <PipelineFigure />
     </section>
   </section>
 
   <section id="findings" class="paper-section section-width" aria-label="Experiments">
-    <h2>Key Findings</h2>
-    <p class="section-lead">Next, we answer three questions. What must we train with? How well does the training transfer? What information does the agent need?</p>
+    <h2>Three questions about latency training</h2>
+    <p class="section-lead">What must we train with? How well does the training transfer? What information does the agent need?</p>
     <div id="training-findings" class="findings-group">
       <section id="training" class="evidence">
-        <h3>1. Profile-trained policies achieve higher returns</h3>
+        <h3>1. Training with the full profile gives a higher return</h3>
         <p>Is the mean latency sufficient for training? No. Training with the full profile gives a higher return on three of four tasks. On Flappy Bird, the two returns are almost equal.</p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Mean-delay and profile training comparison">
           <table class="comparison-table">
@@ -135,12 +135,12 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
       </section>
 
       <section id="transfer" class="evidence">
-          <h3>2. Transfer is stronger from high to low latency</h3>
+          <h3>2. Transfer from high to low latency is better than from low to high latency</h3>
           <p>Does a policy work at a latency that is different from its training latency? Transfer from high to low latency is better than transfer from low to high latency. On Flappy Bird, a policy works well only near its training latency.</p>
           <RobustnessFigure />
       </section>
       <section id="cross-task" class="evidence">
-          <h3>3. Latency training transfers to other tasks</h3>
+          <h3>3. Latency training can help on other games</h3>
           <p>Does the training help on other games? We train a policy on Demon Attack with mixed latencies. On Atlantis and AirRaid, this policy gets a higher return than a policy trained without latency. On Asterix, the result is mixed.</p>
           <CrossTaskFigure />
       </section>
@@ -148,7 +148,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
 
     <div id="information" class="findings-group">
       <section id="latency-prompt" class="evidence">
-        <h3>4. Explicit latency information improves control</h3>
+        <h3>4. The latency value in the prompt increases the return</h3>
         <p>At different latencies, the same frame can need different actions. When the prompt gives the latency value, the Flappy Bird return increases from <strong>less than 20 to 268–434</strong>.</p>
         <div class="table-scroll" tabindex="0" role="region" aria-label="Latency prompt ablation across three tasks">
           <table class="prompt-table">
@@ -160,7 +160,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
         <p class="figure-note">In each column, the prompt gives the delay of that column.</p>
       </section>
       <section id="visual-history" class="evidence">
-        <h3>5. Visual history improves control</h3>
+        <h3>5. Recent frames can increase the return</h3>
         <p>Recent frames show how the scene moved during the latency. The best format for these frames is different for each task.</p>
         <HistoryFigure />
       </section>
