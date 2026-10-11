@@ -102,5 +102,49 @@
         "ci": 705.5
       }
     ]
+  },
+  {
+    "task": "Intercept Grab",
+    "withLatency": true,
+    "cells": [
+      {
+        "mean": 30.0
+      },
+      {
+        "mean": 40.0
+      },
+      {
+        "mean": 45.0
+      },
+      {
+        "mean": 50.0
+      },
+      {
+        "mean": 40.0
+      }
+    ],
+    "metric": "success_rate_percent"
+  },
+  {
+    "task": "Intercept Grab",
+    "withLatency": false,
+    "cells": [
+      {
+        "mean": 20.0
+      },
+      {
+        "mean": 15.0
+      },
+      {
+        "mean": 40.0
+      },
+      {
+        "mean": 40.0
+      },
+      {
+        "mean": 5.0
+      }
+    ],
+    "metric": "success_rate_percent"
   }
 ]

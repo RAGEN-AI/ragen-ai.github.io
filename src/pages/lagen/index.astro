@@ -146,11 +146,11 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
       <section id="latency-prompt" class="evidence">
         <h3>4. Explicit latency information improves control</h3>
         <p>The same observation can require different actions at different latencies. Stating the latency in the prompt lets the agent distinguish these cases. On Flappy Bird, mean return rises from below 20 to 268–434 across delays of 0–4 frames. On Demon Attack, mean return improves at delays of 0, 1, 2, and 4 frames; the means are similar at three frames.</p>
-        <div class="table-scroll" tabindex="0" role="region" aria-label="Latency prompt ablation across two tasks">
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Latency prompt ablation across three tasks">
           <table class="prompt-table">
-            <caption>Mean return ± 95% confidence interval · 20 episodes per condition</caption>
+            <caption>Games: mean return ± 95% confidence interval. Intercept Grab: success rate (%). 20 episodes per condition.</caption>
             <thead><tr><th>Task</th><th>Delay in prompt</th>{[0,1,2,3,4].map(n => <th>{n} {n === 1 ? 'frame' : 'frames'}</th>)}</tr></thead>
-            <tbody>{prompt.map(row => <tr class:list={{'with-prompt': row.withLatency}}><th scope="row">{row.task}</th><td>{row.withLatency ? 'Yes' : 'No'}</td>{row.cells.map(cell => <td><strong>{cell.mean.toFixed(1)}</strong><span class="uncertainty">± {cell.ci.toFixed(1)}</span></td>)}</tr>)}</tbody>
+            <tbody>{prompt.map(row => <tr class:list={{'with-prompt': row.withLatency}}><th scope="row">{row.task}</th><td>{row.withLatency ? 'Yes' : 'No'}</td>{row.cells.map(cell => <td><strong>{cell.mean.toFixed(1)}{row.metric === 'success_rate_percent' ? '%' : ''}</strong>{'ci' in cell && <span class="uncertainty">± {cell.ci.toFixed(1)}</span>}</td>)}</tr>)}</tbody>
           </table>
         </div>
         <p class="figure-note">The prompt states the delay shown in each column.</p>
