@@ -4,13 +4,13 @@ const approaches = [
     key: 'execution',
     title: 'Reduce latency',
     description: 'Two inference-duration bars share one start: the shorter blue bar finishes earlier than the gray bar, with a left-pointing arrow showing the saved time. Action execution shows two equal eight-action chunks on two rows of a shared time axis. The lower chunk starts four steps later. During its two-step inference delay, the upper chunk continues executing the rose prefix. The lower hatched cells retain that prefix. A downward arrow marks the switch to the new actions when inference finishes; the unused upper tail is hollow.',
-    caption: 'Accelerate inference. Predict new actions while executing the current ones.',
+    caption: 'Make inference faster. Predict new actions while the agent does the current actions.',
   },
   {
     key: 'training',
     title: 'Train with latency (ours)',
     description: 'The same aligned inference-duration bars and two asynchronous action chunks are preserved. Their filled regions and the saved-time and handoff arrows use 40 percent opacity. Node borders, module connections and labels remain fully opaque. The upper chunk supplies committed actions while the lower chunk is computed, then execution switches to the lower row. The purple deployment profile supplies delays during simulated training, not an input to Policy.',
-    caption: 'Reproduce deployment latency in simulation. Train agents to act under these delays.',
+    caption: 'Use the deployment latency in simulation. Train agents to act with this latency.',
   },
 ];
 ---

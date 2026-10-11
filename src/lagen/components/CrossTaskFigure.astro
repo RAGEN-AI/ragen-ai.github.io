@@ -49,5 +49,5 @@ const x = (value: number) => plot.left + (value + .2) / 4.4 * plot.width;
     <dl>{[panel.zero, panel.mixed].map((values, i) => <><dt><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="4" fill={colors[i]} /></svg>{labels[i]}</dt><dd>{values[column]}</dd></>)}</dl>
   </template>))}
   <FigureReadout id="cross-task-figure" />
-  <figcaption>Both policies train on Demon Attack. Each point shows mean return over 20 episodes. Returns use each task’s native scale.</figcaption>
+  <figcaption>Both policies train on Demon Attack. Each point shows mean return over 20 episodes. Each task uses its own return scale.</figcaption>
 </figure>

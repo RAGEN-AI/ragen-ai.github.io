@@ -7,23 +7,23 @@ const profilePath = profile.map((value, i) => `${i ? 'L' : 'M'}${6 + i * 11},${4
 const steps = [
   {
     key: 'profile',
-    title: 'Profile the deployment',
-    text: 'Measure delays on the target GPU, model, and task. Fit a profile, including bursts of slow requests.',
+    title: 'Measure the deployment',
+    text: 'Measure the latency for the target GPU, model, and task. Fit a profile that also shows groups of slow requests.',
   },
   {
     key: 'teacher',
-    title: 'Train a teacher under replayed delay',
-    text: 'In simulation, each action lands after a delay drawn from the profile. An RL teacher learns to act under it.',
+    title: 'Train a teacher with simulated latency',
+    text: 'In simulation, each action starts after a latency from the profile. An RL teacher learns to act with this latency.',
   },
   {
     key: 'distill',
-    title: 'Distill into the VLA',
-    text: 'The VLA is fine-tuned on the teacher’s actions, optionally with DAgger.',
+    title: 'Teach the VLA',
+    text: 'Fine-tune the VLA on the actions of the teacher. DAgger is optional.',
   },
   {
     key: 'deploy',
-    title: 'Act under the same timing',
-    text: 'The VLA sees the task, the delay as text, and optional recent frames.',
+    title: 'Act with the same latency',
+    text: 'The VLA receives the task, the latency as text, and optional recent frames.',
   },
 ];
 ---
@@ -74,13 +74,13 @@ const steps = [
       </li>
     ))}
   </ol>
-  <figcaption>One latency profile drives training and evaluation.</figcaption>
+  <figcaption>We use the same latency profile for training and for evaluation.</figcaption>
   <details class="pipeline-original">
     <summary>Full pipeline figure from the paper</summary>
     <a href={src} target="_blank" rel="noopener" class="pipeline-image" aria-label="Open the full-resolution pipeline figure in a new tab">
       <img src={src} width="3988" height="1771" loading="lazy" alt="LAGEN pipeline from the paper: profile deployment timing using Fixed, Normal, IID or Temporal generators; train a latency teacher through fresh reinforcement-learning interactions; distill teacher demonstrations into a VLA with optional DAgger; deploy the VLA with delayed-action execution." />
     </a>
-    <p class="figure-note">Select the figure to open it at full resolution. ActionReady marks when a predicted action becomes available. The curves show schematic latency profiles.</p>
+    <p class="figure-note">Select the figure to open it at full size. ActionReady shows the time when a predicted action is available. The curves show example latency profiles.</p>
   </details>
 </figure>
 <style>
