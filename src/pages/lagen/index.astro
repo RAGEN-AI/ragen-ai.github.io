@@ -103,13 +103,13 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
         <MobileCollapse summary="Show the latency profiles"><ProfilesFigure /></MobileCollapse>
       </section>
       <section id="calibration" class="evidence">
-        <h3>The simulation predicts the return on real hardware</h3>
-        <p>Does the simulation predict the return on real hardware? With the Temporal profile, the prediction error decreases from <strong>8.93 to 3.81 percentage points</strong>. The baseline is a fixed latency that is equal to the mean.</p>
+        <h3>The latency simulation predicts the return on real hardware</h3>
+        <p>Does the latency simulation predict the return on real hardware? With the Temporal profile, the prediction error decreases from <strong>8.93 to 3.81 percentage points</strong>. The baseline is a fixed latency that is equal to the mean.</p>
         <MobileCollapse summary="Show simulated and real returns"><CalibrationFigure /></MobileCollapse>
         <details>
-          <summary>How we test the simulation</summary>
+          <summary>How we test the latency simulation</summary>
           <p>We evaluate OpenVLA and GR00T on three tasks: Flappy Bird, Inverted Pendulum, and Intercept Grab (Fast). We use five GPU types: RTX 3090, RTX 4090, RTX 5090, L40S, and A100.</p>
-          <p>For each combination, we use 25 runs to fit the latency model and 25 different runs to evaluate it. Each run has two episodes. The simulation includes both action delay and inference capacity.</p>
+          <p>For each combination, we use 25 runs to fit the latency model and 25 different runs to evaluate it. Each run has two episodes. The latency simulation includes both action delay and inference capacity.</p>
           <p>Normalized return error for all combinations, in percentage points: Fixed 8.93, Normal 6.55, IID 4.58, Temporal 3.81. Refer to paper §3.4.</p>
         </details>
       </section>
