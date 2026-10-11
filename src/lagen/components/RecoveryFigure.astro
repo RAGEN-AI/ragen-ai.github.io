@@ -6,7 +6,8 @@ const colors = [palette.gray, palette.blue, palette.rose];
 const models = ['OpenVLA', 'π₀.₅', 'GR00T'];
 const tasks = [...new Set(results.map(row => row.task))];
 const ymax = Math.ceil(Math.max(100, ...results.map(row => 100 * row.after / row.zero)) / 25) * 25 + 15;
-const ticks = Array.from({ length: Math.ceil(ymax / 25) }, (_, i) => i * 25);
+const tickStep = ymax > 300 ? 50 : 25;
+const ticks = Array.from({ length: Math.ceil(ymax / tickStep) }, (_, i) => i * tickStep);
 const layouts = [
   { key: 'wide', tasks, width: 1100, height: 430, plotHeight: 240, wide: true },
   ...Array.from({ length: 6 }, (_, i) => ({ key: 'pair-' + i, tasks: tasks.slice(i * 2, i * 2 + 2), width: 280, height: 370, plotHeight: 205, wide: false })),
