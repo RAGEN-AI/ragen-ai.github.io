@@ -130,42 +130,42 @@
     "model": "OpenVLA",
     "zero": 5565.29,
     "before": 194.33,
-    "after": 1853.33
+    "after": 2250.516542056559
   },
   {
     "task": "Ant",
     "model": "\u03c0\u2080.\u2085",
     "zero": 5782.5,
     "before": 131.6,
-    "after": 1774.71
+    "after": 3529.1356694017713
   },
   {
     "task": "Ant",
     "model": "GR00T",
     "zero": 6222.6,
     "before": 165.37,
-    "after": 1955.97
+    "after": 2999.993207588551
   },
   {
     "task": "Hopper",
     "model": "OpenVLA",
     "zero": 1419.93,
     "before": 67.88,
-    "after": 424.58
+    "after": 3400.223478658233
   },
   {
     "task": "Hopper",
     "model": "\u03c0\u2080.\u2085",
     "zero": 3482.49,
     "before": 8.4,
-    "after": 235.17
+    "after": 2654.211841209049
   },
   {
     "task": "Hopper",
     "model": "GR00T",
     "zero": 872.83,
     "before": 8.55,
-    "after": 242.55
+    "after": 3715.532588755296
   },
   {
     "task": "Inverted Pendulum",
@@ -193,21 +193,21 @@
     "model": "OpenVLA",
     "zero": 983.92,
     "before": 103.65,
-    "after": 857.44
+    "after": 4326.980408590924
   },
   {
     "task": "Walker2D",
     "model": "\u03c0\u2080.\u2085",
     "zero": 3631.42,
     "before": 80.95,
-    "after": 371.09
+    "after": 3812.6454174263054
   },
   {
     "task": "Walker2D",
     "model": "GR00T",
     "zero": 3527.99,
     "before": 63.24,
-    "after": 852.87
+    "after": 3955.2027355439686
   },
   {
     "task": "Balance",
