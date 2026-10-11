@@ -46,7 +46,7 @@ function selectColumn(panelIndex: number, column: number, clientX: number, clien
     heading.textContent = `${panel.title} · ${latency} ${latency === 1 ? 'frame' : 'frames'}`;
     metric.textContent = mikasa ? 'Success rate (%)' : 'Mean return';
     values.replaceChildren();
-    // Group the six InterceptGrabFast readings by action mode, preserving model order in each group.
+    // Group the six Intercept Grab (Fast) readings by action mode, preserving model order in each group.
     for (const horizon of mikasa ? [1, 8] : [null]) {
       if (horizon !== null) {
         const groupHeading = document.createElement('div');

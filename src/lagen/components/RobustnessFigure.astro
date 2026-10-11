@@ -14,8 +14,8 @@ function cellColors(ratio: number) {
 }
 ---
 <figure id="robustness-figure" class="paper-figure" data-interactive-figure aria-label="Cross-latency transfer relative to matched-delay policies">
-  <div class="heatmap-scale" aria-label="Color scale: relative to matched-delay policy">
-    <p>Relative to matched-delay policy</p>
+  <div class="heatmap-scale" aria-label="Color scale: return relative to a policy trained at the evaluation latency">
+    <p>Return relative to a policy trained at the evaluation latency</p>
     <div class="heatmap-gradient" style={{ background: `linear-gradient(to right, ${palette.heatmap.join(',')})` }}></div>
     <div class="heatmap-scale-ticks">{[0, 25, 50, 75, 100].map(value => <span style={{ left: `${(value + 5) / 105 * 100}%` }}>{value}%</span>)}</div>
   </div>
@@ -71,7 +71,7 @@ function cellColors(ratio: number) {
     })}
   </div>
   <FigureReadout id="robustness-figure" />
-  <figcaption>Arrows show training → evaluation latency. <strong>High → low latency</strong> is the mean of the ten cell percentages in the lower-right triangle. <strong>Low → high latency</strong> is the corresponding mean for the upper-left triangle.</figcaption>
+  <figcaption>Each cell shows the return of a policy at one evaluation latency. 100% is the return of a policy trained at that evaluation latency. The arrows go from training latency to evaluation latency. <strong>High → low latency</strong> is the mean of the ten cells in the lower-right triangle. <strong>Low → high latency</strong> is the mean of the ten cells in the upper-left triangle.</figcaption>
 </figure>
 <script>
   for (const panel of document.querySelectorAll<HTMLElement>('.heatmap-panel')) {
@@ -91,7 +91,7 @@ function cellColors(ratio: number) {
   }
 </script>
 <style>
-  .heatmap-scale { width: min(360px, 100%); margin: 0 auto 24px; font-size: 16px; }
+  .heatmap-scale { width: min(480px, 100%); margin: 0 auto 24px; font-size: 16px; }
   .heatmap-scale p { margin: 0 0 10px; text-align: center; }
   .heatmap-gradient { height: 14px; margin: 0 24px; }
   .heatmap-scale-ticks { position: relative; height: 28px; margin: 4px 24px 0; color: var(--muted); }

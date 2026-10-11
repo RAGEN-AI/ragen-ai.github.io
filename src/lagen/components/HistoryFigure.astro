@@ -13,7 +13,7 @@ const methods = [
 const asset = (name: string) => '/lagen/' + 'assets/history/' + name;
 const frame = (i: number) => asset('frame_0' + i + '.png');
 const y = (value: number) => 286 - (value - 50) / 100 * 240;
-const ghostTrailNAReason = 'Ghost trail is not suitable for first-person shooters such as Deadly Corridor, so this condition was not evaluated.';
+const ghostTrailNAReason = 'The ghost trail is not suitable for first-person games such as Deadly Corridor. Thus, we did not evaluate this condition.';
 ---
 <figure id="history-figure" data-linked-figure aria-label="Visual-history mechanisms linked to results on three tasks">
   <div class="history-layout">
@@ -55,7 +55,7 @@ const ghostTrailNAReason = 'Ghost trail is not suitable for first-person shooter
       <div class="history-panels">
         {panels.map((panel, task) => <section class="history-panel">
           <h5>{panel.task}</h5>
-          <p class="history-delay">{panel.delay} frames of delay</p>
+          <p class="history-delay">Delay: {panel.delay} frames</p>
           <svg viewBox="0 0 340 310" aria-label={panel.task + ' mean returns and 95% confidence intervals'} data-choice-group data-roving>
             {[50,75,100,125,150].map(value => <g>
               <line x1="48" x2="334" y1={y(value)} y2={y(value)} class={value === 100 ? 'linked-reference' : 'linked-grid'} stroke-dasharray={value === 100 ? '4 4' : undefined} />
@@ -83,7 +83,7 @@ const ghostTrailNAReason = 'Ghost trail is not suitable for first-person shooter
     {cell ? <dl><dt>Return</dt><dd>{cell.mean.toFixed(2)}%</dd><dt>95% interval</dt><dd>{cell.low.toFixed(2)}–{cell.high.toFixed(2)}%</dd><dt>Episodes</dt><dd>{cell.episodes}</dd><dt>Delay</dt><dd>{panel.delay} raw frames</dd></dl> : <p>{ghostTrailNAReason}</p>}
   </template>))}
   <LinkedReadout id="history-figure" />
-  <figcaption>100% marks the single-frame baseline at the same delay. Delays are three frames on Flappy Bird and six on Demon Attack and Deadly Corridor. Error bars show episode-level 95% intervals from one training run. OpenVLA uses 100 evaluation episodes per condition, and WanOFT uses 20. Ghost trail was not evaluated on Deadly Corridor.</figcaption>
+  <figcaption>100% is the return with a single-frame input at the same delay. The delay is three frames on Flappy Bird and six frames on Demon Attack and Deadly Corridor. Error bars show 95% intervals over episodes from one training run. OpenVLA uses 100 evaluation episodes for each condition. WanOFT uses 20. We did not evaluate the ghost trail on Deadly Corridor.</figcaption>
 </figure>
 <script>
   const figure = document.querySelector<HTMLElement>('#history-figure')!;

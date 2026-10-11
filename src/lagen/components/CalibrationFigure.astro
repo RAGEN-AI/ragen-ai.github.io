@@ -4,7 +4,7 @@ import palette from '../data/paper-palette.json';
 import FigureReadout from './FigureReadout.astro';
 const methods = [['fixed', 'Fixed'], ['normal', 'Normal'], ['iid', 'IID'], ['temporal', 'Temporal']];
 const models = [['qwenoft', 'OpenVLA'], ['qwengr00t', 'GR00T']];
-const taskNames: Record<string, string> = { flappy: 'Flappy Bird', inverted_pendulum: 'Inverted Pendulum', mikasa_intercept_grab_fast: 'InterceptGrabFast' };
+const taskNames: Record<string, string> = { flappy: 'Flappy Bird', inverted_pendulum: 'Inverted Pendulum', mikasa_intercept_grab_fast: 'Intercept Grab (Fast)' };
 const taskColors: Record<string, string> = { flappy: palette.gray, inverted_pendulum: palette.coral, mikasa_intercept_grab_fast: palette.peach };
 const gpuNames: Record<string, string> = { rtx3090: 'RTX 3090', rtx4090: 'RTX 4090', rtx5090: 'RTX 5090', l40s: 'L40S', a100: 'A100' };
 const markers: Record<string, string> = {
@@ -71,7 +71,7 @@ const panels = models.map(([model, modelName]) => ({ model, modelName, methods: 
     </template>;
   })))}
   <FigureReadout id="calibration-figure" />
-  <figcaption>Both axes show return relative to the same zero-latency baseline (100%). The diagonal marks equal simulated and measured returns. Sim − real shows their difference in percentage points.</figcaption>
+  <figcaption>Both axes show the return relative to the same baseline without latency (100%). On the diagonal line, the simulated return is equal to the measured return. “Sim − real” is the difference in percentage points.</figcaption>
 </figure>
 <style>
   .calibration-row { margin-top: 28px; }
