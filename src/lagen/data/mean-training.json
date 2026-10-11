@@ -24,7 +24,7 @@
     "gain": 27.478040220510213
   },
   {
-    "task": "InterceptGrabFast",
+    "task": "Intercept Grab (Fast)",
     "mean": 3.5443485127069287,
     "meanStd": 7.07192296411853,
     "profile": 18.195560179747673,

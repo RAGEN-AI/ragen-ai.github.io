@@ -231,21 +231,21 @@
     "after": 90.42079649633935
   },
   {
-    "task": "Intercept Grab Fast",
+    "task": "Intercept Grab (Fast)",
     "model": "OpenVLA",
     "zero": 36.108,
     "before": 18.596,
     "after": 25.752
   },
   {
-    "task": "Intercept Grab Fast",
+    "task": "Intercept Grab (Fast)",
     "model": "\u03c0\u2080.\u2085",
     "zero": 36.785,
     "before": 8.082,
     "after": 17.558
   },
   {
-    "task": "Intercept Grab Fast",
+    "task": "Intercept Grab (Fast)",
     "model": "GR00T",
     "zero": 33.514,
     "before": 14.314,

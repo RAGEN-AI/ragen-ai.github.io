@@ -1,13 +1,110 @@
 ---
+import palette from '../data/paper-palette.json';
 const src = '/lagen/' + 'assets/figures/framework.png';
+// Schematic Temporal profile: mostly fast requests with persistent slow periods.
+const profile = [3, 3.4, 3, 3.2, 12, 12, 12, 12, 3.4, 3, 3.3, 2.9, 3.2, 12, 12, 12, 3, 3.3];
+const profilePath = profile.map((value, i) => `${i ? 'L' : 'M'}${6 + i * 11},${46 - value * 3}`).join('');
+const steps = [
+  {
+    key: 'profile',
+    title: 'Profile the deployment',
+    text: 'Record action latency for the target model, GPU, and task. Fit a latency profile that captures which delays occur and whether slow requests come in bursts.',
+  },
+  {
+    key: 'teacher',
+    title: 'Train a teacher under replayed delay',
+    text: 'In a latency-aware simulator, each predicted action takes effect only after a delay sampled from the profile. The world keeps moving. A small RL teacher learns from the rewards of these delayed actions.',
+  },
+  {
+    key: 'distill',
+    title: 'Distill into the VLA',
+    text: 'The frozen teacher labels observations with its actions. We fine-tune the VLA on these demonstrations, optionally adding teacher-labeled states the VLA visits (DAgger).',
+  },
+  {
+    key: 'deploy',
+    title: 'Act under the same timing',
+    text: 'The VLA receives the task, the latency as text, and optional visual history. Its actions execute with delays drawn from the target profile.',
+  },
+];
 ---
 <figure id="pipeline-figure" class="paper-figure">
-  <div class="pipeline-image" tabindex="0" role="region" aria-label="Original paper pipeline figure">
-    <img src={src} width="3988" height="1771" loading="lazy" alt="LAGEN pipeline from the paper: profile deployment timing using Fixed, Normal, IID or Temporal generators; train a latency teacher through fresh reinforcement-learning interactions; distill teacher demonstrations into a VLA with optional DAgger; deploy the VLA with delayed-action execution." />
-  </div>
-  <figcaption>The agent interacts with the simulator under delays sampled from the latency profile. ActionReady marks when a predicted action becomes available. The curves show schematic latency profiles.</figcaption>
+  <ol class="pipeline-steps">
+    {steps.map((step, i) => (
+      <li class="pipeline-step">
+        <div class="pipeline-visual" aria-hidden="true">
+          {step.key === 'profile' && (
+            <svg viewBox="0 0 200 56">
+              <path d="M4 4V50H198" fill="none" stroke={palette.gray} stroke-width="1" />
+              <path d={profilePath} fill="none" stroke={palette.purple} stroke-width="2" stroke-linejoin="round" />
+              {profile.map((value, j) => <circle cx={6 + j * 11} cy={46 - value * 3} r="2.2" fill={palette.purple} />)}
+            </svg>
+          )}
+          {step.key === 'teacher' && (
+            <svg viewBox="0 0 200 56">
+              <path d="M8 26H192" stroke={palette.gray} stroke-width="1.2" />
+              <path d="M186 22l6 4-6 4" fill="none" stroke={palette.gray} stroke-width="1.2" />
+              <circle cx="22" cy="26" r="5" fill="white" stroke={palette.blue} stroke-width="2" />
+              <circle cx="150" cy="26" r="5" fill={palette.blue} />
+              <text x="22" y="12" text-anchor="middle">observe</text>
+              <text x="150" y="12" text-anchor="middle">act</text>
+              <path d="M22 42H150M22 38v8M150 38v8" fill="none" stroke={palette.rose} stroke-width="1.5" />
+              <text x="86" y="54" text-anchor="middle" class="accent">sampled delay</text>
+            </svg>
+          )}
+          {step.key === 'distill' && (
+            <svg viewBox="0 0 200 56">
+              <rect x="4" y="12" width="52" height="30" rx="6" fill="#f6e9ec" stroke={palette.rose} />
+              <text x="30" y="31" text-anchor="middle">Teacher</text>
+              <path d="M60 27H76m-5-4 5 4-5 4" fill="none" stroke={palette.gray} stroke-width="1.3" />
+              <rect x="80" y="12" width="46" height="30" rx="6" fill="white" stroke={palette.gray} />
+              <text x="103" y="31" text-anchor="middle">Labels</text>
+              <path d="M130 27H146m-5-4 5 4-5 4" fill="none" stroke={palette.gray} stroke-width="1.3" />
+              <rect x="150" y="12" width="46" height="30" rx="6" fill="#eceff3" stroke={palette.blue} />
+              <text x="173" y="31" text-anchor="middle">VLA</text>
+            </svg>
+          )}
+          {step.key === 'deploy' && (
+            <div class="pipeline-chips">
+              <span>Task</span><span class="accent">Latency: 150 ms.</span><span>Visual history</span>
+            </div>
+          )}
+        </div>
+        <h4><span class="pipeline-number">{i + 1}</span>{step.title}</h4>
+        <p>{step.text}</p>
+      </li>
+    ))}
+  </ol>
+  <figcaption>The same latency profile drives teacher training, VLA fine-tuning, and evaluation, so the policy learns under the timing it will face.</figcaption>
+  <details class="pipeline-original">
+    <summary>Full pipeline figure from the paper</summary>
+    <a href={src} target="_blank" rel="noopener" class="pipeline-image" aria-label="Open the full-resolution pipeline figure in a new tab">
+      <img src={src} width="3988" height="1771" loading="lazy" alt="LAGEN pipeline from the paper: profile deployment timing using Fixed, Normal, IID or Temporal generators; train a latency teacher through fresh reinforcement-learning interactions; distill teacher demonstrations into a VLA with optional DAgger; deploy the VLA with delayed-action execution." />
+    </a>
+    <p class="figure-note">Select the figure to open it at full resolution. ActionReady marks when a predicted action becomes available. The curves show schematic latency profiles.</p>
+  </details>
 </figure>
 <style>
-  .pipeline-image { overflow-x: auto; }
-  .pipeline-image img { display: block; width: 100%; min-width: 1100px; max-width: none; height: auto; }
+  .pipeline-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; counter-reset: none; }
+  .pipeline-step { position: relative; display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--rule); border-radius: 12px; background: white; }
+  .pipeline-step:not(:last-child)::after { content: '→'; position: absolute; top: 44px; right: -15px; z-index: 1; width: 14px; text-align: center; color: var(--muted); font-size: 18px; }
+  .pipeline-visual { height: 64px; display: flex; align-items: center; margin-bottom: 14px; }
+  .pipeline-visual svg { width: 100%; height: 100%; overflow: visible; }
+  .pipeline-visual text { font-size: 12px; fill: var(--ink); font-family: inherit; }
+  .pipeline-visual text.accent { fill: var(--rose); font-weight: 600; }
+  .pipeline-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pipeline-chips span { padding: 3px 9px; border: 1px solid var(--rule); border-radius: 999px; font-size: 14px; background: var(--paper); }
+  .pipeline-chips .accent { border-color: var(--rose); color: var(--rose); background: #fbf2f4; font-weight: 600; }
+  .pipeline-step h4 { display: flex; align-items: baseline; gap: 8px; font-size: 18px; font-weight: 650; line-height: 1.35; margin: 0 0 8px; }
+  .pipeline-number { flex: none; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--purple); color: white; font-size: 14px; font-weight: 700; }
+  .pipeline-step p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted); }
+  .pipeline-image { display: block; overflow-x: auto; cursor: zoom-in; }
+  .pipeline-image img { display: block; width: 100%; min-width: 900px; height: auto; }
+  @container (max-width: 960px) {
+    .pipeline-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pipeline-step:nth-child(2)::after { display: none; }
+  }
+  @container (max-width: 560px) {
+    .pipeline-steps { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+    .pipeline-step:not(:last-child)::after { content: '↓'; top: auto; bottom: -21px; right: auto; left: 50%; transform: translateX(-50%); display: block; }
+  }
 </style>

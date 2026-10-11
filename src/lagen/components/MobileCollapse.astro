@@ -1,0 +1,17 @@
+---
+// Secondary figures stay open on wide screens and start collapsed on phones.
+interface Props {
+  summary: string;
+}
+const { summary } = Astro.props;
+---
+<details class="mobile-collapse" open>
+  <summary>{summary}</summary>
+  <slot />
+</details>
+<script>
+  const query = window.matchMedia('(max-width: 700px)');
+  const sync = () => document.querySelectorAll<HTMLDetailsElement>('.mobile-collapse').forEach(details => { details.open = !query.matches; });
+  sync();
+  query.addEventListener('change', sync);
+</script>

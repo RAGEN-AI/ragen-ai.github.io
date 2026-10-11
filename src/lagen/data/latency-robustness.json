@@ -141,7 +141,7 @@
     ]
   },
   {
-    "task": "InterceptGrabFast",
+    "task": "Intercept Grab (Fast)",
     "latencies": [
       0,
       1,
