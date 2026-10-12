@@ -328,6 +328,17 @@ pre { background: var(--paper); border-radius: 10px; padding: 24px; overflow-x: 
 .lagen-intro .hero .affiliations { animation-delay: 1.35s; }
 .lagen-intro .hero .hero-abstract { animation-delay: 1.45s; }
 .lagen-intro .hero .resource-links { animation-delay: 1.6s; }
+.lagen-intro .video-frame { opacity: 0; transform: translateY(14px); animation: intro-rise .8s ease-out 1.75s forwards; }
 @keyframes intro-rise { to { opacity: 1; transform: none; } }
 @keyframes intro-slide { to { opacity: 1; transform: none; } }
 @keyframes intro-logo { to { opacity: 1; transform: none; } }
+
+/* Video summary directly under the hero. */
+.video-section { padding: 8px 0 56px; background: #f6f3f8; }
+.video-frame { margin: 0 auto; max-width: 960px; }
+.video-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 12px; background: #e9ece6; box-shadow: 0 12px 32px #29263118; }
+.video-frame figcaption { margin-top: 12px; text-align: center; font-size: 16px; color: var(--muted); }
+@media (max-width: 600px) { .video-section { padding-bottom: 36px; } }
+.resource-nav > a { white-space: nowrap; }
+/* The Citation link is also in the hero buttons and the contents, so phones drop it from the bar. */
+@media (max-width: 440px) { .resource-nav > a[href="#citation"] { display: none; } }

@@ -1,6 +1,7 @@
 ---
 import "../styles/lagen.css";
 import Contents from "../components/Contents.astro";
+import { links } from "../links";
 import palette from "../data/paper-palette.json";
 import interFont from "../assets/inter.woff2?url";
 interface Props {
@@ -53,7 +54,8 @@ const colors =
         LAGEN
       </a>
       <nav class="resource-nav" aria-label="Resources">
-        <a href={`${base}assets/paper.pdf`} target="_blank" rel="noopener">Paper</a>
+        <a href={links.paper} target="_blank" rel="noopener">Paper</a>
+        <a href={links.video}>Video</a>
         <a href="#citation">Citation</a>
         <details id="research" class="research">
           <summary>More Research <span aria-hidden="true">⌄</span></summary>
