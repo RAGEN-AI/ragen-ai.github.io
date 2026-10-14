@@ -1,0 +1,36 @@
+[
+  {
+    "model": "GPT-6.1 Sol",
+    "returns": {
+      "Demon Attack": 668.5,
+      "Asterix": 5852.5,
+      "Atlantis": 18340,
+      "AirRaid": 567.5,
+      "Deadly Corridor": 313.17829818725585,
+      "Flappy Bird": 17.34500000000004,
+      "Ant": -14.454967142553734,
+      "Hopper": 193.80749970159073,
+      "Inverted Pendulum": 39.6,
+      "Walker2D": 322.36108604827086,
+      "Balance": 46.50753207630992,
+      "Intercept Grab (Fast)": 1.1936931961459778
+    }
+  },
+  {
+    "model": "GPT-6 Luna",
+    "returns": {
+      "Demon Attack": 90.25,
+      "Asterix": 0,
+      "Atlantis": 0,
+      "AirRaid": 68.75,
+      "Deadly Corridor": 111.27498474121094,
+      "Flappy Bird": 3.5399999999999983,
+      "Ant": 145.6886187526504,
+      "Hopper": 72.00552781978855,
+      "Inverted Pendulum": 0,
+      "Walker2D": 15.391827165694252,
+      "Balance": 42.448506682145236,
+      "Intercept Grab (Fast)": 0.23094618071979767
+    }
+  }
+]

@@ -74,8 +74,14 @@ The header icon and social preview use separate assets.
   complementary latency approaches before its result sentence and recovery bars.
   Its heading is “Reducing latency is not enough. Train with it”, with no final period.
   The recovery caption identifies the RTX 3090 latency profiles and the 100%
-  reference. “All 36 results” retains the paper's Zero/Zero, Zero/Real and
-  Target/Real columns with a short explanation of each condition.
+  reference. `CoreResultsTable.astro` displays the complete paper table by default
+  on desktop and phones. Games and Embodied Control each span six task columns.
+  Each VLA model spans three condition rows: Zero/Zero, Zero/Real and Target/Real.
+  Target/Real cells are shaded, with bold returns and red improvement arrows.
+  Two GPT Zero-shot reference rows follow OpenVLA, with a comparison footnote.
+  Narrow screens scroll the table horizontally. VLA values use `results.json`;
+  GPT values use `coding-agents.json`. Values use the paper's decimal rounding
+  and thousands notation. The table needs no client script.
 - `src/lagen/components/LatencyApproachesFigure.astro`: static Results concept figure.
   Both panels share the same Policy, Action execution and Environment loop,
   including inference-duration bars aligned at one start and two equal

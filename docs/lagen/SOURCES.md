@@ -27,7 +27,7 @@ Paths in this table are relative to `../paper/`.
 | Framework, Figure 3 | `figures/mll/figure3_v2.png` → unchanged `public/lagen/assets/figures/framework.png` |
 | Measured latency structure, Figure 5 | `figures/fig5_profiling_structure/data.csv` and `plot.py` → `src/lagen/data/profiles.json`, `public/lagen/assets/data/profiles.json`, Canvas/SVG |
 | Held-out calibration, Figure 4 | `figures/fig4_sim2real_calibration/heldout_30cases_20261002/case_errors.csv` and `plot.py` → `src/lagen/data/calibration.json` and inline SVG |
-| Main 36-pair table | `figures/fig1_teaser/data.csv` |
+| Core results, Table 1 | Layout and formatting: `tables/table1_benchmark_overview/table.tex`, `table_caption.tex`, and `render_table.py`. VLA values: `figures/fig1_teaser/data.csv` → `src/lagen/data/results.json`. GPT values: `tables/table1_benchmark_overview/coding_agents.csv` → `src/lagen/data/coding-agents.json`. |
 | Mean-delay/profile comparison, Table 2 | `tables/mean_delay_training/data.json` and `table.tex` |
 | Cross-delay transfer, matched-delay view of Figure 6 | `figures/fig6_latency_robustness/matched_delay/cells.csv` and `plot_matched_delay.py` → `src/lagen/data/latency-robustness.json` and interactive heatmaps |
 | Cross-task transfer, Figure 7 | `figures/fig21_demon_mixed_cross_task/data.csv` and `plot.py` → `src/lagen/data/cross-task.json` and inline SVG |
@@ -123,7 +123,7 @@ delays into action execution during simulated training, following
 or an extra deployment-time wait module. The Policy box abstracts the training
 recipe; teacher RL and VLA distillation remain in Method. Profile bars have
 no measured time scale. Hardware-timed evidence remains in the following
-recovery bars and the unchanged 36-row table. The approved panel titles are
+recovery bars and the core-results table. The approved panel titles are
 “Reduce latency” and “Train with latency (ours)”. Each panel retains its own
 explanation; the overall schematic caption has been removed.
 
@@ -375,8 +375,8 @@ and STE clarity principles: contributions first, direct headings, short
 explanations and captions that explain the evidence. Model implementation
 details remain in the paper. The approved Results text contrasts reducing
 latency with training agents to act under it. RTX 3090 identifies the training
-latency profiles in the recovery caption. The 36-row table retains the paper's
-Zero/Zero, Zero/Real and Target/Real column names, values and normalization.
+latency profiles in the recovery caption. The core-results table retains
+the paper's condition names and unnormalized mean episode returns.
 All quantitative statements remain grounded in the paper. In particular, the
 two-frame 1.2–7.1% return range applies to the six policies on Flappy Bird and
 Demon Attack in `sections/world_pausing.tex`, not to every benchmark task.
@@ -387,6 +387,27 @@ Inter is self-hosted from [Google Fonts' Inter distribution](https://github.com/
 converted losslessly from its variable TrueType font to WOFF2. Its SIL Open
 Font License is included at `public/lagen/assets/fonts/OFL.txt`. The page does not
 wait for an external font stylesheet before initializing its interactions.
+
+## Core-results table
+
+The table follows Table 1 at paper revision
+`8f7996b91940746107ca1b9b323bd5238199c0ce`, verified on 2026-10-14.
+Tasks occupy columns under Games and Embodied Control.
+Model/condition combinations occupy nine VLA rows and two GPT reference rows.
+VLA values remain unnormalized mean episode returns from `results.json`.
+GPT values retain source precision from `coding_agents.csv`.
+Its `Intercept Grab Fast` key uses the website's `Intercept Grab (Fast)` name.
+
+Values with absolute magnitude at least 1,000 use two decimals and `k`.
+Other values use one decimal. Decimal ties round away from zero, matching
+the paper renderer's `ROUND_HALF_UP`.
+Target/Real cells use `#F0EEF2`, bold returns and `#B34A4A` improvement arrows.
+Model cells stay white. GPT model names are italic, while their conditions
+and values use regular weight and `#46414F`.
+
+Both GPT models use Low reasoning effort and simulated OpenVLA latency.
+The caption and footnote preserve these evaluation conditions and comparison scope.
+The table stays visible at every viewport size, with local horizontal scrolling.
 
 ## Hugging Face paper asset catalogue
 

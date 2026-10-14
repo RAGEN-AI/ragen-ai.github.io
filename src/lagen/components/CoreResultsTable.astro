@@ -1,0 +1,105 @@
+---
+import results from '../data/results.json';
+import codingAgents from '../data/coding-agents.json';
+
+const tasks = [
+  { key: 'Demon Attack', lines: ['Demon', 'Attack'] },
+  { key: 'Asterix', lines: ['Asterix'] },
+  { key: 'Atlantis', lines: ['Atlantis'] },
+  { key: 'AirRaid', lines: ['AirRaid'] },
+  { key: 'Deadly Corridor', lines: ['Deadly', 'Corridor'] },
+  { key: 'Flappy Bird', lines: ['Flappy', 'Bird'] },
+  { key: 'Ant', lines: ['Ant'] },
+  { key: 'Hopper', lines: ['Hopper'] },
+  { key: 'Inverted Pendulum', lines: ['Inverted', 'Pendulum'] },
+  { key: 'Walker2D', lines: ['Walker2D'] },
+  { key: 'Balance', lines: ['Balance', '(simple)'] },
+  { key: 'Intercept Grab (Fast)', lines: ['Intercept', 'GrabFast'] },
+] as const;
+const models = ['OpenVLA', 'π₀.₅', 'GR00T'];
+const conditions = [
+  { label: 'Zero/Zero', field: 'zero' },
+  { label: 'Zero/Real', field: 'before' },
+  { label: 'Target/Real', field: 'after' },
+] as const;
+const decimal = new Intl.NumberFormat('en-US', { useGrouping: false, minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const thousands = new Intl.NumberFormat('en-US', { useGrouping: false, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const formatReturn = (value: number) => Math.abs(value) >= 1000 ? thousands.format(value / 1000) + 'k' : decimal.format(value);
+---
+
+<figure class="core-results">
+  <figcaption id="core-results-caption">
+    <strong>Core results.</strong> Training with the measured RTX 3090 latency profile improves the real-time return in all 36 task–architecture pairs.
+    Zero/Zero is the original policy without delay. Zero/Real runs that policy during live inference.
+    Target/Real first trains with the matched profile and then evaluates in real time.
+    Cells report mean episode return on each task's native scale.
+    Both GPT models use Low reasoning effort to approximate the rapid responses required in game environments.
+  </figcaption>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Core results by model, condition, and task">
+    <table aria-labelledby="core-results-caption" aria-describedby="core-results-note">
+      <colgroup><col class="model-column" /><col class="condition-column" /></colgroup>
+      <colgroup span="6"></colgroup><colgroup span="6"></colgroup>
+      <thead>
+        <tr class="families"><td colspan="2"></td><th colspan="6" scope="colgroup">Games</th><th colspan="6" scope="colgroup">Embodied Control</th></tr>
+        <tr class="task-headings">
+          <th scope="col">Model</th><th scope="col">Condition</th>
+          {tasks.map(task => <th scope="col">{task.lines.map(line => <span>{line}</span>)}</th>)}
+        </tr>
+      </thead>
+      {models.map((model, modelIndex) => {
+        const rows = tasks.map(task => results.find(row => row.model === model && row.task === task.key)!);
+        return <>
+          <tbody class:list={{ 'model-block': true, 'block-divider': modelIndex > 0 }}>
+            {conditions.map((condition, conditionIndex) => <tr class:list={{ trained: condition.field === 'after' }}>
+              {conditionIndex === 0 && <th class="model-name" scope="row" rowspan="3">{model}</th>}
+              <th class="condition" scope="row">{condition.label}</th>
+              {rows.map(row => <td>
+                {condition.field === 'after'
+                  ? <><strong>{formatReturn(row.after)}</strong><span class="gain-arrow" aria-label="increased from Zero/Real">↑</span></>
+                  : formatReturn(row[condition.field])}
+              </td>)}
+            </tr>)}
+          </tbody>
+          {modelIndex === 0 && <tbody class="references">
+            {codingAgents.map(agent => <tr>
+              <th class="model-name" scope="row"><em>{agent.model}</em></th>
+              <th class="condition" scope="row">Zero-shot<sup>†</sup></th>
+              {tasks.map(task => <td>{formatReturn(agent.returns[task.key])}</td>)}
+            </tr>)}
+          </tbody>}
+        </>;
+      })}
+    </table>
+  </div>
+  <p id="core-results-note" class="table-note"><sup>†</sup> GPT results use simulated OpenVLA latency and are not directly comparable to the VLA results.</p>
+</figure>
+
+<style>
+  .core-results { margin: 32px 0 0; }
+  figcaption, .table-note { font-size: 16px; line-height: 1.65; }
+  figcaption { color: var(--muted); }
+  figcaption strong { color: var(--ink); }
+  .table-scroll { margin-top: 16px; }
+  table { min-width: 1100px; table-layout: fixed; font-size: 15px; border-top: 2px solid #46414f; border-bottom: 2px solid #46414f; }
+  .model-column { width: 116px; }
+  .condition-column { width: 98px; }
+  th, td { padding: 6px 3px; border: 0; text-align: center; }
+  thead th { font-weight: 600; }
+  .families th { position: relative; padding: 10px 3px 7px; font-size: 16px; }
+  .families th::after { content: ''; position: absolute; bottom: 0; left: 8px; right: 8px; border-bottom: 1px solid #77727e; }
+  .task-headings th { padding: 7px 3px 9px; font-size: 13px; vertical-align: bottom; border-bottom: 1px solid #77727e; }
+  .task-headings th:first-child { text-align: left; }
+  .task-headings span { display: block; }
+  .model-name { text-align: left; font-size: 14px; font-weight: 400; }
+  .condition { font-size: 14px; font-weight: 400; }
+  .model-block tr:first-child > * { padding-top: 9px; }
+  .model-block tr:last-child > * { padding-bottom: 9px; }
+  .block-divider { border-top: 1px solid #77727e; }
+  .trained > .condition, .trained > td { background: #f0eef2; }
+  .trained strong { font-weight: 700; }
+  .gain-arrow { margin-left: 2px; color: #b34a4a; }
+  .references { color: #46414f; }
+  .references em { font-synthesis: style; }
+  .references th, .references td { padding-block: 8px; }
+  .table-note { margin: 10px 0 0; color: var(--muted); }
+</style>
