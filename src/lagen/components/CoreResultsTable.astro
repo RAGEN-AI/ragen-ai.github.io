@@ -33,7 +33,7 @@ const formatReturn = (value: number) => Math.abs(value) >= 1000 ? thousands.form
     Zero/Zero is the original policy without delay. Zero/Real runs that policy during live inference.
     Target/Real first trains with the matched profile and then evaluates in real time.
     Cells report mean episode return on each task's native scale.
-    Both GPT models use Low reasoning effort to approximate the rapid responses required in game environments.
+    All four coding agents use Low reasoning effort.
   </figcaption>
   <div class="table-scroll" tabindex="0" role="region" aria-label="Core results by model, condition, and task">
     <table aria-labelledby="core-results-caption" aria-describedby="core-results-note">
@@ -71,7 +71,7 @@ const formatReturn = (value: number) => Math.abs(value) >= 1000 ? thousands.form
       })}
     </table>
   </div>
-  <p id="core-results-note" class="table-note"><sup>†</sup> GPT results use simulated OpenVLA latency and are not directly comparable to the VLA results.</p>
+  <p id="core-results-note" class="table-note"><sup>†</sup> Coding-agent results use simulated OpenVLA latency and are not directly comparable to the VLA results.</p>
 </figure>
 
 <style>
@@ -81,7 +81,7 @@ const formatReturn = (value: number) => Math.abs(value) >= 1000 ? thousands.form
   figcaption strong { color: var(--ink); }
   .table-scroll { margin-top: 16px; }
   table { min-width: 1100px; table-layout: fixed; font-size: 15px; border-top: 2px solid #46414f; border-bottom: 2px solid #46414f; }
-  .model-column { width: 116px; }
+  .model-column { width: 138px; }
   .condition-column { width: 98px; }
   th, td { padding: 6px 3px; border: 0; text-align: center; }
   thead th { font-weight: 600; }

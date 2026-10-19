@@ -32,5 +32,39 @@
       "Balance": 42.448506682145236,
       "Intercept Grab (Fast)": 0.23094618071979767
     }
+  },
+  {
+    "model": "Claude Opus 5.5",
+    "returns": {
+      "Demon Attack": 235.0,
+      "Asterix": 560.0,
+      "Atlantis": 1300,
+      "AirRaid": 451.3,
+      "Deadly Corridor": 378.7,
+      "Flappy Bird": 5.7,
+      "Ant": 0.3,
+      "Hopper": 179.9,
+      "Inverted Pendulum": 8.9,
+      "Walker2D": 150.0,
+      "Balance": 44.7,
+      "Intercept Grab (Fast)": 0.6
+    }
+  },
+  {
+    "model": "Claude Haiku 5.5",
+    "returns": {
+      "Demon Attack": 82.3,
+      "Asterix": 0,
+      "Atlantis": 100.0,
+      "AirRaid": 0,
+      "Deadly Corridor": -44.2,
+      "Flappy Bird": 5.1,
+      "Ant": -203.1,
+      "Hopper": 98.6,
+      "Inverted Pendulum": 0,
+      "Walker2D": 33.3,
+      "Balance": 44.7,
+      "Intercept Grab (Fast)": 0.3
+    }
   }
 ]
