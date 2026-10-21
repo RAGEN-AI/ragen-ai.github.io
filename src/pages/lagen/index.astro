@@ -12,6 +12,7 @@ import CalibrationFigure from '../../lagen/components/CalibrationFigure.astro';
 import RobustnessFigure from '../../lagen/components/RobustnessFigure.astro';
 import MobileCollapse from '../../lagen/components/MobileCollapse.astro';
 import CoreResultsTable from '../../lagen/components/CoreResultsTable.astro';
+import CodingAgentResults from '../../lagen/components/CodingAgentResults.astro';
 import meanTraining from '../../lagen/data/mean-training.json';
 import prompt from '../../lagen/data/prompt.json';
 const asset = (name: string) => '/lagen/' + 'assets/' + name;
@@ -82,6 +83,7 @@ const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language 
     <p class="section-lead">Result: training with latency increases the real-time return for <strong>all 36 combinations of task and model</strong>.</p>
     <MobileCollapse summary="Show results for all 12 tasks"><RecoveryFigure /></MobileCollapse>
     <CoreResultsTable />
+    <CodingAgentResults />
     <p class="bridge">How do we train with latency? First, we make a model of the deployment latency. Then, we train the agent with this model. <a href="#method">See the method</a>.</p>
   </section>
 

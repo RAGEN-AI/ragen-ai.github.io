@@ -1,0 +1,75 @@
+---
+import codingAgents from '../data/coding-agents.json';
+const tasks = [
+  { key: 'Demon Attack', lines: ['Demon', 'Attack'] },
+  { key: 'Asterix', lines: ['Asterix'] },
+  { key: 'Atlantis', lines: ['Atlantis'] },
+  { key: 'AirRaid', lines: ['AirRaid'] },
+  { key: 'Deadly Corridor', lines: ['Deadly', 'Corridor'] },
+  { key: 'Flappy Bird', lines: ['Flappy', 'Bird'] },
+  { key: 'Ant', lines: ['Ant'] },
+  { key: 'Hopper', lines: ['Hopper'] },
+  { key: 'Inverted Pendulum', lines: ['Inverted', 'Pendulum'] },
+  { key: 'Walker2D', lines: ['Walker2D'] },
+  { key: 'Balance', lines: ['Balance', '(simple)'] },
+  { key: 'Intercept Grab (Fast)', lines: ['Intercept', 'GrabFast'] },
+] as const;
+const decimal = new Intl.NumberFormat('en-US', { useGrouping: false, minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const thousands = new Intl.NumberFormat('en-US', { useGrouping: false, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const formatReturn = (value: number) => Math.abs(value) >= 1000 ? thousands.format(value / 1000) + 'k' : decimal.format(value);
+const groups = [{ id: 'agent-games', label: 'Games', tasks: tasks.slice(0, 6) }, { id: 'agent-embodied', label: 'Embodied control', tasks: tasks.slice(6) }];
+---
+
+<section id="general-purpose-agents" aria-labelledby="coding-agent-heading">
+  <h3 id="coding-agent-heading">Can general-purpose agents act with delay?</h3>
+  <p>We test four agents on 12 tasks without task-specific training. They choose actions from observations while the environment keeps moving, using simulated OpenVLA delays.</p>
+  <p><strong>Results vary by agent and task.</strong> On Asterix, GPT-6.1 Sol scores 5.85k; GPT-6 Luna and Claude Haiku 5.5 score zero.</p>
+  <figure id="coding-agent-table">
+    <figcaption id="coding-agent-caption">Four zero-shot agents under simulated delay. Values are mean episode returns; k means thousands. Paper Table 2.</figcaption>
+    {groups.map(group => <div class="agent-panel">
+      <h4 id={group.id}>{group.label}</h4>
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby={group.id}>
+        <table aria-labelledby={`coding-agent-caption ${group.id}`}>
+          <colgroup><col class="agent-column" /><col span="6" /></colgroup>
+          <thead><tr><th scope="col">Agent</th>{group.tasks.map(task => <th scope="col">{task.lines.map(line => <span>{line}</span>)}</th>)}</tr></thead>
+          <tbody>{codingAgents.map(agent => <tr><th scope="row">{agent.model}</th>{group.tasks.map(task => <td>{formatReturn(agent.returns[task.key])}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
+    </div>)}
+  </figure>
+  <p class="comparison-note">Simulated delays: these scores are not directly comparable to the hardware-timed VLA results above.</p>
+  <details>
+    <summary>How we evaluate the agents</summary>
+    <p>GPT-6.1 Sol and GPT-6 Luna run through Codex; Claude Opus 5.5 and Haiku 5.5 run through Claude Code. All four use Low reasoning effort and select actions directly from observations.</p>
+    <p>Delays are sampled from measured OpenVLA latency profiles, rather than the agents’ own inference times. Each task uses its native reward scale.</p>
+    <p>We do not have a matched zero-delay baseline for each agent. Low scores could reflect task competence, the action interface, or latency. These results alone do not show that latency causes the low scores or that task-specific training is necessary. See paper §4.2 and Table 2.</p>
+  </details>
+</section>
+
+<style>
+  section { margin-top: 56px; padding-top: 38px; border-top: 1px solid var(--rule); scroll-margin-top: 32px; }
+  h3 { max-width: 850px; margin: 0 0 20px; font-size: 24px; line-height: 1.3; letter-spacing: -.02em; }
+  section > p { font-size: 18px; line-height: 1.75; margin: 0 0 18px; }
+  figure { margin: 30px 0 0; scroll-margin-top: 32px; }
+  figcaption { font-size: 16px; line-height: 1.65; color: var(--muted); }
+  section > .comparison-note { margin: 14px 0 0; font-size: 16px; color: var(--muted); }
+  details p { font-size: 16px; line-height: 1.65; margin: 14px 0 0; }
+  .agent-panel { margin-top: 22px; }
+  h4 { margin: 0; padding: 10px 0; border-top: 2px solid #46414f; border-bottom: 1px solid #77727e; font-size: 16px; font-weight: 600; text-align: center; }
+  .table-scroll { margin-top: 0; }
+  table { min-width: 750px; table-layout: fixed; font-size: 16px; border-bottom: 2px solid #46414f; }
+  .agent-column { width: 180px; }
+  th, td { padding: 9px 6px; border: 0; }
+  thead th { font-size: 14px; font-weight: 600; vertical-align: bottom; border-top: 0; border-bottom: 1px solid #77727e; }
+  thead span { display: block; }
+  tbody th { font-weight: 400; }
+  tbody tr:last-child > * { padding-bottom: 13px; }
+  @media (max-width: 700px) {
+    section { margin-top: 40px; padding-top: 28px; }
+    h3 { font-size: 24px; }
+    section > p { font-size: 17px; }
+    section > .comparison-note { font-size: 15px; }
+    table { font-size: 14px; min-width: 680px; }
+    .agent-column { width: 155px; }
+  }
+</style>

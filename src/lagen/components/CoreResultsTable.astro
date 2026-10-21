@@ -1,6 +1,5 @@
 ---
 import results from '../data/results.json';
-import codingAgents from '../data/coding-agents.json';
 
 const tasks = [
   { key: 'Demon Attack', lines: ['Demon', 'Attack'] },
@@ -29,14 +28,13 @@ const formatReturn = (value: number) => Math.abs(value) >= 1000 ? thousands.form
 
 <figure class="core-results">
   <figcaption id="core-results-caption">
-    <strong>Core results.</strong> Training with the measured RTX 3090 latency profile improves the real-time return in all 36 task–architecture pairs.
+    <strong>Table 1 · Core results.</strong> Training with the measured RTX 3090 latency profile improves the real-time return in all 36 task–architecture pairs.
     Zero/Zero is the original policy without delay. Zero/Real runs that policy during live inference.
     Target/Real first trains with the matched profile and then evaluates in real time.
     Cells report mean episode return on each task's native scale.
-    All four coding agents use Low reasoning effort.
   </figcaption>
   <div class="table-scroll" tabindex="0" role="region" aria-label="Core results by model, condition, and task">
-    <table aria-labelledby="core-results-caption" aria-describedby="core-results-note">
+    <table aria-labelledby="core-results-caption">
       <colgroup><col class="model-column" /><col class="condition-column" /></colgroup>
       <colgroup span="6"></colgroup><colgroup span="6"></colgroup>
       <thead>
@@ -60,23 +58,15 @@ const formatReturn = (value: number) => Math.abs(value) >= 1000 ? thousands.form
               </td>)}
             </tr>)}
           </tbody>
-          {modelIndex === 0 && <tbody class="references">
-            {codingAgents.map(agent => <tr>
-              <th class="model-name" scope="row"><em>{agent.model}</em></th>
-              <th class="condition" scope="row">Zero-shot<sup>†</sup></th>
-              {tasks.map(task => <td>{formatReturn(agent.returns[task.key])}</td>)}
-            </tr>)}
-          </tbody>}
         </>;
       })}
     </table>
   </div>
-  <p id="core-results-note" class="table-note"><sup>†</sup> Coding-agent results use simulated OpenVLA latency and are not directly comparable to the VLA results.</p>
 </figure>
 
 <style>
   .core-results { margin: 32px 0 0; }
-  figcaption, .table-note { font-size: 16px; line-height: 1.65; }
+  figcaption { font-size: 16px; line-height: 1.65; }
   figcaption { color: var(--muted); }
   figcaption strong { color: var(--ink); }
   .table-scroll { margin-top: 16px; }
@@ -98,8 +88,4 @@ const formatReturn = (value: number) => Math.abs(value) >= 1000 ? thousands.form
   .trained > .condition, .trained > td { background: #f0eef2; }
   .trained strong { font-weight: 700; }
   .gain-arrow { margin-left: 2px; color: #b34a4a; }
-  .references { color: #46414f; }
-  .references em { font-synthesis: style; }
-  .references th, .references td { padding-block: 8px; }
-  .table-note { margin: 10px 0 0; color: var(--muted); }
 </style>
