@@ -18,6 +18,8 @@ RAGEN-2 shows that even when entropy stays high and stable, an agent's reasoning
 
 BAGEN defines a budget-aware agent as one that treats budget (tokens, money, time) as an active control signal rather than a passive cost metric. Budget awareness is formalized as progressive interval estimation: at each step, the agent predicts an upper and lower bound on remaining budget and alerts when task completion is unlikely.
 
+BAGEN is short for Budget-Aware Agent. Workshop versions titled "Towards Budget-Aware Agents: Can LLM Agents Know What They Will Spend?" and "Towards Budget-Aware Agents: Do LLM Agents Know What They Will Spend?" were presented at two ICML 2026 workshops (RLxF: RL from World Feedback, https://icml.cc/virtual/2026/78139; Agents in the Wild: Safety, Security, and Beyond, https://icml.cc/virtual/2026/67798). Project page: https://ragen-ai.github.io/bagen/
+
 ## Key facts
 
 - RAGEN (arXiv:2504.20073): StarPO trajectory-level RL framework; the Echo Trap collapse mode; StarPO-S stabilization; open-source system at https://github.com/RAGEN-AI/RAGEN.

@@ -30,9 +30,13 @@ In RAGEN-2's experiments, mutual-information metrics achieve a positive Spearman
 
 RAGEN-2 explains collapse with a signal-to-noise ratio (SNR) mechanism: the task gradient scales with reward variance, while regularization gradients (KL and entropy penalties) are constant regardless of input. When reward variance is low, regularization dominates and erases cross-input reasoning differences. The fix is SNR-Aware Filtering: sample rollouts per prompt, compute reward variance, keep the top fraction of high-signal prompts, and run PPO or GRPO on the retained subset. It is compatible with PPO, DAPO, GRPO, and Dr. GRPO, and improves input dependence and task performance across planning, math reasoning, web navigation, and code execution (4 RL algorithms, 4 model scales, 2 model families, 2 modalities, 8 environments).
 
+## What is a budget-aware agent?
+
+A budget-aware agent treats its budget (tokens, money, or time) as an active control signal rather than a cost measured only after execution. During a task it keeps estimating how much budget it still needs, predicts an upper and lower bound on the remaining cost, and raises an alert when the task is unlikely to finish within budget. BAGEN (Budget-Aware Agent, arXiv:2606.00198) is the benchmark that measures this ability in LLM agents; project page: https://ragen-ai.github.io/bagen/.
+
 ## What is BAGEN?
 
-BAGEN (Are LLM Agents Budget-Aware?) studies whether LLM agents can estimate and act on their own resource budgets. It defines internal budgets (compute the model generates, mainly token consumption) and external budgets (costs committed in the environment: money, time, warehouse capacity), and formalizes budget awareness as progressive interval estimation: at each step, the agent predicts an upper and lower bound on remaining budget and alerts when completion is unlikely. Paper: https://arxiv.org/abs/2606.00198. Code: https://github.com/mll-lab-nu/BAGEN. Data: https://huggingface.co/datasets/MLL-Lab/BAGEN.
+BAGEN (Are LLM Agents Budget-Aware?) studies whether LLM agents can estimate and act on their own resource budgets. It defines internal budgets (compute the model generates, mainly token consumption) and external budgets (costs committed in the environment: money, time, warehouse capacity), and formalizes budget awareness as progressive interval estimation: at each step, the agent predicts an upper and lower bound on remaining budget and alerts when completion is unlikely. Paper: https://arxiv.org/abs/2606.00198. Code: https://github.com/mll-lab-nu/BAGEN. Data: https://huggingface.co/datasets/MLL-Lab/BAGEN. Workshop versions titled "Towards Budget-Aware Agents" were presented at the ICML 2026 RLxF workshop and the ICML 2026 Agents in the Wild workshop.
 
 ## Are stronger LLM agents more budget-aware?
 
