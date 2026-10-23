@@ -13,7 +13,7 @@ const icmlWorkshopPages = [
   "https://icml.cc/virtual/2026/67798"
 ];
 const pageUrl = "https://ragen-ai.github.io/bagen/";
-const ogImage = "https://ragen-ai.github.io/bagen/fig_decoupling.png";
+const ogImage = "https://ragen-ai.github.io/bagen/og-card.jpg";
 const authors = [
   "Yuxiang Lin", "Zihan Wang", "Mengyang Liu", "Yuxuan Shan", "Longju Bai",
   "Junyao Zhang", "Xing Jin", "Boshan Chen", "Jinyan Su", "Xingyao Wang",
@@ -76,9 +76,9 @@ const jsonLd = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="7296" />
-    <meta property="og:image:height" content="2240" />
-    <meta property="og:image:alt" content="BAGEN: budget awareness is decoupled from task performance in LLM agents" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="BAGEN: Towards Budget-Aware Agents. Budget awareness is decoupled from task performance in LLM agents" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
@@ -99,7 +99,7 @@ const jsonLd = {
   <section id="hero" class="content-section hero-section">
     <div class="title-wrapper">
       <div class="title-with-logo">
-        <img src={`${basePath}bagen_icon.png`} alt="BAGEN Logo" class="title-logo">
+        <img src={`${basePath}bagen_icon.png`} alt="BAGEN budget-aware agents logo" class="title-logo">
         <h1 class="main-title" id="animated-title">BAGEN</h1>
       </div>
       <p class="title-subtitle">Are LLM Agents Budget-Aware?</p>
@@ -399,7 +399,7 @@ const jsonLd = {
           </span>
         </button>
         <div class="rq-body" id="f1-body">
-          <img src={`${basePath}bagen/fig_decoupling.png`} alt="Task performance vs estimation quality" class="rq-fig" />
+          <img src={`${basePath}bagen/fig_decoupling.png`} alt="BAGEN: task success vs budget estimation quality for LLM agents, internal and external budgets" class="rq-fig" loading="lazy" decoding="async" />
           <p class="rq-caption">Left &amp; middle: task success rate correlates only weakly with budget estimation quality for both internal and external budgets. Right: on failed Sokoban trajectories, estimation accuracy improves as more progress is observed, but the largest gains appear only very late.</p>
 
           <div class="evidence-grid">
@@ -478,11 +478,11 @@ const jsonLd = {
         </button>
         <div class="rq-body" id="f2-body">
           <h4 class="rq-subheading">Cumulative optimism across models</h4>
-          <img src={`${basePath}bagen/fig_optimism.png`} alt="Optimistic bias across models" class="rq-fig" />
+          <img src={`${basePath}bagen/fig_optimism.png`} alt="BAGEN: optimistic bias in remaining-budget estimates across frontier LLM agents" class="rq-fig" loading="lazy" decoding="async" />
           <p class="rq-caption">Models generally estimate budget too optimistically throughout the rollout. Conservative bias increases with rollout progress, but remains secondary to optimism overall.</p>
 
           <h4 class="rq-subheading">First-turn vs. all-turn feasibility F₁</h4>
-          <img src={`${basePath}bagen/fig_first_vs_all.png`} alt="First-turn vs all-turn F1" class="rq-fig" />
+          <img src={`${basePath}bagen/fig_first_vs_all.png`} alt="BAGEN: first-turn vs all-turn feasibility F1 of budget-aware agents" class="rq-fig" loading="lazy" decoding="async" />
           <p class="rq-caption">Points scatter on both sides of the equality line: first-turn predictions do not reliably summarize what the same agent would say after seeing partial progress. On Sokoban, Gemini improves by +21.9 F₁ points; on Search-R1, Qwen3-235B drops 9.3 points.</p>
 
           <div class="evidence-grid">
@@ -513,7 +513,7 @@ const jsonLd = {
           </span>
         </button>
         <div class="rq-body" id="f3-body">
-          <img src={`${basePath}bagen/fig_failure_timing.png`} alt="Failure recognition timing" class="rq-fig" />
+          <img src={`${basePath}bagen/fig_failure_timing.png`} alt="BAGEN: when LLM agents recognize failed trajectories as impossible, by budget consumed" class="rq-fig" loading="lazy" decoding="async" />
           <p class="rq-caption">Failure is recognized late: across environments, models often label failed trajectories as <code>impossible</code> only after much of the token budget has already been spent.</p>
 
           <div class="evidence-grid">
@@ -563,11 +563,11 @@ const jsonLd = {
         </button>
         <div class="rq-body" id="f4-body">
           <h4 class="rq-subheading">SFT + RL training on Sokoban</h4>
-          <img src={`${basePath}bagen/fig_sft_rl.png`} alt="SFT and RL training tradeoffs" class="rq-fig" />
+          <img src={`${basePath}bagen/fig_sft_rl.png`} alt="BAGEN: SFT and RL training for budget-aware agents, early stop and interval calibration tradeoffs" class="rq-fig" loading="lazy" decoding="async" />
           <p class="rq-caption">Left: coverage vs. midpoint error for SFT checkpoints and their SFT+RL continuations. Right: reward before and after RL from the same SFT starts. RL improves estimation only when starting from a suitable SFT initialization; RL alone collapses.</p>
 
           <h4 class="rq-subheading">SFT interval-width ablation</h4>
-          <img src={`${basePath}bagen/fig_sft_ablation.png`} alt="SFT ablation: interval width choices" class="rq-fig" />
+          <img src={`${basePath}bagen/fig_sft_ablation.png`} alt="BAGEN: SFT ablation on interval width targets for budget estimation" class="rq-fig" loading="lazy" decoding="async" />
           <p class="rq-caption">SFT choices control the estimator's behavior. Wider interval targets improve coverage but increase midpoint error. Longer SFT makes the model more conservative by reducing feasible predictions and improving recall on impossible cases.</p>
 
           <div class="evidence-grid">
