@@ -36,7 +36,7 @@ const jsonLd = {
       "sameAs": ["https://arxiv.org/abs/2606.00198", "https://huggingface.co/papers/2606.00198", ...icmlWorkshopPages],
       "datePublished": "2026-05-29",
       "abstract": "While agents are increasingly spending more resources, today agent cost is mostly measured only after execution. A Budget-Aware Agent (BAGEN) should treat budget as an active control signal, rather than a passive cost metric. We define budget estimation as internal budgets (from agent computation) and external budgets (from agent actions), and formalize budget-awareness as progressive interval estimation: at each step of a plan, an agent should predict an upper and lower bound on remaining budget, and alert when completion is unlikely.",
-      "keywords": ["budget-aware agent", "budget-aware agents", "budget-aware LLM agents", "budget awareness", "LLM agents", "agent cost estimation", "progressive interval estimation", "early stopping", "token budget", "agent benchmark"],
+      "keywords": ["budget-aware agent", "budget-aware agents", "budget-aware LLM agents", "budget awareness", "LLM agents", "agent cost estimation", "progressive interval estimation", "early stopping", "token budget", "token budget estimation", "LLM agent cost prediction", "predict remaining token cost", "budget-constrained agents", "agent early stopping", "coding agent token cost", "agent benchmark"],
       "author": authors.map((name) =>
         name === "Manling Li"
           ? { "@type": "Person", "@id": "https://limanling.github.io/#person", "name": "Manling Li", "url": "https://limanling.github.io/" }
@@ -69,7 +69,7 @@ const jsonLd = {
   <Fragment slot="head">
     <link rel="canonical" href={pageUrl} />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-    <meta name="keywords" content="BAGEN, budget-aware agent, budget-aware agents, Towards Budget-Aware Agents, budget-aware LLM agents, budget awareness, agent cost, progressive interval estimation, early stopping, LLM agent benchmark" />
+    <meta name="keywords" content="BAGEN, budget-aware agent, budget-aware agents, Towards Budget-Aware Agents, budget-aware LLM agents, budget awareness, agent cost, progressive interval estimation, early stopping, LLM agent benchmark, agent cost estimation, token budget estimation, LLM agent cost prediction, budget-constrained agents, coding agent token cost" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={pageUrl} />
     <meta property="og:site_name" content="RAGEN-AI" />
@@ -234,6 +234,17 @@ const jsonLd = {
           task success (r&nbsp;&approx;&nbsp;0.35), models are consistently over-optimistic about
           their remaining budget, and early stopping on tasks judged unfinishable saves 28&ndash;64%
           of wasted tokens at only 1.6&ndash;4.2% success cost.
+        </p>
+        <p>
+          BAGEN is a benchmark for <strong>agent cost estimation</strong>: instead of counting an
+          agent's spend after the run, it asks the agent itself to predict its remaining cost mid-task.
+          It covers internal budgets, where the agent estimates its own remaining token cost on
+          Sokoban puzzles, Search-R1 multi-hop search, and SWE-bench coding tasks, and external
+          budgets, where a supply-chain agent estimates its remaining budget across cumulative cost,
+          time, and warehouse occupancy. This kind of
+          token budget estimation matters for budget-constrained agents: an agent that cannot
+          estimate its own resource requirements cannot decide when to abort a hopeless task, when
+          to request more resources, or how to allocate budget across sub-goals.
         </p>
         <p class="definition-note">
           Workshop versions titled <em>Towards Budget-Aware Agents</em> were presented at two ICML 2026
@@ -592,6 +603,46 @@ const jsonLd = {
   </section>
 
   <!-- ============================================================ -->
+  <!-- FAQ -->
+  <!-- ============================================================ -->
+  <section id="faq" class="content-section">
+    <div class="section-container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="definition-block faq-block">
+        <h3>Can LLM agents predict their own token cost?</h3>
+        <p>
+          Only partly. Asked mid-task how much budget remains, frontier LLM agents are consistently
+          over-optimistic: all twenty model-environment pairs underestimate their remaining budget
+          more often than they overestimate it. On failed trajectories, models still predict that
+          the task is feasible more than 70% of the time after 60% of the budget is spent, and the
+          alarm fires only in the final 20%.
+        </p>
+        <h3>How is this different from a token budget limit?</h3>
+        <p>
+          A token budget limit is a cap enforced from outside the agent, and cost is usually
+          measured only after the run. BAGEN asks the agent itself to forecast its remaining cost at
+          every turn, as an interval with an upper and lower bound, or to declare the task
+          impossible. We call this progressive interval estimation.
+        </p>
+        <h3>Does early stopping save tokens for LLM agents?</h3>
+        <p>
+          Yes, in most settings. Across the five models tested, halting when the model predicts the
+          task is impossible saves 28&ndash;64% of tokens on failed trajectories (depending on the
+          model), at a cost of only 1.6 to 4.2 percentage points in success rate. Savings are
+          largest on Warehouse and SWE-bench and near zero on Search-R1.
+        </p>
+        <h3>Can budget awareness be trained?</h3>
+        <p>
+          Partly. On Sokoban, supervised fine-tuning alone raises Qwen-7B's feasibility prediction
+          accuracy from 25.5% to roughly 90%, so this ability was already latent. Precise intervals
+          are harder: coverage reaches only 47% after SFT followed by RL, and RL without an SFT
+          warm-start collapses entirely.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- CITATION -->
   <!-- ============================================================ -->
   <section id="citation" class="content-section alt-background">
@@ -837,6 +888,8 @@ const jsonLd = {
   .definition-block { max-width: 820px; margin: 0 auto; color: #444; line-height: 1.7; }
   .definition-block p + p { margin-top: 1rem; }
   .definition-note { font-size: 0.88rem; color: #888; }
+  .faq-block h3 { font-size: 1.1rem; font-weight: 600; color: #222; margin: 1.5rem 0 0.4rem; }
+  .faq-block h3:first-child { margin-top: 0; }
   .title-question { font-size: 1.35rem; font-weight: 500; font-style: italic; color: #555; margin-top: 0.3rem; text-align: center; }
   @media (max-width: 768px) { .title-question { font-size: 1rem; } }
 
