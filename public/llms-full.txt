@@ -46,6 +46,18 @@ Not necessarily. Across four environments (Sokoban, Search-R1, SWE-bench, Wareho
 
 Yes. Early stopping when a task appears unfinishable saves 28-64% of tokens on failed trajectories at only a 1.6-4.2% success cost. Training helps: SFT alone raises binary feasibility detection from 25.5% to about 90%, and SFT+RL strengthens early-stop and alert behavior. Precise interval calibration remains hard: interval coverage caps near 47% after SFT+RL.
 
+## Can LLM agents predict their own token cost?
+
+Only partly. In BAGEN, frontier LLM agents asked mid-task how much budget remains are consistently over-optimistic: all twenty model-environment pairs underestimate their remaining budget more often than they overestimate it. On failed trajectories, models still predict that the task is feasible more than 70% of the time after 60% of the budget is spent, and the alarm fires only in the final 20%.
+
+## How is agent cost estimation different from a token budget limit?
+
+A token budget limit is a cap enforced from outside the agent, and cost is usually measured only after the run. BAGEN asks the agent itself to forecast its remaining cost at every turn, as an interval with an upper and lower bound, or to declare the task impossible (progressive interval estimation).
+
+## Does early stopping save tokens for LLM agents?
+
+Yes, in most settings. Across the five models tested in BAGEN, halting when the model predicts the task is impossible saves 28-64% of tokens on failed trajectories (depending on the model), at a cost of only 1.6 to 4.2 percentage points in success rate. Savings are largest on Warehouse and SWE-bench and near zero on Search-R1.
+
 ## Who is behind RAGEN-AI?
 
 The series is led by the MLL Lab at Northwestern University (PI: Manling Li, https://limanling.github.io/), with project lead Zihan "Zenus" Wang and collaborators from Stanford (Jiajun Wu, Li Fei-Fei, Yejin Choi), Microsoft (Linjie Li, Zhengyuan Yang, Lijuan Wang), NYU (Kyunghyun Cho), and other institutions. Related project: VAGEN (https://vagen-ai.github.io/), world model reasoning reinforcement learning for multi-turn VLM agents.
