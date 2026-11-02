@@ -412,8 +412,8 @@ const jsonLd = {
       <div class="rq-block" id="f1">
         <button class="rq-header" aria-expanded="false" data-target="f1-body">
           <span class="rq-badge">Finding 1</span>
-          <h3>Budget Awareness Decouples from Task Performance</h3>
-          <span class="rq-summary">Task success rate correlates only weakly with estimation quality (r&nbsp;&approx;&nbsp;0.35). The best actor is not the best estimator.</span>
+          <h3>Are stronger agents also better at estimating their budget?</h3>
+          <span class="rq-summary"><strong>Not necessarily.</strong> Task success correlates only weakly with estimation quality (r&nbsp;&approx;&nbsp;0.35). On Search-R1, the model that solves the most tasks (Opus) is not the one that gives the best budget estimates (Sonnet).</span>
           <span class="rq-chevron" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
           </span>
@@ -490,8 +490,8 @@ const jsonLd = {
       <div class="rq-block" id="f2">
         <button class="rq-header" aria-expanded="false" data-target="f2-body">
           <span class="rq-badge">Finding 2</span>
-          <h3>Optimistic Bias Is Universal Across All Models and Tasks</h3>
-          <span class="rq-summary">All 20 model-environment pairs underestimate remaining budget. Weaker models are <em>more</em> optimistic, not less.</span>
+          <h3>Do agents overestimate or underestimate how much budget they still need?</h3>
+          <span class="rq-summary"><strong>They underestimate.</strong> In all 20 model-environment pairs, models underestimate the remaining budget more often than they overestimate it, and weaker models are <em>more</em> optimistic, not less.</span>
           <span class="rq-chevron" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
           </span>
@@ -526,8 +526,8 @@ const jsonLd = {
       <div class="rq-block" id="f3">
         <button class="rq-header" aria-expanded="false" data-target="f3-body">
           <span class="rq-badge">Finding 3</span>
-          <h3>Failure Is Recognized Too Late to Act On</h3>
-          <span class="rq-summary">Models predict "feasible" above 70% even after 60% of budget is consumed. The alarm fires only in the final 20%.</span>
+          <h3>Do agents notice in time when a task is going to fail?</h3>
+          <span class="rq-summary"><strong>Usually too late.</strong> On failed runs, models still predict "feasible" more than 70% of the time after 60% of the budget is spent; the warning comes only in the last 20%.</span>
           <span class="rq-chevron" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
           </span>
@@ -575,8 +575,8 @@ const jsonLd = {
       <div class="rq-block" id="f4">
         <button class="rq-header" aria-expanded="false" data-target="f4-body">
           <span class="rq-badge">Finding 4</span>
-          <h3>Binary Feasibility Is Calibration; Interval Estimation Is Reasoning</h3>
-          <span class="rq-summary">SFT alone raises feasibility from 25.5% to ~90%. Interval coverage only reaches 47% after SFT+RL, exposing a hard reasoning bottleneck.</span>
+          <h3>Can budget awareness be trained?</h3>
+          <span class="rq-summary"><strong>Partly.</strong> On Sokoban, fine-tuning alone raises the accuracy of predicting whether a task can still be finished from 25.5% to about 90%. Predicting how much budget is left is much harder: the predicted range contains the true value only 47% of the time, even after SFT+RL.</span>
           <span class="rq-chevron" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 8 10 12 14 8"/></svg>
           </span>
@@ -890,7 +890,8 @@ const jsonLd = {
   .rq-header:hover { background-color: #fafbff; }
   .rq-badge { background: linear-gradient(135deg, #2a2f6c, #4b4f8f); color: white; font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.05em; flex-shrink: 0; margin-top: 2px; }
   .rq-header h3 { margin: 0; font-size: 1.15rem; color: #1a1f3c; font-weight: 700; line-height: 1.35; flex: 1; min-width: 200px; }
-  .rq-summary { display: block; width: 100%; padding-left: calc(12px + 1rem + 50px); font-size: 0.88rem; color: #666; line-height: 1.5; margin-top: 0.3rem; font-style: italic; }
+  .rq-summary { display: block; width: 100%; padding-left: calc(12px + 1rem + 50px); font-size: 0.92rem; color: #444; line-height: 1.55; margin-top: 0.3rem; }
+  .rq-summary strong { color: #1a1f3c; }
   .rq-chevron { flex-shrink: 0; color: #999; transition: transform 0.3s ease; margin-top: 4px; }
   .rq-header[aria-expanded="true"] .rq-chevron { transform: rotate(180deg); }
   .rq-header[aria-expanded="true"] .rq-summary { display: none; }
