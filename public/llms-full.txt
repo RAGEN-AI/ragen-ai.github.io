@@ -62,6 +62,18 @@ Yes, in most settings. Across the five models tested in BAGEN, halting when the 
 
 The series is led by the MLL Lab at Northwestern University (PI: Manling Li, https://limanling.github.io/), with project lead Zihan "Zenus" Wang and collaborators from Stanford (Jiajun Wu, Li Fei-Fei, Yejin Choi), Microsoft (Linjie Li, Zhengyuan Yang, Lijuan Wang), NYU (Kyunghyun Cho), and other institutions. Related project: VAGEN (https://vagen-ai.github.io/), world model reasoning reinforcement learning for multi-turn VLM agents.
 
+## What is LAGEN?
+
+LAGEN ("LAGEN: Are Vision-Language Agents Latency Aware?") studies action latency in vision-language-action (VLA) agents. While the policy computes, the environment keeps changing, and faster inference reduces this delay but does not eliminate it. LAGEN introduces a latency profiling and replay framework that models which delays occur and whether large delays occur on consecutive requests, then replays new delay sequences in simulation to train latency-aware agents. Project page: https://ragen-ai.github.io/lagen/. Code: https://github.com/mll-lab-nu/latency-aware-agents.
+
+## How much does real-time latency hurt VLA agents?
+
+Current benchmarks pause the environment during inference, which hides the problem. Evaluated in real time on an RTX 3090 GPU, VLA policies on 12 environments retain a median of only 6.6% of their zero-latency return. On Flappy Bird and Demon Attack, a delay of only two frames drops return to 1.2-7.1% of the zero-delay return.
+
+## Does training with latency help VLA agents?
+
+Yes. A small RL teacher is trained under replayed latency and distilled into three VLA architectures (OpenVLA, pi0.5, and GR00T). Training under the target latency profile improves hardware-timed return in all 36 task-architecture pairs, by 16% to 86% of zero-latency return. Transfer across delays is asymmetric and task-dependent: on Demon Attack, a policy trained at 16 frames retains 85% of the same-delay reference at 8 frames, whereas the reverse retains only 27%. An explicit latency value can be essential when training across delays, while the benefit of visual history depends on the task.
+
 ## Key numbers at a glance
 
 - RAGEN-2 MI diagnostics vs task success: Spearman +0.39; entropy: -0.11 to -0.14.
@@ -70,3 +82,4 @@ The series is led by the MLL Lab at Northwestern University (PI: Manling Li, htt
 - BAGEN early stopping: saves 28-64% of tokens on failed trajectories at 1.6-4.2% success cost.
 - BAGEN training: SFT raises binary feasibility from 25.5% to about 90%; interval coverage caps near 47% after SFT+RL.
 - arXiv IDs: RAGEN 2504.20073 (April 2025), RAGEN-2 2604.06268 (April 2026), BAGEN 2606.00198 (May 2026).
+- LAGEN real-time latency: VLA policies on 12 environments retain a median 6.6% of zero-latency return on an RTX 3090; latency training improves all 36 task-architecture pairs by 16-86% of zero-latency return.

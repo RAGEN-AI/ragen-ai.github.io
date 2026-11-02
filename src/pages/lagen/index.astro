@@ -31,8 +31,72 @@ const authors = [
   ['Manling Li', '1', 'https://limanling.github.io/'],
 ];
 const citation = '@misc{chafekar2026lagen,\n  title={LAGEN: Are Vision-Language Agents Latency Aware?},\n  author={Talha Chafekar and Zihan Wang and Zeju Li and Xinyuan Li and Qineng Wang and Jiajun Wu and Yuke Zhu and Yi Dong and Zhiding Yu and Ruohan Zhang and Manling Li},\n  year={2026}\n}';
+const pageTitle = 'LAGEN: Are Vision-Language Agents Latency Aware?';
+const pageDescription = 'Latency-aware VLA agents: in real time, VLA policies keep a median 6.6% of zero-latency return; training with profiled deployment latency improves all 36 task-architecture pairs.';
+const pageUrl = 'https://ragen-ai.github.io/lagen/';
+const pdfUrl = 'https://ragen-ai.github.io/lagen/assets/paper.pdf';
+const keywords = ['LAGEN', 'latency-aware agents', 'latency-aware VLA', 'vision-language-action', 'VLA latency', 'action latency', 'inference latency', 'real-time VLA evaluation', 'latency-aware training', 'latency profiling', 'deployment latency', 'OpenVLA', 'pi0.5', 'GR00T'];
+const faq = [
+  ['What is action latency for vision-language-action (VLA) agents?', 'While a VLA policy computes its next action, the environment keeps changing, so the action is executed in a state that has already moved on. Current benchmarks hide this by pausing the environment during inference. Evaluated in real time on an RTX 3090 GPU, VLA policies on 12 environments retain a median of only 6.6% of their zero-latency return.'],
+  ['Does faster inference solve the latency problem?', 'No. Faster inference reduces the delay but does not eliminate it, and training with a delay chosen in advance may not match the target deployment. LAGEN instead keeps the residual latency and trains the agent to act with it.'],
+  ['How does LAGEN train latency-aware agents?', 'LAGEN measures latency on the target hardware, fits a latency profile that models which delays occur and whether large delays occur on consecutive requests, and replays new delay sequences in simulation. A small RL teacher is trained under the replayed latency and distilled into three VLA architectures (OpenVLA, pi0.5, and GR00T). Training under the target profile improves hardware-timed return in all 36 task-architecture pairs, by 16% to 86% of zero-latency return.'],
+  ['Does latency training transfer across different delays?', 'Only partly: transfer is asymmetric and task-dependent. On Demon Attack, a policy trained at 16 frames of delay retains 85% of the same-delay reference at 8 frames, whereas the reverse retains only 27%. An explicit latency value in the prompt can be essential when training across delays, while the benefit of visual history depends on the task.'],
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ScholarlyArticle',
+      '@id': pageUrl + '#paper',
+      'headline': pageTitle,
+      'name': pageTitle,
+      'alternateName': ['Are Vision-Language Agents Latency Aware?', 'LAGEN: Latency-Aware Agents'],
+      'url': pageUrl,
+      'encoding': { '@type': 'MediaObject', 'contentUrl': pdfUrl, 'encodingFormat': 'application/pdf' },
+      'datePublished': '2026-10',
+      'abstract': 'Foundation-model agents, such as vision-language-action (VLA) policies, suffer from action latency: the environment keeps changing while the policy computes. Faster inference reduces this delay but does not eliminate it, and training with a delay chosen in advance may not match the target deployment. Current benchmarks hide the problem by pausing the environment during inference; evaluated in real time on an RTX 3090 GPU, VLA policies on 12 environments retain a median of only 6.6% of their zero-latency return. We introduce a latency profiling and replay framework that models which delays occur and whether large delays occur on consecutive requests, then replays new delay sequences in simulation.',
+      'keywords': keywords,
+      'author': authors.map(([name]) =>
+        name === 'Manling Li'
+          ? { '@type': 'Person', '@id': 'https://limanling.github.io/#person', 'name': 'Manling Li', 'url': 'https://limanling.github.io/' }
+          : { '@type': 'Person', 'name': name.replace(' "Zenus"', '') }),
+    },
+    {
+      '@type': 'SoftwareSourceCode',
+      '@id': pageUrl + '#code',
+      'name': 'LAGEN',
+      'codeRepository': 'https://github.com/mll-lab-nu/latency-aware-agents',
+      'programmingLanguage': 'Python',
+      'description': 'Code for latency profiling, latency replay in simulation, and latency-aware training of vision-language-action agents.',
+    },
+    {
+      '@type': 'Dataset',
+      '@id': pageUrl + '#dataset',
+      'name': 'LAGEN datasets and latency profiles',
+      'description': 'Training data and measured GPU latency profiles for latency-aware vision-language-action agents.',
+      'url': pageUrl,
+      'sameAs': ['https://huggingface.co/datasets/MLL-Lab/LAGEN-datasets', 'https://huggingface.co/datasets/MLL-Lab/LAGEN-profiles', 'https://huggingface.co/MLL-Lab/LAGEN-models'],
+      'creator': { '@type': 'Organization', 'name': 'MLL Lab, Northwestern University', 'url': 'https://mll-lab-nu.github.io' },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': pageUrl + '#faq',
+      'mainEntity': faq.map(([q, a]) => ({ '@type': 'Question', 'name': q, 'acceptedAnswer': { '@type': 'Answer', 'text': a } })),
+    },
+  ],
+};
+
 ---
-<Layout title={title} description="The world keeps moving while an agent thinks. We measure deployment latency and train agents to act under it.">
+<Layout title={pageTitle} description={pageDescription}>
+  <Fragment slot="head">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="keywords" content={keywords.join(', ')} />
+    <meta name="citation_title" content={pageTitle} />
+    {authors.map(([name]) => <meta name="citation_author" content={name.replace(' "Zenus"', '')} />)}
+    <meta name="citation_publication_date" content="2026/10" />
+    <meta name="citation_pdf_url" content={pdfUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
   <script is:inline>
     // Hide the hero title until the intro script splits it; the timeout shows it if the script fails.
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {

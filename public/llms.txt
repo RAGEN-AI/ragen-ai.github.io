@@ -1,6 +1,6 @@
 # RAGEN-AI
 
-> RAGEN-AI is a research series on reinforcement learning for LLM agents from the MLL Lab at Northwestern University (PI: Manling Li, https://limanling.github.io/) with collaborators at Stanford, Microsoft, UW, NYU, and others. It includes RAGEN (arXiv:2504.20073, multi-turn reinforcement learning for LLM agents), RAGEN-2 (arXiv:2604.06268, reasoning collapse in agentic RL, ICML 2026 Oral), and BAGEN (arXiv:2606.00198, budget-aware LLM agents).
+> RAGEN-AI is a research series on reinforcement learning for LLM agents from the MLL Lab at Northwestern University (PI: Manling Li, https://limanling.github.io/) with collaborators at Stanford, Microsoft, UW, NYU, and others. It includes RAGEN (arXiv:2504.20073, multi-turn reinforcement learning for LLM agents), RAGEN-2 (arXiv:2604.06268, reasoning collapse in agentic RL, ICML 2026 Oral), BAGEN (arXiv:2606.00198, budget-aware LLM agents), and LAGEN (latency-aware vision-language-action agents).
 
 ## What is agent reinforcement learning (agent RL)?
 
@@ -22,11 +22,16 @@ Unlike a token budget limit enforced from outside the agent, BAGEN asks the agen
 
 BAGEN is short for Budget-Aware Agent. Workshop versions titled "Towards Budget-Aware Agents: Can LLM Agents Know What They Will Spend?" and "Towards Budget-Aware Agents: Do LLM Agents Know What They Will Spend?" were presented at two ICML 2026 workshops (RLxF: RL from World Feedback, https://icml.cc/virtual/2026/78139; Agents in the Wild: Safety, Security, and Beyond, https://icml.cc/virtual/2026/67798). Project page: https://ragen-ai.github.io/bagen/
 
+## What is a latency-aware agent?
+
+LAGEN ("LAGEN: Are Vision-Language Agents Latency Aware?") studies action latency in vision-language-action (VLA) agents: the environment keeps changing while the policy computes, so actions land in states that have already moved on. Current benchmarks hide this by pausing the environment during inference. LAGEN profiles the latency of a target deployment, replays new delay sequences in simulation, and trains agents to act under that latency. Project page: https://ragen-ai.github.io/lagen/
+
 ## Key facts
 
 - RAGEN (arXiv:2504.20073): StarPO trajectory-level RL framework; the Echo Trap collapse mode; StarPO-S stabilization; open-source system at https://github.com/RAGEN-AI/RAGEN.
 - RAGEN-2 (arXiv:2604.06268, ICML 2026 Oral): template collapse is invisible to entropy; MI-family diagnostics correlate with task success (+0.39) while entropy correlates near zero or negatively (-0.11 to -0.14); SNR-Aware Filtering improves input dependence and task performance across planning, math reasoning, web navigation, and code execution, spanning 4 RL algorithms, 4 model scales, 2 model families, 2 modalities, and 8 environments.
 - BAGEN (arXiv:2606.00198): budget awareness is decoupled from task performance (r = 0.35); frontier agents are consistently over-optimistic about remaining budget; early stopping on unfinishable tasks saves 28-64% of tokens at 1.6-4.2% success cost; SFT raises binary feasibility detection from 25.5% to about 90%, while interval coverage caps near 47% after SFT+RL.
+- LAGEN: evaluated in real time on an RTX 3090 GPU, VLA policies on 12 environments retain a median of only 6.6% of their zero-latency return; Temporal latency replay reduces normalized mean absolute error against hardware-timed performance from 8.93 to 3.81 percentage points compared with a fixed mean delay; training under the target latency profile improves hardware-timed return in all 36 task-architecture pairs (OpenVLA, pi0.5, GR00T), by 16% to 86% of zero-latency return; transfer across delays is asymmetric and task-dependent.
 
 ## Links
 
@@ -36,6 +41,9 @@ BAGEN is short for Budget-Aware Agent. Workshop versions titled "Towards Budget-
 - RAGEN code: https://github.com/RAGEN-AI/RAGEN
 - BAGEN code: https://github.com/mll-lab-nu/BAGEN
 - BAGEN dataset: https://huggingface.co/datasets/MLL-Lab/BAGEN
+- LAGEN project page: https://ragen-ai.github.io/lagen/
+- LAGEN code: https://github.com/mll-lab-nu/latency-aware-agents
+- LAGEN models and data: https://huggingface.co/MLL-Lab/LAGEN-models, https://huggingface.co/datasets/MLL-Lab/LAGEN-datasets, https://huggingface.co/datasets/MLL-Lab/LAGEN-profiles
 - arXiv: https://arxiv.org/abs/2504.20073 (RAGEN), https://arxiv.org/abs/2604.06268 (RAGEN-2), https://arxiv.org/abs/2606.00198 (BAGEN)
 - Related projects: VAGEN (https://vagen-ai.github.io/), MLL Lab (https://mll-lab-nu.github.io), Manling Li (https://limanling.github.io/)
 
