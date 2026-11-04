@@ -129,6 +129,25 @@ const jsonLd = {
       </div>
     </div>
   </section>
+  <section id="video" class="section-width video-section" aria-label="Summary video">
+    <video id="lagen-video" controls muted preload="metadata" playsinline poster={asset('video/poster.jpg')}>
+      <source src={asset('video/lagen.mp4')} type="video/mp4" />
+    </video>
+    <script is:inline>
+      // Start playing (muted, as browsers require) the first time the video is mostly on screen.
+      (function () {
+        var v = document.getElementById('lagen-video');
+        if (!v || !('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }, { threshold: 0.6 });
+        io.observe(v);
+      })();
+    </script>
+  </section>
   <section id="demo" aria-labelledby="demo-title">
     <FailureDemo />
 
