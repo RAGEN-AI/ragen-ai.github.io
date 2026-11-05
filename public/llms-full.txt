@@ -44,7 +44,7 @@ Not necessarily. Across four environments (Sokoban, Search-R1, SWE-bench, Wareho
 
 ## Is budget awareness actionable and trainable?
 
-Yes. Early stopping when a task appears unfinishable saves 28-64% of tokens on failed trajectories at only a 1.6-4.2% success cost. Training helps: SFT alone raises binary feasibility detection from 25.5% to about 90%, and SFT+RL strengthens early-stop and alert behavior. Precise interval calibration remains hard: interval coverage caps near 47% after SFT+RL.
+Yes. Early stopping when a task appears unfinishable saves 28-64% of tokens on failed trajectories at a cost of only 1.6-4.2 percentage points of success rate. Training helps: SFT alone raises binary feasibility detection from 25.5% to about 90%, and SFT+RL strengthens early-stop and alert behavior. Precise interval calibration remains hard: interval coverage caps near 47% after SFT+RL.
 
 ## Can LLM agents predict their own token cost?
 
@@ -79,7 +79,7 @@ Yes. A small RL teacher is trained under replayed latency and distilled into thr
 - RAGEN-2 MI diagnostics vs task success: Spearman +0.39; entropy: -0.11 to -0.14.
 - RAGEN-2 generalization: 4 RL algorithms, 4 model scales, 2 model families, 2 modalities, 8 environments.
 - BAGEN budget awareness vs task performance: r = 0.35.
-- BAGEN early stopping: saves 28-64% of tokens on failed trajectories at 1.6-4.2% success cost.
+- BAGEN early stopping: saves 28-64% of tokens on failed trajectories at a cost of 1.6-4.2 percentage points of success rate.
 - BAGEN training: SFT raises binary feasibility from 25.5% to about 90%; interval coverage caps near 47% after SFT+RL.
 - arXiv IDs: RAGEN 2504.20073 (April 2025), RAGEN-2 2604.06268 (April 2026), BAGEN 2606.00198 (May 2026).
 - LAGEN real-time latency: VLA policies on 12 environments retain a median 6.6% of zero-latency return on an RTX 3090; latency training improves all 36 task-architecture pairs by 16-86% of zero-latency return.

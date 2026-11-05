@@ -7,7 +7,7 @@ import '../../styles/resources.css';
 
 const basePath = import.meta.env.BASE_URL;
 const pageTitle = "BAGEN: Towards Budget-Aware Agents";
-const pageDescription = "BAGEN benchmarks budget-aware agents: frontier LLM agents are over-optimistic about remaining budget; early stopping saves 28-64% of tokens at 1.6-4.2% success cost.";
+const pageDescription = "BAGEN: frontier LLM agents underestimate their remaining budget; early stopping saves 28-64% of tokens on failed runs, costing 1.6-4.2 points of success rate.";
 const icmlWorkshopPages = [
   "https://icml.cc/virtual/2026/78139",
   "https://icml.cc/virtual/2026/67798"
@@ -57,14 +57,14 @@ const jsonLd = {
       "@type": "FAQPage",
       "@id": "https://ragen-ai.github.io/bagen/#faq",
       "mainEntity": [
-        { "@type": "Question", "name": "Can LLM agents predict their own token cost?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Only partly. Asked mid-task how much budget remains, frontier LLM agents are consistently over-optimistic: all twenty model-environment pairs in BAGEN underestimate their remaining budget more often than they overestimate it. On failed trajectories, models still predict that the task is feasible more than 70% of the time after 60% of the budget is spent, and the alarm fires only in the final 20%." } },
-        { "@type": "Question", "name": "How is agent cost estimation different from a token budget limit?",
-          "acceptedAnswer": { "@type": "Answer", "text": "A token budget limit is a cap enforced from outside the agent, and cost is usually measured only after the run. BAGEN asks the agent itself to forecast its remaining cost at every turn, as an interval with an upper and lower bound, or to declare the task impossible. This is called progressive interval estimation." } },
-        { "@type": "Question", "name": "Does early stopping save tokens for LLM agents?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, in most settings. Across the five models tested in BAGEN, halting when the model predicts the task is impossible saves 28-64% of tokens on failed trajectories (depending on the model), at a cost of only 1.6 to 4.2 percentage points in success rate. Savings are largest on Warehouse and SWE-bench and near zero on Search-R1." } },
+        { "@type": "Question", "name": "Are stronger agents also better at estimating their budget?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not necessarily. In BAGEN, task success correlates only weakly with budget estimation quality (r = 0.35). On Search-R1, the model that solves the most tasks (Opus) is not the one that gives the best budget estimates (Sonnet), so budget awareness is a distinct capability from task performance." } },
+        { "@type": "Question", "name": "Do agents overestimate or underestimate how much budget they still need?",
+          "acceptedAnswer": { "@type": "Answer", "text": "They underestimate. In all 20 model-environment pairs in BAGEN, LLM agents underestimate their remaining budget, such as their remaining token cost, more often than they overestimate it, and weaker models are more optimistic, not less." } },
+        { "@type": "Question", "name": "Do agents notice in time when a task is going to fail?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Usually too late. On failed runs, models still predict the task is feasible more than 70% of the time after 60% of the budget is spent, and the warning comes only in the last 20%. Acting on the warning still helps: across the five models tested, stopping when the model predicts the task is impossible saves 28-64% of tokens on failed trajectories, at a cost of 1.6 to 4.2 percentage points in success rate." } },
         { "@type": "Question", "name": "Can budget awareness be trained?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Partly. On Sokoban, supervised fine-tuning alone raises Qwen-7B's feasibility prediction accuracy from 25.5% to roughly 90%, so the ability was already latent. Precise intervals are harder: coverage reaches only 47% after SFT followed by RL, and RL without an SFT warm-start collapses entirely." } }
+          "acceptedAnswer": { "@type": "Answer", "text": "Partly. On Sokoban, fine-tuning alone raises Qwen-7B's accuracy of predicting whether a task can still be finished from 25.5% to about 90%. Predicting how much budget is left is much harder: the predicted range contains the true value only 47% of the time, even after SFT followed by RL, and RL without an SFT warm-start collapses entirely." } }
       ]
     },
     {
@@ -219,7 +219,7 @@ const jsonLd = {
       </div>
       <div class="tldr-card">
         <div class="tldr-icon">&#9889;</div>
-        <div class="tldr-text"><strong>Early stopping</strong> when a task seems unfinishable saves 28&ndash;64% of wasted tokens at only 1.6&ndash;4.2% success cost.</div>
+        <div class="tldr-text"><strong>Early stopping</strong> when a task seems unfinishable saves 28&ndash;64% of tokens on failed runs, costing only 1.6&ndash;4.2 points of success rate.</div>
       </div>
       <div class="tldr-card">
         <div class="tldr-icon">&#127981;</div>
@@ -247,7 +247,7 @@ const jsonLd = {
           Across 4 environments and 5 frontier models, budget awareness correlates only weakly with
           task success (r&nbsp;&approx;&nbsp;0.35), models are consistently over-optimistic about
           their remaining budget, and early stopping on tasks judged unfinishable saves 28&ndash;64%
-          of wasted tokens at only 1.6&ndash;4.2% success cost.
+          of tokens on failed runs, costing only 1.6&ndash;4.2 points of success rate.
         </p>
         <p>
           Unlike a token budget limit enforced from outside the agent, BAGEN asks the agent itself
